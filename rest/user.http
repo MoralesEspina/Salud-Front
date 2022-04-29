@@ -1,0 +1,40 @@
+# @host = http://localhost:5000/vpo/v1
+@host = https://virtualparishoffice.herokuapp.com/vpo/v1
+
+###
+POST {{host}}/users/register
+Content-Type: application/json
+
+{
+    "username":"mike",
+    "password":"12345"
+}
+
+####
+POST {{host}}/login
+
+{
+    "username":"mike",
+    "password":"12345"
+}
+
+
+###
+GET {{host}}/users/many
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjAyODQwNTY5LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.zPHCRNH7kobzUpNJcxtNjeexZHWREpOgP_wCaVouERDlwFVeMbbFNM3m298a4Z4K0vk22Us-9dXw15k4Mk040ihEya7dfSph4YxKIUpS8503E9WZ0gZRafcnMHj_e_eg2Vr8ZD5fi7R9Tv1RMeBJK8EeR_zB9WCeQIwpMMZMAnU
+
+###
+PUT {{host}}/users/changerol/154d650a-ef8a-4b11-90a1-cc14b930da2f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjAyODQwNTY5LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.zPHCRNH7kobzUpNJcxtNjeexZHWREpOgP_wCaVouERDlwFVeMbbFNM3m298a4Z4K0vk22Us-9dXw15k4Mk040ihEya7dfSph4YxKIUpS8503E9WZ0gZRafcnMHj_e_eg2Vr8ZD5fi7R9Tv1RMeBJK8EeR_zB9WCeQIwpMMZMAnU
+
+{
+    "rol": "1"
+}
+
+###
+GET {{host}}/users/rols
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjAzMTkwMjI2LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.YA5u7afiUVjcAJe4Rfdkgt7Ma5HtazRiwqFqfk4Yz9eW1wBPRAPoL1NBtjW4GvGn6JMloAavHTIjSqVpK1IO8Dewue-xya00F1pTAC6z0oU0Sa5CBNITXuD8nLtnIsZNh5nIowT-Nj4NnIR7ohnpPqqBklTpaLSwl09nFJ3M7xk
+
+

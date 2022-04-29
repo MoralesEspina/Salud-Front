@@ -1,0 +1,78 @@
+@host = http://localhost:5000/vpo/v1
+# @host = https://virtualparishoffice.herokuapp.com/vpo/v1
+###
+POST {{host}}/persons/create
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjA0MDQ5OTM3LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.zFEeev2ELHSi6B251ozddIv91nikIsD1y1DzrwluuilikDWDxbgmRpajzzXvPmJWNim0UygjmJiTD4HrjcOR1o8TdflrCGe21Abj3vGnQyohybkK6XTsXhMh9ZzxZOAknly81wZbH8ZHIQ1XkfGafkO-ik7YIaj3da7jQJgHtls
+Content-Type: application/json
+
+{
+	"firstname":"Estefanía",
+	"secondname":"Karina",
+	"lastname":"Marcos",
+	"secondlastname":"Gutierrez",
+	"dpi":"3393791032101",
+	"sexo":"F",
+	"address":"Caserio Araizapo Aldea el Durazno Jalapa"
+}
+
+###
+GET {{host}}/persons/many/F
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjA0MDQ5OTM3LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.zFEeev2ELHSi6B251ozddIv91nikIsD1y1DzrwluuilikDWDxbgmRpajzzXvPmJWNim0UygjmJiTD4HrjcOR1o8TdflrCGe21Abj3vGnQyohybkK6XTsXhMh9ZzxZOAknly81wZbH8ZHIQ1XkfGafkO-ik7YIaj3da7jQJgHtls
+
+###
+GET {{host}}/persons/priest
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjA0MDQ5OTM3LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.zFEeev2ELHSi6B251ozddIv91nikIsD1y1DzrwluuilikDWDxbgmRpajzzXvPmJWNim0UygjmJiTD4HrjcOR1o8TdflrCGe21Abj3vGnQyohybkK6XTsXhMh9ZzxZOAknly81wZbH8ZHIQ1XkfGafkO-ik7YIaj3da7jQJgHtls
+Content-Type: application/json
+
+###
+POST {{host}}/persons/priest
+Content-Type: application/json
+
+{
+	"firstname_priest":"",
+	"secondname_priest":"",
+	"lastname_priest":"",
+	"second_lastname_priest":"",
+	"credentials":""
+}
+
+###
+GET {{host}}/persons/priests/count
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjAyODM4Nzk4LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.KwVKbhYYO5CwgHisdXGoaZkajOtJowDlt4HMBZ9WaCt74xFCOZkWAptvkxRyzQcpbAuiGYvqS9YiAnHcpPrrdELmYDPkpmfc6RuqWFbB46zuKE89XHFgLiIjhCSGCMsrNej1mXskIKEnAxNwD1fEydN_fy6Tgmds63bWZYEg9MY
+
+###
+GET {{host}}/persons/priest/Ca
+Content-Type: application/json
+
+###
+GET {{host}}/persons/baptized
+
+Content-Type: application/json
+
+###
+GET https://virtualparishoffice.herokuapp.com/vpo/v1/persons/partida/8ca77e79-b08a-41de-af66-6a2efa026e2f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjAzNzIwOTAzLCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.athetioghPPFqH0-94-yfORtEqzp8FgTkvTnbiQXDB15I8Y6W3UiOZWrz-NbM6bS0iVesAVQEZ7SkHsq8ZaQ5i4PMVh46iFRI3RZJt4Am2Lf2LR8rh3UshOlIS6cPff6r06fovXt5BwE1X1AJoIDw42G4B8N1JXwgfRvthNiodc
+###
+DELETE http://localhost:5000/vpo/v1/persons/partida/1
+
+
+###
+GET {{host}}/persons/by/50/Guti
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjAzNjU2MTMzLCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.ll_Z7ZkWGFyC1vylgHXrP0ClfWoBmN0Tg9xZ7H7cyyN0qtrLUZhzSHk6PbeHuomhL9WTdElURIv1bfAWPnh1O5KuKUtl9hlpfpRktMMTwvgywkv-92YnOeYUd_uwLw1HinMcavjmPqiEUBuXuNpXJg7uvLVPx5hr9T6ZXeipUAE
+
+###
+PUT {{host}}/persons/108dccf6-b425-4909-8bf6-cfd1c30bcee9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjA0MDQ5OTM3LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.zFEeev2ELHSi6B251ozddIv91nikIsD1y1DzrwluuilikDWDxbgmRpajzzXvPmJWNim0UygjmJiTD4HrjcOR1o8TdflrCGe21Abj3vGnQyohybkK6XTsXhMh9ZzxZOAknly81wZbH8ZHIQ1XkfGafkO-ik7YIaj3da7jQJgHtls
+
+{
+	"firstname":"Estefana",
+	"secondname":"Marina",
+	"lastname":"Marcos",
+	"secondlastname":"Gutierrez",
+	"sexo":"F"
+}

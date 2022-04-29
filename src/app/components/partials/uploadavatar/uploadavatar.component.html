@@ -1,0 +1,35 @@
+<div class="flex w-full  items-center justify-center bg-grey-lighter pb-2">
+    <label
+        class="w-full flex flex-col items-center  bg-white text-blue-400 rounded-lg shadow-lg tracking-wide uppercase border border-blue-400 cursor-pointer hover:bg-blue-400 hover:text-white">
+        <div class="flex">
+            <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path
+                    d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+            </svg>
+            <span class=" px-3 mt-2 text-base leading-normal">Selecciona tu imagen</span>
+        </div>
+        <input type='file' class="hidden" accept="image/png, image/jpeg" (change)="CaptureFile($event)" />
+    </label>
+</div>
+
+<div class="pt-2 container border border-blue-500 h-64 w-full rounded-lg">
+    <div *ngIf="previsualization" align="center">
+        <img width="200px" height="200px" [src]="previsualization" alt="">
+    </div>
+</div>
+
+<div class="ed-item ed-container">
+    <div class="ed-item s-100 m-50 l-50 pt-4 sm:pt-0">
+        <div class="py-2">
+            <button class=" mycustom-buttom-primary hover:bg-green-700 rounded-lg w-full max-w-full"
+                (click)="UploadFile()">GUARDAR</button>
+        </div>
+    </div>
+
+    <div class="ed-item s-100 m-50 l-50 pt-4 sm:pt-0">
+        <div class="py-2">
+            <button class="mycustom-button-warning hover:bg-red-700 rounded-lg w-full max-w-full"
+                (click)="close()">CANCELAR</button>
+        </div>
+    </div>
+</div>

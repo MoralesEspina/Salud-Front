@@ -1,0 +1,790 @@
+<app-navbar></app-navbar>
+<div class="mt-8 px-6 ml-12 mr-auto">
+    <div class="grid grid-cols-1 ">
+        <div class="">
+            <div class="my-2 mx-auto flex sm:flex-row flex-col origin-right">
+                <div class="flex flex-row sm:mb-0 py-1">
+                    <div class="relative w-full">
+                        <select [(ngModel)]="limit" (ngModelChange)="ManyPersons(null, $event, search)"
+                            class="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            <option class="rounded-sm">5</option>
+                            <option class="rounded-sm">10</option>
+                            <option class="rounded-sm">20</option>
+                            <option class="rounded-sm">50</option>
+                            <option class="rounded-sm">100</option>
+                            <option class="rounded-sm">1000</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="block sm:flex mx-0 py-1">
+                    <span class="h-full absolute inset-y-0 left-0 flex items-center pl-0 sm:pl-2">
+                        <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
+                            <path
+                                d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
+                            </path>
+                        </svg>
+
+                    </span>
+                    <input placeholder="Search"
+                        class="uppercase appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
+                        [(ngModel)]="search" (keyup.enter)="ManyPersons( null, limit, search)"/>
+                        <button
+                        class="flex-1 text-xs shadow appearance-none border bg-gray-300 text-gray-400 h-10  hover:bg-gray-200  actions-width px-2"
+                        (click)="ManyPersons( null, limit, search)" *ngIf="user.rol == 'admin'"><i class="fas fa-search"></i></button>
+                </div>
+
+                <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                    <div class="flex items-center px-0 sm:px-1 ">
+                        <button
+                            class="flex-1 text-xs shadow appearance-none border bg-green-500 text-blue-100 h-10  hover:bg-green-700 rounded-lg actions-width px-2"
+                            (click)="PrintReport()" *ngIf="user.rol == 'admin'">IMPRIMIR REPORTE</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--Data object from database-->
+            <div >
+                <div class="datagrid overflow-x-auto block" #scrollOne (scroll)="scrollTwo.scrollLeft = scrollOne.scrollLeft">
+                    <table class="w-full" >
+                        <thead>
+                            <tr>
+                                <th style="width: 2rem;">
+                                   <input type="checkbox" [(ngModel)]="checkedAll" (change)="addAllToPrintData()">
+                                </th>
+                                <th style="width: 5rem;">No.
+                                </th>
+                                <th *ngIf="user.rol == 'admin'">EDITAR</th>
+                                <th style="width: 20rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>NOMBRE COMPLETO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkfullname"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascfullname = !orderBy.ascfullname, column: 'fullname'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascfullname === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascfullname === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+                                <th style="width: 10rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>CODIGO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkcui" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.asccui = !orderBy.asccui, column: 'cui'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.asccui === true"></i>
+                                                <i class="fas fa-sort-down flex-1" *ngIf="orderBy.asccui === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 20rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>PUESTO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkjob" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascjob = !orderBy.ascjob, column: 'job'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.ascjob === true"></i>
+                                                <i class="fas fa-sort-down flex-1" *ngIf="orderBy.ascjob === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 25rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>ESPECIALIDAD</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkespeciality"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascespeciality = !orderBy.ascespeciality, column: 'especiality'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascespeciality === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascespeciality === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 25rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>PARTIDA</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkpartida"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascpartida = !orderBy.ascpartida, column: 'partida'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascpartida === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascpartida === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 20rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>FECHA DE INGRESO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkadmission_date"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascadmission_date = !orderBy.ascadmission_date, column: 'admission_date'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascadmission_date === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascadmission_date === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 25rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>PRESUPUESTADO EN</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkreubication"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascreubication = !orderBy.ascreubication, column: 'reubication'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascreubication === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascreubication === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 25rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>LABORA EN</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkwork_dependency"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascwork_dependency = !orderBy.ascwork_dependency, column: 'work_dependency'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascwork_dependency === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascwork_dependency === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 12rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>RENGLÓN</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkrenglon"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascrenglon = !orderBy.ascrenglon, column: 'renglon'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascrenglon === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascrenglon === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 15rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>TELÉFONO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkphone" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascphone = !orderBy.ascphone, column: 'phone'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.ascphone === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascphone === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 10rem;">
+                                    DPI <mat-checkbox class="pl-2" [(ngModel)]="checkdpi" [color]="color">
+                                    </mat-checkbox>
+                                </th>
+
+                                <th style="width: 10rem;">
+                                    NIT <mat-checkbox class="pl-2" [(ngModel)]="checknit" [color]="color">
+                                    </mat-checkbox>
+                                </th>
+
+                                <th style="width: 20rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>FECHA DE NACIMIENTO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkborn_date"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascborn_date = !orderBy.ascborn_date, column: 'born_date'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascborn_date === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascborn_date === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 15rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>CORREO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkemail" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascemail = !orderBy.ascemail, column: 'email'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.ascemail === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascemail === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 8rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>ACTIVO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkactive" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascactive = !orderBy.ascactive, column: 'activo'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.ascactive === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascactive === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tfoot class="border-t-2 border-blue-600">
+                            <tr class="py-2">
+                                <td colspan="3">
+                                    <div id="paging">
+                                        <ul>
+                                            <li class="cursor-pointer"><a
+                                                    (click)="decrement()"><span>Anterior</span></a></li>
+                                            <li class="cursor-pointer"><a
+                                                    class="bg-white text-gray-800 font-bold"><span>{{page}}</span></a>
+                                            </li>
+                                            <li class="cursor-pointer"><a
+                                                    (click)="increment()"><span>Siguiente</span></a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr *ngFor="let p of persons; let indexof = index" class="text-lg"
+                                [class.alt]="(indexof + 1)%2==1">
+                                <td> <input type="checkbox" [(ngModel)]="p.isSelected" (change)="addToPrintData(p)">
+                                </td>
+
+                                <td style="width: 30rem !important;">{{indexof + 1}}</td>
+                                <td *ngIf="user.rol == 'admin'" style="width: 15px;">
+                                    <div class="rounded-full cursor-pointer">
+                                        <div class="justify-center text-center " (click)="UpdatePerson(p.uuid)">
+                                            <i
+                                                class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-blue-500"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{p.fullname}}</td>
+                                <td>{{p.cui}}</td>
+                                <td>{{p.job.name || '---------------'}}</td>
+                                <td>{{p.especiality.name || '---------------'}}</td>
+                                <td>{{p.partida}}</td>
+                                <td>{{p.admission_date || '---------------'}}</td>
+                                <td>{{p.reubication.name}}</td>
+                                <td>{{p.work_dependency.name}}</td>
+                                <td>{{p.renglon}}</td>
+                                <td>{{p.phone || '---------------'}}</td>
+                                <td>{{p.dpi || '---------------'}}</td>
+                                <td>{{p.nit || '---------------'}}</td>
+                                <td>{{p.born_date || '---------------'}}</td>
+                                <td>{{p.email || '---------------'}}</td>
+                                <td><bdi *ngIf="p.active" class="text-green-500">SI</bdi> <bdi *ngIf="!p.active"
+                                        class="text-red-600">NO</bdi></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div >
+                <div class="datagrid overflow-x-auto block" #scrollTwo>
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th style="width: 2rem;">
+                                   <input type="checkbox" [(ngModel)]="checkedAll" (change)="addAllToPrintData()">
+                                </th>
+                                <th style="width: 5rem;">No.
+                                </th>
+                                <th style="width: 20rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>NOMBRE COMPLETO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkfullname"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascfullname = !orderBy.ascfullname, column: 'fullname'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascfullname === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascfullname === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+                                <th style="width: 10rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>CODIGO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkcui" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.asccui = !orderBy.asccui, column: 'cui'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.asccui === true"></i>
+                                                <i class="fas fa-sort-down flex-1" *ngIf="orderBy.asccui === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 20rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>PUESTO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkjob" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascjob = !orderBy.ascjob, column: 'job'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.ascjob === true"></i>
+                                                <i class="fas fa-sort-down flex-1" *ngIf="orderBy.ascjob === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 25rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>ESPECIALIDAD</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkespeciality"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascespeciality = !orderBy.ascespeciality, column: 'especiality'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascespeciality === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascespeciality === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 25rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>PARTIDA</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkpartida"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascpartida = !orderBy.ascpartida, column: 'partida'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascpartida === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascpartida === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 20rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>FECHA DE INGRESO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkadmission_date"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascadmission_date = !orderBy.ascadmission_date, column: 'admission_date'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascadmission_date === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascadmission_date === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 25rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>PRESUPUESTADO EN</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkreubication"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascreubication = !orderBy.ascreubication, column: 'reubication'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascreubication === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascreubication === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 25rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>LABORA EN</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkwork_dependency"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascwork_dependency = !orderBy.ascwork_dependency, column: 'work_dependency'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascwork_dependency === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascwork_dependency === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 12rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>RENGLÓN</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkrenglon"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascrenglon = !orderBy.ascrenglon, column: 'renglon'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascrenglon === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascrenglon === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 15rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>TELÉFONO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkphone" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascphone = !orderBy.ascphone, column: 'phone'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.ascphone === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascphone === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+
+                                <th style="width: 10rem;">
+                                    DPI <mat-checkbox class="pl-2" [(ngModel)]="checkdpi" [color]="color">
+                                    </mat-checkbox>
+                                </th>
+
+                                <th style="width: 10rem;">
+                                    NIT <mat-checkbox class="pl-2" [(ngModel)]="checknit" [color]="color">
+                                    </mat-checkbox>
+                                </th>
+
+                                <th style="width: 20rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>FECHA DE NACIMIENTO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkborn_date"
+                                                [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascborn_date = !orderBy.ascborn_date, column: 'born_date'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1"
+                                                    *ngIf="orderBy.ascborn_date === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascborn_date === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 15rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>CORREO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkemail" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascemail = !orderBy.ascemail, column: 'email'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.ascemail === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascemail === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </th>
+
+                                <th style="width: 8rem;">
+                                    <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <bdi>ACTIVO</bdi>
+                                        </div>
+
+                                        <div class="flex items-center px-0 sm:px-1 ">
+                                            <mat-checkbox class="pl-2 flex-1" [(ngModel)]="checkactive" [color]="color">
+                                            </mat-checkbox>
+                                        </div>
+                                        <div class="flex items-center mx-4 px-2">
+                                            <div (click)="this.orderByObserver$.emit({orderAsc: orderBy.ascactive = !orderBy.ascactive, column: 'activo'})"
+                                                class="cursor-pointer">
+                                                <i class="fas fa-sort-up flex-1" *ngIf="orderBy.ascactive === true"></i>
+                                                <i class="fas fa-sort-down flex-1"
+                                                    *ngIf="orderBy.ascactive === false"></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let p of dataTablePersons; let indexof = index" class="text-lg"
+                                [class.alt]="(indexof + 1)%2==1">
+                                <td> <input type="checkbox" [(ngModel)]="p.isSelected" (change)="addToPrintData(p)">
+                                </td>
+
+                                <td style="width: 30rem !important;">{{indexof + 1}}</td>
+                                <td>{{p.fullname}}</td>
+                                <td>{{p.cui}}</td>
+                                <td>{{p.job.name || '---------------'}}</td>
+                                <td>{{p.especiality.name || '---------------'}}</td>
+                                <td>{{p.partida}}</td>
+                                <td>{{p.admission_date || '---------------'}}</td>
+                                <td>{{p.reubication.name}}</td>
+                                <td>{{p.work_dependency.name}}</td>
+                                <td>{{p.renglon}}</td>
+                                <td>{{p.phone || '---------------'}}</td>
+                                <td>{{p.dpi || '---------------'}}</td>
+                                <td>{{p.nit || '---------------'}}</td>
+                                <td>{{p.born_date || '---------------'}}</td>
+                                <td>{{p.email || '---------------'}}</td>
+                                <td><bdi *ngIf="p.active" class="text-green-500">SI</bdi> <bdi *ngIf="!p.active"
+                                        class="text-red-600">NO</bdi></td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

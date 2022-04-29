@@ -1,0 +1,166 @@
+<app-navbar></app-navbar>
+<div class="mt-8 lg:mt-12 px-6 ml-12 mr-auto space-x-1">
+    <div class="ed-container">
+
+        <div class="ed-item ed-container s-100 m-50">
+            <!--Data object from database-->
+            <div class="ed-item s-100 mt-8 mx-auto">
+                <div class="border-2 border-blue-500 p-2 shadow-sm rounded-md">
+                    <div align="center">
+                        <div
+                            class="text-base text-gray-900 -mt-5 bg-white w-11/12 sm:w-5/12 lg:w-1/2 text-center font-bold border border-blue-600 rounded-md">
+                            DEPENDENCIA LABORAL</div>
+                    </div>
+                    <div class="my-2 mx-auto flex sm:flex-row flex-col">
+                        <div class="block sm:flex mx-0 py-1">
+                            <app-dependencies (dependencieSaved)="Works()"></app-dependencies>
+                        </div>
+                    </div>
+                    <div class="datagrid overflow-x-auto block">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>DEPENDENCIA LABORAL</th>
+                                    <th *ngIf="user.rol == 'admin'">EDITAR</th>
+                                    <th *ngIf="user.rol == 'admin'">ELIMINAR</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let dep of works; let indexof = index;">
+                                <tr>
+                                    <td>{{indexof + 1}}</td>
+                                    <td>{{dep.name}}</td>
+
+                                    <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+                                        <div class="rounded-full cursor-pointer"
+                                            (click)="UpdateWorkJob('works','ACTUALIZAR REGISTRO', dep.uuid_work, dep.name)">
+                                            <div class="justify-center text-center ">
+                                                <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"> </i>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+                                        <div class="rounded-full cursor-pointer"
+                                            (click)="DeleteWorkDependency(dep.uuid_work)">
+                                            <div class="justify-center text-center ">
+                                                <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"> </i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!--Data object from database-->
+            <div class="ed-item s-100 mt-8 mx-auto">
+                <div class="border-2 border-blue-500 p-2 shadow-sm rounded-md">
+                    <div align="center">
+                        <div
+                            class="text-base text-gray-900 -mt-5 bg-white w-10/12 sm:w-5/12 lg:w-1/2 text-center font-bold border border-blue-600 rounded-md">ESPECIALIDADES</div>
+                    </div>
+
+                    <div class="my-2 mx-auto flex sm:flex-row flex-col ">
+                        <div class="block sm:flex mx-0 py-1">
+                            <app-especialities (especialitySaved)="Jobs()"></app-especialities>
+                        </div>
+                    </div>
+
+                    <div class="datagrid overflow-x-auto block">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>ESPECIALIDAD</th>
+                                    <th *ngIf="user.rol == 'admin'">EDITAR</th>
+                                    <th *ngIf="user.rol == 'admin'">ELIMINAR</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let es of especialities; let indexof = index;">
+                                <tr>
+                                    <td>{{indexof + 1}}</td>
+                                    <td>{{es.name}}</td>
+
+                                    <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+                                        <div class="rounded-full cursor-pointer"
+                                            (click)="UpdateWorkJob('especialities', 'ACTUALIZAR REGISTRO', es.uuid_especiality, es.name)">
+                                            <div class="justify-center text-center ">
+                                                <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"> </i>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+                                        <div class="rounded-full cursor-pointer" (click)="DeleteJob(es.uuid_especiality)">
+                                            <div class="justify-center text-center ">
+                                                <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"> </i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Data object from database-->
+        <div class="ed-item s-100 l-50 mt-8 mx-auto">
+            <div class="border-2 border-blue-500 p-2 shadow-sm rounded-md">
+                <div align="center">
+                    <div
+                        class="text-base text-gray-900 -mt-5 bg-white w-10/12 sm:w-5/12 lg:w-1/2 text-center font-bold border border-blue-600 rounded-md">
+                        PUESTO LABORAL</div>
+                </div>
+
+                <div class="my-2 mx-auto flex sm:flex-row flex-col ">
+                    <div class="block sm:flex mx-0 py-1">
+                        <app-jobs (jobSaved)="Jobs()"></app-jobs>
+                    </div>
+                </div>
+
+                <div class="datagrid overflow-x-auto block">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>PUESTO LABORAL</th>
+                                <th *ngIf="user.rol == 'admin'">EDITAR</th>
+                                <th *ngIf="user.rol == 'admin'">ELIMINAR</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let job of jobs; let indexof = index;">
+                            <tr>
+                                <td>{{indexof + 1}}</td>
+                                <td>{{job.name}}</td>
+
+                                <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+                                    <div class="rounded-full cursor-pointer"
+                                        (click)="UpdateWorkJob('jobs','ACTUALIZAR REGISTRO', job.uuid_job, job.name)">
+                                        <div class="justify-center text-center ">
+                                            <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"> </i>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+                                    <div class="rounded-full cursor-pointer" (click)="DeleteJob(job.uuid_job)">
+                                        <div class="justify-center text-center ">
+                                            <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"> </i>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+
+<!--Data object from database-->
+<div class="mt-8 px-6">
+  <div class="ed-container">
+    <div class="ed-item s-100 m-70">
+      <div class="ml-16 mr-auto">
+        <mat-form-field class="w-full">
+          <mat-label>Buscar por nombre</mat-label>
+          <input type="text" matInput [(ngModel)]="search" autocomplete="off">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="ed-item s-100 m-30">
+      <app-authorization-configuration [url]="'authorization'" [component]="'autorización'"></app-authorization-configuration>
+    </div>
+  </div>
+
+  <div class="ml-16 mr-auto">
+    <div class="datagrid overflow-x-auto block">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>NOMBRE COMPLETO</th>
+            <th>CÓDIGO</th>
+            <th>EMITIDO</th>
+            <th *ngIf="user.rol == 'admin'">EDITAR</th>
+            <th>IMPRIMIR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ai of authorizations | filter:search:'person'; let indexof = index" class="text-lg"
+            [class.alt]="(indexof + 1)%2==1">
+            <td>{{indexof + 1}}</td>
+            <td>{{ai.person.fullname}}</td>
+            <td>{{ai.person.cui}}</td>
+            <td>{{ai.submitted_at}}</td>
+
+            <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+              <div class="rounded-full cursor-pointer" (click)="updateOne(ai.uuid_authorization)">
+                <div class="justify-center text-center ">
+                  <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+                </div>
+              </div>
+            </td>
+
+            <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+              <div class="rounded-full cursor-pointer" (click)="printPDF(ai.uuid_authorization)">
+                <div class="justify-center text-center ">
+                  <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

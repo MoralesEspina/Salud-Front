@@ -1,0 +1,5 @@
+<div class="flex items-center px-0 sm:px-1 ">
+    <button
+        class="flex-1 text-xs shadow appearance-none border bg-blue-500 text-blue-100 h-10  hover:bg-blue-700 rounded-lg actions-width px-2"
+        (click)="ShowConfigurationAuthorizationModal()" *ngIf="user.rol == 'admin'">Configuracion de {{component}}</button>
+</div>

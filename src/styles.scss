@@ -1,0 +1,147 @@
+@import "~@angular/material/theming";
+
+@include mat-core();
+
+// hue. Available color palettes: https://material.io/design/color/
+$virtual-parish-office-primary: mat-palette($mat-indigo);
+$virtual-parish-office-accent : mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$virtual-parish-office-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$virtual-parish-office-theme: mat-light-theme($virtual-parish-office-primary,
+    $virtual-parish-office-accent,
+    $virtual-parish-office-warn);
+
+@include angular-material-theme($virtual-parish-office-theme);
+
+/* You can add global styles to this file, and also import other style files */
+$max-width: 1700px;
+@import "~ed-grid/ed-grid";
+
+/*
+    Data table start
+*/
+.datagrid table {
+    border-collapse: collapse;
+    text-align     : left;
+    width          : 100%;
+    font-family    : 'Times New Roman', Times, serif;
+}
+
+.datagrid {
+    font                 : normal 12px/150% null;
+    background           : #fff;
+    overflow             : hidden;
+    border               : 1px solid #006699;
+    -webkit-border-radius: 3px;
+    -moz-border-radius   : 3px;
+    border-radius        : 3px;
+}
+
+.datagrid table td,
+.datagrid table th {
+    padding: 3px 10px;
+}
+
+.datagrid table thead th {
+    background      : -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557f));
+    background      : -moz-linear-gradient(center top, #006699 5%, #00557f 100%);
+    filter          : progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557f');
+    background-color: #006699;
+    color           : #ffffff;
+    font-size       : 15px;
+    font-weight     : bold;
+    border-left     : 1px solid #0070a8;
+}
+
+.datagrid table thead th:first-child {
+    border: none;
+}
+
+.datagrid table tbody td {
+    color      : #00557f;
+    border-left: 1px solid #e1eef4;
+    font-size  : 14px;
+    font-weight: normal;
+}
+
+.datagrid table tbody .alt td {
+    background: #e1eef4;
+    color     : #00557f;
+}
+
+.datagrid table tbody td:first-child {
+    border-left: none;
+}
+
+.datagrid table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.datagrid table tfoot td div {
+    border-top: 1px solid #006699;
+    background: #e1eef4;
+}
+
+.datagrid table tfoot td {
+    padding  : 0;
+    font-size: 12px;
+}
+
+.datagrid table tfoot td div {
+    padding: 2px;
+}
+
+.datagrid table tfoot td ul {
+    margin    : 0;
+    padding   : 0;
+    list-style: none;
+    text-align: right;
+}
+
+.datagrid table tfoot li {
+    display: inline;
+}
+
+.datagrid table tfoot li a {
+    text-decoration      : none;
+    display              : inline-block;
+    padding              : 2px 8px;
+    margin               : 1px;
+    color                : #f5f5f5;
+    border               : 1px solid #006699;
+    -webkit-border-radius: 3px;
+    -moz-border-radius   : 3px;
+    border-radius        : 3px;
+    background           : -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #006699), color-stop(1, #00557f));
+    background           : -moz-linear-gradient(center top, #006699 5%, #00557f 100%);
+    filter               : progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557f');
+    background-color     : #006699;
+}
+
+.container .datagrid table tfoot ul.active,
+.container .datagrid table tfoot ul a:hover {
+    text-decoration : none;
+    border-color    : #00557f;
+    color           : #f5f5f5;
+    background      : none;
+    background-color: #006699;
+}
+
+div.dhtmlx_window_active,
+div.dhx_modal_cover_dv {
+    position: fixed !important;
+}
+
+@media screen and (max-width: 320px) {
+    .datagrid table {
+        display   : block;
+        overflow-x: auto;
+    }
+}
+
+/*
+    Data table end
+*/

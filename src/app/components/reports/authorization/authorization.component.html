@@ -1,0 +1,113 @@
+<app-navbar></app-navbar>
+
+<div class="mt-8 px-6 ml-12 mr-auto">
+    <div class="ed-container border-2 border-blue-500 p-2 shadow-sm rounded-md">
+
+        <div class="ed-item ed-container">
+            <div class="ed-item s-100 m-30 mx-auto">
+                <mat-form-field appearance="outline" class="input-width">
+                    <mat-label>Fecha de inicio</mat-label>
+                    <input matInput [matDatepicker]="picker1" [ngModel]="startDateInput"
+                        (ngModelChange)="authorizationReport($event, endDateInput)">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="ed-item s-100 m-30 mx-auto">
+                <mat-form-field appearance="outline" class="input-width">
+                    <mat-label>Fecha de finalización</mat-label>
+                    <input matInput [matDatepicker]="picker2" [ngModel]="endDateInput"
+                        (ngModelChange)="authorizationReport(startDateInput, $event)">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="ed-item s-100 m-30 mx-auto">
+                <mat-form-field appearance="outline" class="example-full-width input-width">
+                    <mat-label>Ordenar en forma</mat-label>
+                    <mat-select [ngModel]="order" (ngModelChange)="orderReport($event, orderField)">
+                        <mat-option [value]="'asc'">Ascendente</mat-option>
+                        <mat-option [value]="'desc'">Descendente</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="ed-item s-100">
+            <!--Data object from database-->
+            <div class="my-2 mx-auto flex sm:flex-row flex-col ">
+                <div class="block sm:flex mx-0 py-1">
+                    <!-- <app-jobs (jobSaved)="Jobs()"></app-jobs> -->
+                </div>
+            </div>
+
+            <div class="datagrid overflow-x-auto block">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>
+                                <div class="inline-flex items-center">
+                                    <span class="ml-3 text-base text-gray-100">NOMBRE. </span>
+                                    <input type="radio" class="form-radio ml-2 h-6 w-6" [ngModel]="orderField"
+                                        value="person.fullname" (ngModelChange)="orderReport(order, $event)">
+                                </div>
+                            </th>
+
+                            <th>
+                                <div class="inline-flex items-center">
+                                    <span class="ml-3 text-base text-gray-100">DEPENDENCIA </span>
+                                    <input type="radio" class="form-radio ml-2 h-6 w-6" [ngModel]="orderField"
+                                        value="person.work_dependency.name" (ngModelChange)="orderReport(order, $event)">
+                                </div>
+                            </th>
+
+                            <th align="center">
+                                <div class="inline-flex items-center">
+                                    <span class="ml-3 text-base text-gray-100">FECHA INICIO </span>
+                                    <input type="radio" class="form-radio ml-2 h-6 w-6" [ngModel]="orderField"
+                                        value="startdate" (ngModelChange)="orderReport(order, $event)">
+                                </div>
+                            </th>
+
+                            <th align="center">
+                                <div class="inline-flex items-center">
+                                    <span class="ml-3 text-base text-gray-100">FECHA FIN </span>
+                                    <input type="radio" class="form-radio ml-2 h-6 w-6" [ngModel]="orderField"
+                                        value="enddate" (ngModelChange)="orderReport(order, $event)">
+                                </div>
+                            </th>
+
+                            <th align="center">
+                                <div class="inline-flex items-center">
+                                    <span class="ml-3 text-base text-gray-100">FECHA DE REANUDACIÓN </span>
+                                    <input type="radio" class="form-radio ml-2 h-6 w-6" [ngModel]="orderField"
+                                        value="resumework" (ngModelChange)="orderReport(order, $event)">
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let aut of authorizations; let indexof = index;">
+                        <tr>
+                            <td>{{indexof + 1}}</td>
+                            <td>{{aut.person.fullname}}</td>
+                            <td>{{aut.person.work_dependency.name}}</td>
+                            <td align="center">{{aut.startdate}}</td>
+                            <td align="center">{{aut.enddate}}</td>
+                            <td align="center">{{aut.resumework}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="ed-item s-100 m-50">
+            <div class="py-1 ">
+                <button class="mycustom-buttom-primary hover:bg-green-700 rounded-lg w-full"
+                    (click)="GenerateReportTable(authorizations)">GENERAR REPORTE EN PDF</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+[
+    {
+        "origin": [
+            "http://localhost:4200",
+	    "https://das-jalapa.web.app"
+        ],
+        "method": [
+            "GET"
+        ],
+        "maxAgeSeconds": 5000
+    }
+]

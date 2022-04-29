@@ -1,0 +1,29 @@
+.inputsize{
+    font-size: 12px !important;
+}
+
+.inputheight{
+    width: 100% !important;
+}
+
+.mat-form-field-infix{
+    height: 0.75rem !important;
+}
+
+.tamano{
+    width: 100%;
+}
+
+.mat-form-field:not(.mat-form-field-has-label) .mat-form-field-infix {
+    border-top-width: 0;
+}
+  
+.mat-form-field-wrapper {
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+  
+.mat-form-field-label-wrapper {
+    padding-top: 0px;
+}

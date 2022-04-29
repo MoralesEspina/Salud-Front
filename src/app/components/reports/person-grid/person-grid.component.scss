@@ -1,0 +1,23 @@
+.flexible-td{
+    width: 20rem;
+}
+table{
+    table-layout: fixed;
+    width: 250px;
+}
+
+th, td {
+    width: 100px;
+    word-wrap: break-word;
+}
+
+.datagrid table thead th {
+    background      : -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffffff), color-stop(1, #ffffff));
+    background      : -moz-linear-gradient(center top, #ffffff 5%, #ffffff 100%);
+    filter          : progid:DXImageTransform.Microsoft.gradient(startColorstr='#006699', endColorstr='#00557f');
+    background-color: #ffffff;
+    color           : #313131;
+    font-size       : 15px;
+    font-weight     : bold;
+    border-bottom     : 1px solid #bbdbeb;
+}

@@ -1,0 +1,118 @@
+@host = https://virtualparishoffice.herokuapp.com/vpo/v1/
+
+###
+GET {{host}}/documents/folio/2
+Content-Type: application/json
+
+###
+POST {{host}}/documents/baptisms
+Content-Type: application/json
+
+{
+    "firstname":"Elida",
+    "secondname":"Noemi",
+    "lastname":"Castrillo",
+    "secondlastname":"Maldonado",
+    "borndate":"1997-2-24",
+    "dpi":"339379092",
+    "sex":"F",
+    "folio":1,
+    "baptism_date":"1997-4-2",
+    "priest":{
+        "id_priest":"1"
+    },
+    "place":{
+        "id":"qwertyuiop"
+    },
+    "address":"Caserio Araizapo Aldea el Durazno Jalapa",
+    "father":{
+        "id_father":"9b6e8df8-dd44-47c7-b2c7-a4b226d0cf84"
+    },
+    "mother":{
+        "id_mother":"396aa1eb-208c-4ff6-a655-dce2a02b46b4"
+    },
+    "godmother":{
+        "id_godmother":"876ae4da-0dc8-4f18-ab85-3ec7926ae09f"
+    }
+}
+
+###
+# ###
+# POST {{host}}/documents/baptisms
+# Content-Type: application/json
+
+# {
+#     "firstname":"Silvia",
+#     "secondname":"Betzaida",
+#     "lastname":"Castrillo",
+#     "secondlastname":"Maldonado",
+#     "borndate":"1997-2-24",
+#     "dpi":"339379092",
+#     "sex":"M",
+#     "folio":"1",
+#     "baptism_date":"1997-4-2",
+#     "priest":"1",
+#     "place":"2",
+#     "address":"",
+#     "father":{
+#         "id_father":"9b6e8df8-dd44-47c7-b2c7-a4b226d0cf84"
+#     },
+#     "mother":{
+#         "id_mother":"396aa1eb-208c-4ff6-a655-dce2a02b46b4"
+#     },
+#     "godfather":{
+#         "id_godfather":""
+#     },
+#     "godmother":{
+#         "id_godmother":"876ae4da-0dc8-4f18-ab85-3ec7926ae09f"
+#     },
+#     "manager":{
+#         "id_manager":""
+#     }
+# }
+
+###
+GET {{host}}/documents/baptisms
+Content-Type: application/json
+
+###
+POST {{host}}/documents/mail/send
+Content-Type: application/json
+
+{
+    "firstname":"Mike",
+    "secondname":"Aroldo",
+    "thirdname":"Bernardo",
+    "lastname":"Castrillo",
+    "secondlastname":"Maldonado"
+}
+
+###
+POST {{host}}/documents/books
+Content-Type: application/json
+
+{
+    "number_book":3,
+    "start_date":"1997-11-23",
+    "commentary":"Este es el comentario",
+    "folios": 20
+}
+
+###
+GET {{host}}/documents/books/all
+Content-Type: application/json
+
+
+###
+GET {{host}}documents/audits
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjAzNjYyMjE3LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.tCq4dtUeJmlE4t12M-8Zph6a8ovNYCVFFbqHnE81nccMIwLC20Cx_i0h60d8gYX0xTECoHPI1cucZPwWSY1-J6iTziTHOLR-1vZZ3yiAmoXcEIrfyc3ZbV2AMluhLKMIP9_PppmDtQ2IdwKYkWfBR7A9hWlSGJbgbHgDQ9MtB7s
+
+###
+POST {{host}}documents/audits
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTU0ZDY1MGEtZWY4YS00YjExLTkwYTEtY2MxNGI5MzBkYTJmIiwidXNlcm5hbWUiOiJtaWtlIiwicm9sIjoiYWRtaW4ifSwiZXhwIjoxNjAzNjYyMjE3LCJpc3MiOiJtYXJvbGQ5N0BvdXRsb29rLmNvbSJ9.tCq4dtUeJmlE4t12M-8Zph6a8ovNYCVFFbqHnE81nccMIwLC20Cx_i0h60d8gYX0xTECoHPI1cucZPwWSY1-J6iTziTHOLR-1vZZ3yiAmoXcEIrfyc3ZbV2AMluhLKMIP9_PppmDtQ2IdwKYkWfBR7A9hWlSGJbgbHgDQ9MtB7s
+
+{
+    "id_baptism":"1f2b28c4-d3d2-43a9-a324-647b2de63a1e"
+}

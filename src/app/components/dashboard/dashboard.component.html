@@ -1,0 +1,139 @@
+<app-navbar></app-navbar>
+<div class="mt-8 px-6 ml-12 mr-auto">
+    <div class="grid grid-cols-1 ">
+        <div class="">
+            <div class="my-2 mx-auto flex sm:flex-row flex-col origin-right">
+                <div class="flex flex-row sm:mb-0 py-1">
+                    <div class="relative w-full">
+                        <select [ngModel]="limit" (ngModelChange)="ManyPersons(null, $event, search)"
+                            class="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                            <option class="rounded-sm">5</option>
+                            <option class="rounded-sm">10</option>
+                            <option class="rounded-sm">20</option>
+                            <option class="rounded-sm">50</option>
+                            <option class="rounded-sm">100</option>
+                            <option class="rounded-sm">1000</option>
+                        </select>
+                        <div
+                            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="block sm:flex mx-0 py-1">
+                    <span class="h-full absolute inset-y-0 left-0 flex items-center pl-0 sm:pl-2">
+                        <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
+                            <path
+                                d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
+                            </path>
+                        </svg>
+
+                    </span>
+                    <input placeholder="Search"
+                        class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
+                        [ngModel]="search" (ngModelChange)="ManyPersons( null, limit, $event)" />
+                </div>
+
+                <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+                    <app-especialities></app-especialities>
+                    <app-jobs></app-jobs>
+                    <app-dependencies></app-dependencies>
+
+                    <div class="flex items-center px-0 sm:px-1 ">
+                        <button
+                            class="flex-1 text-xs shadow appearance-none border bg-green-500 text-blue-100 h-10  hover:bg-green-700 rounded-lg actions-width px-2"
+                            (click)="CreatePerson()" *ngIf="user.rol == 'admin'">Agrega una
+                            persona</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!--Data object from database-->
+            <div>
+                <div class="datagrid overflow-x-auto block">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th *ngIf="user.rol == 'admin'">EDITAR</th>
+                                <th *ngIf="user.rol == 'admin'">ELIMINAR</th>
+                                <th>No.</th>
+                                <th>NOMBRE COMPLETO</th>
+                                <th>CÓDIGO</th>
+                                <th *ngIf="user.rol == 'admin'">AUTORIZACIÓN</th>
+                                <th>SOLICITUD</th>
+                                <th *ngIf="user.rol == 'admin'">CONSTANCIA</th>
+                            </tr>
+                        </thead>
+                        <tfoot class="border-t-2 border-blue-600">
+                            <tr class="py-2">
+                                <td colspan="8">
+                                    <div id="paging">
+                                        <ul>
+                                            <li class="cursor-pointer"><a
+                                                    (click)="decrement()"><span>Anterior</span></a></li>
+                                            <li class="cursor-pointer"><a
+                                                    class="bg-white text-gray-800 font-bold"><span>{{page}}</span></a>
+                                            </li>
+                                            <li class="cursor-pointer"><a
+                                                    (click)="increment()"><span>Siguiente</span></a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr *ngFor="let p of persons; let indexof = index" class="text-lg"
+                                [class.alt]="(indexof + 1)%2==1">
+                                <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+                                    <div class="rounded-full cursor-pointer" (click)="UpdatePerson(p.uuid)">
+                                        <div class="justify-center text-center ">
+                                            <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+                                    <div class="rounded-full cursor-pointer" (click)="deletePerson(p.uuid)">
+                                        <div class="justify-center text-center ">
+                                            <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{indexof + 1}}</td>
+                                <td>{{p.fullname}}</td>
+                                <td>{{p.cui}}</td>
+                                <td *ngIf="user.rol == 'admin'" style="width: 15px;">
+                                    <div class="rounded-full cursor-pointer">
+                                        <div class="justify-center text-center " (click)="CreateAuthorizationDialog(p)">
+                                            <i
+                                                class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-blue-500"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td style="width: 15px;">
+                                    <div class="rounded-full cursor-pointer">
+                                        <div class="justify-center text-center "
+                                            (click)="createRequestAuthorizationModal(p.uuid)">
+                                            <!-- <div class="justify-center text-center " (click)="VacationRequestPDF()"> -->
+                                            <i
+                                                class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-orange-500"></i>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td style="width: 15px;" *ngIf="user.rol == 'admin'">
+                                    <app-constancy [IDPerson]="p.uuid"></app-constancy>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

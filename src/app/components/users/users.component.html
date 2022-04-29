@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+<div class="mt-8 lg:mt-4 px-6 ml-12 mr-auto">
+    <div class="ed-container">
+        <div class="ed-item s-100 l-50">
+            <!--Data object from database-->
+            <div class="container mt-8 mx-auto">
+                <div class="datagrid overflow-x-auto block">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>NOMBRE DE USUARIO</th>
+                                <th>ROL</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let duser of users; let indexof = index;">
+                            <tr class="text-lg">
+                                <td>{{indexof + 1}}</td>
+                                <td>{{duser.username}}</td>
+                                <td>{{duser.rol}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="ed-item s-100 l-50 mt-6 lg:mt-8 border border-blue-500 rounded-md mx-4 lg:mx-0">
+            <div class="ed-container py-2">
+                <form class="ed-item ed-container inputsize">
+                    <mat-dialog-content [formGroup]="form">
+                        <div class="ed-item ed-container">
+
+                            <div class="ed-item s-100 m-100 l-100">
+                                <span *ngIf="submitted && f.username.errors"
+                                    class="text-red-700 text-xs animated fadeIn">Ingrese el usuario</span>
+                                <mat-form-field appearance="outline" class="inputheight">
+                                    <mat-label>Nombre de usuario</mat-label>
+                                    <input matInput formControlName="username"
+                                        [ngClass]="{'is-invalid':submitted && f.username.errors}">
+                                </mat-form-field>
+
+                            </div>
+
+                            <div class="ed-item s-100 m-100 l-100">
+                                <span *ngIf="submitted && f.password.errors"
+                                    class="text-red-700 text-xs animated fadeIn">Ingrese la contraseña</span>
+                                <mat-form-field appearance="outline" class="inputheight">
+                                    <mat-label>Contraseña</mat-label>
+                                    <input matInput type="password" formControlName="password"
+                                        [ngClass]="{'is-invalid':submitted && f.password.errors}">
+                                </mat-form-field>
+                                <span *ngIf="submitted && f.password.errors" class="text-blue-700"> </span>
+                            </div>
+
+                            <div class="ed-item s-100 m-100 l-100">
+                                <span *ngIf="submitted && f.id_rol.errors"
+                                    class="text-red-700 text-xs animated fadeIn">Seleccione el rol</span>
+                                <mat-form-field appearance="outline" class="example-full-width inputheight">
+                                    <mat-label>Rol</mat-label>
+                                    <mat-select formControlName="id_rol"
+                                        [ngClass]="{'is-invalid':submitted && f.id_rol.errors}">
+                                        <mat-option *ngFor="let option of rols" [value]="option.id_rol">
+                                            {{option.type_rol}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </mat-dialog-content>
+
+                    <div class="ed-item ed-container ">
+
+                        <div class="ed-item s-50">
+                            <div class="py-1 ">
+                                <button class="mycustom-buttom-primary hover:bg-green-700 rounded-lg tamano"
+                                    (click)="save()">GUARDAR</button>
+                            </div>
+                        </div>
+                        <div class="ed-item s-50">
+                            <div class="py-1 ">
+                                <button
+                                    class="mycustom-button-warning hover:bg-red-700 rounded-lg tamano">CANCELAR</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

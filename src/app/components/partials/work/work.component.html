@@ -1,0 +1,29 @@
+<div mat-dialog-title class="block text-gray-700 text-sm font-bold mb-2 text-center pb-5"> CREAR {{title}}</div>
+
+<div class="ed-container">
+
+    <form class="ed-item s-100 l-100">
+        <mat-dialog-content [formGroup]="form">
+            <span *ngIf="submitted && f.nameentity.errors" class="text-red-700 text-xs animated fadeIn">Ingrese
+                este campo</span>
+            <mat-form-field appearance="outline" class="inputheight">
+                <mat-label>Nombre</mat-label>
+                <input matInput formControlName="nameentity">
+            </mat-form-field>
+        </mat-dialog-content>
+    </form>
+
+    <div class="ed-item s-50 l-50">
+        <div class="py-1 px-4 ">
+            <button class=" mycustom-buttom-primary hover:bg-green-700 rounded-lg tamano"
+                (click)="save()">GUARDAR</button>
+        </div>
+    </div>
+    <div class="ed-item s-50 l-50">
+        <div class="py-1 px-4">
+            <button class="mycustom-button-warning hover:bg-red-700 rounded-lg tamano"
+                (click)="close()">CANCELAR</button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* comando para generar el codigo css tailwind */
+
+/* npx tailwindcss build src/tailwind.css -o src/assets/tailwind/final.css */
+
+/* Add specific classes to tailwind */
+
+@layer components {
+    .input-gray {
+        @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight
+    }
+
+    .push {
+        @apply text-white font-bold py-2 px-4 rounded
+    }
+
+    .push:focus {
+        @apply outline-none shadow-outline
+    }
+
+    .input-text {
+        @apply block text-gray-700 text-sm font-serif
+    }
+
+    .btn {
+        @apply font-bold py-2 px-4 rounded;
+    }
+
+    .btn-blue {
+        @apply bg-blue-500 text-white;
+    }
+
+    .btn-blue:hover {
+        @apply bg-blue-700;
+    }
+
+    .mycustom-button {
+        @apply shadow appearance-none border rounded-sm bg-blue-500 text-blue-100 h-10
+    }
+
+    .mycustom-buttom:hover {
+        @apply outline-none border-blue-900
+    }
+
+    .mycustom-buttom-primary {
+        @apply shadow appearance-none border rounded-sm bg-green-500 text-green-100 h-10
+    }
+
+    .mycustom-buttom-primary:hover {
+        @apply outline-none border-green-900
+    }
+
+    .mycustom-button-warning {
+        @apply shadow appearance-none border rounded-sm bg-red-500 text-blue-100 h-10
+    }
+
+    .toggle-checkbox:checked {
+        @apply      : right-0 border-green-400;
+        right       : 0;
+        border-color: #68D391;
+    }
+
+    .toggle-checkbox:checked+.toggle-label {
+        @apply          : bg-green-400;
+        background-color: #68D391;
+    }
+}

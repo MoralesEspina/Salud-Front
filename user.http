@@ -1,0 +1,19 @@
+@host = http://192.168.1.101:5000/das/v1
+
+###
+POST {{host}}/login
+Content-Type: application/json
+
+{
+    "username":"cristianJL",
+    "password":"Guat33mala225"
+}
+
+###
+POST {{host}}/register
+Content-Type: application/json
+
+{
+    "username":"mikeadmin",
+    "password":"1234567890"
+}

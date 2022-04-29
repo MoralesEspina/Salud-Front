@@ -1,0 +1,12 @@
+correlativo en 1++ para cada año inicial
+cuadroos de firma customizables
+guardar en base de datos las observaciones
+
+DEPARTAMENTO DE RECURSOS HUMANOS
+DIRECCIÓN DE ÁREA DE SALUD DE JALAPA
+
+
+---- con fechas inicio, finalización, reanudación de labores ----
+se modifica cuando se edita, se le quita un dia a cada fecha
+
+---- la fecha en el correlativo, agregar el año para que aparezca editar---

@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+
+<!--Data object from database-->
+<div class="mt-8 px-6">
+
+  <div class="ed-container">
+    <div class="ed-item s-100 m-70">
+      <div class="ml-16 mr-auto">
+        <mat-form-field class="w-full">
+          <mat-label>Buscar por nombre</mat-label>
+          <input type="text" matInput [(ngModel)]="search" autocomplete="off">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="s-100 m-30">
+      <app-authorization-configuration [url]="'requestvacation'" [component]="'solicitud de vacaciones'"></app-authorization-configuration>
+    </div>
+  </div>
+
+  <div class="ml-16 mr-auto">
+    <div class="datagrid overflow-x-auto block">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>NOMBRE COMPLETO</th>
+            <th>CÓDIGO</th>
+            <th>EMITIDO</th>
+            <th>EDITAR</th>
+            <th>IMPRIMIR</th>
+            <th *ngIf="user.rol === 'admin'">BORRAR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rv of requestsVacation | filter:search:'person'; let indexof = index" class="text-lg"
+            [class.alt]="(indexof + 1)%2==1">
+            <td>{{indexof + 1}}</td>
+            <td>{{rv.person.fullname}}</td>
+            <td>{{rv.person.cui}}</td>
+            <td>{{rv.submitted_at}}</td>
+
+            <td style="width: 10px;">
+              <div class="rounded-full cursor-pointer" (click)="UpdateRequestVacation(rv.uuid_request_vacation)">
+                <div class="justify-center text-center ">
+                  <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+                </div>
+              </div>
+            </td>
+
+            <td style="width: 10px;">
+              <div class="rounded-full cursor-pointer" (click)="printPDF(rv.uuid_request_vacation)">
+                <div class="justify-center text-center ">
+                  <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>
+                </div>
+              </div>
+            </td>
+
+            <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+              <div class="rounded-full cursor-pointer" (click)="DeleteRequest(rv.uuid_request_vacation)">
+                <div class="justify-center text-center ">
+                  <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

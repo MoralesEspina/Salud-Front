@@ -44,6 +44,8 @@ import { JobsComponent } from './components/shared/render/jobs/jobs.component';
 import { UsersComponent } from './components/users/users.component';
 import { Jwtheader } from './guards/jwtheader.interceptor';
 import { Statuserror } from './guards/statuserror.interceptor';
+import { RecordComponent } from './components/newviews/record/record.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   exports: [
@@ -83,7 +85,9 @@ import { Statuserror } from './guards/statuserror.interceptor';
 
     NotfoundComponent,
 
-    ConstancyComponent
+    ConstancyComponent,
+
+    RecordComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +118,8 @@ import { Statuserror } from './guards/statuserror.interceptor';
     MatCheckboxModule,
 
     AppRoutingModule,
+
+    MatSortModule,
   ],
   entryComponents: [
     DocumentComponent,

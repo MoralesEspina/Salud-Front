@@ -1,0 +1,154 @@
+<app-navbar></app-navbar>
+<app-navbar></app-navbar>
+<div class="mt-8 lg:mt-4 px-6 ml-12 mr-auto">
+  <form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>DATOS GENERALES</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- AQUI COMIENZA UN FILA -->
+        <div class="row">
+           <!-- AQUI COMIENZA UNA COLUMNA -->
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Primer Nombre" formControlName="firstName">
+              <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+           <!-- AQUI COMIENZA UNA COLUMNA -->
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Segundo Nombre" formControlName="lastName">
+              <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+         <!-- AQUI COMIENZA UN OTRA FILA -->
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Otros Nombres" formControlName="otherName">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Primer Apellido" formControlName="firstSurname">
+              <mat-error *ngIf="addressForm.controls['firstSurname'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+         <!-- AQUI COMIENZA UN OTRA FILA -->
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Segundo Apellido" formControlName="lastSurname">
+              <mat-error *ngIf="addressForm.controls['lastSurname'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Apellido De Casada" formControlName="surnameOfEach">
+            </mat-form-field>
+          </div>
+        </div>
+         <!-- AQUI COMIENZA UN OTRA FILA -->
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <textarea matInput placeholder="Dirección Particular" formControlName="address"></textarea>
+              <mat-error *ngIf="addressForm.controls['address'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+         <!-- AQUI COMIENZA UN OTRA FILA -->
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="País" formControlName="country">
+              <mat-error *ngIf="addressForm.controls['country'].hasError('required')">
+               <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Municipio" formControlName="municipality">
+              <mat-error *ngIf="addressForm.controls['municipality'].hasError('required')">
+               <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+         <!-- **************AQUI COMENZA AGREGAR LOS LAS DEMAS FILAS Y COLUMNAS IGUAL QUE ARRIBA****************** -->
+
+      </mat-card-content>
+       <!-- AQUI COMIENZA LA SEGUNDA PARTE -->
+      <mat-card-header>
+        <mat-card-title>DATOS DE IDENTIFICACION</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+         <!-- AQUI COMIENZA UN OTRA FILA -->
+         <!-- MODIFICAR LOS DATOS -->
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Primer Nombre" formControlName="firstName">
+              <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Segundo Nombre" formControlName="lastName">
+              <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+         <!-- AQUI COMIENZA UN OTRA FILA -->
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Otros Nombres" formControlName="otherName">
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Primer Apellido" formControlName="firstSurname">
+              <mat-error *ngIf="addressForm.controls['firstSurname'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+         <!-- AQUI COMIENZA UN OTRA FILA -->
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Otros Nombres" formControlName="otherName">
+            </mat-form-field>
+          </div>
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions style="text-align: center;">
+        <button mat-raised-button color="primary" type="submit" [disabled]="addressForm.invalid">Agregar</button>
+        <button mat-raised-button color="primary" routerLink="/dashboard" >Cancelar</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+</div>
+

@@ -44,6 +44,8 @@ import { JobsComponent } from './components/shared/render/jobs/jobs.component';
 import { UsersComponent } from './components/users/users.component';
 import { Jwtheader } from './guards/jwtheader.interceptor';
 import { Statuserror } from './guards/statuserror.interceptor';
+import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   exports: [
@@ -83,7 +85,9 @@ import { Statuserror } from './guards/statuserror.interceptor';
 
     NotfoundComponent,
 
-    ConstancyComponent
+    ConstancyComponent,
+
+    CurriculumComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +118,8 @@ import { Statuserror } from './guards/statuserror.interceptor';
     MatCheckboxModule,
 
     AppRoutingModule,
+
+    MatRadioModule,
   ],
   entryComponents: [
     DocumentComponent,

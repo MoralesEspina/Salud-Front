@@ -12,7 +12,7 @@ import { PersonGridComponent } from './components/reports/person-grid/person-gri
 import { UsersComponent } from './components/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
-
+import { RecordComponent } from './components/newviews/record/record.component';
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: "enabled",
@@ -77,7 +77,12 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'not-found'
+  },
+  {
+    path: 'historial',
+    component: RecordComponent
   }
+  
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes, routerOptions);

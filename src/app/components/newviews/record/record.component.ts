@@ -35,7 +35,8 @@ export class RecordComponent implements OnInit {
   authorizationPDF = new IAuthorization();
   user = new Claims();
 
-  search: string;
+  search = "GRISELDA YANIRA RUANO BAUTISTA";
+  //search: string;
 
   dataSource: { filter: string; };
 

@@ -3,20 +3,7 @@
 <!--Data object from database-->
 <div class="mt-8 px-6">
   <div class="ed-container">
-    <div class="ed-item s-100 m-70">
-      <div class="ml-16 mr-auto">
-        <mat-form-field class="w-full">
-          <mat-label>Buscar por nombre</mat-label>
-          <input type="text" matInput [(ngModel)]="search" autocomplete="off">
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div class="ed-item s-100 m-30">
-      <app-authorization-configuration [url]="'authorization'" [component]="'autorización'"></app-authorization-configuration>
-    </div>
-  </div>
-
+    
   <div class="ml-16 mr-auto">
     <div class="datagrid overflow-x-auto block">
       <table>

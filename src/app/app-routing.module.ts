@@ -57,6 +57,13 @@ const routes: Routes = [
     component: JobdependencyComponent,
     canActivate: [AuthGuard]
   },
+
+  {
+    path: 'historial',
+    component: RecordComponent,
+    canActivate: [AuthGuard]
+  },
+
   {
     path: 'solicitudes',
     component: GridrequestvacationComponent,
@@ -78,10 +85,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'not-found'
   },
-  {
-    path: 'historial',
-    component: RecordComponent
-  }
+
   
 ];
 

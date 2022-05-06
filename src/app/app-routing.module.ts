@@ -10,6 +10,7 @@ import { NotfoundComponent } from './components/partials/notfound/notfound.compo
 import { AuthorizationComponent } from './components/reports/authorization/authorization.component';
 import { PersonGridComponent } from './components/reports/person-grid/person-grid.component';
 import { UsersComponent } from './components/users/users.component';
+import { RequestsComponent } from './components/newviews/requests/requests.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
 
@@ -28,6 +29,12 @@ const routes: Routes = [
   {
     path: 'reportes',
     component: AuthorizationComponent ,
+    canActivate: [AuthGuard],
+    data: {roles: [Role.admin]}
+  },
+  {
+    path: 'requests',
+    component: RequestsComponent ,
     canActivate: [AuthGuard],
     data: {roles: [Role.admin]}
   },

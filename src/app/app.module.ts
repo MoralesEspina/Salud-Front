@@ -89,7 +89,7 @@ import { MatRadioModule } from '@angular/material/radio';
 
     ConstancyComponent,
 
-    RecordComponent
+    RecordComponent,
 
     CurriculumComponent
   ],

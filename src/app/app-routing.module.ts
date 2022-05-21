@@ -1,3 +1,4 @@
+import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
 
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { CertificationComponent } from './components/certification/certification.component';
@@ -69,6 +70,10 @@ const routes: Routes = [
   {
     path: 'personas',
     component: PersonGridComponent
+  },
+  {
+    path: 'curriculum',
+    component: CurriculumComponent
   },
   {
     path: 'not-found',

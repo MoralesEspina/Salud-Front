@@ -46,6 +46,8 @@ import { Jwtheader } from './guards/jwtheader.interceptor';
 import { Statuserror } from './guards/statuserror.interceptor';
 import { RecordComponent } from './components/newviews/record/record.component';
 import { MatSortModule } from '@angular/material/sort';
+import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   exports: [
@@ -88,6 +90,8 @@ import { MatSortModule } from '@angular/material/sort';
     ConstancyComponent,
 
     RecordComponent
+
+    CurriculumComponent
   ],
   imports: [
     BrowserModule,
@@ -119,7 +123,11 @@ import { MatSortModule } from '@angular/material/sort';
 
     AppRoutingModule,
 
+
     MatSortModule,
+
+    MatRadioModule,
+
   ],
   entryComponents: [
     DocumentComponent,

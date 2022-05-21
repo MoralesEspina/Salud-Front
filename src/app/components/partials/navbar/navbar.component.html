@@ -179,5 +179,47 @@
       </div>
     </li>
   </ul>
+        <li>
+          <a routerLink="/curriculum">
+              <i class="fa fa-bookmark fa-2x"></i>
+              <span class="nav-text">
+                  Curriculum
+              </span>
+          </a>
+
+      </li>
+    </ul>
+
+    <ul class="logout">
+        <li *ngIf="user.rol == 'admin'">
+            <a (click)="changePassword()">
+                <i class="fa fa-user-edit fa-2x"></i>
+                <span class="nav-text">
+                    Cambiar contraseña
+                </span>
+            </a>
+        </li>
+
+        <li>
+            <a (click)="Logout()">
+                <i class="fa fa-power-off fa-2x"></i>
+                <span class="nav-text">
+                    Cerrar Sesion
+                </span>
+            </a>
+        </li>
+
+        <li>
+            <div class="px-2">
+                <div class="flex -space-x-1 overflow-hidden cursor-pointer" (click)="UploadAvatar()">
+                    <img class="inline-block h-12 w-12 rounded-full ring-2 ring-white" src="{{urlImage}}" alt="">
+                    <nav class="pl-4 pt-2 text-white text-sm"
+                        style="font-family:'Titillium Web', sans-serif; color: #edf2f7; ">
+                        Cambiar imagen de perfil
+                    </nav>
+                </div>
+            </div>
+        </li>
+    </ul>
 
 </nav>

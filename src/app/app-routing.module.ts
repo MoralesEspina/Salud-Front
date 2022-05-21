@@ -1,3 +1,4 @@
+import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
 
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { CertificationComponent } from './components/certification/certification.component';
@@ -12,7 +13,7 @@ import { PersonGridComponent } from './components/reports/person-grid/person-gri
 import { UsersComponent } from './components/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
-
+import { RecordComponent } from './components/newviews/record/record.component';
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: "enabled",
@@ -57,6 +58,13 @@ const routes: Routes = [
     component: JobdependencyComponent,
     canActivate: [AuthGuard]
   },
+
+  {
+    path: 'historial',
+    component: RecordComponent,
+    canActivate: [AuthGuard]
+  },
+
   {
     path: 'solicitudes',
     component: GridrequestvacationComponent,
@@ -71,13 +79,19 @@ const routes: Routes = [
     component: PersonGridComponent
   },
   {
+    path: 'curriculum',
+    component: CurriculumComponent
+  },
+  {
     path: 'not-found',
     component: NotfoundComponent
   },
   {
     path: '**',
     redirectTo: 'not-found'
-  }
+  },
+
+  
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes, routerOptions);

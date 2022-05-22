@@ -47,7 +47,6 @@ import { Statuserror } from './guards/statuserror.interceptor';
 import { RequestsComponent } from './components/newviews/requests/requests.component';
 import { MatSortModule } from '@angular/material/sort';
 import { RecordComponent } from './components/newviews/record/record.component';
-import { MatSortModule } from '@angular/material/sort';
 import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
 import { MatRadioModule } from '@angular/material/radio';
 
@@ -91,7 +90,7 @@ import { MatRadioModule } from '@angular/material/radio';
 
     ConstancyComponent,
 
-    RequestsComponent
+    RequestsComponent,
 
     RecordComponent,
 

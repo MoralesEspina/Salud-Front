@@ -68,8 +68,7 @@ const routes: Routes = [
 
   {
     path: 'historial',
-    component: RecordComponent,
-    canActivate: [AuthGuard]
+    component: RecordComponent
   },
 
   {
@@ -98,7 +97,7 @@ const routes: Routes = [
     redirectTo: 'not-found'
   },
 
-  
+
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes, routerOptions);

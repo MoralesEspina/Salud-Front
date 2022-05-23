@@ -14,14 +14,9 @@ import { RequestVacation } from './../../../models/requestVacation.models';
 import { IAuthorization } from './../../../models/authorization';
 import { IPerson } from './../../../models/person.model';
 import { Claims } from './../../../models/claims.model';
-import { DashboardComponent } from './../../dashboard/dashboard.component';
 import pdfFonts from '../../../fonts/fonts/fonts.js'
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
-import { AfterViewInit, Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { RequestsDataSource, RequestsItem } from './requests-datasource';
+import {Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import Swal from 'sweetalert2';
 import { RequestVacationService } from 'src/app/services/request-vacation.service';

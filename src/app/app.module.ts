@@ -46,9 +46,9 @@ import { Jwtheader } from './guards/jwtheader.interceptor';
 import { Statuserror } from './guards/statuserror.interceptor';
 import { RequestsComponent } from './components/newviews/requests/requests.component';
 import { MatSortModule } from '@angular/material/sort';
-import { RecordComponent } from './components/newviews/record/record.component';
 import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { HistoryComponent } from './components/newviews/history/history.component';
 
 @NgModule({
   exports: [
@@ -92,7 +92,7 @@ import { MatRadioModule } from '@angular/material/radio';
 
     RequestsComponent,
 
-    RecordComponent,
+    HistoryComponent,
 
     CurriculumComponent
 

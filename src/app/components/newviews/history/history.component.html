@@ -2,23 +2,27 @@
 
 <!--Data object from database-->
 <div class="mt-8 px-6">
+
   <div class="ed-container">
-    
   <div class="ml-16 mr-auto">
     <div class="datagrid overflow-x-auto block">
       <table>
         <thead>
           <tr>
-            <th>No.</th>
+            <th>No. DE SOLICITUD</th>
             <th>NOMBRE COMPLETO</th>
             <th>CÓDIGO</th>
-            <th>EMITIDO</th>
+            <th>EMITIDO EL</th>
+            <th>ESTADO DE JEFE INMEDIATO</th>
+            <th>ESTADO DE JEFE DE AREA</th>
+            <th>ESTADO</th>
             <th>IMPRIMIR</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let ai of authorizations | filter:search:'person'; let indexof = index" class="text-lg"
+         <tr *ngFor="let ai of authorizations | filter:search:'person'; let indexof = index" class="text-lg"
             [class.alt]="(indexof + 1)%2==1">
+
             <td>{{indexof + 1}}</td>
             <td>{{ai.person.fullname}}</td>
             <td>{{ai.person.cui}}</td>

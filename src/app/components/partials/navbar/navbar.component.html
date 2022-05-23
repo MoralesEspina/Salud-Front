@@ -41,7 +41,7 @@
 
     <div [ngClass]="{ 'hidden': isClickedSolicitudes == true}">
       <li *ngIf="user.rol == 'employed'">
-        <a  routerLinkActive="text-yellow-500">
+        <a routerLink="/requests" routerLinkActive="text-yellow-500">
           <div class="ml-4">
             <i class="fa fa-clock-o fa-2x"></i>
             <span class="nav-text font-bold ml-3">

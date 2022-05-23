@@ -8,9 +8,7 @@ import { AuthorizationService } from 'src/app/services/authorization.service';
 import { UserService } from 'src/app/services/user.service';
 import { CreatePDFVacationAuthorization } from 'src/app/utils/reports/VacationAuthorization';
 import pdfFonts from 'src/app/fonts/custom/times-new-roman'
-
-
-
+/*
 PdfMakeWrapper.useFont('times')
 PdfMakeWrapper.setFonts(pdfFonts, {
   times: {
@@ -19,63 +17,63 @@ PdfMakeWrapper.setFonts(pdfFonts, {
     italics: 'georgia-italic.ttf',
     bolditalics: 'georgia-italic.ttf'
   }
-})
+})*/
 
 
 @Component({
-  selector: 'app-record',
-  templateUrl: './record.component.html',
-  styleUrls: ['./record.component.scss']
+  selector: 'app-history',
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.scss']
 })
-export class RecordComponent implements OnInit {
 
+export class HistoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['register', 'dateemmited', 'fullname', 'cui', 'ACCIONES'];
+  /*displayedColumns: string[] = ['register', 'dateemmited', 'fullname', 'cui', 'ACCIONES'];*/
   authorizations: IAuthorization[] = []
   authorizationPDF = new IAuthorization();
   user = new Claims();
 
-  search = "OSWALDO PEREZ RAMIREZ";
-  //search: string;
+  //search = "OSWALDO PEREZ RAMIREZ";
+  search: string;
 
   dataSource: { filter: string; };
 
-  filtro(event: Event) {
+  /*filtro(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     if (typeof event['key'] == 'number') {
       filterValue.trim().toLowerCase();
     }
     this.dataSource.filter = filterValue
-  }
+  }*/
   constructor(
     private authorizationService: AuthorizationService,
     private userService: UserService,
     private dialog: MatDialog) {
-    this.manyAuthorization();
+    //this.manyAuthorization();
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
   }
 
   ngOnInit() {
-    this.user = this.userService.userValue;
-    this.manyAuthorization();
+   /* this.user = this.userService.userValue;
+    this.manyAuthorization();*/
 
-    // this.search.valueChanges.subscribe(value => {
-    //   this.authorizations.filter(character => character.person.fullname === value)
-    // })
+    /* this.search.valueChanges.subscribe(value => {
+      this.authorizations.filter(character => character.person.fullname === value)
+     })*/
   }
 
-  manyAuthorization() {
-    this.authorizationService.ManyAuthorization()
+  /*manyAuthorization() {
+   this.authorizationService.ManyAuthorization()
       .subscribe(data => {
         this.authorizations = data['data']
         // this.dataSource = new MatTableDataSource(this.authorization);
       }, err => console.log(err))
-  }
+  }*/
 
 
 
   printPDF(uuid) {
-    this.authorizationService.printPDF(uuid)
+   /* this.authorizationService.printPDF(uuid)
       .subscribe(data => {
         this.authorizationService.GetConfigurationFile('authorization')
           .subscribe(dataConf => {
@@ -90,15 +88,16 @@ export class RecordComponent implements OnInit {
                 pdf.create().print();
               })
           })
-      }, err => console.log(err))
+      }, err => console.log(err))*/
   }
 
 
 }
-
+/*
 @Pipe({
   name: 'filter'
 })
+
 export class FilterPipe implements PipeTransform {
 
   transform(items: any[], searchText: string, fieldName: string): any[] {
@@ -123,7 +122,7 @@ export class FilterPipe implements PipeTransform {
 }
 
 
-
+*/
 
 
 

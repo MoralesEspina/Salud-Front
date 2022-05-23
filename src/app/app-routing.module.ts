@@ -14,7 +14,7 @@ import { UsersComponent } from './components/users/users.component';
 import { RequestsComponent } from './components/newviews/requests/requests.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
-import { RecordComponent } from './components/newviews/record/record.component';
+import { HistoryComponent } from './components/newviews/history/history.component';
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: "enabled",
@@ -36,8 +36,6 @@ const routes: Routes = [
   {
     path: 'requests',
     component: RequestsComponent ,
-    canActivate: [AuthGuard],
-    data: {roles: [Role.admin]}
   },
   {
     path: 'dashboard',
@@ -68,7 +66,8 @@ const routes: Routes = [
 
   {
     path: 'historial',
-    component: RecordComponent
+    component: HistoryComponent
+
   },
 
   {

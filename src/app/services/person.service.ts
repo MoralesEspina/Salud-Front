@@ -42,6 +42,10 @@ export class PersonService {
     return this.http.get(`${environment.URL}/substitutes`)
   }
 
+  GetNamePerson() {
+    return this.http.get(`${environment.URL}/nameperson`)
+  }
+
   ValidationCertify(uuid: string) {
     return this.http.get(`${environment.URL}/validation/certify/${uuid}`)
   }

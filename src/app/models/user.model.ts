@@ -3,4 +3,5 @@ export class User {
     password?: string
     id_rol?: number
     rol?:string
+    uuidPerson?: string
 }

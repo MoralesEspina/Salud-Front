@@ -31,6 +31,17 @@
                     <mat-dialog-content [formGroup]="form">
                         <div class="ed-item ed-container">
 
+                          <mat-form-field appearance="outline" class="w-full">
+
+                            <mat-label >Persona</mat-label>
+                            <mat-select formControlName='uuidPerson'>
+                              <input type="text" class="p-2" autocomplete="off" matInput placeholder="buscar por nombre" #multiUserSearch (input)="onInputChange()">
+                            <mat-option *ngFor="let persona of persons" [value]="persona.uuid" >
+                              {{persona.fullname}}
+                           </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+
                             <div class="ed-item s-100 m-100 l-100">
                                 <span *ngIf="submitted && f.username.errors"
                                     class="text-red-700 text-xs animated fadeIn">Ingrese el usuario</span>

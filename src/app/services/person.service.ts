@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
+import { IUser } from '../models/edituser.model';
 import { IPerson } from '../models/person.model';
 
 @Injectable({
@@ -49,5 +50,6 @@ export class PersonService {
   ValidationCertify(uuid: string) {
     return this.http.get(`${environment.URL}/validation/certify/${uuid}`)
   }
+
 }
 

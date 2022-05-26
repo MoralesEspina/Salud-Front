@@ -49,6 +49,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { HistoryComponent } from './components/newviews/history/history.component';
+import { UsermodalComponent } from './components/partials/usermodal/usermodal.component';
 
 @NgModule({
   exports: [
@@ -94,7 +95,9 @@ import { HistoryComponent } from './components/newviews/history/history.componen
 
     HistoryComponent,
 
-    CurriculumComponent
+    CurriculumComponent,
+
+    UsermodalComponent
 
   ],
   imports: [

@@ -6,6 +6,9 @@ import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { PersonService } from 'src/app/services/person.service';
+import { UsermodalComponent } from '../partials/usermodal/usermodal.component';
+import { MatDialog } from '@angular/material';
+import { LocalService } from 'src/app/services/local.service';
 
 @Component({
   selector: 'app-users',
@@ -14,6 +17,8 @@ import { PersonService } from 'src/app/services/person.service';
 })
 
 export class UsersComponent implements OnInit {
+  search = this.localService.getJsonValue('filter');
+  limit: any = this.localService.getJsonValue('limit');
   form: FormGroup;
   title: string
   user = new User()
@@ -25,11 +30,15 @@ export class UsersComponent implements OnInit {
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
   constructor(
-
+    private dialog: MatDialog,
     private userService: UserService,
     private personService: PersonService,
-    private fb: FormBuilder
-  ) { }
+    private fb: FormBuilder,
+    private localService: LocalService,
+  ) {
+    this.localService.getJsonValue('limit');
+    this.ManyPersons();
+  }
 
   @ViewChild('multiUserSearch',{static: false}) multiUserSearchInput: ElementRef;
 
@@ -44,6 +53,25 @@ export class UsersComponent implements OnInit {
       id_rol: [this.user.id_rol, Validators.required]
     })
 
+  }
+
+  ManyPersons(page?: number, limit?: string, filter?: string) {
+
+    if (limit && typeof limit == 'string') {
+      this.localService.setJsonValue('limit', limit)
+    }
+
+    if (filter && typeof filter == 'string' && typeof filter != 'object' || filter == '') {
+      this.localService.setJsonValue('filter', filter)
+    }
+
+    var stlimit = this.localService.getJsonValue('limit')
+    var stFilter = this.localService.getJsonValue('filter')
+
+    this.personService.ManyPersons(page, stlimit, stFilter)
+      .subscribe(res => {
+        this.persons = res['data']
+      })
   }
 
   get f() { return this.form.controls }
@@ -126,5 +154,56 @@ export class UsersComponent implements OnInit {
       return name.indexOf(searchInput) > -1;
     });
   }
+  UpdateUser(uuid) {
+    this.userService.OneUser(uuid)
+      .subscribe(data => {
+        const modalDialog = this.dialog.open(UsermodalComponent, {
+          disableClose: true,
+          autoFocus: true,
+          width: '600px',
+          data: {
+            person: data['data'],
+            action: 'Actualizar'
+          }
+        })
+
+        modalDialog.afterClosed()
+          .subscribe(result => {
+
+            if (result) {
+              this.userService.UpdateUser(result, uuid)
+                .subscribe(ok => {
+                  this.ManyPersons()
+                }, err => console.log(err))
+            }
+          })
+      })
+
+  }
+  deletePerson(id: string) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Borrar el Usuario!',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#4299e1',
+      confirmButtonColor: '#f56565',
+      cancelButtonText: "Cancelar",
+      confirmButtonText: 'Si, borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: `<span class="text-gray-900"> Usuario borrado exitosamente </span>`,
+          toast: true,
+          showConfirmButton: false,
+          position: 'top-end',
+          timer: 2000,
+          background: '#ffffff',
+        })
+      }
+    })
+  }
+
 
 }

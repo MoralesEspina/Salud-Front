@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
 import { Claims } from '../models/claims.model';
+import { IUser } from '../models/edituser.model';
 import { User } from '../models/user.model';
 import { LocalService } from '../services/local.service';
 
@@ -61,4 +62,17 @@ export class UserService {
     }
     return this.http.post(`${environment.URL}/users/changepassword`, JSON.stringify(newCredentials))
   }
+
+  UpdateUser(user:IUser, uuid: string) {
+    return this.http.put(`${environment.URL}/users/${uuid}`, JSON.stringify(user))
+  }
+
+  OneUser(uuid: string) {
+    return this.http.get(`${environment.URL}/users/${uuid}`)
+  }
+  ManyPersons(page?: number, limit?: string, filter?: string,) {
+    var URL = `${environment.URL}/users?page=${page || 1}&limit=${limit || 10}&filter=${filter || ''}`
+    return this.http.get(URL)
+  }
+
 }

@@ -1,0 +1,75 @@
+<div mat-dialog-title class="block text-gray-700 text-sm font-bold mb-2 text-center pb-5"> {{formActionSubmmit}}
+  usuario</div>
+
+<div class="ed-container">
+  <div class="row">
+    <form class="ed-item ed-container inputsize">
+      <mat-dialog-content [formGroup]="form">
+        <div class="ed-item ed-container">
+          <div class="ed-item s-100 m-50 l-50">
+            <span *ngIf="submitted && f.username.errors" class="text-red-700 text-xs animated fadeIn">Ingrese
+              este campo</span>
+            <mat-form-field appearance="outline" class="inputheight">
+              <mat-label>Usuario</mat-label>
+              <input matInput formControlName="username">
+            </mat-form-field>
+          </div>
+
+          <div class="ed-item s-100 m-50 l-50">
+            <mat-form-field appearance="outline" class="inputheight">
+              <mat-label>Contraseña</mat-label>
+              <input matInput formControlName="pasword">
+            </mat-form-field>
+          </div>
+
+          <div class="ed-item s-100 m-50 l-50">
+            <fieldset disabled>
+              <mat-form-field appearance="outline" class="inputheight">
+                <mat-label>Rol Actual</mat-label>
+                <input matInput formControlName="rol">
+              </mat-form-field>
+            </fieldset>
+          </div>
+
+
+          <div class="ed-item s-100 m-50 l-50">
+
+            <mat-form-field appearance="outline" class="example-full-width inputheight">
+              <mat-label>Nuevo Rol</mat-label>
+              <mat-select formControlName="id_rol" [ngClass]="{'is-invalid':submitted && f.id_rol.errors}">
+                <mat-option *ngFor="let option of roles" [value]="option.id_rol">
+                  {{option.type_rol}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+          </div>
+
+        </div>
+
+
+
+      </mat-dialog-content>
+
+      <div class="ed-item ed-container">
+
+          <div class="s-30">
+            <div class=" py-1">
+              <button class=" mycustom-buttom-primary hover:bg-green-700 rounded-lg tamano"
+                (click)="save()">{{formActionSubmmit.toUpperCase()}}</button>
+            </div>
+          </div>
+          <div >
+            <div class="s-30">
+            <div class="py-1">
+              <button class=" mycustom-button-warning hover:bg-red-700 rounded-lg tamano"
+                (click)="close()">CANCELAR</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -145,6 +145,7 @@ import { UsermodalComponent } from './components/partials/usermodal/usermodal.co
     VacationrequestComponent,
     UploadavatarComponent,
     ConstancyComponent,
+    UsermodalComponent,
     ConfigurationauthorizationfileComponent
   ],
   providers: [

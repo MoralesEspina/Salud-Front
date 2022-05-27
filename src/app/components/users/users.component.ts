@@ -1,3 +1,4 @@
+import { IUser } from './../../models/edituser.model';
 import { nameperson } from 'src/app/models/namepreson.model';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -7,7 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { PersonService } from 'src/app/services/person.service';
 import { UsermodalComponent } from '../partials/usermodal/usermodal.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatTableDataSource } from '@angular/material';
 import { LocalService } from 'src/app/services/local.service';
 
 @Component({
@@ -22,13 +23,23 @@ export class UsersComponent implements OnInit {
   form: FormGroup;
   title: string
   user = new User()
+  usuario: IUser[] = []
   users: User[] = []
+  _users= new MatTableDataSource(this.usuario)
   submitted: boolean = false;
   error: string = '';
   rols: Rol[] = []
   person = new nameperson()
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
+  page: number = 1
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this._users.filter = filterValue.trim().toLowerCase();
+  }
+
+
   constructor(
     private dialog: MatDialog,
     private userService: UserService,
@@ -68,10 +79,23 @@ export class UsersComponent implements OnInit {
     var stlimit = this.localService.getJsonValue('limit')
     var stFilter = this.localService.getJsonValue('filter')
 
-    this.personService.ManyPersons(page, stlimit, stFilter)
+    this.userService.ManyPersons(page, stlimit, stFilter)
       .subscribe(res => {
-        this.persons = res['data']
+        this.users = res['data']
       })
+  }
+  increment() {
+    this.page++
+    this.ManyPersons(this.page)
+  }
+
+  decrement() {
+    if (this.page <= 0) {
+      this.page = 1
+    } else {
+      this.page--
+    }
+    this.ManyPersons(this.page)
   }
 
   get f() { return this.form.controls }
@@ -155,6 +179,7 @@ export class UsersComponent implements OnInit {
     });
   }
   UpdateUser(uuid) {
+    console.log(uuid);
     this.userService.OneUser(uuid)
       .subscribe(data => {
         const modalDialog = this.dialog.open(UsermodalComponent, {
@@ -162,10 +187,12 @@ export class UsersComponent implements OnInit {
           autoFocus: true,
           width: '600px',
           data: {
-            person: data['data'],
+            user: data['data'],
             action: 'Actualizar'
+
           }
-        })
+        }
+        )
 
         modalDialog.afterClosed()
           .subscribe(result => {
@@ -175,9 +202,15 @@ export class UsersComponent implements OnInit {
                 .subscribe(ok => {
                   this.ManyPersons()
                 }, err => console.log(err))
+                setTimeout(location.reload.bind(location),200);
             }
-          })
-      })
+          }
+
+          )
+
+      }
+
+      )
 
   }
   deletePerson(id: string) {

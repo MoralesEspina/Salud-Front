@@ -5,6 +5,8 @@
 .shipping-card {
   min-width: 120px;
   margin: 20px auto;
+  margin-left: 24%;
+  margin-right: 10%;
 }
 
 .mat-radio-button {
@@ -19,9 +21,16 @@
 
 .col {
   flex: 1;
-  margin-right: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
 }
 
 .col:last-child {
-  margin-right: 0;
+  margin-left: 20;
+  margin-right: 20;
 }
+table {
+  width: 100%;
+  text-align: center;
+}
+

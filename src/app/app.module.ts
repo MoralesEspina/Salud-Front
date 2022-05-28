@@ -153,6 +153,7 @@ import { PermissionComponent } from './components/partials/permission/permission
     UploadavatarComponent,
     ConstancyComponent,
     UsermodalComponent,
+    PermissionComponent,
     ConfigurationauthorizationfileComponent
   ],
   providers: [

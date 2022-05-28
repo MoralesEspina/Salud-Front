@@ -12,6 +12,7 @@ import { MatDialog, MatTableDataSource } from '@angular/material';
 import { LocalService } from 'src/app/services/local.service';
 import { Curriculum } from 'src/app/models/curriculum.model';
 
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -104,24 +105,14 @@ export class UsersComponent implements OnInit {
   get f() { return this.form.controls }
 
   save() {
-    console.log(this.form.value)
     this.submitted = true
-
     if (this.form.invalid) { return }
-
     this.user = this.form.value
-    console.log(this.user)
     this.user.id_rol = parseInt(`${this.user.id_rol}`)
 
     this.curriculum.uuidPerson= this.user.uuidPerson
-    console.log(this.curriculum)
-    this.userService.crearCurriculum(this.curriculum);
-     this.userService.crearEducation(this.curriculum);
-     this.userService.crearReferences(this.curriculum);
-     this.userService.crearWorkExp(this.curriculum);
 
     this.userService.crearUsuario(this.user)
-
       .subscribe(data => {
         this.getUsers()
         this.GetNamePerson()
@@ -154,6 +145,38 @@ export class UsersComponent implements OnInit {
         }
       });
 
+    this.userService.crearCurriculum(this.curriculum)
+    .subscribe(
+      res => {
+        this.curriculum = res[0];
+        console.log(res[0]);
+      },
+      err => console.log(err)
+    )
+     this.userService.crearEducation(this.curriculum)
+     .subscribe(
+      res => {
+        this.curriculum = res[0];
+        console.log(res[0]);
+      },
+      err => console.log(err)
+    )
+     this.userService.crearReferences(this.curriculum)
+     .subscribe(
+      res => {
+        this.curriculum = res[0];
+        console.log(res[0]);
+      },
+      err => console.log(err)
+    )
+     this.userService.crearWorkExp(this.curriculum)
+     .subscribe(
+      res => {
+        this.curriculum = res[0];
+        console.log(res[0]);
+      },
+      err => console.log(err)
+    )
   }
 
   getrols() {

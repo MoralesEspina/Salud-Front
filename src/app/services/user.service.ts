@@ -79,6 +79,7 @@ export class UserService {
   crearCurriculum(curriculum: Curriculum) {
     return this.http.post(`${environment.URL}/curriculums`, JSON.stringify(curriculum))
   }
+
   crearEducation(curriculum: Curriculum) {
     return this.http.post(`${environment.URL}/personEducation`, JSON.stringify(curriculum))
   }

@@ -10,6 +10,8 @@ import { PersonService } from 'src/app/services/person.service';
 import { UsermodalComponent } from '../partials/usermodal/usermodal.component';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 import { LocalService } from 'src/app/services/local.service';
+import { Curriculum } from 'src/app/models/curriculum.model';
+
 
 @Component({
   selector: 'app-users',
@@ -23,6 +25,7 @@ export class UsersComponent implements OnInit {
   form: FormGroup;
   title: string
   user = new User()
+  curriculum= new Curriculum()
   usuario: IUser[] = []
   users: User[] = []
   _users= new MatTableDataSource(this.usuario)
@@ -33,6 +36,7 @@ export class UsersComponent implements OnInit {
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
   page: number = 1
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -101,14 +105,12 @@ export class UsersComponent implements OnInit {
   get f() { return this.form.controls }
 
   save() {
-    console.log(this.form.value)
     this.submitted = true
-
     if (this.form.invalid) { return }
-
     this.user = this.form.value
-    console.log(this.user)
     this.user.id_rol = parseInt(`${this.user.id_rol}`)
+
+    this.curriculum.uuidPerson= this.user.uuidPerson
 
     this.userService.crearUsuario(this.user)
       .subscribe(data => {
@@ -141,7 +143,16 @@ export class UsersComponent implements OnInit {
             timer: 2000,
           })
         }
-      })
+      });
+
+    this.userService.crearCurriculum(this.curriculum)
+    .subscribe(
+      res => {
+        this.curriculum = res[0];
+        console.log(res[0]);
+      },
+      err => console.log(err)
+    )
 
   }
 

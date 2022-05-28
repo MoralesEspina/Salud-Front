@@ -15,6 +15,7 @@ import { RequestsComponent } from './components/newviews/requests/requests.compo
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
 import { HistoryComponent } from './components/newviews/history/history.component';
+import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: "enabled",
@@ -87,6 +88,12 @@ const routes: Routes = [
     path: 'curriculum',
     component: CurriculumComponent
   },
+  {
+    path: 'permisos',
+    component: PermissionauthComponent
+  },
+
+
   {
     path: 'not-found',
     component: NotfoundComponent

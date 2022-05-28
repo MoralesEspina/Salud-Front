@@ -51,5 +51,7 @@ export class PersonService {
     return this.http.get(`${environment.URL}/validation/certify/${uuid}`)
   }
 
+
+
 }
 

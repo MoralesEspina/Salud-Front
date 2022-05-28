@@ -50,6 +50,8 @@ import { CurriculumComponent } from './components/newviews/curriculum/curriculum
 import { MatRadioModule } from '@angular/material/radio';
 import { HistoryComponent } from './components/newviews/history/history.component';
 import { UsermodalComponent } from './components/partials/usermodal/usermodal.component';
+import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
+import { PermissionComponent } from './components/partials/permission/permission.component';
 
 @NgModule({
   exports: [
@@ -97,7 +99,12 @@ import { UsermodalComponent } from './components/partials/usermodal/usermodal.co
 
     CurriculumComponent,
 
-    UsermodalComponent
+    UsermodalComponent,
+
+    PermissionauthComponent,
+
+    PermissionComponent,
+
 
   ],
   imports: [

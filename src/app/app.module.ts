@@ -53,6 +53,7 @@ import { HistoryComponent } from './components/newviews/history/history.componen
 import { UsermodalComponent } from './components/partials/usermodal/usermodal.component';
 import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
 import { PermissionComponent } from './components/partials/permission/permission.component';
+import { CurriculumPDFComponent } from './components/shared/actionbuttons/curriculum-pdf/curriculum-pdf.component';
 
 @NgModule({
   exports: [
@@ -106,7 +107,9 @@ import { PermissionComponent } from './components/partials/permission/permission
 
     PermissionComponent,
 
-    PrincipalComponent
+    PrincipalComponent,
+
+    CurriculumPDFComponent
 
 
   ],
@@ -155,6 +158,7 @@ import { PermissionComponent } from './components/partials/permission/permission
     VacationrequestComponent,
     UploadavatarComponent,
     ConstancyComponent,
+    CurriculumPDFComponent,
     UsermodalComponent,
     PermissionComponent,
     ConfigurationauthorizationfileComponent

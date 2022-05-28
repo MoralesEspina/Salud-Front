@@ -118,6 +118,7 @@ export class CurriculumComponent {
   tableEducation: EducationI[] | undefined;
   tableRefFam: ReferenceI[] | undefined;
   tableRefPer: ReferenceI[] | undefined;
+  uuid: string = this.userService.userValue.uuidPerson;
 
   ngOnInit(): void {
     this.loadExperience();

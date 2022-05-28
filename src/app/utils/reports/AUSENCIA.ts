@@ -16,6 +16,8 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
     var name = authorization.person.fullname
     var puesto = authorization.person.job.name
     var partida = authorization.person.partida.split('-')[12]
+    var fechainicio= authorization.enddate
+    var fechasolicitud= authorization.startdate
 
     if (authorization.person.work_dependency.name.length >= 40) {
         fontsize = 10
@@ -38,6 +40,7 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
     var firstFirma = `${authorization.personnelOfficer} \n${authorization.personnelOfficerPosition} \n${authorization.personnelOfficerArea}`
     var secondFirma = `${authorization.executiveDirector}\n${authorization.executiveDirectorPosition} \n${authorization.executiveDirectorArea}`
 
+  
     if (!authorizationConfiguration.align) {
         authorizationConfiguration.align = 'left'
     }
@@ -64,11 +67,12 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
 
 
     pdf.add(new Txt('Fecha de solicitud:').alignment('left').relativePosition(0, 30).bold().end)
-    pdf.add(new Txt('Día:').alignment('left').relativePosition(110, 30).bold().end)
+    pdf.add(new Txt(fechasolicitud).bold().decoration('underline').fontSize(fontsizeName).relativePosition(120, 30).end)
+    //pdf.add(new Txt('Día:').alignment('left').relativePosition(110, 30).bold().end)
     //llmar dia
-    pdf.add(new Txt('Mes:').alignment('left').relativePosition(200, 30).bold().end)
+   //() pdf.add(new Txt('Mes:').alignment('left').relativePosition(200, 30).bold().end)
     //llmar mes
-    pdf.add(new Txt('Año:').alignment('left').relativePosition(350, 30).bold().end)
+   // pdf.add(new Txt('Año:').alignment('left').relativePosition(350, 30).bold().end)
     //llmar año
 
     pdf.add(new Txt('Nombre del servidor o contratista:').alignment('left').relativePosition(0, 55).bold().end)
@@ -82,11 +86,13 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
     pdf.add(new Txt(partida).bold().decoration('underline').relativePosition(150, 105).end)
 
     pdf.add(new Txt('Fecha de ausencia:').alignment('left').relativePosition(0, 130).bold().end)
-    pdf.add(new Txt('Día:').alignment('left').relativePosition(110, 130).bold().end)
+    pdf.add(new Txt(fechainicio).bold().decoration('underline').fontSize(fontsizeName).relativePosition(120, 130).end)
+
+    //pdf.add(new Txt('Día:').alignment('left').relativePosition(110, 130).bold().end)
      //llmar dia
-    pdf.add(new Txt('Mes:').alignment('left').relativePosition(200, 130).bold().end)
+    //pdf.add(new Txt('Mes:').alignment('left').relativePosition(200, 130).bold().end)
      //llmar mes
-    pdf.add(new Txt('Año:').alignment('left').relativePosition(350, 130).bold().end)
+    //pdf.add(new Txt('Año:').alignment('left').relativePosition(350, 130).bold().end)
      //llmar año
 
     //seleccipnar
@@ -159,39 +165,6 @@ pdf.add(new Table(
 
 ).alignment('right').relativePosition(425, 280).color('white').end)
 
-
-
-
-
-/*
-    pdf.add(new Txt('Código del servidor público: ').alignment('left').relativePosition(0, 180).end)
-    pdf.add(new Txt(publicserver).bold().decoration('underline').relativePosition(160, 180).end)
-    pdf.add(new Txt('Partida presupuestaria individual: ').alignment('left').relativePosition(230, 180).end)
-    pdf.add(new Txt(partida).bold().decoration('underline').relativePosition(410, 180).end)
-    pdf.add(new Txt('Título del puesto: ').alignment('left').relativePosition(0, 210).end)
-    pdf.add(new Txt(puesto).bold().decoration('underline').relativePosition(100, 210).end)
-    pdf.add(new Txt('Dependencia donde labora: ').alignment('left').relativePosition(0, 240).end)
-    pdf.add(new Txt(workAddress).alignment('justify').bold().fontSize(fontsize).decoration('underline').relativePosition(150, 240).end)
-    pdf.add(new Txt('Periodo o año al que corresponde la autorización: ').alignment('left').relativePosition(0, 270).end)
-    pdf.add(new Txt(laboralPeriodo).bold().decoration('underline').relativePosition(270, 270).end)
-    pdf.add(new Txt(body).alignment('justify').relativePosition(0, 300).end)
-    pdf.add(new Txt('Inicio: ').alignment('left').relativePosition(5, 400).end)
-    pdf.add(new Txt(`${formatDateToLetter(authorization.startdate).toUpperCase()}`.toUpperCase()).bold().decoration('underline').relativePosition(45, 400).end)
-    pdf.add(new Txt('Finalización: ').alignment('left').relativePosition(215, 400).end)
-    pdf.add(new Txt(`${formatDateToLetter(authorization.enddate).toUpperCase()}`.toUpperCase()).bold().decoration('underline').relativePosition(290, 400).end)
-    pdf.add(new Txt('Reanudación de labores: ').alignment('left').relativePosition(75, 430).end)
-    pdf.add(new Txt(`${formatDateToLetter(authorization.resumework).toUpperCase()}`).bold().decoration('underline').relativePosition(220, 430).end)
-    pdf.add(new Txt('Días por asueto o feriado: ').alignment('left').relativePosition(25, 460).end)
-    pdf.add(new Txt(`${FormatNumberToRender(authorization.holidays, 2, '0')}`).bold().decoration('underline').relativePosition(170, 460).end)
-    pdf.add(new Txt('Total días: ').alignment('left').relativePosition(195, 460).end)
-    pdf.add(new Txt(`${FormatNumberToRender(authorization.total_days, 2, '0')}`).bold().decoration('underline').relativePosition(260, 460).end)
-    pdf.add(new Txt('Días pendientes: ').alignment('left').relativePosition(285, 460).end)
-    pdf.add(new Txt(`${FormatNumberToRender(authorization.pendingdays, 2, '0')}`).bold().decoration('underline').relativePosition(380, 460).end)
-    pdf.add(new Txt('OBSERVACIÓN: ').bold().alignment('left').relativePosition(0, 490).end)
-    pdf.add(new Txt(`${observation || ''}`).alignment('justify').relativePosition(0, 505).end)
-    pdf.add(new Txt(firstFirma).alignment('left').relativePosition(0, 550).end)
-    pdf.add(new Txt(secondFirma).alignment('right').relativePosition(0, 590).end)
-    */
 
 
     return pdf;

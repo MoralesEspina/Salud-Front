@@ -5,6 +5,10 @@ import { IAuthorization } from 'src/app/models/authorization';
 import { IPerson } from 'src/app/models/person.model';
 import { IWork } from 'src/app/models/work.model';
 import { WorkService } from 'src/app/services/work.service';
+<<<<<<< HEAD
+=======
+import { DocumentComponent } from '../document/document.component';
+>>>>>>> 23a172d51be32dc42a5ee284aa1219f255d02854
 import FormatDateToLetter from '../../../utils/formats/formatDateToLetter';
 
 @Component({
@@ -15,6 +19,10 @@ import FormatDateToLetter from '../../../utils/formats/formatDateToLetter';
 export class PermissionComponent implements OnInit {
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 23a172d51be32dc42a5ee284aa1219f255d02854
   actuality = `Jalapa, ${this.formatDate(new Date())}`
 
   form: FormGroup;
@@ -31,7 +39,11 @@ export class PermissionComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private workService: WorkService,
+<<<<<<< HEAD
     private dialogRef: MatDialogRef<PermissionComponent>,
+=======
+    private dialogRef: MatDialogRef<DocumentComponent>,
+>>>>>>> 23a172d51be32dc42a5ee284aa1219f255d02854
     @Inject(MAT_DIALOG_DATA) data) {
     this.person = data['person']
   }
@@ -58,6 +70,7 @@ export class PermissionComponent implements OnInit {
     })
 
     this.getWorks()
+<<<<<<< HEAD
   }
 
   get f() { return this.form.controls }
@@ -79,6 +92,29 @@ export class PermissionComponent implements OnInit {
     this.dialogRef.close();
   }
 
+=======
+  }
+
+  get f() { return this.form.controls }
+
+  save() {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return
+    }
+
+    this.authorizationOfVacations = this.form.value
+    this.authorizationFormEmmited = this.authorizationOfVacations
+    this.authorizationFormEmmited.person = this.person;
+    if (!this.authorizationFormEmmited.submitted_at) { this.authorizationFormEmmited.submitted_at = `${new Date()}` }
+    this.dialogRef.close(this.authorizationFormEmmited)
+  }
+
+  close(): void {
+    this.dialogRef.close();
+  }
+
+>>>>>>> 23a172d51be32dc42a5ee284aa1219f255d02854
   getWorks() {
     this.workService.getWorks()
       .subscribe(data => {

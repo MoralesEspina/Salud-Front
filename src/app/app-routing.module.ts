@@ -1,3 +1,4 @@
+import { PrincipalComponent } from './components/newviews/principal/principal.component';
 import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
 
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
@@ -92,6 +93,12 @@ const routes: Routes = [
     path: 'permisos',
     component: PermissionauthComponent
   },
+
+  {
+    path: 'principal',
+    component: PrincipalComponent
+  },
+
 
 
   {

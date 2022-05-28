@@ -2,6 +2,7 @@
 <div class="bg-gray-100 border-2 rounded-md p-2">
   <form [formGroup]="form">
 
+<<<<<<< HEAD
 
       <div class="font-bold">
           Reg: -------
@@ -12,12 +13,23 @@
       <br>
       <div align="center" class=" font-bold capitalize">
           DEPARTAMENTO DE RECURSOS HUMANOS <br>
+=======
+      <br>
+      <div align="center" class="underline font-bold capitalize">AUTORIZACIÓN DE PERMISOS</div>
+
+      <div align="center" class=" font-bold capitalize">
+          JEFATURA DE PERSONAL <br>
+>>>>>>> 23a172d51be32dc42a5ee284aa1219f255d02854
           DIRECCIÓN DE ÁREA DE SALUD DE JALAPA <br>
           MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA SOCIAL <br>
       </div>
       <br>
       <div class="grid grid-cols-2">
+<<<<<<< HEAD
           <div class="">
+=======
+          <div >
+>>>>>>> 23a172d51be32dc42a5ee284aa1219f255d02854
               <mat-form-field appearance="outline" class="inputheight inputsize">
                   <mat-label>{{actuality}}</mat-label>
                   <input matInput formControlName="submitted_at" type="date" (ngModelChange)="emmittedDay($event)">
@@ -25,6 +37,7 @@
           </div>
       </div>
       <div class="flex flex-row">
+<<<<<<< HEAD
           <div class="flex-1">Nombre completo del solicitante:</div>
           <div class="flex-1 font-bold underline"> {{person.fullname}} </div>
       </div>
@@ -115,6 +128,60 @@
           </textarea>
           </mat-form-field>
       </div>
+=======
+          <div class="flex-1">Nombre completo del servidor o contratista:</div>
+          <div class="flex-1 font-bold underline">  </div>
+      </div>
+      <br>
+      <div class="flex flex-row">
+          <div class="flex-1">Puesto que desenpeña:</div>
+          <div class="flex-1 font-bold underline"></div>
+        </div>
+
+
+      <br>
+      <div class="flex flex-row">
+      <div class="flex-1">Renglon presupuestario:</div>
+      <div class="flex-1 font-bold underline"></div>
+    </div><br>
+
+      <div class="grid grid-cols-2">
+        <div >
+          <mat-label>Fecha de ausencia:</mat-label>
+            <mat-form-field appearance="outline" class="inputheight inputsize">
+
+                <input matInput type="date" >
+            </mat-form-field>
+        </div>
+    </div>
+
+          <div class="col-span-2 p-2 text-left">Razon de la ausencia:</div>
+          <div class="col-span-1 inputsize">
+              <mat-form-field appearance="outline" class="inputheight">
+                  <input matInput >
+              </mat-form-field>
+          </div>
+
+
+      <div>
+          <strong>Documentacion adjunta para evidenciar la ausencia: </strong>
+          <mat-form-field appearance="outline" class=" inputheight text-base">
+              <mat-label>Archivos adjuntos</mat-label>
+              <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" c dkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5" >
+          </textarea>
+          </mat-form-field>
+      </div>
+      <div>
+        <strong>SI LA SOLICITUD DE AUSENCIA DEL SERVICIO NO AMERITA SER APROBADA, ESPECIFICAR LOS MOTIVOS: </strong>
+        <mat-form-field appearance="outline" class=" inputheight text-base">
+            <mat-label>Motivos</mat-label>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" c dkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5" >
+        </textarea>
+        </mat-form-field>
+    </div>
+>>>>>>> 23a172d51be32dc42a5ee284aa1219f255d02854
 
       <div class="ed-container">
           <div class="ed-item s-100 m-50 l-50">
@@ -181,10 +248,22 @@
           <div class="ed-item s-100 m-50 l-50 pt-4 sm:pt-0">
               <div class="py-1">
                   <button class=" mycustom-buttom-primary hover:bg-green-700 rounded-lg w-full max-w-full px-12"
+<<<<<<< HEAD
                       (click)="save()">GUARDAR</button>
               </div>
           </div>
 
+=======
+                      (click)="save()">ACEPTAR</button>
+              </div>
+          </div>
+          <div class="ed-item s-100 m-50 l-50 pt-4 sm:pt-0">
+            <div class="py-1">
+                <button class="mycustom-button-warning hover:bg-red-700 rounded-lg w-full max-w-full px-12"
+                    (click)="close()">DENEGAR</button>
+            </div>
+        </div>
+>>>>>>> 23a172d51be32dc42a5ee284aa1219f255d02854
           <div class="ed-item s-100 m-50 l-50 pt-4 sm:pt-0">
               <div class="py-1">
                   <button class="mycustom-button-warning hover:bg-red-700 rounded-lg w-full max-w-full px-12"

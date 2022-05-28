@@ -1,5 +1,5 @@
-export class Reference{
-  uid: string;
+export class ReferenceI{
+  uuid: string;
   uuidPerson: string;
   name: string;
   phone: string;
@@ -7,5 +7,5 @@ export class Reference{
   bornDate: string;
   profession: string;
   company: string;
-  isFamiliar: boolean;
+  isfamiliar: boolean;
 }

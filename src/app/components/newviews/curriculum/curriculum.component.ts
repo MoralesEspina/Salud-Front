@@ -14,8 +14,6 @@ export interface Family {
 }
 
 
-
-
 @Component({
   selector: 'app-curriculum',
   templateUrl: './curriculum.component.html',

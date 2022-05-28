@@ -36,7 +36,7 @@ export class HistoryComponent implements OnInit {
   authorizationPDF = new IAuthorization();
   user = new Claims();
 
-  search='WALTER FRANCISCO JIMENEZ SEGURA';
+  search:string;
 
   dataSource: { filter: string; };
 
@@ -65,16 +65,17 @@ export class HistoryComponent implements OnInit {
   }
 
   manyAuthorization() {
-   /*this.authorizationService.ManyAuthorization()
+    this.authorizationService.ManyAuthorization()
       .subscribe(data => {
         this.authorizations = data['data']
         // this.dataSource = new MatTableDataSource(this.authorization);
-      }, err => console.log(err))*/
+      }, err => console.log(err))
   }
 
 
 
   printPDF(uuid) {
+    let teclado=this.userService.userValue.uuidPerson;
     this.authorizationService.printPDF(uuid)
       .subscribe(data => {
         this.authorizationService.GetConfigurationFile('authorization')

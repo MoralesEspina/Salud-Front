@@ -29,6 +29,10 @@ export class CurriculumService {
     return this.http.post(`${environment.URL}/workExp`,form);
   }
 
+  editCurriculum(form:CurriculumDataI, uuid: any){
+    return this.http.put(`${environment.URL}/curriculums/${uuid}`,form);
+  }
+
   GetCurriculum(uuid: any):Observable<CurriculumDataI[]> {
     return this.http.get<CurriculumDataI[]>(`${environment.URL}/curriculums/${uuid}`)
   }

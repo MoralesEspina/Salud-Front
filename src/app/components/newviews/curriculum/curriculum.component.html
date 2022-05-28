@@ -20,8 +20,8 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <textarea matInput placeholder="Dirección Particular" formControlName="directionCU"></textarea>
-              <mat-error *ngIf="addressFormCurriculum.controls['directionCU'].hasError('required')">
+              <textarea matInput placeholder="Dirección Particular" formControlName="direction"></textarea>
+              <mat-error *ngIf="addressFormCurriculum.controls['direction'].hasError('required')">
                 <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
@@ -30,8 +30,8 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="País" formControlName="countryCU">
-              <mat-error *ngIf="addressFormCurriculum.controls['countryCU'].hasError('required')">
+              <input matInput placeholder="País" formControlName="country">
+              <mat-error *ngIf="addressFormCurriculum.controls['country'].hasError('required')">
                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
@@ -157,7 +157,7 @@
     </mat-card>
   </form>
   <!-- -------------------------------------------------- -->
-  <form [formGroup]="addressFormCurriculum" novalidate (ngSubmit)="onSubmit()">
+  <form [formGroup]="addressFormCurriculum">
     <mat-card class="shipping-card">
       <mat-card-header>
         <mat-card-title>DATOS DE IDENTIFICACION</mat-card-title>
@@ -211,7 +211,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" type="submit" [disabled]="addressFormCurriculum.invalid">Agregar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="addressFormCurriculum.invalid" (click)="editCurriculum()">Agregar</button>
         <button mat-raised-button color="primary" routerLink="/dashboard" >Cancelar</button>
       </mat-card-actions>
     </mat-card>

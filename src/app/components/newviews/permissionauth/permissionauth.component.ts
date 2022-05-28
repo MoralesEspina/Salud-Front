@@ -98,6 +98,7 @@ export class PermissionauthComponent implements OnInit {
   }
 
   CreateAuthorizationDialog(IPerson: IPerson) {
+    console.log(IPerson);
     const modalDialog = this.dialog.open(PermissionComponent, {
       disableClose: true,
       autoFocus: true,

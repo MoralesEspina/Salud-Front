@@ -53,6 +53,7 @@ import { HistoryComponent } from './components/newviews/history/history.componen
 import { UsermodalComponent } from './components/partials/usermodal/usermodal.component';
 import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
 import { PermissionComponent } from './components/partials/permission/permission.component';
+import { PermissionrequestComponent } from './components/pdfs/permissionrequest/permissionrequest.component';
 
 @NgModule({
   exports: [
@@ -106,7 +107,9 @@ import { PermissionComponent } from './components/partials/permission/permission
 
     PermissionComponent,
 
-    PrincipalComponent
+    PrincipalComponent,
+
+    PermissionrequestComponent
 
 
   ],
@@ -157,6 +160,7 @@ import { PermissionComponent } from './components/partials/permission/permission
     ConstancyComponent,
     UsermodalComponent,
     PermissionComponent,
+    PermissionrequestComponent,
     ConfigurationauthorizationfileComponent
   ],
   providers: [

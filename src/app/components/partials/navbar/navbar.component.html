@@ -11,17 +11,20 @@
 <nav class="main-menu fixed" *ngIf="loged">
   <ul class="mt-8">
 
-    <li *ngIf="user.rol == 'admin'||user.rol == 'member'">
+    <li >
       <a routerLink="/dashboard">
         <i class="fa fa-address-book fa-2x"></i>
-        <span class="nav-text">
+        <span class="nav-text" *ngIf="user.rol == 'admin'||user.rol == 'member'">
           Registros
+        </span>
+        <span class="nav-text" *ngIf="user.rol == 'employed'||user.rol == 'boss'">
+          Principal
         </span>
       </a>
 
     </li>
 
-    <li *ngIf="user.rol == 'employed'">
+    <li *ngIf="user.rol == 'employed'||user.rol == 'boss'">
       <a routerLink="/curriculum">
         <i class="fa fa-user-md fa-2x"></i>
         <span class="nav-text">
@@ -29,7 +32,7 @@
         </span>
       </a>
     </li>
-
+  <!--
     <li *ngIf="user.rol == 'employed'">
       <a (click)="isClickedSolicitudes = !isClickedSolicitudes">
         <i class="fa fa-user-md fa-2x"></i>
@@ -39,7 +42,7 @@
       </a>
     </li>
 
-    <div [ngClass]="{ 'hidden': isClickedSolicitudes == true}">
+   <div [ngClass]="{ 'hidden': isClickedSolicitudes == true}">
       <li *ngIf="user.rol == 'employed'">
         <a routerLink="/requests" routerLinkActive="text-yellow-500">
           <div class="ml-4">
@@ -51,17 +54,28 @@
         </a>
       </li>
 
-    <li *ngIf="user.rol == 'employed'">
+    <li class="has-subnav" *ngIf="user.rol === 'admin'">
+      <a routerLink="/principal">
+        <i class="fa fa-users fa-2x"></i>
+        <span class="nav-text">
+          Principal
+        </span>
+      </a>
+    </li>
+
+    -->
+
+    <li *ngIf="user.rol == 'employed'||user.rol == 'boss'">
       <a routerLink="/historial" routerLinkActive="text-yellow-500">
-        <div class="ml-4">
+
           <i class="fa fa-clock-o fa-2x"></i>
           <span class="nav-text font-bold ml-3">
             Historial de solicitudes
           </span>
-        </div>
+
       </a>
     </li>
-  </div>
+
 
 
     <li *ngIf="user.rol == 'admin'||user.rol == 'member'">
@@ -148,22 +162,15 @@
       </li>
 
     </div>
-    <li class="has-subnav" *ngIf="user.rol === 'admin'">
+    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'admin'">
       <a routerLink="/permisos">
         <i class="fa fa-users fa-2x"></i>
         <span class="nav-text">
-          Historial de Permisos
+          Aceptar Permisos
         </span>
       </a>
     </li>
-    <li class="has-subnav" *ngIf="user.rol === 'admin'">
-      <a routerLink="/principal">
-        <i class="fa fa-users fa-2x"></i>
-        <span class="nav-text">
-          Principal
-        </span>
-      </a>
-    </li>
+
   </ul>
 
 

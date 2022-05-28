@@ -1,9 +1,9 @@
-export class CurriculumData{
+export class CurriculumDataI{
   uuid:string;
   uuidPerson:string;
-  directionCU: string;
-  countryCU: string;
-  homePhone: string;
+  direction: string;
+  country: string;
+  homephone: string;
   bornPlace: string;
   nacionality: string;
   municipality: string;
@@ -14,4 +14,12 @@ export class CurriculumData{
   etnia: string;
   passport: string;
   license: string;
+  department:string;
+  igss: string;
+  phone: string;
+  dpi: string;
+  nit: string;
+  bornDate: Date;
+  email: string;
+  fullname: string;
 }

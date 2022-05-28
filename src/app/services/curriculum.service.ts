@@ -1,4 +1,4 @@
-import { CurriculumData } from './../models/curriculum';
+import { CurriculumDataI } from '../models/curriculum.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,8 +15,8 @@ export class CurriculumService {
     private http: HttpClient
   ) { }
 
-  GetCurriculum(uuid: any):Observable<CurriculumData[]> {
-    return this.http.get<CurriculumData[]>(`${environment.URL}/curriculums/${uuid}`)
+  GetCurriculum(uuid: any):Observable<CurriculumDataI[]> {
+    return this.http.get<CurriculumDataI[]>(`${environment.URL}/curriculums/${uuid}`)
   }
 
   GetExperience(uuid: any):Observable<ExperienceI[]> {

@@ -1,11 +1,10 @@
-import { CurriculumData } from './../../../models/curriculum';
-import { Job } from 'src/app/models/job.model';
 import { ExperienceI } from './../../../models/experience.model';
 import { CurriculumService } from './../../../services/curriculum.service';
 import { UserService } from 'src/app/services/user.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { CurriculumDataI } from 'src/app/models/curriculum.model';
 
 export interface Family {
   name: string;
@@ -23,11 +22,11 @@ export interface Family {
 
 export class CurriculumComponent {
 
-  curriculum: CurriculumData ={
+  /*curriculum: CurriculumData ={
     uuid:'',
     uuidPerson:'',
-    directionCU: '',
-    countryCU: '',
+    direction: '',
+    country: '',
     homePhone: '',
     bornPlace: '',
     nacionality: '',
@@ -39,7 +38,7 @@ export class CurriculumComponent {
     etnia: '',
     passport: '',
     license: '',
-  }
+  }*/
 
   civilStatus: any[] = [
     'SOLTERO','CASADO','DIVORCIADO','VIUDO'
@@ -54,17 +53,18 @@ export class CurriculumComponent {
   addressForm = this.fb.group({
 
       //----------Form Person----------//
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    otherName: null,
-    firstSurname: [null, Validators.required],
-    lastSurname: [null, Validators.required],
-    surnameOfEach: null,
+    fullname: [null, Validators.required],
+    phone: [null, Validators.required],
+    email: [null, Validators.required],
+    nit: [null, Validators.required],
+    dpi: [null, Validators.required],
+    bornDate:[null, Validators.required],
+
 
     //----------Form Curriculum----------//
     directionCU: [null, Validators.required],
     countryCU: [null, Validators.required],
-    homePhone:[null, Validators.required],
+    homephone:[null, Validators.required],
     bornPlace:[null, Validators.required],
     nacionality:[null, Validators.required],
     municipality:[null, Validators.required],
@@ -75,6 +75,8 @@ export class CurriculumComponent {
     etnia:[null, Validators.required],
     passport:[null, Validators.required],
     license:[null, Validators.required],
+    department:[null, Validators.required],
+    igss:[null, Validators.required],
 
      //----------Form References----------//
     nameRF:[null, Validators.required],
@@ -90,7 +92,7 @@ export class CurriculumComponent {
     establishment:[null, Validators.required],
     periodof:[null, Validators.required],
     periodto:[null, Validators.required],
-    cartificate:[null, Validators.required],
+    certificate:[null, Validators.required],
     status:[null, Validators.required],
     grade:[null, Validators.required],
 
@@ -117,31 +119,47 @@ export class CurriculumComponent {
 
   modelExperience: ExperienceI | undefined;
   tableExperience: ExperienceI[] | undefined;
+  modelCurriculum: CurriculumDataI | undefined;
 
   ngOnInit(): void {
     this.loadExperience();
+    this.loadCurriculum();
 
   }
   onSubmit() {
     alert('Thanks!');
   }
 
-  loadCcurriculum() {
+  loadCurriculum() {
     let id_entrada = this.userService.userValue.uuidPerson;
     if (id_entrada) {
       this.curriculumService.GetCurriculum(id_entrada).subscribe(
         data => {
-          this.curriculum = data['data'];
-          /*console.log(this.modelExperience)
+          this.modelCurriculum = data['data'];
+          console.log( this.modelCurriculum)
           this.addressForm.setValue({
-            'workAddress': this.modelExperience.workAddress,
-            'workPhone': this.modelExperience.workPhone,
-            'reasonForWithdrawal': this.modelExperience.reasonForWithdrawal,
-            'dateOfEmployment': this.modelExperience.dateOfEmployment,
-            'immediateBossName': this.modelExperience.immediateBossName,
-            'sector': this.modelExperience.sector,
-            'salary': this.modelExperience.salary,
-          });*/
+            'fullname': this.modelCurriculum.fullname,
+            'phone': this.modelCurriculum.phone,
+            'email': this.modelCurriculum.email,
+            'nit': this.modelCurriculum.nit,
+            'dpi': this.modelCurriculum.dpi,
+            'bornDate': this.modelCurriculum.bornDate,
+            'directionCU': this.modelCurriculum.direction,
+            'countryCU': this.modelCurriculum.country,
+            'homephone': this.modelCurriculum.homephone,
+            'bornPlace': this.modelCurriculum.bornPlace,
+            'nacionality': this.modelCurriculum.nacionality,
+            'municipality': this.modelCurriculum.municipality,
+            'village': this.modelCurriculum.village,
+            'workPhone': this.modelCurriculum.workPhone,
+            'age': this.modelCurriculum.age,
+            'civilStatus': this.modelCurriculum.civilStatus,
+            'etnia': this.modelCurriculum.etnia,
+            'passport': this.modelCurriculum.passport,
+            'license': this.modelCurriculum.license,
+            'department': this.modelCurriculum.department,
+            'igss': this.modelCurriculum.igss,
+          });
         }, error => {
           Swal.fire({
             icon: 'error',

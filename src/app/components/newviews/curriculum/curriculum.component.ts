@@ -50,7 +50,41 @@ export class CurriculumComponent {
     'ABUELO','ABUELA','PADRE','MADRE','HERMANO','HERMANA','HIJO','HIJA','TIO','TIA','PRIMO','PRIMA','TIO','SOBRINO','SOBRINA'
   ];
 
-  addressForm = this.fb.group({
+  addressFormReferences = this.fb.group({
+     //----------Form References----------//
+     nameRF:[null, Validators.required],
+     phoneRF:[null, Validators.required],
+     relationship:[null, Validators.required],
+     borndate:[null, Validators.required],
+     profession:[null, Validators.required],
+     company:[null, Validators.required],
+     isFamiliar:[Validators.required],
+  });
+
+  addressFormPersonEducation = this.fb.group({
+    //----------Form PersonEducation----------//
+    countryPE:[null, Validators.required],
+    establishment:[null, Validators.required],
+    periodof:[null, Validators.required],
+    periodto:[null, Validators.required],
+    certificate:[null, Validators.required],
+    status:[null, Validators.required],
+    grade:[null, Validators.required],
+  });
+
+  addressFormWorkExperience = this.fb.group({
+    //----------Form WorkExperience----------//
+    direction:[null, Validators.required],
+    phoneWE:[null, Validators.required],
+    reason:[null, Validators.required],
+    dateof:[null, Validators.required],
+    dateto:[null, Validators.required],
+    job:[null, Validators.required],
+    bossName:[null, Validators.required],
+    sector:[null, Validators.required],
+    salary:[null, Validators.required],
+  });
+  addressFormCurriculum = this.fb.group({
 
       //----------Form Person----------//
     fullname: [null, Validators.required],
@@ -77,36 +111,6 @@ export class CurriculumComponent {
     license:[null, Validators.required],
     department:[null, Validators.required],
     igss:[null, Validators.required],
-
-     //----------Form References----------//
-    nameRF:[null, Validators.required],
-    phoneRF:[null, Validators.required],
-    relationship:[null, Validators.required],
-    borndate:[null, Validators.required],
-    profession:[null, Validators.required],
-    company:[null, Validators.required],
-    isFamiliar:[Validators.required],
-
-    //----------Form PersonEducation----------//
-    countryPE:[null, Validators.required],
-    establishment:[null, Validators.required],
-    periodof:[null, Validators.required],
-    periodto:[null, Validators.required],
-    certificate:[null, Validators.required],
-    status:[null, Validators.required],
-    grade:[null, Validators.required],
-
-    //----------Form WorkExperience----------//
-    direction:[null, Validators.required],
-    phoneWE:[null, Validators.required],
-    reason:[null, Validators.required],
-    dateof:[null, Validators.required],
-    dateto:[null, Validators.required],
-    job:[null, Validators.required],
-    bossName:[null, Validators.required],
-    sector:[null, Validators.required],
-    salary:[null, Validators.required],
-
   });
 
 
@@ -137,7 +141,7 @@ export class CurriculumComponent {
         data => {
           this.modelCurriculum = data['data'];
           console.log( this.modelCurriculum)
-          this.addressForm.setValue({
+          this.addressFormCurriculum.setValue({
             'fullname': this.modelCurriculum.fullname,
             'phone': this.modelCurriculum.phone,
             'email': this.modelCurriculum.email,

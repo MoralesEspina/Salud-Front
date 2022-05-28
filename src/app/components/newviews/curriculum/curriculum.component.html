@@ -10,8 +10,8 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Primer Nombre" formControlName="firstName">
-              <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
+              <input matInput placeholder="Primer Nombre" formControlName="directionCU">
+              <mat-error *ngIf="addressForm.controls['directionCU'].hasError('required')">
                 <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
@@ -58,8 +58,8 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <textarea matInput placeholder="Dirección Particular" formControlName="address"></textarea>
-              <mat-error *ngIf="addressForm.controls['address'].hasError('required')">
+              <textarea matInput [(ngModel)]="curriculum.directionCU" placeholder="Dirección Particular" formControlName="directionCU"></textarea>
+              <mat-error *ngIf="addressForm.controls['directionCU'].hasError('required')">
                 <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
@@ -68,15 +68,15 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="País" formControlName="country">
-              <mat-error *ngIf="addressForm.controls['country'].hasError('required')">
+              <input matInput [(ngModel)]="curriculum.countryCU" placeholder="País" formControlName="countryCU">
+              <mat-error *ngIf="addressForm.controls['countryCU'].hasError('required')">
                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Municipio" formControlName="municipality">
+              <input matInput [(ngModel)]="curriculum.municipality" placeholder="Municipio" formControlName="municipality">
               <mat-error *ngIf="addressForm.controls['municipality'].hasError('required')">
                <strong>*Obligatorio</strong>
               </mat-error>
@@ -94,7 +94,7 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Aldea/Caserio" formControlName="village">
+              <input matInput [(ngModel)]="curriculum.village" placeholder="Aldea/Caserio" formControlName="village">
               <mat-error *ngIf="addressForm.controls['village'].hasError('required')">
                <strong>*Obligatorio</strong>
               </mat-error>
@@ -104,16 +104,16 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Teléfono Residencia" formControlName="residentialtelephone">
-              <mat-error *ngIf="addressForm.controls['residentialtelephone'].hasError('required')">
+              <input matInput [(ngModel)]="curriculum.homePhone" placeholder="Teléfono Residencia" formControlName="homePhone">
+              <mat-error *ngIf="addressForm.controls['homePhone'].hasError('required')">
                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Teléfono Oficina" formControlName="Officephone">
-              <mat-error *ngIf="addressForm.controls['Officephone'].hasError('required')">
+              <input matInput [(ngModel)]="curriculum.workPhone" placeholder="Teléfono Oficina" formControlName="workPhone">
+              <mat-error *ngIf="addressForm.controls['workPhone'].hasError('required')">
                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
@@ -148,7 +148,7 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Edad" type="number" formControlName="age">
+              <input matInput [(ngModel)]="curriculum.age" placeholder="Edad" type="number" formControlName="age">
               <mat-error *ngIf="addressForm.controls['age'].hasError('required')">
                <strong>*Obligatorio</strong>
               </mat-error>
@@ -158,16 +158,16 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Lugar De Nacimiento" formControlName="placeofbirth">
-              <mat-error *ngIf="addressForm.controls['placeofbirth'].hasError('required')">
+              <input matInput [(ngModel)]="curriculum.bornPlace" placeholder="Lugar De Nacimiento" formControlName="bornPlace">
+              <mat-error *ngIf="addressForm.controls['bornPlace'].hasError('required')">
                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <mat-select  matInput placeholder="Estado Civil" formControlName="civilstatus">
-                <mat-option *ngFor="let status of civilstatus" [value]="status">
+              <mat-select  matInput [(ngModel)]="curriculum.civilStatus" placeholder="Estado Civil" formControlName="civilStatus">
+                <mat-option *ngFor="let status of civilStatus" [value]="status">
                   {{status}}
                 </mat-option>
               </mat-select>
@@ -177,7 +177,7 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Nacionalidad" formControlName="nationality">
+              <input matInput [(ngModel)]="curriculum.nationality" placeholder="Nacionalidad" formControlName="nationality">
               <mat-error *ngIf="addressForm.controls['nationality'].hasError('required')">
                <strong>*Obligatorio</strong>
               </mat-error>
@@ -185,8 +185,8 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <mat-select  matInput placeholder="Etnia" formControlName="ethnicity">
-                <mat-option *ngFor="let status of ethnicity" [value]="status">
+              <mat-select  matInput [(ngModel)]="curriculum.etnia" placeholder="Etnia" formControlName="etnia">
+                <mat-option *ngFor="let status of etnia" [value]="status">
                   {{status}}
                 </mat-option>
               </mat-select>
@@ -219,8 +219,8 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="No. Pasaporte" formControlName="passportnumber">
-              <mat-error *ngIf="addressForm.controls['passportnumber'].hasError('required')">
+              <input matInput [(ngModel)]="curriculum.passport" placeholder="No. Pasaporte" formControlName="passport">
+              <mat-error *ngIf="addressForm.controls['passport'].hasError('required')">
                 <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
@@ -237,7 +237,7 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Licencia" formControlName="license">
+              <input matInput [(ngModel)]="curriculum.license" placeholder="Licencia" formControlName="license">
               <mat-error *ngIf="addressForm.controls['license'].hasError('required')">
                 <strong>*Obligatorio</strong>
               </mat-error>

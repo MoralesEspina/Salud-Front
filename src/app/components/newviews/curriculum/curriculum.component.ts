@@ -1,3 +1,4 @@
+import { CurriculumData } from './../../../models/curriculum';
 import { Job } from 'src/app/models/job.model';
 import { ExperienceI } from './../../../models/experience.model';
 import { CurriculumService } from './../../../services/curriculum.service';
@@ -22,7 +23,25 @@ export interface Family {
 
 export class CurriculumComponent {
 
-  civilstatus: any[] = [
+  curriculum: CurriculumData ={
+    uuid:'',
+    uuidPerson:'',
+    directionCU: '',
+    countryCU: '',
+    homePhone: '',
+    bornPlace: '',
+    nacionality: '',
+    municipality: '',
+    village: '',
+    workPhone: '',
+    age: '',
+    civilStatus: '',
+    etnia: '',
+    passport: '',
+    license: '',
+  }
+
+  civilStatus: any[] = [
     'SOLTERO','CASADO','DIVORCIADO','VIUDO'
   ];
   ethnicity: any[] = [
@@ -52,7 +71,7 @@ export class CurriculumComponent {
     village:[null, Validators.required],
     workPhone:[null, Validators.required],
     age:[null, Validators.required],
-    civilstatus:[null, Validators.required],
+    civilStatus:[null, Validators.required],
     etnia:[null, Validators.required],
     passport:[null, Validators.required],
     license:[null, Validators.required],
@@ -105,6 +124,32 @@ export class CurriculumComponent {
   }
   onSubmit() {
     alert('Thanks!');
+  }
+
+  loadCcurriculum() {
+    let id_entrada = this.userService.userValue.uuidPerson;
+    if (id_entrada) {
+      this.curriculumService.GetCurriculum(id_entrada).subscribe(
+        data => {
+          this.curriculum = data['data'];
+          /*console.log(this.modelExperience)
+          this.addressForm.setValue({
+            'workAddress': this.modelExperience.workAddress,
+            'workPhone': this.modelExperience.workPhone,
+            'reasonForWithdrawal': this.modelExperience.reasonForWithdrawal,
+            'dateOfEmployment': this.modelExperience.dateOfEmployment,
+            'immediateBossName': this.modelExperience.immediateBossName,
+            'sector': this.modelExperience.sector,
+            'salary': this.modelExperience.salary,
+          });*/
+        }, error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.error.message,
+          })
+        })
+    }
   }
 
   loadExperience() {

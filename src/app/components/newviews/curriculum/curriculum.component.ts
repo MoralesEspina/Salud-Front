@@ -1,3 +1,4 @@
+import { Education } from './../../../models/personEducation.model';
 import { ExperienceI } from './../../../models/experience.model';
 import { CurriculumService } from './../../../services/curriculum.service';
 import { UserService } from 'src/app/services/user.service';
@@ -124,10 +125,13 @@ export class CurriculumComponent {
   modelExperience: ExperienceI | undefined;
   tableExperience: ExperienceI[] | undefined;
   modelCurriculum: CurriculumDataI | undefined;
+  modelEducation: Education | undefined;
+  tableEducation: Education[] | undefined;
 
   ngOnInit(): void {
     this.loadExperience();
     this.loadCurriculum();
+    this.loadEducation();
 
   }
   onSubmit() {
@@ -164,6 +168,33 @@ export class CurriculumComponent {
             'department': this.modelCurriculum.department,
             'igss': this.modelCurriculum.igss,
           });
+        }, error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.error.message,
+          })
+        })
+    }
+  }
+
+  loadEducation() {
+    let id_entrada = this.userService.userValue.uuidPerson;
+    if (id_entrada) {
+      this.curriculumService.GetEducation(id_entrada).subscribe(
+        data => {
+          console.log(this.modelEducation);
+          this.tableEducation = data['data'];
+          /*console.log(this.modelExperience)
+          this.addressForm.setValue({
+            'workAddress': this.modelExperience.workAddress,
+            'workPhone': this.modelExperience.workPhone,
+            'reasonForWithdrawal': this.modelExperience.reasonForWithdrawal,
+            'dateOfEmployment': this.modelExperience.dateOfEmployment,
+            'immediateBossName': this.modelExperience.immediateBossName,
+            'sector': this.modelExperience.sector,
+            'salary': this.modelExperience.salary,
+          });*/
         }, error => {
           Swal.fire({
             icon: 'error',

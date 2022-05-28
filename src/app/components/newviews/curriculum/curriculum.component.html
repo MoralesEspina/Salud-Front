@@ -99,6 +99,60 @@
             </mat-form-field>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Fecha de Nacimiento" type="date" formControlName="bornDate">
+              <mat-error *ngIf="addressFormCurriculum.controls['bornDate'].hasError('required')">
+               <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Edad" type="date" formControlName="age">
+              <mat-error *ngIf="addressFormCurriculum.controls['age'].hasError('required')">
+               <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Lugar de Nacimiento"formControlName="bornPlace">
+              <mat-error *ngIf="addressFormCurriculum.controls['bornPlace'].hasError('required')">
+               <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Estado Civil" formControlName="civilStatus">
+              <mat-error *ngIf="addressFormCurriculum.controls['civilStatus'].hasError('required')">
+               <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nacionalidad" formControlName="nacionality">
+              <mat-error *ngIf="addressFormCurriculum.controls['nacionality'].hasError('required')">
+               <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Etnia" formControlName="etnia">
+              <mat-error *ngIf="addressFormCurriculum.controls['etnia'].hasError('required')">
+               <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
       </mat-card-content>
 
       <mat-card-actions style="text-align: center;">
@@ -167,79 +221,6 @@
       </mat-card-actions>
     </mat-card>
   </form>
-  <!-- -------------------------------------------------- -->
-  <form [formGroup]="addressFormReferences" novalidate (ngSubmit)="onSubmit()">
-    <mat-card class="shipping-card">
-      <mat-card-header>
-        <mat-card-title>INFORMACION FAMILIAR</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-         <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Nombre" formControlName="nameRF">
-              <mat-error *ngIf="addressFormReferences.controls['nameRF']">
-                <strong>*Obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Teléfono" formControlName="phoneRF">
-              <mat-error *ngIf="addressFormReferences.controls['phoneRF'].hasError('required')">
-                <strong>*Obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <mat-select  matInput placeholder="Parentesco" formControlName="relationship">
-                <mat-option *ngFor="let status of relationship" [value]="status">
-                  {{status}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Fecha De Nacimiento" type="date" formControlName="borndate">
-              <mat-error *ngIf="addressFormReferences.controls['borndate'].hasError('required')">
-                <strong>*Obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-        </div>
-      </mat-card-content>
-      <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" type="submit" [disabled]="addressFormReferences.invalid">Agregar</button>
-        <button mat-raised-button color="primary" routerLink="/dashboard" >Cancelar</button>
-      </mat-card-actions>
-
-        <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Nombre </th>
-          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="telephone">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Teléfono </th>
-          <td mat-cell *matCellDef="let element"> {{element.telephone}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="relationship">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Parentesco </th>
-          <td mat-cell *matCellDef="let element"> {{element.relationship}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="dateofbirth">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Fecha De Nacimiento </th>
-          <td mat-cell *matCellDef="let element"> {{element.dateofbirth}} </td>
-        </ng-container>
-    </mat-card>
-  </form>
-
-
 
   <!-- -------------------------------------------------- -->
   <form [formGroup]="addressFormPersonEducation" novalidate (ngSubmit)="onSubmit()">
@@ -319,44 +300,109 @@
         <button mat-raised-button color="primary" type="submit" [disabled]="addressFormPersonEducation.invalid">Agregar</button>
         <button mat-raised-button color="primary" routerLink="/dashboard" >Cancelar</button>
       </mat-card-actions>
-
-        <ng-container matColumnDef="country">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> País </th>
-          <td mat-cell *matCellDef="let element"> {{element.country}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="establishment">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Establecimiento </th>
-          <td mat-cell *matCellDef="let element"> {{element.establishment}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="preiodof">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Periodo Del </th>
-          <td mat-cell *matCellDef="let element"> {{element.preiodof}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="periodto">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Periodo Al </th>
-          <td mat-cell *matCellDef="let element"> {{element.periodto}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="diploma">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Diploma </th>
-          <td mat-cell *matCellDef="let element"> {{element.diploma}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="condition">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Estado </th>
-          <td mat-cell *matCellDef="let element"> {{element.condition}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="grade">
-          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Grado </th>
-          <td mat-cell *matCellDef="let element"> {{element.grade}} </td>
-        </ng-container>
-
+      <div class="container">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">País</th>
+              <th scope="col">Establecimiento</th>
+              <th scope="col">Periodo Del</th>
+              <th scope="col">Periodo Al</th>
+              <th scope="col">Diploma</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Grado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let education of tableEducation">
+              <th scope="row">{{education.country}}</th>
+              <td>{{education.establishment}}</td>
+              <td>{{education.periodof}}</td>
+              <td>{{education.periodto}}</td>
+              <td>{{education.certificate}}</td>
+              <td>{{education.status}}</td>
+              <td>{{education.grade}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </mat-card>
   </form>
+  <!-- -------------------------------------------------- -->
+  <form [formGroup]="addressFormReferences" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>REFERENCIA FAMILIAR</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+         <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombre" formControlName="nameRF">
+              <mat-error *ngIf="addressFormReferences.controls['nameRF']">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Teléfono" formControlName="phoneRF">
+              <mat-error *ngIf="addressFormReferences.controls['phoneRF'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select  matInput placeholder="Parentesco" formControlName="relationship">
+                <mat-option *ngFor="let status of relationship" [value]="status">
+                  {{status}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Fecha De Nacimiento" type="date" formControlName="borndate">
+              <mat-error *ngIf="addressFormReferences.controls['borndate'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions style="text-align: center;">
+        <button mat-raised-button color="primary" type="submit" [disabled]="addressFormReferences.invalid">Agregar</button>
+        <button mat-raised-button color="primary" routerLink="/dashboard" >Cancelar</button>
+      </mat-card-actions>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Nombre </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="telephone">
+          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Teléfono </th>
+          <td mat-cell *matCellDef="let element"> {{element.telephone}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="relationship">
+          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Parentesco </th>
+          <td mat-cell *matCellDef="let element"> {{element.relationship}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateofbirth">
+          <th mat-header-cell *matHeaderCellDef style="text-align:center"> Fecha De Nacimiento </th>
+          <td mat-cell *matCellDef="let element"> {{element.dateofbirth}} </td>
+        </ng-container>
+    </mat-card>
+  </form>
+
+
+
+
   <!-- -------------------------------------------------- -->
   <form [formGroup]="addressFormReferences" novalidate (ngSubmit)="onSubmit()">
     <mat-card class="shipping-card">

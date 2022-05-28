@@ -3,7 +3,7 @@ export class Education{
   uuidPerson: string;
   country: string;
   establishment: string;
-  preiodof: string;
+  periodof: string;
   periodto: string;
   certificate: string;
   status: string;

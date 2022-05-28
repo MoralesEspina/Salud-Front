@@ -46,6 +46,7 @@ export class DashboardComponent implements OnInit {
 
   user: Claims = new Claims()
   persons: IPerson[] = []
+  uuidactual= this.authServie.userValue.uuidPerson
 
   displayedColumns: string[] = ['fullname', 'cui', 'ACCIONES'];
   dataSource: { filter: string; };

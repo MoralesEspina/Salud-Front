@@ -6,7 +6,8 @@ import { IAuthorization } from 'src/app/models/authorization';
 import { Claims } from 'src/app/models/claims.model';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { UserService } from 'src/app/services/user.service';
-import { CreatePDFVacationAuthorization } from 'src/app/utils/reports/VacationAuthorization';
+//import { CreatePDFVacationAuthorization } from 'src/app/utils/reports/pdf';
+import { CreatePDFVacationAuthorization } from 'src/app/utils/reports/AUSENCIA';
 import pdfFonts from 'src/app/fonts/custom/times-new-roman'
 
 
@@ -35,7 +36,7 @@ export class RecordComponent implements OnInit {
   authorizationPDF = new IAuthorization();
   user = new Claims();
 
-  search: string;
+  search='WALTER FRANCISCO JIMENEZ SEGURA';
 
   dataSource: { filter: string; };
 

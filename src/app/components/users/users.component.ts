@@ -10,7 +10,7 @@ import { PersonService } from 'src/app/services/person.service';
 import { UsermodalComponent } from '../partials/usermodal/usermodal.component';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 import { LocalService } from 'src/app/services/local.service';
-import { Curriculum } from 'src/app/models/curriculum.model';
+import { CurriculumDataI } from 'src/app/models/curriculum.model';
 
 
 @Component({
@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
   form: FormGroup;
   title: string
   user = new User()
-  curriculum= new Curriculum()
+  curriculum= new CurriculumDataI()
   usuario: IUser[] = []
   users: User[] = []
   _users= new MatTableDataSource(this.usuario)

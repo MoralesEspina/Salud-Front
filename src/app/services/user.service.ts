@@ -1,10 +1,10 @@
-import { Curriculum } from './../models/curriculum.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
 import { Claims } from '../models/claims.model';
+import { CurriculumDataI } from '../models/curriculum.model';
 import { IUser } from '../models/edituser.model';
 import { User } from '../models/user.model';
 import { LocalService } from '../services/local.service';
@@ -76,7 +76,7 @@ export class UserService {
     return this.http.get(URL)
   }
 
-  crearCurriculum(curriculum: Curriculum) {
+  crearCurriculum(curriculum: CurriculumDataI) {
     return this.http.post(`${environment.URL}/curriculums`, JSON.stringify(curriculum))
   }
 

@@ -23,9 +23,4 @@ export class CurriculumDataI{
   bornDate: Date;
   email: string;
   fullname: string;
-
-export class Curriculum {
-  uuid: string
-  uuidPerson?: string
-
 }

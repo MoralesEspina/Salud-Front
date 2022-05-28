@@ -1,5 +1,10 @@
+import { Job } from 'src/app/models/job.model';
+import { ExperienceI } from './../../../models/experience.model';
+import { CurriculumService } from './../../../services/curriculum.service';
+import { UserService } from 'src/app/services/user.service';
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 export interface Family {
   name: string;
@@ -8,55 +13,8 @@ export interface Family {
   dateofbirth: string;
 }
 
-export interface Reference{
-  name: string;
-  profession: string;
-  telephone: string;
-  business: string;
-  relationship: string;
-}
-
-export interface Study{
-  country: string;
-  establishment: string;
-  preiodof: string;
-  periodto: string;
-  diploma: string;
-  condition: string;
-  grade: string;
-}
 
 
-
-export interface Experience{
-  workAddress: string;
-  workPhone: string;
-  immediateBossName: string;
-  reasonForWithdrawal: string;
-  sector: string;
-  dateOfEmployment: string;
-  salary: string;
-  heldPosition: string;
-}
-
-
-const ELEMENT_Family: Family[] = [
-  {name: 'Marta', telephone: '51342324', relationship: 'Hermano', dateofbirth: '25-03-2002'}
-
-];
-
-const ELEMENT_Reference: Reference[] = [
-  {name: 'Marta', profession: 'Maestro', telephone: '51342324', business:'bxiuas', relationship: 'Hermano'}
-
-];
-
-const ELEMENT_Study: Study[] = [
-];
-
-const ELEMENT_Experience: Experience[] = [
-
-
-];
 
 @Component({
   selector: 'app-curriculum',
@@ -65,18 +23,6 @@ const ELEMENT_Experience: Experience[] = [
 })
 
 export class CurriculumComponent {
-
-  displayedColumns1: string[] = ['name', 'telephone', 'relationship', 'dateofbirth'];
-  dataSource1 = ELEMENT_Family;
-
-  displayedColumns2: string[] = ['name', 'profession','telephone', 'business','relationship'];
-  dataSource2 = ELEMENT_Reference;
-
-  displayedColumns3: string[] = ['country','establishment','preiodof','periodto','diploma','condition','grade'];
-  dataSource3 = ELEMENT_Study;
-
-  displayedColumns4: string[] = ['workAddress','workPhone','immediateBossName','reasonForWithdrawal','sector','dateOfEmployment','salary','heldPosition'];
-  dataSource4 = ELEMENT_Experience;
 
   civilstatus: any[] = [
     'SOLTERO','CASADO','DIVORCIADO','VIUDO'
@@ -88,67 +34,104 @@ export class CurriculumComponent {
     'ABUELO','ABUELA','PADRE','MADRE','HERMANO','HERMANA','HIJO','HIJA','TIO','TIA','PRIMO','PRIMA','TIO','SOBRINO','SOBRINA'
   ];
 
-
   addressForm = this.fb.group({
+
+      //----------Form Person----------//
     firstName: [null, Validators.required],
     lastName: [null, Validators.required],
     otherName: null,
     firstSurname: [null, Validators.required],
     lastSurname: [null, Validators.required],
     surnameOfEach: null,
-    address: [null, Validators.required],
-    country: [null, Validators.required],
+
+    //----------Form Curriculum----------//
+    directionCU: [null, Validators.required],
+    countryCU: [null, Validators.required],
+    homePhone:[null, Validators.required],
+    bornPlace:[null, Validators.required],
+    nacionality:[null, Validators.required],
     municipality:[null, Validators.required],
-    department:[null, Validators.required],
     village:[null, Validators.required],
-    residentialtelephone:[null, Validators.required],
-    Officephone:[null, Validators.required],
-    cellphone:[null, Validators.required],
-    email:[null, Validators.required],
-    dateofbirth:[null, Validators.required],
+    workPhone:[null, Validators.required],
     age:[null, Validators.required],
-    placeofbirth:[null, Validators.required],
     civilstatus:[null, Validators.required],
-    nationality:[null, Validators.required],
-    ethnicity:[null, Validators.required],
-
-    cui:[null, Validators.required],
-    passportnumber:[null, Validators.required],
-    iggsmembershipnumber:[null, Validators.required],
+    etnia:[null, Validators.required],
+    passport:[null, Validators.required],
     license:[null, Validators.required],
-    nit:[null, Validators.required],
 
-    name:[null, Validators.required],
-    profession:[null, Validators.required],
-    telephone:[null, Validators.required],
-    business:[null, Validators.required],
+     //----------Form References----------//
+    nameRF:[null, Validators.required],
+    phoneRF:[null, Validators.required],
     relationship:[null, Validators.required],
+    borndate:[null, Validators.required],
+    profession:[null, Validators.required],
+    company:[null, Validators.required],
+    isFamiliar:[Validators.required],
 
+    //----------Form PersonEducation----------//
+    countryPE:[null, Validators.required],
     establishment:[null, Validators.required],
-    preiodof:[null, Validators.required],
+    periodof:[null, Validators.required],
     periodto:[null, Validators.required],
-    diploma:[null, Validators.required],
-    condition:[null, Validators.required],
+    cartificate:[null, Validators.required],
+    status:[null, Validators.required],
     grade:[null, Validators.required],
 
-    schema:[null, Validators.required],
-    workAddress:[null, Validators.required],
-    workPhone:[null, Validators.required],
-    immediateBossName:[null, Validators.required],
-    reasonForWithdrawal:[null, Validators.required],
+    //----------Form WorkExperience----------//
+    direction:[null, Validators.required],
+    phoneWE:[null, Validators.required],
+    reason:[null, Validators.required],
+    dateof:[null, Validators.required],
+    dateto:[null, Validators.required],
+    job:[null, Validators.required],
+    bossName:[null, Validators.required],
     sector:[null, Validators.required],
-    dateOfEmployment:[null, Validators.required],
     salary:[null, Validators.required],
-    heldPosition:[null, Validators.required],
 
   });
 
 
   hasUnitNumber = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+    private userService: UserService,
+    private curriculumService : CurriculumService) {}
 
+
+  modelExperience: ExperienceI | undefined;
+  tableExperience: ExperienceI[] | undefined;
+
+  ngOnInit(): void {
+    this.loadExperience();
+
+  }
   onSubmit() {
     alert('Thanks!');
+  }
+
+  loadExperience() {
+    let id_entrada = this.userService.userValue.uuidPerson;
+    if (id_entrada) {
+      this.curriculumService.GetExperience(id_entrada).subscribe(
+        data => {
+          this.tableExperience = data['data'];
+          /*console.log(this.modelExperience)
+          this.addressForm.setValue({
+            'workAddress': this.modelExperience.workAddress,
+            'workPhone': this.modelExperience.workPhone,
+            'reasonForWithdrawal': this.modelExperience.reasonForWithdrawal,
+            'dateOfEmployment': this.modelExperience.dateOfEmployment,
+            'immediateBossName': this.modelExperience.immediateBossName,
+            'sector': this.modelExperience.sector,
+            'salary': this.modelExperience.salary,
+          });*/
+        }, error => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: error.error.message,
+          })
+        })
+    }
   }
 }

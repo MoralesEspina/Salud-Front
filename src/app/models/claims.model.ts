@@ -4,4 +4,5 @@ export class Claims {
     token: string;
     rol: Role;
     name: string;
+    uuidPerson: string;
 }

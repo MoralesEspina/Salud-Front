@@ -1,3 +1,4 @@
+import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
 
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { CertificationComponent } from './components/certification/certification.component';
@@ -10,9 +11,11 @@ import { NotfoundComponent } from './components/partials/notfound/notfound.compo
 import { AuthorizationComponent } from './components/reports/authorization/authorization.component';
 import { PersonGridComponent } from './components/reports/person-grid/person-grid.component';
 import { UsersComponent } from './components/users/users.component';
+import { RequestsComponent } from './components/newviews/requests/requests.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
-import { RecordComponent } from './components/newviews/record/record.component';
+import { HistoryComponent } from './components/newviews/history/history.component';
+import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: "enabled",
@@ -30,6 +33,10 @@ const routes: Routes = [
     component: AuthorizationComponent ,
     canActivate: [AuthGuard],
     data: {roles: [Role.admin]}
+  },
+  {
+    path: 'requests',
+    component: RequestsComponent ,
   },
   {
     path: 'dashboard',
@@ -60,8 +67,8 @@ const routes: Routes = [
 
   {
     path: 'historial',
-    component: RecordComponent,
-    canActivate: [AuthGuard]
+    component: HistoryComponent
+
   },
 
   {
@@ -78,6 +85,16 @@ const routes: Routes = [
     component: PersonGridComponent
   },
   {
+    path: 'curriculum',
+    component: CurriculumComponent
+  },
+  {
+    path: 'permisos',
+    component: PermissionauthComponent
+  },
+
+
+  {
     path: 'not-found',
     component: NotfoundComponent
   },
@@ -86,7 +103,7 @@ const routes: Routes = [
     redirectTo: 'not-found'
   },
 
-  
+
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes, routerOptions);

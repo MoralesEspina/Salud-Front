@@ -3,8 +3,13 @@
 <!--Data object from database-->
 <div class="mt-8 px-6">
   <div class="ed-container">
+<<<<<<< HEAD:src/app/components/newviews/record/record.component.html
     
 
+=======
+
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256:src/app/components/newviews/history/history.component.html
 
   <div class="ml-16 mr-auto">
     <div class="datagrid overflow-x-auto block">
@@ -26,7 +31,7 @@
             <td>{{ai.person.cui}}</td>
             <td>{{ai.submitted_at}}</td>
 
-            <td style="width: 10px;" *ngIf="user.rol == 'admin'">
+            <td style="width: 10px;" >
               <div class="rounded-full cursor-pointer" (click)="printPDF(ai.uuid_authorization)">
                 <div class="justify-center text-center ">
                   <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>

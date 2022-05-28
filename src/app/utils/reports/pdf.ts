@@ -8,7 +8,11 @@ import FormatNumberToRender from '../formats/formatNumbersToRender';
 
 
 export async function CreatePDFVacationAuthorization(authorization: IAuthorization, body: string, authorizationConfiguration: AuthorizationConfigurationFile): Promise<PdfMakeWrapper> {
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
 
     var fontsize = 13
     var fontsizeName = 13
@@ -21,7 +25,11 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
     }
 
     var fontsize1 = 10
+<<<<<<< HEAD
    
+=======
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
 
     var body = body
     var observation = authorization.observation
@@ -56,7 +64,11 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
     pdf.defaultStyle({
         fontSize: 13
     })
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
 
    // pdf.background(await new Img(authorizationConfiguration.imageURL).alignment(authorizationConfiguration.align).width(authorizationConfiguration.width).height(authorizationConfiguration.height).build())
     pdf.add(new Txt('Datos generales').alignment('left').relativePosition(0, 5).color('blue').bold().end)
@@ -103,7 +115,11 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
     pdf.add(new Txt('Información familiar').alignment('left').relativePosition(0, 405).color('blue').bold().end)
 
     pdf.add(new Table(
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
           [
           [
             'Nombre',
@@ -137,7 +153,11 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
      pdf.add(new Txt('Educación').alignment('left').relativePosition(0, 530).color('blue').bold().end)
 
      pdf.add(new Table(
+<<<<<<< HEAD
      
+=======
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
            [
            [
              'Pais',
@@ -166,18 +186,31 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
              '',
              '',
            ],
+<<<<<<< HEAD
           
          ]
  
       ).alignment('left').relativePosition(0, 555).end)
  
   
+=======
+
+         ]
+
+      ).alignment('left').relativePosition(0, 555).end)
+
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
 
 
       pdf.add(new Txt('Referencias personales').alignment('left').relativePosition(0, 705).color('blue').bold().end)
 
       pdf.add(new Table(
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
             [
             [
               'Nombre',
@@ -200,24 +233,40 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
                 'NO SE',
                 'PERSONAL'
               ]
+<<<<<<< HEAD
             
           ]
   
        ).alignment('left').relativePosition(0, 730).end) 
+=======
+
+          ]
+
+       ).alignment('left').relativePosition(0, 730).end)
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
 
 
 /*
     pdf.add(new Txt('EXPERIENCIA LABORAL').alignment('left').relativePosition(0, 505).color('blue').bold().end)
+<<<<<<< HEAD
 
        pdf.add(new Table(
        
+=======
+       pdf.add(new Table(
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
              [
              [
                'Nombre de la institución o empresa: MINISTERIO DE SALUD PUBLICA Y ASISTENCIA SOCIAL'
              ],
              [
                'Direccion:',
+<<<<<<< HEAD
                
+=======
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
              ],
              [
                'Telefono:',
@@ -238,9 +287,15 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
                   'Puesto desempeñado:',
                 ]
            ]
+<<<<<<< HEAD
    
         ).alignment('left').relativePosition(0, 530).end) */
     
+=======
+
+        ).alignment('left').relativePosition(0, 530).end) */
+
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
 
 
 
@@ -248,6 +303,7 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
 /*
     pdf.add(new Txt('Código del servidor público: ').alignment('left').relativePosition(0, 180).end)
     pdf.add(new Txt(publicserver).bold().decoration('underline').relativePosition(160, 180).end)
+<<<<<<< HEAD
 
     pdf.add(new Txt('Partida presupuestaria individual: ').alignment('left').relativePosition(230, 180).end)
     pdf.add(new Txt(partida).bold().decoration('underline').relativePosition(410, 180).end)
@@ -287,10 +343,40 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
     pdf.add(new Txt(firstFirma).alignment('left').relativePosition(0, 550).end)
     pdf.add(new Txt(secondFirma).alignment('right').relativePosition(0, 590).end)
 
+=======
+    pdf.add(new Txt('Partida presupuestaria individual: ').alignment('left').relativePosition(230, 180).end)
+    pdf.add(new Txt(partida).bold().decoration('underline').relativePosition(410, 180).end)
+    pdf.add(new Txt('Título del puesto: ').alignment('left').relativePosition(0, 210).end)
+    pdf.add(new Txt(puesto).bold().decoration('underline').relativePosition(100, 210).end)
+    pdf.add(new Txt('Dependencia donde labora: ').alignment('left').relativePosition(0, 240).end)
+    pdf.add(new Txt(workAddress).alignment('justify').bold().fontSize(fontsize).decoration('underline').relativePosition(150, 240).end)
+    pdf.add(new Txt('Periodo o año al que corresponde la autorización: ').alignment('left').relativePosition(0, 270).end)
+    pdf.add(new Txt(laboralPeriodo).bold().decoration('underline').relativePosition(270, 270).end)
+    pdf.add(new Txt(body).alignment('justify').relativePosition(0, 300).end)
+    pdf.add(new Txt('Inicio: ').alignment('left').relativePosition(5, 400).end)
+    pdf.add(new Txt(`${formatDateToLetter(authorization.startdate).toUpperCase()}`.toUpperCase()).bold().decoration('underline').relativePosition(45, 400).end)
+    pdf.add(new Txt('Finalización: ').alignment('left').relativePosition(215, 400).end)
+    pdf.add(new Txt(`${formatDateToLetter(authorization.enddate).toUpperCase()}`.toUpperCase()).bold().decoration('underline').relativePosition(290, 400).end)
+    pdf.add(new Txt('Reanudación de labores: ').alignment('left').relativePosition(75, 430).end)
+    pdf.add(new Txt(`${formatDateToLetter(authorization.resumework).toUpperCase()}`).bold().decoration('underline').relativePosition(220, 430).end)
+    pdf.add(new Txt('Días por asueto o feriado: ').alignment('left').relativePosition(25, 460).end)
+    pdf.add(new Txt(`${FormatNumberToRender(authorization.holidays, 2, '0')}`).bold().decoration('underline').relativePosition(170, 460).end)
+    pdf.add(new Txt('Total días: ').alignment('left').relativePosition(195, 460).end)
+    pdf.add(new Txt(`${FormatNumberToRender(authorization.total_days, 2, '0')}`).bold().decoration('underline').relativePosition(260, 460).end)
+    pdf.add(new Txt('Días pendientes: ').alignment('left').relativePosition(285, 460).end)
+    pdf.add(new Txt(`${FormatNumberToRender(authorization.pendingdays, 2, '0')}`).bold().decoration('underline').relativePosition(380, 460).end)
+    pdf.add(new Txt('OBSERVACIÓN: ').bold().alignment('left').relativePosition(0, 490).end)
+    pdf.add(new Txt(`${observation || ''}`).alignment('justify').relativePosition(0, 505).end)
+    pdf.add(new Txt(firstFirma).alignment('left').relativePosition(0, 550).end)
+    pdf.add(new Txt(secondFirma).alignment('right').relativePosition(0, 590).end)
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256
     */
 
 
     return pdf;
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 47a8131b5ac0b05a625a5d6c6f324fc09456e256

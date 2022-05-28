@@ -44,8 +44,14 @@ import { JobsComponent } from './components/shared/render/jobs/jobs.component';
 import { UsersComponent } from './components/users/users.component';
 import { Jwtheader } from './guards/jwtheader.interceptor';
 import { Statuserror } from './guards/statuserror.interceptor';
-import { RecordComponent } from './components/newviews/record/record.component';
+import { RequestsComponent } from './components/newviews/requests/requests.component';
 import { MatSortModule } from '@angular/material/sort';
+import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
+import { MatRadioModule } from '@angular/material/radio';
+import { HistoryComponent } from './components/newviews/history/history.component';
+import { UsermodalComponent } from './components/partials/usermodal/usermodal.component';
+import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
+import { PermissionComponent } from './components/partials/permission/permission.component';
 
 @NgModule({
   exports: [
@@ -87,7 +93,19 @@ import { MatSortModule } from '@angular/material/sort';
 
     ConstancyComponent,
 
-    RecordComponent
+    RequestsComponent,
+
+    HistoryComponent,
+
+    CurriculumComponent,
+
+    UsermodalComponent,
+
+    PermissionauthComponent,
+
+    PermissionComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -120,6 +138,11 @@ import { MatSortModule } from '@angular/material/sort';
     AppRoutingModule,
 
     MatSortModule,
+
+    MatSortModule,
+
+    MatRadioModule,
+
   ],
   entryComponents: [
     DocumentComponent,
@@ -129,6 +152,7 @@ import { MatSortModule } from '@angular/material/sort';
     VacationrequestComponent,
     UploadavatarComponent,
     ConstancyComponent,
+    UsermodalComponent,
     ConfigurationauthorizationfileComponent
   ],
   providers: [

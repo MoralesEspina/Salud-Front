@@ -21,11 +21,13 @@ export class NavbarComponent implements OnInit {
 
   isClicked: boolean = true;
   isClickedReportes: boolean = true;
+  isClickedSolicitudes: boolean = true;
+
   constructor(
     private userService: UserService,
     private router: Router,
     private avatar: AvatarsService,
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
     private localService: LocalService) { }
 
   ngOnInit() {

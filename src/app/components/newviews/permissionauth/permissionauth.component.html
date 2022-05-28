@@ -27,9 +27,8 @@
             <th>NOMBRE COMPLETO</th>
             <th>CÓDIGO</th>
             <th>EMITIDO</th>
-            <th>EDITAR</th>
+            <th>ACEPTAR</th>
             <th>IMPRIMIR</th>
-            <th *ngIf="user.rol === 'admin'">BORRAR</th>
           </tr>
         </thead>
         <tbody>
@@ -42,9 +41,9 @@
             <td>{{rv.submitted_at}}</td>
 
             <td style="width: 10px;">
-              <div class="rounded-full cursor-pointer" (click)="UpdateRequestVacation(rv.uuid_request_vacation)">
+              <div class="rounded-full cursor-pointer" (click)="CreateAuthorizationDialog(rv.uuid_request_vacation)">
                 <div class="justify-center text-center ">
-                  <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+                  <i class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
                 </div>
               </div>
             </td>
@@ -57,13 +56,7 @@
               </div>
             </td>
 
-            <td style="width: 10px;" *ngIf="user.rol == 'admin'">
-              <div class="rounded-full cursor-pointer" (click)="DeleteRequest(rv.uuid_request_vacation)">
-                <div class="justify-center text-center ">
-                  <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
-                </div>
-              </div>
-            </td>
+
           </tr>
         </tbody>
       </table>

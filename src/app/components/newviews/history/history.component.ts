@@ -24,12 +24,12 @@ PdfMakeWrapper.setFonts(pdfFonts, {
 
 
 @Component({
-  selector: 'app-record',
-  templateUrl: './record.component.html',
-  styleUrls: ['./record.component.scss']
+  selector: 'app-history',
+  templateUrl: './history.component.html',
+  styleUrls: ['./history.component.scss']
 })
-export class RecordComponent implements OnInit {
 
+export class HistoryComponent implements OnInit {
 
   displayedColumns: string[] = ['register', 'dateemmited', 'fullname', 'cui', 'ACCIONES'];
   authorizations: IAuthorization[] = []
@@ -65,11 +65,11 @@ export class RecordComponent implements OnInit {
   }
 
   manyAuthorization() {
-    this.authorizationService.ManyAuthorization()
+   /*this.authorizationService.ManyAuthorization()
       .subscribe(data => {
         this.authorizations = data['data']
         // this.dataSource = new MatTableDataSource(this.authorization);
-      }, err => console.log(err))
+      }, err => console.log(err))*/
   }
 
 
@@ -121,12 +121,5 @@ export class FilterPipe implements PipeTransform {
     });
   }
 }
-
-
-
-
-
-
-
 
 

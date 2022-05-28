@@ -3,6 +3,8 @@ import { IPerson } from 'src/app/models/person.model';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { PersonService } from 'src/app/services/person.service';
 import { Constancy } from 'src/app/utils/reports/Constancy';
+import { environment } from 'src/environments/environment.prod';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-constancy',
@@ -18,29 +20,65 @@ export class ConstancyComponent implements OnInit {
 
   ngOnInit() {
   }
-
   PrintConstancy(uuidPerson) {
-    this.personService.OnePerson(uuidPerson)
-      .subscribe(async data => {
-        let person = new IPerson();
-        person = data['data']
-        this.constancyService.GetConfigurationFile('constancy')
-          .subscribe(async configuration => {
-            await Constancy(person, configuration['data']).then(
-              pdf => {
-                pdf.create().print()
-              }
-            )
-          }, async err => {
-            console.log(err)
-            await Constancy(person, null).then(
-              pdf => {
-                pdf.create().print()
-              }
-            )
-          })
+    Swal.fire({
+      title: 'Desea Agregar el Salario',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'No',
+      confirmButtonText: 'Si, Agregar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        environment.viewSalary=true
+        this.personService.OnePerson(uuidPerson)
+        .subscribe(async data => {
+          let person = new IPerson();
+          person = data['data']
+          this.constancyService.GetConfigurationFile('constancy')
+            .subscribe(async configuration => {
+              await Constancy(person, configuration['data']).then(
+                pdf => {
+                  pdf.create().print()
+                }
+              )
+            }, async err => {
+              console.log(err)
+              await Constancy(person, null).then(
+                pdf => {
+                  pdf.create().print()
+                }
+              )
+            })
 
-      })
+        })
+      }else{
+        environment.viewSalary=false
+        this.personService.OnePerson(uuidPerson)
+        .subscribe(async data => {
+          let person = new IPerson();
+          person = data['data']
+          this.constancyService.GetConfigurationFile('constancy')
+            .subscribe(async configuration => {
+              await Constancy(person, configuration['data']).then(
+                pdf => {
+                  pdf.create().print()
+                }
+              )
+            }, async err => {
+              console.log(err)
+              await Constancy(person, null).then(
+                pdf => {
+                  pdf.create().print()
+                }
+              )
+            })
+
+        })
+      }
+    })
+
 
   }
 

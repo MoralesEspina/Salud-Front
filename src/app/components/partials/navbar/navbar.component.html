@@ -156,7 +156,17 @@
         </span>
       </a>
     </li>
+    <li class="has-subnav" *ngIf="user.rol === 'admin'">
+      <a routerLink="/principal">
+        <i class="fa fa-users fa-2x"></i>
+        <span class="nav-text">
+          Principal
+        </span>
+      </a>
+    </li>
   </ul>
+
+
 
     <ul class="logout">
         <li *ngIf="user.rol == 'admin'">

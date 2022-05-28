@@ -125,7 +125,6 @@ export class CurriculumComponent {
     this.loadEducation();
     this.loadRefFam();
     this.loadRefPer();
-
   }
 
   loadCurriculum() {

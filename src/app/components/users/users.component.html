@@ -63,7 +63,7 @@
                 <mat-form-field appearance="outline" class="w-full">
                   <mat-label>Persona</mat-label>
                   <mat-select formControlName='uuidPerson'>
-                    <input type="text" class="p-2" autocomplete="off" matInput placeholder="buscar por nombre"
+                    <input type="text" class="p-2" autocomplete="off" matInput placeholder="Buscar por Nombre"
                       #multiUserSearch (input)="onInputChange()">
                     <mat-option *ngFor="let persona of persons" [value]="persona.uuid">
                       {{persona.fullname}}

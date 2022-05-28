@@ -1,4 +1,4 @@
-export class Education{
+export class EducationI{
   uuid: string;
   uuidPerson: string;
   country: string;

@@ -1,4 +1,5 @@
-import { Education } from './../models/personEducation.model';
+import { ReferenceI } from 'src/app/models/references.model';
+import { EducationI } from './../models/personEducation.model';
 import { CurriculumDataI } from '../models/curriculum.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -16,17 +17,38 @@ export class CurriculumService {
     private http: HttpClient
   ) { }
 
+  createPersonEducation(form:EducationI){
+    return this.http.post(`${environment.URL}/personEducation`,form);
+  }
+
+  createRef(form:ReferenceI){
+    return this.http.post(`${environment.URL}/references/refFam`,form);
+  }
+
+  createWorkExp(form:ExperienceI){
+    return this.http.post(`${environment.URL}/workExp`,form);
+  }
+
   GetCurriculum(uuid: any):Observable<CurriculumDataI[]> {
     return this.http.get<CurriculumDataI[]>(`${environment.URL}/curriculums/${uuid}`)
   }
 
-  GetEducation(uuid: any):Observable<Education[]> {
-    return this.http.get<Education[]>(`${environment.URL}/personEducation/${uuid}`)
+  GetEducation(uuid: any):Observable<EducationI[]> {
+    return this.http.get<EducationI[]>(`${environment.URL}/personEducation/${uuid}`)
   }
 
   GetExperience(uuid: any):Observable<ExperienceI[]> {
     return this.http.get<ExperienceI[]>(`${environment.URL}/workExp/${uuid}`)
   }
+
+  GetRefFam(uuid: any):Observable<ReferenceI[]> {
+    return this.http.get<ReferenceI[]>(`${environment.URL}/references/refFam/${uuid}`)
+  }
+
+  GetRefPer(uuid: any):Observable<ReferenceI[]> {
+    return this.http.get<ReferenceI[]>(`${environment.URL}/references/refPer/${uuid}`)
+  }
+
 
 
 }

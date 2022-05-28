@@ -1,4 +1,4 @@
-import { Education } from './../../../models/personEducation.model';
+import { EducationI } from './../../../models/personEducation.model';
 import { ExperienceI } from './../../../models/experience.model';
 import { CurriculumService } from './../../../services/curriculum.service';
 import { UserService } from 'src/app/services/user.service';
@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { CurriculumDataI } from 'src/app/models/curriculum.model';
+import { ReferenceI } from 'src/app/models/references.model';
 
 export interface Family {
   name: string;
@@ -51,20 +52,18 @@ export class CurriculumComponent {
     'ABUELO','ABUELA','PADRE','MADRE','HERMANO','HERMANA','HIJO','HIJA','TIO','TIA','PRIMO','PRIMA','TIO','SOBRINO','SOBRINA'
   ];
 
-  addressFormReferences = this.fb.group({
+  addressFormRefPer = this.fb.group({
      //----------Form References----------//
-     nameRF:[null, Validators.required],
-     phoneRF:[null, Validators.required],
+     name:[null, Validators.required],
+     phone:[null, Validators.required],
      relationship:[null, Validators.required],
-     borndate:[null, Validators.required],
      profession:[null, Validators.required],
      company:[null, Validators.required],
-     isFamiliar:[Validators.required],
   });
 
   addressFormPersonEducation = this.fb.group({
     //----------Form PersonEducation----------//
-    countryPE:[null, Validators.required],
+    country:[null, Validators.required],
     establishment:[null, Validators.required],
     periodof:[null, Validators.required],
     periodto:[null, Validators.required],
@@ -76,15 +75,23 @@ export class CurriculumComponent {
   addressFormWorkExperience = this.fb.group({
     //----------Form WorkExperience----------//
     direction:[null, Validators.required],
-    phoneWE:[null, Validators.required],
+    phone:[null, Validators.required],
     reason:[null, Validators.required],
     dateof:[null, Validators.required],
     dateto:[null, Validators.required],
     job:[null, Validators.required],
-    bossName:[null, Validators.required],
+    bossname:[null, Validators.required],
     sector:[null, Validators.required],
     salary:[null, Validators.required],
   });
+
+  addressFormRefFam = this.fb.group({
+     name:[null, Validators.required],
+     phone:[null, Validators.required],
+     relationship:[null, Validators.required],
+     bornDate:[null, Validators.required],
+  });
+
   addressFormCurriculum = this.fb.group({
 
       //----------Form Person----------//
@@ -93,7 +100,7 @@ export class CurriculumComponent {
     email: [null, Validators.required],
     nit: [null, Validators.required],
     dpi: [null, Validators.required],
-    bornDate:[null, Validators.required],
+    borndate:[null, Validators.required],
 
 
     //----------Form Curriculum----------//
@@ -125,13 +132,17 @@ export class CurriculumComponent {
   modelExperience: ExperienceI | undefined;
   tableExperience: ExperienceI[] | undefined;
   modelCurriculum: CurriculumDataI | undefined;
-  modelEducation: Education | undefined;
-  tableEducation: Education[] | undefined;
+  modelEducation: EducationI | undefined;
+  tableEducation: EducationI[] | undefined;
+  tableRefFam: ReferenceI[] | undefined;
+  tableRefPer: ReferenceI[] | undefined;
 
   ngOnInit(): void {
     this.loadExperience();
     this.loadCurriculum();
     this.loadEducation();
+    this.loadRefFam();
+    this.loadRefPer();
 
   }
   onSubmit() {
@@ -144,14 +155,13 @@ export class CurriculumComponent {
       this.curriculumService.GetCurriculum(id_entrada).subscribe(
         data => {
           this.modelCurriculum = data['data'];
-          console.log( this.modelCurriculum)
           this.addressFormCurriculum.setValue({
             'fullname': this.modelCurriculum.fullname,
             'phone': this.modelCurriculum.phone,
             'email': this.modelCurriculum.email,
             'nit': this.modelCurriculum.nit,
             'dpi': this.modelCurriculum.dpi,
-            'bornDate': this.modelCurriculum.bornDate,
+            'borndate': this.modelCurriculum.bornDate,
             'directionCU': this.modelCurriculum.direction,
             'countryCU': this.modelCurriculum.country,
             'homephone': this.modelCurriculum.homephone,
@@ -168,14 +178,8 @@ export class CurriculumComponent {
             'department': this.modelCurriculum.department,
             'igss': this.modelCurriculum.igss,
           });
-        }, error => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: error.error.message,
-          })
-        })
-    }
+        }
+        )}
   }
 
   loadEducation() {
@@ -183,26 +187,9 @@ export class CurriculumComponent {
     if (id_entrada) {
       this.curriculumService.GetEducation(id_entrada).subscribe(
         data => {
-          console.log(this.modelEducation);
           this.tableEducation = data['data'];
-          /*console.log(this.modelExperience)
-          this.addressForm.setValue({
-            'workAddress': this.modelExperience.workAddress,
-            'workPhone': this.modelExperience.workPhone,
-            'reasonForWithdrawal': this.modelExperience.reasonForWithdrawal,
-            'dateOfEmployment': this.modelExperience.dateOfEmployment,
-            'immediateBossName': this.modelExperience.immediateBossName,
-            'sector': this.modelExperience.sector,
-            'salary': this.modelExperience.salary,
-          });*/
-        }, error => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: error.error.message,
-          })
-        })
-    }
+        }
+    )}
   }
 
   loadExperience() {
@@ -211,23 +198,159 @@ export class CurriculumComponent {
       this.curriculumService.GetExperience(id_entrada).subscribe(
         data => {
           this.tableExperience = data['data'];
-          /*console.log(this.modelExperience)
-          this.addressForm.setValue({
-            'workAddress': this.modelExperience.workAddress,
-            'workPhone': this.modelExperience.workPhone,
-            'reasonForWithdrawal': this.modelExperience.reasonForWithdrawal,
-            'dateOfEmployment': this.modelExperience.dateOfEmployment,
-            'immediateBossName': this.modelExperience.immediateBossName,
-            'sector': this.modelExperience.sector,
-            'salary': this.modelExperience.salary,
-          });*/
+        }
+    )}
+  }
+
+  loadRefFam() {
+    let id_entrada = this.userService.userValue.uuidPerson;
+    if (id_entrada) {
+      this.curriculumService.GetRefFam(id_entrada).subscribe(
+        data => {
+          this.tableRefFam = data['data'];
+        }
+    )}
+  }
+
+  loadRefPer() {
+    let id_entrada = this.userService.userValue.uuidPerson;
+    if (id_entrada) {
+      this.curriculumService.GetRefPer(id_entrada).subscribe(
+        data => {
+          this.tableRefPer = data['data'];
+        }
+    )}
+  }
+
+  aggEducation(){
+    let id_entrada = this.userService.userValue.uuidPerson;
+      const education: EducationI = {
+        uuid: '0',
+        uuidPerson: id_entrada,
+        country: this.addressFormPersonEducation.value.country,
+        establishment: this.addressFormPersonEducation.value.establishment,
+        periodof: this.addressFormPersonEducation.value.periodof,
+        periodto: this.addressFormPersonEducation.value.periodto,
+        certificate: this.addressFormPersonEducation.value.certificate,
+        status: this.addressFormPersonEducation.value.status,
+        grade: this.addressFormPersonEducation.value.grade,
+      }
+
+      this.curriculumService.createPersonEducation(education).subscribe(data => {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Cliente Creado con Exito',
+          showConfirmButton: false,
+          timer: 800
+        })
+        setTimeout(location.reload.bind(location),400);
+      }, error => {
+        Swal.fire({
+          icon: 'error',
+          title: 'No se ha podido ingresar el cliente',
+          text: error.message,
+        })
+      });
+    }
+
+    aggRefFam(){
+      let id_entrada = this.userService.userValue.uuidPerson;
+        const refFam: ReferenceI = {
+          uuid:'',
+          uuidPerson: id_entrada,
+          name: this.addressFormRefFam.value.name,
+          phone: this.addressFormRefFam.value.phone,
+          relationship: this.addressFormRefFam.value.relationship,
+          bornDate: this.addressFormRefFam.value.bornDate,
+          profession: null,
+          company: null,
+          isfamiliar: true,
+        }
+        console.log(refFam)
+        this.curriculumService.createRef(refFam).subscribe(data => {
+          console.log(data)
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Cliente Creado con Exito',
+            showConfirmButton: false,
+            timer: 800
+          })
+         setTimeout(location.reload.bind(location),400);
         }, error => {
           Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: error.error.message,
+            title: 'No se ha podido ingresar el cliente',
+            text: error.message,
           })
-        })
-    }
+        });
+      }
+
+      aggRefPer(){
+        let id_entrada = this.userService.userValue.uuidPerson;
+          const refPer: ReferenceI = {
+            uuid:'',
+            uuidPerson: id_entrada,
+            name: this.addressFormRefPer.value.name,
+            phone: this.addressFormRefPer.value.phone,
+            relationship: this.addressFormRefPer.value.relationship,
+            bornDate: null,
+            profession: this.addressFormRefPer.value.profession,
+            company: this.addressFormRefPer.value.company,
+            isfamiliar: false,
+          }
+          console.log(refPer)
+          this.curriculumService.createRef(refPer).subscribe(data => {
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Cliente Creado con Exito',
+              showConfirmButton: false,
+              timer: 800
+            })
+            setTimeout(location.reload.bind(location),400);
+          }, error => {
+            Swal.fire({
+              icon: 'error',
+              title: 'No se ha podido ingresar el cliente',
+              text: error.message,
+            })
+          });
+        }
+
+        aggWorkExp(){
+          let id_entrada = this.userService.userValue.uuidPerson;
+            const workExpr: ExperienceI = {
+              uuid: '0',
+              uuidPerson: id_entrada,
+              direction: this.addressFormWorkExperience.value.direction,
+              phone: this.addressFormWorkExperience.value.phone,
+              reason: this.addressFormWorkExperience.value.reason,
+              dateof: this.addressFormWorkExperience.value.dateof,
+              dateto: this.addressFormWorkExperience.value.dateto,
+              job: this.addressFormWorkExperience.value.job,
+              bossname: this.addressFormWorkExperience.value.bossname,
+              sector: this.addressFormWorkExperience.value.sector,
+              salary: this.addressFormWorkExperience.value.salary,
+            }
+            this.curriculumService.createWorkExp(workExpr).subscribe(data => {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Cliente Creado con Exito',
+                showConfirmButton: false,
+                timer: 800
+              })
+              setTimeout(location.reload.bind(location),200);
+            }, error => {
+              Swal.fire({
+                icon: 'error',
+                title: 'No se ha podido ingresar el cliente',
+                text: error.message,
+              })
+            });
+          }
+
   }
-}
+

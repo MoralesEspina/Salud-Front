@@ -1,3 +1,4 @@
+import { Curriculum } from './../models/curriculum.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -74,5 +75,11 @@ export class UserService {
     var URL = `${environment.URL}/users?page=${page || 1}&limit=${limit || 10}&filter=${filter || ''}`
     return this.http.get(URL)
   }
+
+  crearCurriculum(curriculum: Curriculum) {
+    return this.http.post(`${environment.URL}/curriculums`, JSON.stringify(curriculum))
+  }
+
+
 
 }

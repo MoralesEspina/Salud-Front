@@ -56,7 +56,6 @@ export class UsermodalComponent implements OnInit {
 
       }
       );
-      console.log(this.form);
     }
     this.manyRols();
 
@@ -82,7 +81,7 @@ export class UsermodalComponent implements OnInit {
       if (result.isConfirmed) {
         this.user2 = this.form.value
         this.user2.id_rol = parseInt(`${this.user2.id_rol}`)
-        console.log(this.user2, '3');
+
 
         this.dialogRef.close(this.user2);
       }

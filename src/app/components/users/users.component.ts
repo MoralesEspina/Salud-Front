@@ -153,30 +153,7 @@ export class UsersComponent implements OnInit {
       },
       err => console.log(err)
     )
-     this.userService.crearEducation(this.curriculum)
-     .subscribe(
-      res => {
-        this.curriculum = res[0];
-        console.log(res[0]);
-      },
-      err => console.log(err)
-    )
-     this.userService.crearReferences(this.curriculum)
-     .subscribe(
-      res => {
-        this.curriculum = res[0];
-        console.log(res[0]);
-      },
-      err => console.log(err)
-    )
-     this.userService.crearWorkExp(this.curriculum)
-     .subscribe(
-      res => {
-        this.curriculum = res[0];
-        console.log(res[0]);
-      },
-      err => console.log(err)
-    )
+
   }
 
   getrols() {

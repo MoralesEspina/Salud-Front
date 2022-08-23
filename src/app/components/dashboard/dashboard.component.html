@@ -128,39 +128,41 @@
       </div>
     </div>
   </div>
-  <div div class="mt-8 px-6" *ngIf="user.rol == 'employed'||user.rol == 'boss'">
-    <mat-card class="card ">
-      <div class="row">
-
-        <label>Ver Curriculum</label>
-          <div >
-            <a> <img routerLink="/curriculum"
+  <div class="container" *ngIf="user.rol == 'employed'||user.rol == 'boss'">
+    <mat-card class="card">
+      <div class="contenedor">
+        <div class="row">
+          <div class="caja" align="center">
+            <a>
+              Ver Curriculum
+              <img routerLink="/curriculum"
                 src="https://images.vexels.com/media/users/3/140030/isolated/preview/521136d25b37386f49728b93d2e4e6fa-icono-de-cv.png"
                 alt="Logo" height="40" width="85"></a>
-          </div><br>
-
-          <label>Solicitar Premiso</label>
-          <div (click)="createRequestAuthorizationModal(uuidactual)">
-            <a> <img routerLink="/permisos" src="https://www.centrodediabetes.mx/images/cemudi/solicitud-recibida.png"
-                alt="Logo" height="40" width="85" ></a>
           </div>
-      <br>
+          <div class="caja" align="center" (click)="createRequestAuthorizationModal(uuidactual)">
+            <a>
+              Solicitar Premiso
+              <img routerLink="/permisos" src="https://www.centrodediabetes.mx/images/cemudi/solicitud-recibida.png"
+                alt="Logo" height="40" width="85" align-items="center"></a>
+          </div>
 
-      <label>Historial de Solicitudes</label>
-          <div >
-            <a> <img routerLink="/historial" src="https://cdn-icons-png.flaticon.com/512/3447/3447637.png" alt="Logo"
+          <div class="caja" align="center">
+            <a>
+              Historial de Solicitudes
+              <img routerLink="/historial" src="https://cdn-icons-png.flaticon.com/512/3447/3447637.png" alt="Logo"
                 height="40" width="85"></a>
           </div>
-          <br>
 
-          <label>Imprimir constancia</label>
-            <div >
-              <app-constancy [IDPerson]="uuidactual"></app-constancy>
-            </div>
-
+          <div class="caja" align="center">
+            <a>
+              Imprimir constancia
+                <app-constancy [IDPerson]="uuidactual"></app-constancy>
+            </a>
+          </div>
         </div>
-
-
-
+      </div>
     </mat-card>
+
+
+
   </div>

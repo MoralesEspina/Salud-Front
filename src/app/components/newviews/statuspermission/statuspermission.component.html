@@ -1,0 +1,51 @@
+<app-navbar></app-navbar>
+
+<!--Data object from database-->
+<div class="mt-8 px-6">
+
+  <div class="ml-16 mr-auto">
+    <div class="datagrid overflow-x-auto block">
+      <div align="center" class=" font-bold capitalize" style="margin-bottom: 5PX; font-size: 20px;">
+        Mis Permisos Activos <br>
+      </div>
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>No.</th>
+            <th>EMITIDO</th>
+            <th>FECHA DE PERMISO</th>
+            <th>JEFE INMEDIATO</th>
+            <th>VO.BO.</th>
+            <th>ESTADO</th>
+            <th>DETALLES</th>
+            <th>IMPRIMIR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="width: 180px;">
+            <div class="rounded-full cursor-pointer">
+              <div class="justify-center text-center" [routerLink]="['/solicitudpermiso']">
+                <i class="fas fa-check fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+              </div>
+            </div>
+          </td>
+          <td style="width: 10px;">
+            <div class="rounded-full cursor-pointer">
+              <div class="justify-center text-center ">
+                <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>
+              </div>
+            </div>
+          </td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { environment } from 'src/environments/environment.prod';
 import { IPermission } from '../models/permission';
 
@@ -17,6 +18,11 @@ export class RequestpermissionService {
   getOneRequestPermission(uuid: string) {
     return this.http.get(`${environment.URL}/permission/${uuid}`)
   }
+
+  getPermissions(): Observable<any> {
+    return this.http.get(`${environment.URL}/permission`);
+  }
+
 
   getBossOne(){
     return this.http.get(`${environment.URL}/permission/information/bossone`)

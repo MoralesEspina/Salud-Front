@@ -20,6 +20,7 @@ import { PermissionauthComponent } from './components/newviews/permissionauth/pe
 import { RequestHistoryComponent } from './components/newviews/request-history/request-history.component';
 import { PermissionComponent } from './components/partials/permission/permission.component';
 import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
+import { StatuspermissionComponent } from './components/newviews/statuspermission/statuspermission.component';
 
 
 const routerOptions: ExtraOptions = {
@@ -102,6 +103,11 @@ const routes: Routes = [
     path: 'permisos',
     component: PermissionauthComponent
   },
+  {
+    path: 'estadopermisos',
+    component: StatuspermissionComponent
+  },
+
   {
     path: 'solicitudpermiso',
     component: PermissionReqComponent

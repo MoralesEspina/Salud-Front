@@ -188,6 +188,15 @@
         </span>
       </a>
     </li>
+    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'admin'||user.rol == 'boss2'||user.rol == 'employed'">
+      <a routerLink="/estadopermisos">
+        <i class="fa fa-users fa-2x"></i>
+        <span class="nav-text">
+          Estado de Permisos
+        </span>
+      </a>
+    </li>
+
 
   </ul>
 

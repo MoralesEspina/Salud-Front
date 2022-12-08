@@ -12,17 +12,17 @@
           DIRECCIÓN DE ÁREA DE SALUD DE JALAPA <br>
         </div>
         <div class="row ">
-          <mat-form-field appearance="fill" style="width: 450px; margin-right: 10px;">
+          <mat-form-field appearance="fill" style="width: 520px; margin-right: 10px;">
             <input matInput placeholder="NOMBRE DEL SOLICITANTE" formControlName="fullname" readonly>
           </mat-form-field>
 
-          <mat-form-field appearance="fill" style="width: 100px;">
+          <mat-form-field appearance="fill" style="width: 130px;">
             <mat-label>RENGLON</mat-label>
             <input matInput readonly formControlName="renglon">
           </mat-form-field>
         </div>
-        <div class="row">
-          <mat-form-field appearance="fill" style="width: 350px; margin-right: 10px;">
+        <div class="row" align="center">
+          <mat-form-field appearance="fill" style="width: 400px; ">
             <mat-label>PUESTO QUE DESEMPEÑA</mat-label>
             <input matInput readonly formControlName="job">
           </mat-form-field>
@@ -35,11 +35,8 @@
     <mat-card>
 
       <mat-card-content>
-        <mat-form-field appearance="fill" style="width: 200px; ">
-          <mat-label>FECHA DE AUSENCIA</mat-label>
-          <input matInput type="date" formControlName="permissionDate">
-        </mat-form-field>
-        <mat-form-field appearance="fill" style="width: 560px;">
+
+        <mat-form-field appearance="fill" style="width: 520px;">
           <mat-label>INDIQUE LA RAZÓN DE SU AUSENCIA AL SERVICIO</mat-label>
           <mat-select [disabled]="disableSelect.value" formControlName="motive">
             <mat-option value="one">Permiso (conforme lo establecido en la Ley de Servicio Civil y Pacto
@@ -51,11 +48,15 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 130px; margin-left: 10px;">
+          <mat-label>FECHA DE AUSENCIA</mat-label>
+          <input matInput type="date" formControlName="permissionDate">
+        </mat-form-field>
         <div class="row">
           <p>
             <mat-checkbox [formControl]="disableSelect">OTRO</mat-checkbox>
           </p>
-          <mat-form-field appearance="fill" style="width: 560px;">
+          <mat-form-field appearance="fill" style="width: 660px;">
             <mat-label>INDIQUE LA RAZÓN</mat-label>
             <textarea matInput [disabled]="disableSelect.value == false " formControlName="motive"></textarea>
           </mat-form-field>

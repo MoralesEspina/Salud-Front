@@ -3,10 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  URL: 'https://das-jalapa-system.herokuapp.com/das/v1',
-  URL2: 'https://das-jalapa-system.herokuapp.com',
-  // URL2: 'http://localhost:4000',
-  // URL: 'http://localhost:4000/das/v1',
+  //URL: 'https://das-jalapa-system.herokuapp.com/das/v1',
+  //URL2: 'https://das-jalapa-system.herokuapp.com',
+  URL2: 'http://localhost:4000',
+  URL: 'http://localhost:4000/das/v1',
   URLCustomForms: 'https://das-custom-forms.herokuapp.com',
   viewSalary: false,
   production: false

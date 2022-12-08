@@ -44,8 +44,7 @@
           <div class="flex items-center px-0 sm:px-1 ">
             <button
               class="flex-1 text-xs shadow appearance-none border bg-green-500 text-blue-100 h-10  hover:bg-green-700 rounded-lg actions-width px-2"
-              (click)="CreatePerson()" *ngIf="user.rol == 'admin'">Agrega una
-              persona</button>
+              (click)="CreatePerson()" *ngIf="user.rol == 'admin'">Agrega una persona</button>
           </div>
         </div>
 
@@ -132,31 +131,34 @@
     <mat-card class="card">
       <div class="contenedor">
         <div class="row">
-          <div class="caja" align="center">
+          <div class="caja" align="center"  routerLink="/curriculum" >
             <a>
               Ver Curriculum
               <img routerLink="/curriculum"
                 src="https://images.vexels.com/media/users/3/140030/isolated/preview/521136d25b37386f49728b93d2e4e6fa-icono-de-cv.png"
                 alt="Logo" height="40" width="85"></a>
           </div>
-          <div class="caja" align="center" (click)="createRequestAuthorizationModal(uuidactual)">
+          <!--(click)="createRequestAuthorizationModal(uuidactual)"-->
+          <div class="caja" align="center"(click)="createRequestPermissionModal()" >
+
             <a>
-              Solicitar Premiso
-              <img routerLink="/permisos" src="https://www.centrodediabetes.mx/images/cemudi/solicitud-recibida.png"
+              Solicitar Permiso
+              <img
+                src="https://www.centrodediabetes.mx/images/cemudi/solicitud-recibida.png"
                 alt="Logo" height="40" width="85" align-items="center"></a>
           </div>
 
-          <div class="caja" align="center">
+          <div class="caja" align="center" routerLink="/historial_solicitudes">
             <a>
               Historial de Solicitudes
-              <img routerLink="/historial" src="https://cdn-icons-png.flaticon.com/512/3447/3447637.png" alt="Logo"
+              <img routerLink="/historial_solicitudes" src="https://cdn-icons-png.flaticon.com/512/3447/3447637.png" alt="Logo"
                 height="40" width="85"></a>
           </div>
 
           <div class="caja" align="center">
             <a>
               Imprimir constancia
-                <app-constancy [IDPerson]="uuidactual"></app-constancy>
+                <app-constancy  [IDPerson]="uuidactual"></app-constancy>
             </a>
           </div>
         </div>

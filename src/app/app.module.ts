@@ -57,6 +57,9 @@ import { PermissionComponent } from './components/partials/permission/permission
 import { PermissionrequestComponent } from './components/pdfs/permissionrequest/permissionrequest.component';
 
 import { CurriculumPDFComponent } from './components/shared/actionbuttons/curriculum-pdf/curriculum-pdf.component';
+import { RequestHistoryComponent } from './components/newviews/request-history/request-history.component';
+import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
+
 
 
 @NgModule({
@@ -118,9 +121,11 @@ import { CurriculumPDFComponent } from './components/shared/actionbuttons/curric
 
     CurriculumPDFComponent,
 
-
+    RequestHistoryComponent,
+    PermissionReqComponent,
 
   ],
+
   imports: [
     BrowserModule,
     FormsModule,
@@ -168,9 +173,9 @@ import { CurriculumPDFComponent } from './components/shared/actionbuttons/curric
     ConstancyComponent,
     CurriculumPDFComponent,
     UsermodalComponent,
-    PermissionComponent,
+    PermissionReqComponent,
     PermissionrequestComponent,
-    ConfigurationauthorizationfileComponent
+    ConfigurationauthorizationfileComponent,
   ],
   providers: [
     {
@@ -181,7 +186,8 @@ import { CurriculumPDFComponent } from './components/shared/actionbuttons/curric
     },
     {
       provide: MAT_DATE_LOCALE, useValue: 'en-GB'
-    }
+    },
+
   ],
   bootstrap: [AppComponent],
 

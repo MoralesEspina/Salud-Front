@@ -65,8 +65,18 @@
 
     -->
 
-    <li *ngIf="user.rol == 'employed'||user.rol == 'boss'">
+    <li *ngIf="user.rol == 'boss'">
       <a routerLink="/historial" routerLinkActive="text-yellow-500">
+
+          <i class="fa fa-clock-o fa-2x"></i>
+          <span class="nav-text font-bold ml-3">
+            Historial de solicitudes
+          </span>
+
+      </a>
+    </li>
+    <li *ngIf="user.rol == 'employed'">
+      <a routerLink="/historial_solicitudes" routerLinkActive="text-yellow-500">
 
           <i class="fa fa-clock-o fa-2x"></i>
           <span class="nav-text font-bold ml-3">
@@ -167,6 +177,14 @@
         <i class="fa fa-users fa-2x"></i>
         <span class="nav-text">
           Aceptar Permisos
+        </span>
+      </a>
+    </li>
+    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'admin'||user.rol == 'boss2'||user.rol == 'employed'">
+      <a routerLink="/solicitudpermiso">
+        <i class="fa fa-users fa-2x"></i>
+        <span class="nav-text">
+          Solicitar Permiso
         </span>
       </a>
     </li>

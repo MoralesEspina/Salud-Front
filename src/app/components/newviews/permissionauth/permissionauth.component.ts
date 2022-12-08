@@ -39,45 +39,12 @@ export class PermissionauthComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.userService.userValue;
-    this.GetRequestVacations();
+
   }
 
-  GetRequestVacations() {
-    this.requestVacationService.getRequestVacations()
-      .subscribe(data => {
-        this.requestsVacation = data['data']
-      })
-  }
 
-  DeleteRequest(id: string) {
-    Swal.fire({
-      title: '¿Estás seguro?',
-      text: 'Borrar el registro!',
-      icon: 'warning',
-      showCancelButton: true,
-      cancelButtonColor: '#4299e1',
-      confirmButtonColor: '#f56565',
-      cancelButtonText: "Cancelar",
-      confirmButtonText: 'Si, borrar!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.requestVacationService.DeleteOneRequestVacations(id)
-          .subscribe(data => {
-            this.GetRequestVacations();
-            Swal.fire({
-              icon: 'success',
-              title: `<span class="text-gray-900"> Registro borrado exitosamente </span>`,
-              toast: true,
-              showConfirmButton: false,
-              position: 'top-end',
-              timer: 2000,
-              background: '#ffffff',
-            })
-          }, err => console.log(err))
 
-      }
-    })
-  }
+
 
   printPDF(uuid: string) {
     this.requestVacationService.getOneRequestVacations(uuid)
@@ -94,48 +61,6 @@ export class PermissionauthComponent implements OnInit {
             VacationRequestPDF(this.requestVacation, null);
           })
 
-      })
-  }
-
-  CreateAuthorizationDialog(IPerson: IPerson) {
-    console.log(IPerson);
-    const modalDialog = this.dialog.open(PermissionComponent, {
-      disableClose: true,
-      autoFocus: true,
-      width: '800px',
-      height: '892px',
-      data: {
-        person: IPerson
-      }
-    })
-
-    modalDialog.afterClosed()
-      .subscribe(result => {
-        if (result) {
-          this.authService.createAuthorization(result)
-            .subscribe(data => {
-              if (data['ok']) {
-                this.authService.GetConfigurationFile('authorization')
-                  .subscribe(dataConf => {
-                    CreatePDFVacationAuthorization(data['data'], result.body, dataConf['data'])
-                      .then(pdf => {
-                        pdf.create().print();
-                      })
-                  }, err => console.log(err))
-
-              } else {
-                Swal.fire({
-                  icon: 'error',
-                  title: data['message'],
-                  toast: true,
-                  showConfirmButton: false,
-                  position: 'top-end',
-                  timer: 2000,
-                  background: '#ffffff',
-                })
-              }
-            }, err => { console.log(err) })
-        }
       })
   }
 

@@ -17,6 +17,10 @@ import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
 import { HistoryComponent } from './components/newviews/history/history.component';
 import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
+import { RequestHistoryComponent } from './components/newviews/request-history/request-history.component';
+import { PermissionComponent } from './components/partials/permission/permission.component';
+import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
+
 
 const routerOptions: ExtraOptions = {
   anchorScrolling: "enabled",
@@ -71,6 +75,11 @@ const routes: Routes = [
     component: HistoryComponent
 
   },
+  {
+    path: 'historial_solicitudes',
+    component: RequestHistoryComponent
+
+  },
 
   {
     path: 'solicitudes',
@@ -92,6 +101,10 @@ const routes: Routes = [
   {
     path: 'permisos',
     component: PermissionauthComponent
+  },
+  {
+    path: 'solicitudpermiso',
+    component: PermissionReqComponent
   },
 
   {

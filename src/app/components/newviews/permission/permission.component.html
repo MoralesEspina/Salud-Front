@@ -1,0 +1,134 @@
+<app-navbar></app-navbar>
+<div class="box">
+
+
+  <form [formGroup]="addressFormPerson">
+    <mat-card>
+
+      <mat-card-content>
+        <div align="center" class=" font-bold capitalize" style="margin-bottom: 20PX; font-size: 20px;">
+          FORMULARIO DE AUSENCIA AL SERVICIO <br>
+          JEFATURA DE PERSONAL <br>
+          DIRECCIÓN DE ÁREA DE SALUD DE JALAPA <br>
+        </div>
+        <div class="row ">
+          <mat-form-field appearance="fill" style="width: 450px; margin-right: 10px;">
+            <input matInput placeholder="NOMBRE DEL SOLICITANTE" formControlName="fullname" readonly>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="width: 100px;">
+            <mat-label>RENGLON</mat-label>
+            <input matInput readonly formControlName="renglon">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="fill" style="width: 350px; margin-right: 10px;">
+            <mat-label>PUESTO QUE DESEMPEÑA</mat-label>
+            <input matInput readonly formControlName="job">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+    </mat-card>
+  </form>
+  <form [formGroup]="addressFormPermission">
+    <mat-card>
+
+      <mat-card-content>
+        <mat-form-field appearance="fill" style="width: 200px; ">
+          <mat-label>FECHA DE AUSENCIA</mat-label>
+          <input matInput type="date" formControlName="permissionDate">
+        </mat-form-field>
+        <mat-form-field appearance="fill" style="width: 560px;">
+          <mat-label>INDIQUE LA RAZÓN DE SU AUSENCIA AL SERVICIO</mat-label>
+          <mat-select [disabled]="disableSelect.value" formControlName="motive">
+            <mat-option value="one">Permiso (conforme lo establecido en la Ley de Servicio Civil y Pacto
+              Colectivo)
+            </mat-option>
+            <mat-option value="Reposición de tiempo extra laborado">Reposición de tiempo extra laborado</mat-option>
+            <mat-option value="Asueto por cumpleaños">Asueto por cumpleaños</mat-option>
+            <mat-option value="No marcaje de huella por cumplimiento de actividades o comisiones">No marcaje de huella por cumplimiento de actividades o comisiones
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="row">
+          <p>
+            <mat-checkbox [formControl]="disableSelect">OTRO</mat-checkbox>
+          </p>
+          <mat-form-field appearance="fill" style="width: 560px;">
+            <mat-label>INDIQUE LA RAZÓN</mat-label>
+            <textarea matInput [disabled]="disableSelect.value == false " formControlName="motive"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <div align="center" class=" font-bold capitalize" style="margin-bottom: 20PX;">
+            DOCUMENTACIÓN QUE ADJUNTA PARA EVIDENCIAR LA AUSENCIA AL SERVICIO:
+          </div>
+        </div>
+
+        <div class="row">
+          <div align="center">
+            <form name="formulario" method="post" action="/send.php" enctype="multipart/form-data">
+              <button mat-raised-button type="button" class="btn mb-5 btn-primary" aria-haspopup="true"
+                aria-expanded="false" style="width: 200px;">
+                Adjuntar Archivo:
+                <i class="fas fa-paperclip fa-2x" type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple></i>
+              </button>
+            </form>
+            <form name="formulario" method="post" action="/send.php" enctype="multipart/form-data">
+              <!-- ¡No olvides el enctype! -->
+              <!-- Campo de selección de archivo -->
+              <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
+            </form>
+
+          </div>
+        </div>
+        <div class="row" *ngIf="editing==true">
+          <div align="left" class=" font-bold capitalize">
+            SI LA SOLICITUD DE AUSENCIA DEL SERVICIO NO AMERITA SER APROBADA,<br> ESPECIFICAR LOS MOTIVOS:
+          </div>
+          <mat-form-field appearance="fill" style="width: 560px;">
+            <mat-label>ESPECIFIQUE LOS MOTIVOS:</mat-label>
+            <textarea matInput></textarea>
+          </mat-form-field>
+        </div>
+        <div align="center" class="row">
+          <mat-form-field appearance="fill" style="width: 260px; margin-right: 10px;">
+            <mat-label>JEFE INMEDIATO</mat-label>
+            <mat-select formControlName="bossOne">
+              <mat-option value="" disabled>Seleccionar</mat-option>
+              <mat-option value="{{item.uuid}}" *ngFor="let item of bossOneList">{{item.fullname}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" style="width: 260px;">
+            <mat-label>JEFE VO.BO.</mat-label>
+            <mat-select formControlName="bossTwo">
+              <mat-option value="" disabled>Seleccionar</mat-option>
+              <mat-option value="{{item.uuid}}" *ngFor="let item of bossTwoList">{{item.fullname}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div align="center" class="row">
+          <button type="submit" mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="createNewPermission()">Solicitar</button>
+        </div>
+        <div align="center" class="row" *ngIf="editing==true">
+          <button mat-raised-button color="primary" style="margin-right: 10px; margin-bottom: 10px">Aceptar</button>
+          <button mat-raised-button color="primary">Denegar</button>
+        </div>
+        <div align="center" class="row" *ngIf="editing==true||status1==true ">
+          <button mat-raised-button color="primary" style="margin-right: 10px;">Aceptar VO.BO.</button>
+          <button mat-raised-button color="primary">Denegar VO.BO.</button>
+        </div>
+        <div align="center" class="row">
+          <button mat-raised-button color="primary" style="margin-top: 10px;">Imprimir</button>
+        </div>
+
+      </mat-card-content>
+
+    </mat-card>
+  </form>
+
+
+</div>

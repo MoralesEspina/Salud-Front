@@ -19,10 +19,14 @@ export class RequestpermissionService {
     return this.http.get(`${environment.URL}/permission/${uuid}`)
   }
 
-  getPermissions(): Observable<any> {
-    return this.http.get(`${environment.URL}/permission`);
+  getPermissionsBossOne(uuid: any): Observable<any> {
+    return this.http.get(`${environment.URL}/permission/table/bossone/${uuid}`);
   }
 
+
+  getPermissionsBossTwo(uuid: any): Observable<any> {
+    return this.http.get(`${environment.URL}/permission/table/bosstwo/${uuid}`);
+  }
 
   getBossOne(){
     return this.http.get(`${environment.URL}/permission/information/bossone`)

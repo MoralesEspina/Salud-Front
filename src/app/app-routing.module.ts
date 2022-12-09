@@ -29,32 +29,16 @@ const routerOptions: ExtraOptions = {
 }
 
 const routes: Routes = [
-  {
-    path: '',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'reportes',
-    component: AuthorizationComponent ,
-    canActivate: [AuthGuard],
-    data: {roles: [Role.admin]}
-  },
-  {
-    path: 'requests',
-    component: RequestsComponent ,
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: "registros",
-    component: GridauthorizationsComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Role.admin]}
-  },
+  {path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+
+  {path: 'reportes', component: AuthorizationComponent , canActivate: [AuthGuard], data: {roles: [Role.admin]} },
+
+  {path: 'requests', component: RequestsComponent , },
+
+  {path: 'dashboard',component: DashboardComponent,canActivate: [AuthGuard] },
+
+  {path: "registros", component: GridauthorizationsComponent, canActivate: [AuthGuard], data: {roles: [Role.admin]} },
+
   {
     path: 'login',
     component: LoginComponent
@@ -112,7 +96,10 @@ const routes: Routes = [
     path: 'solicitudpermiso',
     component: PermissionReqComponent
   },
-
+  {
+    path: 'solicitudpermiso/edit/:id',
+    component: PermissionReqComponent
+  },
   {
     path: 'principal',
     component: PrincipalComponent

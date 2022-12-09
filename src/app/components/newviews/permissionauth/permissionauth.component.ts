@@ -28,6 +28,7 @@ export class PermissionauthComponent implements OnInit {
   user = new Claims();
   search: string;
   public permissionreq;
+  uuid: string = this.userService.userValue.uuidPerson;
 
   constructor(
     private requestVacationService: RequestVacationService,
@@ -47,7 +48,8 @@ export class PermissionauthComponent implements OnInit {
 
 
   getPermissions(){
-    this._permission.getPermissions().subscribe(
+    let id_entrada = this.userService.userValue.uuidPerson;
+    this._permission.getPermissionsBossOne(id_entrada).subscribe(
       response =>{
         console.log(response)
         this.permissionreq = response.data;

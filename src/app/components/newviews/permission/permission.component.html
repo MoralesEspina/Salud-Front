@@ -56,10 +56,12 @@
           <p>
             <mat-checkbox [formControl]="disableSelect">OTRO</mat-checkbox>
           </p>
-          <mat-form-field appearance="fill" style="width: 660px;">
+          <div >
+          <mat-form-field appearance="fill" style="width: 660px;" >
             <mat-label>INDIQUE LA RAZÓN</mat-label>
-            <textarea matInput [disabled]="disableSelect.value == false " formControlName="motive"></textarea>
+            <textarea matInput [readonly]="disableSelect.value == false" formControlName="motive"></textarea>
           </mat-form-field>
+        </div>
         </div>
         <div class="row">
           <div align="center" class=" font-bold capitalize" style="margin-bottom: 20PX;">

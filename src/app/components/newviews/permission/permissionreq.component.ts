@@ -6,7 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { IPerson } from 'src/app/models/person.model';
 import { nameperson } from 'src/app/models/namepreson.model';
 import { IPermission } from 'src/app/models/permission';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   templateUrl: './permission.component.html',
@@ -15,13 +15,15 @@ import { Router } from '@angular/router';
 export class PermissionReqComponent implements OnInit {
   disableSelect = new FormControl(false);
   editing: boolean;
+  public id_entrada;
   public status1: boolean = false;
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
-  public permission;
+  public permission: IPermission;
   public bossOneList;
   public bossTwoList;
-  private _router:Router;
+  private _router: Router;
+  public data_response;
 
   addressFormPerson = this.fb.group({
     fullname: [null, Validators.required],
@@ -46,6 +48,7 @@ export class PermissionReqComponent implements OnInit {
     private userService: UserService,
     private personService: PersonService,
     private fb: FormBuilder,
+    private router: ActivatedRoute,
     private _permission: RequestpermissionService,
   ) {
 
@@ -54,20 +57,22 @@ export class PermissionReqComponent implements OnInit {
   modelPerson: IPerson | undefined;
   uuid: string = this.userService.userValue.uuidPerson;
 
-  @ViewChild('multiUserSearch',{static: false}) multiUserSearchInput: ElementRef;
+  @ViewChild('multiUserSearch', { static: false }) multiUserSearchInput: ElementRef;
 
   ngOnInit(): void {
+    this.id_entrada = this.router.snapshot.params['id'];
+
     this.loadPerson();
     this.getBossTwo();
     this.getBossOne();
+    this.loadPermission();
   }
 
   loadPerson() {
-    let id_entrada = this.userService.userValue.uuidPerson;
-    if (id_entrada) {
-      this.personService.OnePerson(id_entrada).subscribe(
+    this.id_entrada = this.userService.userValue.uuidPerson;
+    if (!this.id_entrada) {
+      this.personService.OnePerson(this.id_entrada).subscribe(
         data => {
-
           this.modelPerson = data['data'];
           this.addressFormPerson.setValue({
             'fullname': this.modelPerson.fullname,
@@ -80,10 +85,9 @@ export class PermissionReqComponent implements OnInit {
     }
   }
 
-  onInputChange(){
-
+  onInputChange() {
     const searchInput = this.multiUserSearchInput.nativeElement.value ?
-    this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
+      this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
     this.persons = this._persons.filter(u => {
       const name: string = u.fullname.toLowerCase();
       return name.indexOf(searchInput) > -1;
@@ -105,6 +109,7 @@ export class PermissionReqComponent implements OnInit {
       status: "",
 
     }
+<<<<<<< HEAD
       console.log(permission)
       this._permission.createRequestPermissionService(permission).subscribe(
         data => {
@@ -113,6 +118,11 @@ export class PermissionReqComponent implements OnInit {
           console.log(error)
         }
       );
+=======
+    this._permission.createRequestPermissionService(permission).subscribe(
+      data => { }
+    );
+>>>>>>> 6344b761ef0fa57b74c64a71957c76b6e71934ab
 
 
   }
@@ -120,8 +130,8 @@ export class PermissionReqComponent implements OnInit {
   getBossOne() {
     this._permission.getBossOne().subscribe(
       response => {
-        console.log(response['data'])
-        this.bossOneList = response['data'] ;
+
+        this.bossOneList = response['data'];
       }, error => {
       }
     )
@@ -130,9 +140,34 @@ export class PermissionReqComponent implements OnInit {
   getBossTwo() {
     this._permission.getBossTwo().subscribe(
       response => {
-        this.bossTwoList = response['data'] ;
+        this.bossTwoList = response['data'];
       }, error => {
       }
     )
   }
+
+
+  loadPermission() {
+    this.id_entrada = this.router.snapshot.params['id'];
+    if (this.id_entrada) {
+      this.editing = true
+      this._permission.getOneRequestPermission(this.id_entrada).subscribe(
+        data => {
+          this.permission = data['data'];
+          console.log(this.permission);
+          this.addressFormPermission.setValue({
+            'uuidPerson': this.permission.uuidPerson,
+            'permissionDate': this.permission.permissionDate,
+            'motive': this.permission.motive,
+            'bossOne': this.permission.bossOne,
+            'bossTwo': this.permission.bossTwo,
+            'reason': this.permission.reason,
+
+          });
+        }
+      )
+    }else{this.editing = false}
+  }
+
+
 }

@@ -59,6 +59,7 @@ import { PermissionrequestComponent } from './components/pdfs/permissionrequest/
 import { CurriculumPDFComponent } from './components/shared/actionbuttons/curriculum-pdf/curriculum-pdf.component';
 import { RequestHistoryComponent } from './components/newviews/request-history/request-history.component';
 import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
+import { StatuspermissionComponent } from './components/newviews/statuspermission/statuspermission.component';
 
 
 
@@ -123,6 +124,7 @@ import { PermissionReqComponent } from './components/newviews/permission/permiss
 
     RequestHistoryComponent,
     PermissionReqComponent,
+    StatuspermissionComponent,
 
   ],
 

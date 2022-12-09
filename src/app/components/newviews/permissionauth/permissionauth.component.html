@@ -16,36 +16,30 @@
             <th>No.</th>
             <th>EMITIDO</th>
             <th>SOLICITANTE</th>
-            <th>CÓDIGO</th>
             <th>FECHA DE PERMISO</th>
             <th>ACEPTAR / DENEGAR</th>
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody>
-          <tr  >
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td ></td>
-            <td style="width: 180px;">
-              <div class="rounded-full cursor-pointer" >
-                <div class="justify-center text-center" [routerLink]="['/solicitudpermiso']" >
-                  <i class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
-                </div>
+        <tbody *ngFor="let item of permissionreq; let indexof = index;">
+          <td>{{indexof + 1}}</td>
+          <td>{{item.submittedAt}}</td>
+          <td>{{item.person.fullname}}</td>
+          <td>{{item.permissionDate}}</td>
+          <td style="width: 180px;">
+            <div class="rounded-full cursor-pointer">
+              <div class="justify-center text-center" [routerLink]="['solicitudpermiso/edit/',item.uuid]">
+                <i class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
               </div>
-            </td>
-            <td style="width: 10px;">
-              <div class="rounded-full cursor-pointer" >
-                <div class="justify-center text-center ">
-                  <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>
-                </div>
+            </div>
+          </td>
+          <td style="width: 10px;">
+            <div class="rounded-full cursor-pointer">
+              <div class="justify-center text-center ">
+                <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>
               </div>
-            </td>
-
-
-          </tr>
+            </div>
+          </td>
         </tbody>
       </table>
     </div>
@@ -63,40 +57,33 @@
             <th>EMITIDO</th>
             <th>AUTORIZADO POR</th>
             <th>SOLICITANTE</th>
-            <th>CÓDIGO</th>
             <th>FECHA DE PERMISO</th>
             <th>ACEPTAR / DENEGAR</th>
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td style="width: 180px;">
-              <div class="rounded-full cursor-pointer" >
-                <div class="justify-center text-center " [routerLink]="['/solicitudpermiso']">
-                  <i class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
-                </div>
+        <tbody *ngFor="let item of permissionreq2">
+          <td></td>
+          <td>{{item.submittedAt}}</td>
+          <td>{{item.bossOne.fullname}}</td>
+          <td>{{item.fullname}}</td>
+          <td>{{item.permissionDate}}</td>
+          <td style="width: 180px;">
+            <div class="rounded-full cursor-pointer">
+              <div class="justify-center text-center " [routerLink]="['/solicitudpermiso']">
+                <i class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
               </div>
-            </td>
-            <td style="width: 10px;">
-              <div class="rounded-full cursor-pointer" >
-                <div class="justify-center text-center ">
-                  <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>
-                </div>
+            </div>
+          </td>
+          <td style="width: 10px;">
+            <div class="rounded-full cursor-pointer">
+              <div class="justify-center text-center ">
+                <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>
               </div>
-            </td>
-
-
-          </tr>
+            </div>
+          </td>
         </tbody>
       </table>
     </div>
   </div>
 </div>
-

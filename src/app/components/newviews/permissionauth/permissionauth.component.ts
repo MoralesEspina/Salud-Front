@@ -13,6 +13,7 @@ import pdfFonts from 'src/app/fonts/custom/times-new-roman.js';
 import { DocumentComponent } from '../../partials/document/document.component';
 import { CreatePDFVacationAuthorization } from 'src/app/utils/reports/VacationAuthorization';
 import { PermissionComponent } from '../../partials/permission/permission.component';
+import { RequestpermissionService } from 'src/app/services/request-permission.service';
 
 @Component({
   selector: 'app-permissionauth',
@@ -26,24 +27,37 @@ export class PermissionauthComponent implements OnInit {
   requestVacation: RequestVacation;
   user = new Claims();
   search: string;
+  public permissionreq;
+  uuid: string = this.userService.userValue.uuidPerson;
 
   constructor(
     private requestVacationService: RequestVacationService,
     private authService: AuthorizationService,
     private configuration: AuthorizationService,
     private userService: UserService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private _permission: RequestpermissionService,
   ) {
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
   }
 
   ngOnInit() {
     this.user = this.userService.userValue;
-
+    this.getPermissions();
   }
 
 
+  getPermissions(){
+    let id_entrada = this.userService.userValue.uuidPerson;
+    this._permission.getPermissionsBossOne(id_entrada).subscribe(
+      response =>{
+        console.log(response)
+        this.permissionreq = response.data;
+      }, error =>{
 
+      }
+    )
+  }
 
 
   printPDF(uuid: string) {

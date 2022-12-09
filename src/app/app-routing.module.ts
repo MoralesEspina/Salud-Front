@@ -20,6 +20,7 @@ import { PermissionauthComponent } from './components/newviews/permissionauth/pe
 import { RequestHistoryComponent } from './components/newviews/request-history/request-history.component';
 import { PermissionComponent } from './components/partials/permission/permission.component';
 import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
+import { StatuspermissionComponent } from './components/newviews/statuspermission/statuspermission.component';
 
 
 const routerOptions: ExtraOptions = {
@@ -28,32 +29,16 @@ const routerOptions: ExtraOptions = {
 }
 
 const routes: Routes = [
-  {
-    path: '',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'reportes',
-    component: AuthorizationComponent ,
-    canActivate: [AuthGuard],
-    data: {roles: [Role.admin]}
-  },
-  {
-    path: 'requests',
-    component: RequestsComponent ,
-  },
-  {
-    path: 'dashboard',
-    component: DashboardComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: "registros",
-    component: GridauthorizationsComponent,
-    canActivate: [AuthGuard],
-    data: {roles: [Role.admin]}
-  },
+  {path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+
+  {path: 'reportes', component: AuthorizationComponent , canActivate: [AuthGuard], data: {roles: [Role.admin]} },
+
+  {path: 'requests', component: RequestsComponent , },
+
+  {path: 'dashboard',component: DashboardComponent,canActivate: [AuthGuard] },
+
+  {path: "registros", component: GridauthorizationsComponent, canActivate: [AuthGuard], data: {roles: [Role.admin]} },
+
   {
     path: 'login',
     component: LoginComponent
@@ -103,10 +88,18 @@ const routes: Routes = [
     component: PermissionauthComponent
   },
   {
+    path: 'estadopermisos',
+    component: StatuspermissionComponent
+  },
+
+  {
     path: 'solicitudpermiso',
     component: PermissionReqComponent
   },
-
+  {
+    path: 'solicitudpermiso/edit/:id',
+    component: PermissionReqComponent
+  },
   {
     path: 'principal',
     component: PrincipalComponent

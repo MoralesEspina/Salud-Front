@@ -1,8 +1,10 @@
+import { RequestpermissionService } from './../../services/request-permission.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { PdfMakeWrapper } from 'pdfmake-wrapper';
 import { IAuthorization } from 'src/app/models/authorization';
 import { Claims } from 'src/app/models/claims.model';
+import { IPermission } from 'src/app/models/permission.js';
 import { IPerson } from 'src/app/models/person.model';
 import { RequestVacation } from 'src/app/models/requestVacation.models';
 import { AuthorizationService } from 'src/app/services/authorization.service';
@@ -17,8 +19,10 @@ import Swal from 'sweetalert2';
 import pdfFonts from '../../fonts/fonts/fonts.js';
 import { ConfigurationauthorizationfileComponent } from '../partials/configurationauthorizationfile/configurationauthorizationfile.component';
 import { DocumentComponent } from '../partials/document/document.component';
+import { PermissionComponent } from '../partials/permission/permission.component.js';
 import { PersonmodalComponent } from '../partials/personmodal/personmodal.component';
 import { WorkComponent } from '../partials/work/work.component';
+import { PermissionrequestComponent } from '../pdfs/permissionrequest/permissionrequest.component.js';
 import { VacationrequestComponent } from '../pdfs/vacationrequest/vacationrequest.component';
 
 
@@ -61,7 +65,9 @@ export class DashboardComponent implements OnInit {
     private dialog: MatDialog,
     private changeDetector: ChangeDetectorRef,
     private requestVacService: RequestVacationService,
-    private localService: LocalService
+    private localService: LocalService,
+    private RequestpermissionService: RequestpermissionService,
+    private userService: UserService,
   ) {
     this.localService.getJsonValue('limit');
     this.ManyPersons();
@@ -151,6 +157,7 @@ export class DashboardComponent implements OnInit {
         }
       })
   }
+
 
   createRequestAuthorizationModal(uuidPerson: string) {
     this.personService.OnePerson(uuidPerson).subscribe(data => {
@@ -343,4 +350,8 @@ export class DashboardComponent implements OnInit {
       }
     })
   }
+
+
+
+
 }

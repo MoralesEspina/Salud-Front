@@ -22,11 +22,21 @@ export class RequestpermissionService {
   getPermissionsBossOne(uuid: any): Observable<any> {
     return this.http.get(`${environment.URL}/permission/table/bossone/${uuid}`);
   }
-
-
   getPermissionsBossTwo(uuid: any): Observable<any> {
     return this.http.get(`${environment.URL}/permission/table/bosstwo/${uuid}`);
   }
+
+  getPermissionsUser(uuid: any): Observable<any> {
+    return this.http.get(`${environment.URL}/permission/table/useractive/${uuid}`);
+  }
+  getPermissionsUserHistory(uuid: any): Observable<any> {
+    return this.http.get(`${environment.URL}/permission/table/user/${uuid}`);
+  }
+  updateOneRequestPermission(form:IPermission, uuid: string) {
+    return this.http.put(`${environment.URL}/permission/${uuid}`, form)
+  }
+
+
 
   getBossOne(){
     return this.http.get(`${environment.URL}/permission/information/bossone`)

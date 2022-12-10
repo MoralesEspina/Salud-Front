@@ -13,7 +13,8 @@
         </div>
         <div class="row ">
           <mat-form-field appearance="fill" style="width: 520px; margin-right: 10px;">
-            <input matInput placeholder="NOMBRE DEL SOLICITANTE" formControlName="fullname" readonly>
+            <mat-label>NOMBRE DEL SOLICITANTE</mat-label>
+            <input matInput formControlName="fullname" readonly>
           </mat-form-field>
 
           <mat-form-field appearance="fill" style="width: 130px;">
@@ -32,9 +33,10 @@
     </mat-card>
   </form>
   <form [formGroup]="addressFormPermission">
-    <mat-card>
+    <mat-card style="margin-top: -10px;">
       <mat-card-content>
-        <mat-form-field appearance="fill" style="width: 520px;">
+        <div class="row" align="center">
+        <mat-form-field appearance="fill" style="width: 520px;" *ngIf="editing==false">
           <mat-label>INDIQUE LA RAZÓN DE SU AUSENCIA AL SERVICIO</mat-label>
           <mat-select [disabled]="disableSelect.value" formControlName="motive">
             <mat-option value="Permiso (conforme lo establecido en la Ley de Servicio Civil y Pacto Colectivo)">
@@ -47,16 +49,17 @@
         </mat-form-field>
         <mat-form-field appearance="fill" style="width: 130px; margin-left: 10px;">
           <mat-label>FECHA DE AUSENCIA</mat-label>
-          <input matInput type="date" formControlName="permissionDate">
+          <input matInput type="date" formControlName="permissionDate"  [readonly]="editing == true">
         </mat-form-field>
+      </div>
         <div class="row">
           <p>
-            <mat-checkbox [formControl]="disableSelect">OTRO</mat-checkbox>
+            <mat-checkbox [formControl]="disableSelect" *ngIf="editing==false">OTRO</mat-checkbox>
           </p>
           <div >
-          <mat-form-field appearance="fill" style="width: 660px;" >
+          <mat-form-field appearance="fill" style="width: 660px; margin-top: -20px;" >
             <mat-label>INDIQUE LA RAZÓN</mat-label>
-            <textarea matInput [readonly]="disableSelect.value == false" formControlName="motive"></textarea>
+            <textarea matInput [readonly]="disableSelect.value == false"  [readonly]="editing == true"formControlName="motive"></textarea>
           </mat-form-field>
         </div>
         </div>
@@ -83,19 +86,11 @@
 
           </div>
         </div>
-        <div class="row" *ngIf="statusPermission = Nos">
-          <div align="left" class=" font-bold capitalize">
-            SI LA SOLICITUD DE AUSENCIA DEL SERVICIO NO AMERITA SER APROBADA,<br> ESPECIFICAR LOS MOTIVOS:
-          </div>
-          <mat-form-field appearance="fill" style="width: 560px;">
-            <mat-label>ESPECIFIQUE LOS MOTIVOS:</mat-label>
-            <textarea matInput></textarea>
-          </mat-form-field>
-        </div>
+
         <div align="center" class="row">
-          <mat-form-field appearance="fill" style="width: 260px; margin-right: 10px;">
+          <mat-form-field appearance="fill" style="width: 260px; margin-right: 10px;" >
             <mat-label>JEFE INMEDIATO</mat-label>
-            <mat-select formControlName="bossOne">
+            <mat-select formControlName="bossOne"  [disabled]="editing == true">
               <mat-option value="" disabled>Seleccionar</mat-option>
               <mat-option value="{{item.uuid}}" *ngFor="let item of bossOneList">{{item.fullname}}</mat-option>
             </mat-select>
@@ -103,26 +98,34 @@
 
           <mat-form-field appearance="fill" style="width: 260px;">
             <mat-label>JEFE VO.BO.</mat-label>
-            <mat-select formControlName="bossTwo">
+            <mat-select formControlName="bossTwo"  [disabled]="editing == true">
               <mat-option value="" disabled>Seleccionar</mat-option>
               <mat-option value="{{item.uuid}}" *ngFor="let item of bossTwoList">{{item.fullname}}</mat-option>
             </mat-select>
           </mat-form-field>
-
+          <!-- <div class="row" *ngIf="editing==true">
+            <div align="left" class=" font-bold capitalize" style="margin-left: 5px;margin-top: 20px;">
+              SI LA SOLICITUD DE AUSENCIA DEL SERVICIO NO AMERITA SER APROBADA,<br> ESPECIFICAR LOS MOTIVOS:
+            </div>
+            <mat-form-field appearance="fill" style="width: 660px;">
+              <mat-label>ESPECIFIQUE LOS MOTIVOS:</mat-label>
+              <textarea matInput formControlName="reason"></textarea>
+            </mat-form-field>
+          </div> -->
         </div>
         <div align="center" class="row">
-          <button type="submit" mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="createNewPermission()">Solicitar</button>
+          <button *ngIf="editing==false" type="submit" mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="createNewPermission()">Solicitar</button>
         </div>
-        <div align="center" class="row" *ngIf="editing==true">
-          <button mat-raised-button color="primary" style="margin-right: 10px; margin-bottom: 10px">Aceptar</button>
-          <button mat-raised-button color="primary">Denegar</button>
+        <div align="center" class="row" *ngIf="editing==true && statusbossOne==false">
+          <button mat-raised-button color="primary" style="margin-right: 10px; margin-bottom: 10px" (click)="acceptRequest(addressFormPermission)">Aceptar</button>
+          <button mat-raised-button color="primary" (click)="denyRequest()">Denegar</button>
         </div>
-        <div align="center" class="row" *ngIf="editing==true||status1==true ">
-          <button mat-raised-button color="primary" style="margin-right: 10px;">Aceptar VO.BO.</button>
-          <button mat-raised-button color="primary">Denegar VO.BO.</button>
+        <div align="center" class="row" *ngIf="statusbossOne==true">
+          <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="acceptRequest2(addressFormPermission)">Aceptar VO.BO.</button>
+          <button mat-raised-button color="primary" (click)="denyRequest2()">Denegar VO.BO.</button>
         </div>
         <div align="center" class="row">
-          <button mat-raised-button color="primary" style="margin-top: 10px;">Imprimir</button>
+          <button mat-raised-button color="primary" style="margin-top: 10px;" *ngIf="editing==true">Imprimir</button>
         </div>
 
       </mat-card-content>

@@ -28,6 +28,7 @@ export class PermissionauthComponent implements OnInit {
   user = new Claims();
   search: string;
   public permissionreq;
+  public permissionreq2;
   uuid: string = this.userService.userValue.uuidPerson;
 
   constructor(
@@ -44,6 +45,7 @@ export class PermissionauthComponent implements OnInit {
   ngOnInit() {
     this.user = this.userService.userValue;
     this.getPermissions();
+    this.getPermissions2();
   }
 
 
@@ -51,13 +53,24 @@ export class PermissionauthComponent implements OnInit {
     let id_entrada = this.userService.userValue.uuidPerson;
     this._permission.getPermissionsBossOne(id_entrada).subscribe(
       response =>{
-        console.log(response)
         this.permissionreq = response.data;
       }, error =>{
 
       }
     )
   }
+  getPermissions2(){
+    let id_entrada = this.userService.userValue.uuidPerson;
+    this._permission.getPermissionsBossTwo(id_entrada).subscribe(
+      response =>{
+        console.log(response.data)
+        this.permissionreq2 = response.data;
+      }, error =>{
+
+      }
+    )
+  }
+
 
 
   printPDF(uuid: string) {

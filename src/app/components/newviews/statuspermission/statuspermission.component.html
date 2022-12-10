@@ -6,7 +6,54 @@
   <div class="ml-16 mr-auto">
     <div class="datagrid overflow-x-auto block">
       <div align="center" class=" font-bold capitalize" style="margin-bottom: 5PX; font-size: 20px;">
-        Mis Permisos Activos <br>
+        MIS SOLICITUDES ACTIVAS <br>
+      </div>
+      <table>
+
+        <thead>
+
+          <tr style="text-align: center;">
+            <th>No.</th>
+            <th>EMITIDO</th>
+            <th>FECHA DE PERMISO</th>
+            <th>JEFE INMEDIATO</th>
+            <th>ESTADO</th>
+            <th>VO.BO.</th>
+            <th>ESTADO</th>
+            <th>ESTADO DE SOLICITUD</th>
+            <th>DETALLES</th>
+            <th>IMPRIMIR</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of permissionreq; let indexof = index;" style="text-align: center;">
+          <td>{{indexof + 1}}</td>
+          <td>{{item.submittedAt  | date: 'd MMM y H:mm' | uppercase }}</td>
+          <td>{{item.permissionDate  | date: 'd MMM y ' | uppercase }}</td>
+          <td>{{item.bossOne}}</td>
+          <td>{{item.statusBossOne}} </td>
+          <td>{{item.bossTwo}}</td>
+          <td>{{item.statusBossTwo}}</td>
+          <td>{{item.status}}</td>
+          <td style="width: 50px;">
+            <div class="rounded-full cursor-pointer">
+              <div class="justify-center text-center" [routerLink]="['/solicitudpermiso/edit/',item.uuid]">
+                <i class="fas fa-check fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+              </div>
+            </div>
+          </td>
+          <td style="width: 10px;">
+            <div class="rounded-full cursor-pointer">
+              <div class="justify-center text-center ">
+                <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>
+              </div>
+            </div>
+          </td>
+        </tbody>
+      </table>
+    </div>
+    <div class="datagrid overflow-x-auto block" style="margin-top: 100PX;">
+      <div align="center" class=" font-bold capitalize" style="margin-bottom: 5PX; font-size: 20px;">
+        HISTORIAL DE SOLICITUDES<br>
       </div>
       <table>
 
@@ -16,24 +63,20 @@
             <th>No.</th>
             <th>EMITIDO</th>
             <th>FECHA DE PERMISO</th>
-            <th>JEFE INMEDIATO</th>
-            <th>VO.BO.</th>
             <th>ESTADO</th>
             <th>DETALLES</th>
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td style="width: 180px;">
+        <tbody *ngFor="let item of permissionreq2; let indexof = index;">
+          <td>{{indexof + 1}}</td>
+          <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
+          <td>{{item.permissionDate | date: 'd MMM y' | uppercase }}</td>
+          <td>{{item.status}}</td>
+          <td style="width: 50px;">
             <div class="rounded-full cursor-pointer">
-              <div class="justify-center text-center" [routerLink]="['/solicitudpermiso']">
-                <i class="fas fa-check fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+              <div class="justify-center text-center " [routerLink]="['/solicitudpermiso/edit/',item.uuid]">
+                <i class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
               </div>
             </div>
           </td>

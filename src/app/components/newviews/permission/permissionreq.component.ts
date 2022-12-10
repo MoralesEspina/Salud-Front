@@ -1,12 +1,15 @@
 import { RequestpermissionService } from './../../../services/request-permission.service';
 import { PersonService } from './../../../services/person.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, PipeTransform } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
 import { IPerson } from 'src/app/models/person.model';
 import { nameperson } from 'src/app/models/namepreson.model';
 import { IPermission } from 'src/app/models/permission';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { SweetAlertService } from 'src/app/services/sweetAlert.service';
+import { ErrorsService } from 'src/app/services/errors.service';
 
 @Component({
   templateUrl: './permission.component.html',
@@ -25,6 +28,7 @@ export class PermissionReqComponent implements OnInit {
   public bossTwoList;
   private _router: Router;
   public data_response;
+  statusbossOne: boolean;
 
   addressFormPerson = this.fb.group({
     fullname: [null, Validators.required],
@@ -38,11 +42,13 @@ export class PermissionReqComponent implements OnInit {
     uuidPerson: [null, Validators.required],
     bossOne: [null, Validators.required],
     bossTwo: [null, Validators.required],
-    statusBossOne: [null, Validators.required],
-    statusBossTwo: [null, Validators.required],
-    status: [null, Validators.required],
+    statusBossOne: [null],
+    statusBossTwo: [null],
+    status: [null],
+    reason: [null, Validators.maxLength(99)],
 
   })
+
 
   constructor(
     private userService: UserService,
@@ -50,6 +56,8 @@ export class PermissionReqComponent implements OnInit {
     private fb: FormBuilder,
     private router: ActivatedRoute,
     private _permission: RequestpermissionService,
+    private _sweetAlertService: SweetAlertService,
+    private _errorService: ErrorsService,
   ) {
 
 
@@ -64,22 +72,22 @@ export class PermissionReqComponent implements OnInit {
       this._uuidPerson = this.userService.userValue.uuidPerson;
       this.loadPerson(this._uuidPerson);
     }
-      this.getBossTwo();
-      this.getBossOne();
-      this.loadPermission();
+    this.getBossTwo();
+    this.getBossOne();
+    this.loadPermission();
   }
 
   loadPerson(person) {
-      this.personService.OnePerson(person).subscribe(
-        data => {
-          this.modelPerson = data['data'];
-          this.addressFormPerson.setValue({
-            'fullname': this.modelPerson.fullname,
-            'renglon': this.modelPerson.renglon,
-            'job': this.modelPerson.job.name,
-          });
-        }
-      )
+    this.personService.OnePerson(person).subscribe(
+      data => {
+        this.modelPerson = data['data'];
+        this.addressFormPerson.setValue({
+          'fullname': this.modelPerson.fullname,
+          'renglon': this.modelPerson.renglon,
+          'job': this.modelPerson.job.name,
+        });
+      }
+    )
   }
 
   onInputChange() {
@@ -99,22 +107,18 @@ export class PermissionReqComponent implements OnInit {
       uuidPerson: id_entrada,
       bossOne: this.addressFormPermission.value.bossOne,
       bossTwo: this.addressFormPermission.value.bossTwo,
-      reason: "",
+      reason: "-",
       statusBossOne: "",
       statusBossTwo: "",
       status: "",
     }
-
-    console.log(permission)
     this._permission.createRequestPermissionService(permission).subscribe(
       data => {
-        console.log(data)
+        this._sweetAlertService.createAndUpdate('Se Creo correctamente la solicitud');
+        this._router.navigate(['permisos'])
       }, error => {
         console.log(error)
       }
-    );
-    this._permission.createRequestPermissionService(permission).subscribe(
-      data => { }
     );
   }
 
@@ -137,16 +141,13 @@ export class PermissionReqComponent implements OnInit {
   }
 
   loadPermission() {
-    this.id_entrada = this.router.snapshot.params['id'];
     if (this.id_entrada) {
       this.editing = true
       this._permission.getOneRequestPermission(this.id_entrada).subscribe(
         data => {
           this.permission = data['data'];
-          console.log(this.permission);
           this.loadPerson(this.permission.uuidPerson);
-          this.statusPermission = 'Nos';
-          this.addressFormPermission.setValue({
+          this.addressFormPermission.patchValue({
             'uuidPerson': this.permission.uuidPerson,
             'permissionDate': this.permission.permissionDate,
             'motive': this.permission.motive,
@@ -155,11 +156,164 @@ export class PermissionReqComponent implements OnInit {
             'statusBossOne': '',
             'statusBossTwo': '',
             'status': '',
-          });
+            'reason': this.permission.reason,
+          }
+          );
+          if (this.permission.statusBossOne == 'Aceptada' && this.permission.statusBossTwo == 'En Espera'){
+          this.statusbossOne = true;
+          }else{
+            this.statusbossOne = false;
+          }
         }
       )
     } else { this.editing = false }
   }
+
+
+  async denyRequest() {
+    const { value: text } = await Swal.fire({
+      input: 'textarea',
+      inputLabel: 'Indique el motivo del rechazo:',
+      inputPlaceholder: 'Escribe acá el motivo...',
+      inputAttributes: {
+        'aria-label': 'Type your message here'
+      },
+      showCancelButton: true
+    })
+
+    if (!text) {
+      this._sweetAlertService.warning('Debe ingresar un motivo');
+      return
+    }
+    const deny: IPermission = {
+      'uuidPerson': '',
+      'permissionDate': '',
+      'motive': '',
+      'bossOne': '',
+      'bossTwo': '',
+      'statusBossOne': 'Denegada',
+      'statusBossTwo': 'En Espera',
+      'status': 'Denegada',
+      'reason': text,
+    }
+    this._permission.updateOneRequestPermission(deny, this.id_entrada).subscribe(
+      response => {
+        this._sweetAlertService.createAndUpdate('Se denego correctamente la solicitud');
+        this._router.navigate(['/permisos'])
+        setTimeout(() => {
+          window.location.reload();
+       }, 1000);
+
+      }, error => {
+        console.log(error)
+        this._sweetAlertService.warning('No se pudo denegar la solicitud');
+        this.data_response = error;
+        this._errorService.error(this.data_response);
+      }
+    );
+  }
+
+  acceptRequest(addressFormPermission){
+    const accepted:IPermission = {
+      'uuidPerson': '',
+      'permissionDate': '',
+      'motive': '',
+      'bossOne': '',
+      'bossTwo': '',
+      'statusBossOne': 'Aceptada',
+      'statusBossTwo': 'En Espera',
+      'status': 'En Espera',
+      'reason': '',
+    }
+    if (addressFormPermission.valid) {
+      this._permission.updateOneRequestPermission(accepted, this.id_entrada).subscribe(
+        response => {
+          this._sweetAlertService.createAndUpdate('Se acepto correctamente la solicitud');
+          this._router.navigate(['/permisos'])
+        }, error => {
+          console.log(error)
+          this.data_response = error;
+          this._errorService.error(this.data_response);
+        }
+      );
+    } else {
+      this._sweetAlertService.warning('Complete correctamente el formulario');
+    }
+  }
+
+// ----------------------------- Aceptar/denegar Boss2 --------------------------------------------------
+
+  async denyRequest2() {
+    const { value: text } = await Swal.fire({
+      input: 'textarea',
+      inputLabel: 'Indique el motivo del rechazo:',
+      inputPlaceholder: 'Escribe acá el motivo...',
+      inputAttributes: {
+        'aria-label': 'Type your message here'
+      },
+      showCancelButton: true
+    })
+
+    if (!text) {
+      this._sweetAlertService.warning('Debe ingresar un motivo');
+      return
+    }
+    const deny: IPermission = {
+      'uuidPerson': '',
+      'permissionDate': '',
+      'motive': '',
+      'bossOne': '',
+      'bossTwo': '',
+      'statusBossOne': this.permission.statusBossOne,
+      'statusBossTwo': 'Denegada',
+      'status': 'Denegada',
+      'reason': text,
+    }
+    this._permission.updateOneRequestPermission(deny, this.id_entrada).subscribe(
+      response => {
+        this._sweetAlertService.createAndUpdate('Se denego correctamente la solicitud');
+        this._router.navigate(['/permisos'])
+        setTimeout(() => {
+          window.location.reload();
+       }, 1000);
+
+      }, error => {
+        console.log(error)
+        this._sweetAlertService.warning('No se pudo denegar la solicitud');
+        this.data_response = error;
+        this._errorService.error(this.data_response);
+      }
+    );
+  }
+
+  acceptRequest2(addressFormPermission){
+    const accepted:IPermission = {
+      'uuidPerson': '',
+      'permissionDate': '',
+      'motive': '',
+      'bossOne': '',
+      'bossTwo': '',
+      'statusBossOne': 'Aceptada',
+      'statusBossTwo': 'Aceptada',
+      'status': 'Aceptada',
+      'reason': '',
+    }
+    if (addressFormPermission.valid) {
+      this._permission.updateOneRequestPermission(accepted, this.id_entrada).subscribe(
+        response => {
+          this._sweetAlertService.createAndUpdate('Se acepto correctamente la solicitud');
+          this._router.navigate(['/permisos'])
+        }, error => {
+          console.log(error)
+          this.data_response = error;
+          this._errorService.error(this.data_response);
+        }
+      );
+    } else {
+      this._sweetAlertService.warning('Complete correctamente el formulario');
+    }
+  }
+
 
 
 }

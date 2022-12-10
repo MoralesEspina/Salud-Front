@@ -127,38 +127,46 @@
       </div>
     </div>
   </div>
-  <div class="container" *ngIf="user.rol == 'employed'||user.rol == 'boss'">
+  <div class="container" *ngIf="user.rol == 'employed'||user.rol == 'boss'||user.rol == 'boss2' ">
     <mat-card class="card">
       <div class="contenedor">
         <div class="row">
-          <div class="caja" align="center"  routerLink="/curriculum" >
-            <a>
-              Ver Curriculum
-              <img routerLink="/curriculum"
-                src="https://images.vexels.com/media/users/3/140030/isolated/preview/521136d25b37386f49728b93d2e4e6fa-icono-de-cv.png"
-                alt="Logo" height="40" width="85"></a>
+          <div class="caja" align="center">
+            <a routerLink="/curriculum">
+              <span >
+                Curriculum
+              </span>
+              <br>
+              <mat-icon class="fa-5x" style="margin-left: -50px;">assignment_ind</mat-icon>
+            </a>
           </div>
           <!--(click)="createRequestAuthorizationModal(uuidactual)"-->
-          <div class="caja" align="center"(click)="createRequestPermissionModal()" >
+          <div class="caja" align="center">
+            <a routerLink="/solicitudpermiso">
+              <span >
+                Solicitar Permiso
+              </span>
+              <br>
+              <mat-icon class="fa-5x" style="margin-left: -50px;">add_box</mat-icon>
+            </a>
 
-            <a>
-              Solicitar Permiso
-              <img
-                src="https://www.centrodediabetes.mx/images/cemudi/solicitud-recibida.png"
-                alt="Logo" height="40" width="85" align-items="center"></a>
           </div>
 
-          <div class="caja" align="center" routerLink="/historial_solicitudes">
-            <a>
-              Historial de Solicitudes
-              <img routerLink="/historial_solicitudes" src="https://cdn-icons-png.flaticon.com/512/3447/3447637.png" alt="Logo"
-                height="40" width="85"></a>
+          <div class="caja" align="center">
+            <a routerLink="/permisos">
+              <span >
+                Historial de Solicitudes
+              </span>
+              <br>
+              <mat-icon class="fa-5x" style="margin-left: -50px;">history</mat-icon>
+            </a>
           </div>
+
 
           <div class="caja" align="center">
             <a>
               Imprimir constancia
-                <app-constancy  [IDPerson]="uuidactual"></app-constancy>
+              <app-constancy class="fa-2x" [IDPerson]="uuidactual"></app-constancy>
             </a>
           </div>
         </div>

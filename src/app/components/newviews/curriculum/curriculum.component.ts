@@ -134,7 +134,7 @@ export class CurriculumComponent {
       this.curriculumService.GetCurriculum(id_entrada).subscribe(
         data => {
           this.modelCurriculum = data['data'];
-          this.addressFormCurriculum.setValue({
+          this.addressFormCurriculum.patchValue({
             'fullname': this.modelCurriculum.fullname,
             'phone': this.modelCurriculum.phone,
             'email': this.modelCurriculum.email,

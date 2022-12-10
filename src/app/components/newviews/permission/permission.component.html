@@ -33,15 +33,12 @@
   </form>
   <form [formGroup]="addressFormPermission">
     <mat-card>
-
       <mat-card-content>
-
         <mat-form-field appearance="fill" style="width: 520px;">
           <mat-label>INDIQUE LA RAZÓN DE SU AUSENCIA AL SERVICIO</mat-label>
           <mat-select [disabled]="disableSelect.value" formControlName="motive">
-            <mat-option value="one">Permiso (conforme lo establecido en la Ley de Servicio Civil y Pacto
-              Colectivo)
-            </mat-option>
+            <mat-option value="Permiso (conforme lo establecido en la Ley de Servicio Civil y Pacto Colectivo)">
+              Permiso (conforme lo establecido en la Ley de Servicio Civil y Pacto Colectivo) </mat-option>
             <mat-option value="Reposición de tiempo extra laborado">Reposición de tiempo extra laborado</mat-option>
             <mat-option value="Asueto por cumpleaños">Asueto por cumpleaños</mat-option>
             <mat-option value="No marcaje de huella por cumplimiento de actividades o comisiones">No marcaje de huella por cumplimiento de actividades o comisiones
@@ -86,7 +83,7 @@
 
           </div>
         </div>
-        <div class="row" *ngIf="editing==true">
+        <div class="row" *ngIf="statusPermission = Nos">
           <div align="left" class=" font-bold capitalize">
             SI LA SOLICITUD DE AUSENCIA DEL SERVICIO NO AMERITA SER APROBADA,<br> ESPECIFICAR LOS MOTIVOS:
           </div>

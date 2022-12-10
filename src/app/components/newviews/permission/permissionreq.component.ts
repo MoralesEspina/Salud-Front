@@ -16,7 +16,8 @@ export class PermissionReqComponent implements OnInit {
   disableSelect = new FormControl(false);
   editing: boolean;
   public id_entrada;
-  public status1: boolean = false;
+  public _uuidPerson;
+  public statusPermission;
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
   public permission: IPermission;
@@ -29,15 +30,14 @@ export class PermissionReqComponent implements OnInit {
     fullname: [null, Validators.required],
     renglon: [null, Validators.required],
     job: [null, Validators.required],
-
   })
+
   addressFormPermission = this.fb.group({
     permissionDate: [null, Validators.required],
     motive: [null, Validators.required],
     uuidPerson: [null, Validators.required],
     bossOne: [null, Validators.required],
     bossTwo: [null, Validators.required],
-    reason: [null, Validators.required],
     statusBossOne: [null, Validators.required],
     statusBossTwo: [null, Validators.required],
     status: [null, Validators.required],
@@ -55,34 +55,31 @@ export class PermissionReqComponent implements OnInit {
 
   }
   modelPerson: IPerson | undefined;
-  uuid: string = this.userService.userValue.uuidPerson;
 
   @ViewChild('multiUserSearch', { static: false }) multiUserSearchInput: ElementRef;
 
   ngOnInit(): void {
     this.id_entrada = this.router.snapshot.params['id'];
-
-    this.loadPerson();
-    this.getBossTwo();
-    this.getBossOne();
-    this.loadPermission();
+    if (!this.id_entrada) {
+      this._uuidPerson = this.userService.userValue.uuidPerson;
+      this.loadPerson(this._uuidPerson);
+    }
+      this.getBossTwo();
+      this.getBossOne();
+      this.loadPermission();
   }
 
-  loadPerson() {
-    this.id_entrada = this.userService.userValue.uuidPerson;
-    if (!this.id_entrada) {
-      this.personService.OnePerson(this.id_entrada).subscribe(
+  loadPerson(person) {
+      this.personService.OnePerson(person).subscribe(
         data => {
           this.modelPerson = data['data'];
           this.addressFormPerson.setValue({
             'fullname': this.modelPerson.fullname,
             'renglon': this.modelPerson.renglon,
             'job': this.modelPerson.job.name,
-
           });
         }
       )
-    }
   }
 
   onInputChange() {
@@ -93,7 +90,6 @@ export class PermissionReqComponent implements OnInit {
       return name.indexOf(searchInput) > -1;
     });
   }
-
 
   createNewPermission() {
     let id_entrada = this.userService.userValue.uuidPerson;
@@ -107,30 +103,24 @@ export class PermissionReqComponent implements OnInit {
       statusBossOne: "",
       statusBossTwo: "",
       status: "",
-
     }
-<<<<<<< HEAD
-      console.log(permission)
-      this._permission.createRequestPermissionService(permission).subscribe(
-        data => {
-          console.log(data)
-         },error => {
-          console.log(error)
-        }
-      );
-=======
+
+    console.log(permission)
+    this._permission.createRequestPermissionService(permission).subscribe(
+      data => {
+        console.log(data)
+      }, error => {
+        console.log(error)
+      }
+    );
     this._permission.createRequestPermissionService(permission).subscribe(
       data => { }
     );
->>>>>>> 6344b761ef0fa57b74c64a71957c76b6e71934ab
-
-
   }
 
   getBossOne() {
     this._permission.getBossOne().subscribe(
       response => {
-
         this.bossOneList = response['data'];
       }, error => {
       }
@@ -146,7 +136,6 @@ export class PermissionReqComponent implements OnInit {
     )
   }
 
-
   loadPermission() {
     this.id_entrada = this.router.snapshot.params['id'];
     if (this.id_entrada) {
@@ -155,18 +144,21 @@ export class PermissionReqComponent implements OnInit {
         data => {
           this.permission = data['data'];
           console.log(this.permission);
+          this.loadPerson(this.permission.uuidPerson);
+          this.statusPermission = 'Nos';
           this.addressFormPermission.setValue({
             'uuidPerson': this.permission.uuidPerson,
             'permissionDate': this.permission.permissionDate,
             'motive': this.permission.motive,
             'bossOne': this.permission.bossOne,
             'bossTwo': this.permission.bossTwo,
-            'reason': this.permission.reason,
-
+            'statusBossOne': '',
+            'statusBossTwo': '',
+            'status': '',
           });
         }
       )
-    }else{this.editing = false}
+    } else { this.editing = false }
   }
 
 

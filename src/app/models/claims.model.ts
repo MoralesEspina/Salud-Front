@@ -5,4 +5,5 @@ export class Claims {
     rol: Role;
     name: string;
     uuidPerson: string;
+    uuid: string;
 }

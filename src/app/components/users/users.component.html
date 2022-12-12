@@ -79,10 +79,11 @@
 
   <div class="datagrid border rounded-md ">
     <mat-form-field appearance="standard">
-      <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+      <input type="text" class="p-2" autocomplete="off" matInput placeholder="Buscar por Nombre"
+      #multiUserSearch (input)="onInputChange()">
     </mat-form-field>
     <table>
+
       <thead>
         <tr>
           <th>EDITAR</th>

@@ -17,5 +17,9 @@ export class AvatarsService {
   UploadAvatar(avatar){
     return this.Http.post(`${environment.URLCustomForms}/das-jalapa/avatar`, avatar)
   }
+
+  UploadPermission(avatar){
+    return this.Http.post(`${environment.URLCustomForms}/das-jalapa/avatar`, avatar)
+  }
 }
 

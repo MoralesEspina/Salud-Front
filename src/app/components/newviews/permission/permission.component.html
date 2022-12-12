@@ -58,7 +58,7 @@
           </p>
           <div >
           <mat-form-field appearance="fill" style="width: 660px; margin-top: -20px;" >
-            <mat-label>INDIQUE LA RAZÓN</mat-label>
+            <mat-label>RAZÓN DE AUSENCIA</mat-label>
             <textarea matInput [readonly]="disableSelect.value == false"  [readonly]="editing == true"formControlName="motive"></textarea>
           </mat-form-field>
         </div>
@@ -71,18 +71,18 @@
 
         <div class="row">
           <div align="center">
-            <form name="formulario" method="post" action="/send.php" enctype="multipart/form-data">
+            <!-- <form name="formulario" method="post" action="/send.php" enctype="multipart/form-data">
               <button mat-raised-button type="button" class="btn mb-5 btn-primary" aria-haspopup="true"
                 aria-expanded="false" style="width: 200px;">
                 Adjuntar Archivo:
                 <i class="fas fa-paperclip fa-2x" type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple></i>
               </button>
-            </form>
-            <form name="formulario" method="post" action="/send.php" enctype="multipart/form-data">
-              <!-- ¡No olvides el enctype! -->
-              <!-- Campo de selección de archivo -->
-              <input type="file" name="adjunto" accept=".pdf,.jpg,.png" multiple />
-            </form>
+            </form> -->
+            <input type="file" (change)="uploadImage($event)">
+
+            <div class="images" style="margin-bottom: 20px;">
+              <img [src]="image" *ngFor="let image of images" width="200">
+            </div>
 
           </div>
         </div>
@@ -91,6 +91,7 @@
           <mat-form-field appearance="fill" style="width: 260px; margin-right: 10px;" >
             <mat-label>JEFE INMEDIATO</mat-label>
             <mat-select formControlName="bossOne"  [disabled]="editing == true">
+
               <mat-option value="" disabled>Seleccionar</mat-option>
               <mat-option value="{{item.uuid}}" *ngFor="let item of bossOneList">{{item.fullname}}</mat-option>
             </mat-select>
@@ -99,19 +100,20 @@
           <mat-form-field appearance="fill" style="width: 260px;">
             <mat-label>JEFE VO.BO.</mat-label>
             <mat-select formControlName="bossTwo"  [disabled]="editing == true">
+              <!-- <input type="text" class="p-2" autocomplete="off" matInput placeholder="Buscar por Nombre"
+                  #multiUserSearch (input)="onInputChange()"> -->
               <mat-option value="" disabled>Seleccionar</mat-option>
               <mat-option value="{{item.uuid}}" *ngFor="let item of bossTwoList">{{item.fullname}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- <div class="row" *ngIf="editing==true">
-            <div align="left" class=" font-bold capitalize" style="margin-left: 5px;margin-top: 20px;">
-              SI LA SOLICITUD DE AUSENCIA DEL SERVICIO NO AMERITA SER APROBADA,<br> ESPECIFICAR LOS MOTIVOS:
+           <div class="row" *ngIf="deny==true ">
+            <div align="center" class=" font-bold capitalize" >
+              MOTIVO DE RECHAZO:
             </div>
-            <mat-form-field appearance="fill" style="width: 660px;">
-              <mat-label>ESPECIFIQUE LOS MOTIVOS:</mat-label>
-              <textarea matInput formControlName="reason"></textarea>
+            <mat-form-field appearance="fill" style="width: 660px;" >
+              <textarea matInput formControlName="reason" readonly></textarea>
             </mat-form-field>
-          </div> -->
+          </div>
         </div>
         <div align="center" class="row">
           <button *ngIf="editing==false" type="submit" mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="createNewPermission()">Solicitar</button>

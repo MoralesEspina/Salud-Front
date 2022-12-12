@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 import { ErrorsService } from 'src/app/services/errors.service';
 
+
 @Component({
   templateUrl: './permission.component.html',
   styleUrls: ['./permission.component.scss']
@@ -23,16 +24,18 @@ export class PermissionReqComponent implements OnInit {
   public _uuidPerson;
   public _uuidUser;
   statusPermission: boolean;
-  statusPermission2:boolean;
+  statusPermission2: boolean;
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
   public permission: IPermission;
   public bossOneList;
   public bossTwoList;
-  private _router: Router;
+
   public data_response;
   statusbossOne: boolean = false;
   statusbossTwo: boolean = false;
+  deny: boolean = false;
+  images: string[];
 
   addressFormPerson = this.fb.group({
     fullname: [null, Validators.required],
@@ -62,7 +65,9 @@ export class PermissionReqComponent implements OnInit {
     private _permission: RequestpermissionService,
     private _sweetAlertService: SweetAlertService,
     private _errorService: ErrorsService,
+    private _router: Router,
   ) {
+    this.images = [];
 
 
   }
@@ -83,6 +88,7 @@ export class PermissionReqComponent implements OnInit {
     this.loadPermission();
   }
 
+
   loadPerson(person) {
     this.personService.OnePerson(person).subscribe(
       data => {
@@ -96,14 +102,7 @@ export class PermissionReqComponent implements OnInit {
     )
   }
 
-  onInputChange() {
-    const searchInput = this.multiUserSearchInput.nativeElement.value ?
-      this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
-    this.persons = this._persons.filter(u => {
-      const name: string = u.fullname.toLowerCase();
-      return name.indexOf(searchInput) > -1;
-    });
-  }
+
 
   createNewPermission() {
     let id_entrada = this.userService.userValue.uuidPerson;
@@ -121,7 +120,7 @@ export class PermissionReqComponent implements OnInit {
     this._permission.createRequestPermissionService(permission).subscribe(
       data => {
         this._sweetAlertService.createAndUpdate('Se Creo correctamente la solicitud');
-        this._router.navigate(['permisos'])
+        this._router.navigate(['permisos']);
       }, error => {
         console.log(error)
       }
@@ -171,8 +170,12 @@ export class PermissionReqComponent implements OnInit {
           } else if (this.permission.bossTwo == this._uuidUser && this.permission.statusBossOne == 'Aceptada' && this.permission.statusBossTwo == 'En Espera') {
             this.statusbossTwo = true;
           }
-          }  )
+          if(this.permission.status === 'Denegada'){
+            this.deny = true;
+          }
+        })
     } else { this.editing = false }
+
   }
 
 
@@ -208,7 +211,7 @@ export class PermissionReqComponent implements OnInit {
         this._router.navigate(['/permisos'])
         setTimeout(() => {
           window.location.reload();
-       }, 1000);
+        }, 1000);
 
       }, error => {
         console.log(error)
@@ -219,8 +222,8 @@ export class PermissionReqComponent implements OnInit {
     );
   }
 
-  acceptRequest(addressFormPermission){
-    const accepted:IPermission = {
+  acceptRequest(addressFormPermission) {
+    const accepted: IPermission = {
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',
@@ -247,7 +250,7 @@ export class PermissionReqComponent implements OnInit {
     }
   }
 
-// ----------------------------- Aceptar/denegar Boss2 --------------------------------------------------
+  // ----------------------------- Aceptar/denegar Boss2 --------------------------------------------------
 
   async denyRequest2() {
     const { value: text } = await Swal.fire({
@@ -281,7 +284,7 @@ export class PermissionReqComponent implements OnInit {
         this._router.navigate(['/permisos'])
         setTimeout(() => {
           window.location.reload();
-       }, 1000);
+        }, 1000);
 
       }, error => {
         console.log(error)
@@ -292,8 +295,8 @@ export class PermissionReqComponent implements OnInit {
     );
   }
 
-  acceptRequest2(addressFormPermission){
-    const accepted:IPermission = {
+  acceptRequest2(addressFormPermission) {
+    const accepted: IPermission = {
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',

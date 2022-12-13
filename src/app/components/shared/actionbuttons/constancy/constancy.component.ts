@@ -21,17 +21,6 @@ export class ConstancyComponent implements OnInit {
   ngOnInit() {
   }
   PrintConstancy(uuidPerson) {
-    Swal.fire({
-      title: 'Desea Agregar el Salario',
-      icon: 'info',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      cancelButtonText: 'No',
-      confirmButtonText: 'Si, Agregar!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        environment.viewSalary=true
         this.personService.OnePerson(uuidPerson)
         .subscribe(async data => {
           let person = new IPerson();
@@ -51,37 +40,6 @@ export class ConstancyComponent implements OnInit {
                 }
               )
             })
-
         })
-      }else{
-        environment.viewSalary=false
-        this.personService.OnePerson(uuidPerson)
-        .subscribe(async data => {
-          let person = new IPerson();
-          person = data['data']
-          this.constancyService.GetConfigurationFile('constancy')
-            .subscribe(async configuration => {
-              await Constancy(person, configuration['data']).then(
-                pdf => {
-                  pdf.create().print()
-                }
-              )
-            }, async err => {
-              console.log(err)
-              await Constancy(person, null).then(
-                pdf => {
-                  pdf.create().print()
-                }
-              )
-            })
-
-        })
-      }
-    })
-
-
   }
-
-
-
 }

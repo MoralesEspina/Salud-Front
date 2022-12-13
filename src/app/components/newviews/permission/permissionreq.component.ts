@@ -107,6 +107,7 @@ export class PermissionReqComponent implements OnInit {
   createNewPermission() {
     let id_entrada = this.userService.userValue.uuidPerson;
     const permission: IPermission = {
+      submittedAt: "",
       permissionDate: this.addressFormPermission.value.permissionDate,
       motive: this.addressFormPermission.value.motive,
       uuidPerson: id_entrada,
@@ -195,6 +196,7 @@ export class PermissionReqComponent implements OnInit {
       return
     }
     const deny: IPermission = {
+      'submittedAt': '',
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',
@@ -222,8 +224,11 @@ export class PermissionReqComponent implements OnInit {
     );
   }
 
-  acceptRequest(addressFormPermission) {
-    const accepted: IPermission = {
+
+  acceptRequest(addressFormPermission){
+    const accepted:IPermission = {
+      'submittedAt': '',
+
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',
@@ -268,6 +273,7 @@ export class PermissionReqComponent implements OnInit {
       return
     }
     const deny: IPermission = {
+      'submittedAt': '',
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',
@@ -295,8 +301,9 @@ export class PermissionReqComponent implements OnInit {
     );
   }
 
-  acceptRequest2(addressFormPermission) {
-    const accepted: IPermission = {
+  acceptRequest2(addressFormPermission){
+    const accepted:IPermission = {
+      'submittedAt': '',
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',

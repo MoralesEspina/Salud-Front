@@ -4,7 +4,7 @@ import { IPerson } from "./person.model";
 export class IPermission{
 
     constructor(
-
+      public submittedAt: string,
       public permissionDate: string,
       public motive: string,
 

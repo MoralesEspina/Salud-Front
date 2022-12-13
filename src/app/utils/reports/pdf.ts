@@ -14,7 +14,6 @@ export async function Curriculum(curriculum: CurriculumDataI, fam: ReferenceI, a
         fontSize: 12
     })
 
-
    // pdf.background(await new Img(authorizationConfiguration.imageURL).alignment(authorizationConfiguration.align).width(authorizationConfiguration.width).height(authorizationConfiguration.height).build())
     pdf.add(new Txt('Datos generales_____________________________________________').alignment('left').relativePosition(0, 10).color('#2778B4').fontSize(16).bold().end)
 
@@ -156,5 +155,6 @@ export async function Curriculum(curriculum: CurriculumDataI, fam: ReferenceI, a
     }
   })
   .end)
+
     return pdf;
 }

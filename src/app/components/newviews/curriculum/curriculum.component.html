@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<div class="container">
+<div class="box">
   <form [formGroup]="addressFormCurriculum">
     <mat-card class="shipping-card">
       <mat-card-title class="text-center">INFORMACIÓN CURRICULUM</mat-card-title>
@@ -460,7 +460,7 @@
       </mat-card-actions>
 
       <div class="container">
-        <table class="table table-hover">
+        <table class="table table-bordered" >
           <thead>
             <tr>
               <th scope="col">Nombre</th>
@@ -485,11 +485,29 @@
   </form>
   <!-- -------------------------------------------------- -->
   <form [formGroup]="addressFormWorkExperience">
-    <mat-card class="shipping-card">
+    <mat-card class="shipping-card" style="width: 1200px; text-align: center;">
       <mat-card-header>
-        <mat-card-title>EXPERIENCIA LABORAL</mat-card-title>
+        <mat-card-title class="text-center">EXPERIENCIA LABORAL</mat-card-title>
       </mat-card-header>
       <mat-card-content>
+        <div  class="row">
+          <div style="margin-left: 15px;margin-right: -100px; width: 130px;">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Fecha De Inicio" type="date" formControlName="dateof">
+              <mat-error *ngIf="addressFormWorkExperience.controls['dateof'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div style="margin: auto; margin-left: 150px; width: 130px;">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Fecha Del Final" type="date" formControlName="dateto">
+              <mat-error *ngIf="addressFormWorkExperience.controls['dateto'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
@@ -536,24 +554,7 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="row">
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Fecha De Inicio" type="date" formControlName="dateof">
-              <mat-error *ngIf="addressFormWorkExperience.controls['dateof'].hasError('required')">
-                <strong>*Obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="col">
-            <mat-form-field class="full-width">
-              <input matInput placeholder="Fecha Del Final" type="date" formControlName="dateto">
-              <mat-error *ngIf="addressFormWorkExperience.controls['dateto'].hasError('required')">
-                <strong>*Obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-        </div>
+
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">

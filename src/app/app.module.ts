@@ -60,6 +60,7 @@ import { CurriculumPDFComponent } from './components/shared/actionbuttons/curric
 import { RequestHistoryComponent } from './components/newviews/request-history/request-history.component';
 import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
 import { StatuspermissionComponent } from './components/newviews/statuspermission/statuspermission.component';
+import { environment } from 'src/environments/environment.prod';
 
 
 
@@ -155,14 +156,13 @@ import { StatuspermissionComponent } from './components/newviews/statuspermissio
     MatPaginatorModule,
     NgxMatSelectSearchModule,
     MatCheckboxModule,
-
     AppRoutingModule,
-
     MatSortModule,
 
     MatSortModule,
 
     MatRadioModule,
+
 
   ],
   entryComponents: [

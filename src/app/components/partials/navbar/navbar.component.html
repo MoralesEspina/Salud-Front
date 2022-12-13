@@ -75,16 +75,7 @@
 
       </a>
     </li>
-    <li *ngIf="user.rol == 'employed'">
-      <a routerLink="/historial_solicitudes" routerLinkActive="text-yellow-500">
 
-          <i class="fa fa-clock-o fa-2x"></i>
-          <span class="nav-text font-bold ml-3">
-            Historial de solicitudes
-          </span>
-
-      </a>
-    </li>
 
 
 
@@ -172,14 +163,6 @@
       </li>
 
     </div>
-    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'boss2'||user.rol == 'boss2'||user.rol == 'admin'">
-      <a routerLink="/permisos">
-        <i class="fa fa-users fa-2x"></i>
-        <span class="nav-text">
-          Aceptar Permisos
-        </span>
-      </a>
-    </li>
     <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'admin'||user.rol == 'boss2'||user.rol == 'employed'">
       <a routerLink="/solicitudpermiso">
         <i class="fa fa-users fa-2x"></i>
@@ -188,11 +171,21 @@
         </span>
       </a>
     </li>
+
+    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'boss2'||user.rol == 'admin'">
+      <a routerLink="/permisos">
+        <i class="fa fa-users fa-2x"></i>
+        <span class="nav-text">
+          Aceptar/Denegar Permisos
+        </span>
+      </a>
+    </li>
+
     <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'admin'||user.rol == 'boss2'||user.rol == 'employed'">
       <a routerLink="/estadopermisos">
         <i class="fa fa-users fa-2x"></i>
         <span class="nav-text">
-          Estado de Permisos
+          Estado de mis Permisos
         </span>
       </a>
     </li>

@@ -1,3 +1,4 @@
+import { filteruser } from './../../models/namepreson.model';
 import { IUser } from './../../models/edituser.model';
 import { nameperson } from 'src/app/models/namepreson.model';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -28,20 +29,17 @@ export class UsersComponent implements OnInit {
   curriculum= new CurriculumDataI()
   usuario: IUser[] = []
   users: User[] = []
-  _users= new MatTableDataSource(this.usuario)
   submitted: boolean = false;
   error: string = '';
   rols: Rol[] = []
   person = new nameperson()
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
+  protected fiteruser: filteruser[] = []
+  private _fiteruser: filteruser[] = []
   page: number = 1
 
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this._users.filter = filterValue.trim().toLowerCase();
-  }
 
 
   constructor(
@@ -69,7 +67,11 @@ export class UsersComponent implements OnInit {
     })
 
   }
-
+  dataSource = new MatTableDataSource(this.users);
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   ManyPersons(page?: number, limit?: string, filter?: string) {
 
     if (limit && typeof limit == 'string') {
@@ -164,10 +166,12 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers() {
+
     this.userService.users()
       .subscribe(data => {
         this.users = data['data']
       }, err => console.log(err))
+
   }
 
 
@@ -186,6 +190,15 @@ export class UsersComponent implements OnInit {
     this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
     this.persons = this._persons.filter(u => {
       const name: string = u.fullname.toLowerCase();
+      return name.indexOf(searchInput) > -1;
+    });
+  }
+  onInputChange2(){
+    console.log(this.multiUserSearchInput.nativeElement.value);
+    const searchInput = this.multiUserSearchInput.nativeElement.value ?
+    this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
+    this.fiteruser = this._fiteruser.filter(u => {
+      const name: string = u.name.toLowerCase();
       return name.indexOf(searchInput) > -1;
     });
   }

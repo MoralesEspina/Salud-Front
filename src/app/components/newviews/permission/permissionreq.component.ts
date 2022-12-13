@@ -1,3 +1,4 @@
+import { Claims } from 'src/app/models/claims.model';
 import { RequestpermissionService } from './../../../services/request-permission.service';
 import { PersonService } from './../../../services/person.service';
 import { Component, ElementRef, OnInit, ViewChild, PipeTransform } from '@angular/core';
@@ -20,7 +21,9 @@ export class PermissionReqComponent implements OnInit {
   editing: boolean;
   public id_entrada;
   public _uuidPerson;
-  public statusPermission;
+  public _uuidUser;
+  statusPermission: boolean;
+  statusPermission2:boolean;
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
   public permission: IPermission;
@@ -28,7 +31,8 @@ export class PermissionReqComponent implements OnInit {
   public bossTwoList;
   private _router: Router;
   public data_response;
-  statusbossOne: boolean;
+  statusbossOne: boolean = false;
+  statusbossTwo: boolean = false;
 
   addressFormPerson = this.fb.group({
     fullname: [null, Validators.required],
@@ -68,6 +72,8 @@ export class PermissionReqComponent implements OnInit {
 
   ngOnInit(): void {
     this.id_entrada = this.router.snapshot.params['id'];
+    this._uuidUser = this.userService.userValue.uuid;
+    console.log(this.userService.userValue.uuid)
     if (!this.id_entrada) {
       this._uuidPerson = this.userService.userValue.uuidPerson;
       this.loadPerson(this._uuidPerson);
@@ -102,6 +108,7 @@ export class PermissionReqComponent implements OnInit {
   createNewPermission() {
     let id_entrada = this.userService.userValue.uuidPerson;
     const permission: IPermission = {
+      submittedAt: "",
       permissionDate: this.addressFormPermission.value.permissionDate,
       motive: this.addressFormPermission.value.motive,
       uuidPerson: id_entrada,
@@ -141,6 +148,7 @@ export class PermissionReqComponent implements OnInit {
   }
 
   loadPermission() {
+
     if (this.id_entrada) {
       this.editing = true
       this._permission.getOneRequestPermission(this.id_entrada).subscribe(
@@ -159,13 +167,12 @@ export class PermissionReqComponent implements OnInit {
             'reason': this.permission.reason,
           }
           );
-          if (this.permission.statusBossOne == 'Aceptada' && this.permission.statusBossTwo == 'En Espera'){
-          this.statusbossOne = true;
-          }else{
-            this.statusbossOne = false;
+          if (this.permission.bossOne == this._uuidUser && this.permission.statusBossOne == 'En Espera' && this.permission.statusBossTwo == 'En Espera') {
+            this.statusbossOne = true;
+          } else if (this.permission.bossTwo == this._uuidUser && this.permission.statusBossOne == 'Aceptada' && this.permission.statusBossTwo == 'En Espera') {
+            this.statusbossTwo = true;
           }
-        }
-      )
+          }  )
     } else { this.editing = false }
   }
 
@@ -186,6 +193,7 @@ export class PermissionReqComponent implements OnInit {
       return
     }
     const deny: IPermission = {
+      'submittedAt': '',
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',
@@ -215,6 +223,7 @@ export class PermissionReqComponent implements OnInit {
 
   acceptRequest(addressFormPermission){
     const accepted:IPermission = {
+      'submittedAt': '',
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',
@@ -259,6 +268,7 @@ export class PermissionReqComponent implements OnInit {
       return
     }
     const deny: IPermission = {
+      'submittedAt': '',
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',
@@ -288,6 +298,7 @@ export class PermissionReqComponent implements OnInit {
 
   acceptRequest2(addressFormPermission){
     const accepted:IPermission = {
+      'submittedAt': '',
       'uuidPerson': '',
       'permissionDate': '',
       'motive': '',

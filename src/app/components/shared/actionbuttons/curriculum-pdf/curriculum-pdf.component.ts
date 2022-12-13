@@ -28,32 +28,31 @@ export class CurriculumPDFComponent implements OnInit {
 
 
   PrintCurriculum(uuidPerson) {
-        this.curriculumService.GetCurriculum(uuidPerson)
-        .subscribe(async data => {
-          let curriculum = new CurriculumDataI();
-          curriculum = data['data']
-          this.curriculumService.GetRefFam(uuidPerson)
-        .subscribe(async data => {
-          let fam = new ReferenceI();
-          fam = data['data']
-          console.log(fam)
-          this.constancyService.GetConfigurationFile('constancy')
-            .subscribe(async configuration => {
-              await Curriculum(curriculum,fam, configuration['data']).then(
-                pdf => {
-                  pdf.create().print()
-                }
-              )
-            }, async err => {
-              console.log(err)
-              await Curriculum(curriculum, fam, null).then(
-                pdf => {
-                  pdf.create().print()
-                }
-              )
-            })
-
-        })
+    this.curriculumService.GetCurriculum(uuidPerson)
+      .subscribe(async data => {
+        let curriculum = new CurriculumDataI();
+        curriculum = data['data']
+        this.curriculumService.GetRefFam(uuidPerson)
+          .subscribe(async data => {
+            let fam = new ReferenceI();
+            fam = data['data']
+            console.log(fam)
+            this.constancyService.GetConfigurationFile('constancy')
+              .subscribe(async configuration => {
+                await Curriculum(curriculum, fam, configuration['data']).then(
+                  pdf => {
+                    pdf.create().print()
+                  }
+                )
+              }, async err => {
+                console.log(err)
+                await Curriculum(curriculum, fam, null).then(
+                  pdf => {
+                    pdf.create().print()
+                  }
+                )
+              })
+          })
       })
-    }
+  }
 }

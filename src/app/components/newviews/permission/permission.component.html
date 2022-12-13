@@ -116,11 +116,11 @@
         <div align="center" class="row">
           <button *ngIf="editing==false" type="submit" mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="createNewPermission()">Solicitar</button>
         </div>
-        <div align="center" class="row" *ngIf="editing==true && statusbossOne==false">
+        <div align="center" class="row" *ngIf="editing==true && statusbossOne==true">
           <button mat-raised-button color="primary" style="margin-right: 10px; margin-bottom: 10px" (click)="acceptRequest(addressFormPermission)">Aceptar</button>
           <button mat-raised-button color="primary" (click)="denyRequest()">Denegar</button>
         </div>
-        <div align="center" class="row" *ngIf="statusbossOne==true">
+        <div align="center" class="row" *ngIf="editing==true && statusbossTwo==true">
           <button mat-raised-button color="primary" style="margin-right: 10px;" (click)="acceptRequest2(addressFormPermission)">Aceptar VO.BO.</button>
           <button mat-raised-button color="primary" (click)="denyRequest2()">Denegar VO.BO.</button>
         </div>

@@ -24,7 +24,9 @@ export class UserService {
   }
 
   public get userValue(): Claims {
+
     return this.userSubject.value;
+
   }
 
   login(user: User) {
@@ -34,7 +36,6 @@ export class UserService {
           this.localStorage.setJsonValue('claims', JSON.stringify(Claims));
           this.userSubject.next(Claims)
         }
-
         return Claims;
       }))
   }

@@ -6,14 +6,11 @@ import { RequestVacation } from 'src/app/models/requestVacation.models';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { RequestVacationService } from 'src/app/services/request-vacation.service';
 import { UserService } from 'src/app/services/user.service';
-import { VacationRequestPDF } from 'src/app/utils/reports/VacationRequest';
-import Swal from 'sweetalert2';
-import { VacationrequestComponent } from '../../pdfs/vacationrequest/vacationrequest.component';
 import pdfFonts from 'src/app/fonts/custom/times-new-roman.js';
-import { DocumentComponent } from '../../partials/document/document.component';
-import { CreatePDFVacationAuthorization } from 'src/app/utils/reports/VacationAuthorization';
-import { PermissionComponent } from '../../partials/permission/permission.component';
 import { RequestpermissionService } from 'src/app/services/request-permission.service';
+import { PersonService } from 'src/app/services/person.service';
+import { IPermission } from 'src/app/models/permission';
+import { Permission } from 'src/app/utils/reports/Permission';
 
 @Component({
   selector: 'app-permissionauth',
@@ -32,12 +29,8 @@ export class PermissionauthComponent implements OnInit {
   uuid: string = this.userService.userValue.uuidPerson;
 
   constructor(
-    private requestVacationService: RequestVacationService,
-    private authService: AuthorizationService,
-    private configuration: AuthorizationService,
     private userService: UserService,
-    private dialog: MatDialog,
-    private _permission: RequestpermissionService,
+    private _permission: RequestpermissionService
   ) {
     (window as any).pdfMake.vfs = pdfFonts.pdfMake.vfs;
   }
@@ -69,26 +62,6 @@ export class PermissionauthComponent implements OnInit {
 
       }
     )
-  }
-
-
-
-  printPDF(uuid: string) {
-    this.requestVacationService.getOneRequestVacations(uuid)
-      .subscribe(data => {
-        this.requestVacation = data['data']
-        this.configuration.GetConfigurationFile('requestvacation')
-          .subscribe(datapdf => {
-            VacationRequestPDF(this.requestVacation, datapdf['data'])
-              .then(pdf => {
-                pdf.create().print();
-              })
-          }, err => {
-            console.log(err);
-            VacationRequestPDF(this.requestVacation, null);
-          })
-
-      })
   }
 
 }

@@ -3,13 +3,13 @@
 <div class="target animated fadeInLeft">
   <div class="flex h-screen justify-center items-center">
     <div class="max-w-sm rounded">
-      
+
         <div class="w-full max-w-xs">
-          
+
           <form class="bg-white shadow-xs rounded px-8 pt-6 pb-8 mb-4 border-2 border-blue-400"
                 [formGroup]= "loginForm" (ngSubmit)="login()"
                 autocomplete="on">
-                
+
             <div class="block text-gray-700 text-base font-bold mb-2 text-center pb-5">LOGIN</div>
             <div class="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
@@ -18,7 +18,7 @@
               <input
                 class="input-gray focus:outline-none focus:border-blue-400"
                 autocomplete="off"
-                type="text" 
+                type="text"
                 formControlName = "username"
                 name="username"
                 required
@@ -28,7 +28,7 @@
                 <span *ngIf="submitted && f.username.errors"
                   class="text-red-700 text-xs animated fadeIn">Ingrese el usuario</span>
             </div>
-          
+
             <div class="mb-6">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
                 Password
@@ -45,9 +45,9 @@
                 <span *ngIf="submitted && f.password.errors"
                   class="text-red-700 text-xs animated fadeIn">Ingrese la contraseña</span>
             </div>
-            
 
-            <div class="flex items-center justify-between">
+
+            <div class="flex items-center justify-center">
               <button
                 class="bg-green-500 hover:bg-green-700  push push-focus"
                 type="submit">

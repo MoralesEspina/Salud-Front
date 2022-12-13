@@ -3,10 +3,9 @@
 }
 
 .shipping-card {
-  min-width: 120px;
-  margin: 20px auto;
-  margin-left: 24%;
-  margin-right: 10%;
+  min-width: 800px;
+  margin:0 auto;
+
 }
 
 .mat-radio-button {
@@ -34,3 +33,8 @@ table {
   text-align: center;
 }
 
+.box{
+  margin-top: 20px;
+  display: grid;
+  place-items: center;
+}

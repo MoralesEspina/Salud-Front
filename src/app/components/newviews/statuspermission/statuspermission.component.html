@@ -1,9 +1,9 @@
 <app-navbar></app-navbar>
 
 <!--Data object from database-->
-<div class="mt-8 px-6">
+<div class="box">
 
-  <div class="ml-16 mr-auto">
+
     <div class="datagrid overflow-x-auto block">
       <div align="center" class=" font-bold capitalize" style="margin-bottom: 5PX; font-size: 20px;">
         MIS SOLICITUDES ACTIVAS <br>
@@ -25,7 +25,7 @@
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody *ngFor="let item of permissionreq; let indexof = index;" style="text-align: center;">
+        <tbody style="text-align: center;" *ngFor="let item of permissionreq; let indexof = index;" style="text-align: center;">
           <td>{{indexof + 1}}</td>
           <td>{{item.submittedAt  | date: 'd MMM y H:mm' | uppercase }}</td>
           <td>{{item.permissionDate  | date: 'd MMM y ' | uppercase }}</td>
@@ -59,7 +59,7 @@
 
         <thead>
 
-          <tr>
+          <tr style="text-align: center;">
             <th>No.</th>
             <th>EMITIDO</th>
             <th>FECHA DE PERMISO</th>
@@ -68,7 +68,7 @@
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody *ngFor="let item of permissionreq2; let indexof = index;">
+        <tbody style="text-align: center;" *ngFor="let item of permissionreq2; let indexof = index;">
           <td>{{indexof + 1}}</td>
           <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
           <td>{{item.permissionDate | date: 'd MMM y' | uppercase }}</td>
@@ -89,6 +89,6 @@
           </td>
         </tbody>
       </table>
-    </div>
+
   </div>
 </div>

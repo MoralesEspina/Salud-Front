@@ -163,7 +163,7 @@
       </li>
 
     </div>
-    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'admin'||user.rol == 'boss2'||user.rol == 'employed'">
+    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'boss2'||user.rol == 'employed'">
       <a routerLink="/solicitudpermiso">
         <i class="fa fa-users fa-2x"></i>
         <span class="nav-text">
@@ -172,7 +172,7 @@
       </a>
     </li>
 
-    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'boss2'||user.rol == 'admin'">
+    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'boss2' ">
       <a routerLink="/permisos">
         <i class="fa fa-users fa-2x"></i>
         <span class="nav-text">
@@ -181,7 +181,7 @@
       </a>
     </li>
 
-    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'admin'||user.rol == 'boss2'||user.rol == 'employed'">
+    <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'boss2'||user.rol == 'employed'">
       <a routerLink="/estadopermisos">
         <i class="fa fa-users fa-2x"></i>
         <span class="nav-text">

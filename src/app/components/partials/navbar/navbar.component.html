@@ -32,51 +32,6 @@
         </span>
       </a>
     </li>
-  <!--
-    <li *ngIf="user.rol == 'employed'">
-      <a (click)="isClickedSolicitudes = !isClickedSolicitudes">
-        <i class="fa fa-user-md fa-2x"></i>
-        <span class="nav-text">
-          Solicitudes
-        </span>
-      </a>
-    </li>
-
-   <div [ngClass]="{ 'hidden': isClickedSolicitudes == true}">
-      <li *ngIf="user.rol == 'employed'">
-        <a routerLink="/requests" routerLinkActive="text-yellow-500">
-          <div class="ml-4">
-            <i class="fa fa-clock-o fa-2x"></i>
-            <span class="nav-text font-bold ml-3">
-              Crear solicitud
-            </span>
-          </div>
-        </a>
-      </li>
-
-    <li class="has-subnav" *ngIf="user.rol === 'admin'">
-      <a routerLink="/principal">
-        <i class="fa fa-users fa-2x"></i>
-        <span class="nav-text">
-          Principal
-        </span>
-      </a>
-    </li>
-
-    -->
-
-    <li *ngIf="user.rol == 'boss'">
-      <a routerLink="/historial" routerLinkActive="text-yellow-500">
-
-          <i class="fa fa-clock-o fa-2x"></i>
-          <span class="nav-text font-bold ml-3">
-            Historial de solicitudes
-          </span>
-
-      </a>
-    </li>
-
-
 
 
     <li *ngIf="user.rol == 'admin'||user.rol == 'member'">

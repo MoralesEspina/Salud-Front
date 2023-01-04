@@ -1,7 +1,6 @@
 <app-navbar></app-navbar>
 <div class="mt-8 lg:mt-4 px-6 ml-12 mr-auto">
 
-
   <div class="user border rounded-md ">
     <form class="ed-item ed-container inputsize">
       <mat-dialog-content [formGroup]="form">
@@ -94,7 +93,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let duser of users; let indexof = index; let u of usuario;let indexof = index" class="text-lg"
+        <tr *ngFor="let duser of admins; let indexof = index; let u of usuario;" class="text-lg"
           [class.alt]="(indexof + 1)%2==1">
           <td style="width: 10px;">
             <div class="rounded-full cursor-pointer" (click)="UpdateUser(u.uuid)">
@@ -117,9 +116,99 @@
         </tr>
 
       </tbody>
+
+
     </table>
+
   </div>
 
+  <div class="datagrid border rounded-md ">
+    <mat-form-field appearance="standard">
+      <input type="text" class="p-2" autocomplete="off" matInput placeholder="Buscar por Nombre"
+      #multiUserSearch (input)="onInputChange()">
+    </mat-form-field>
+  <table>
 
+    <thead>
+      <tr>
+        <th>EDITAR</th>
+        <th>ELIMINAR</th>
+        <th>No.</th>
+        <th>NOMBRE</th>
+        <th>NOMBRE DE USUARIO</th>
+        <th>ROL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let duser of bosses; let indexof = index; let u of usuario;" class="text-lg"
+        [class.alt]="(indexof + 1)%2==1">
+        <td style="width: 10px;">
+          <div class="rounded-full cursor-pointer" (click)="UpdateUser(u.uuid)">
+            <div class="justify-center text-center ">
+              <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+            </div>
+          </div>
+        </td>
+
+        <td style="width: 10px;">
+          <div class="rounded-full cursor-pointer" (click)="deletePerson(u.uuid)">
+            <div class="justify-center text-center ">
+              <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
+            </div>
+          </div>
+        </td>
+        <td>{{indexof + 1}}</td>
+        <td>{{duser.uuidPerson}}</td>
+        <td>{{duser.username}}</td>
+        <td>{{duser.rol}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+<div class="datagrid border rounded-md ">
+  <mat-form-field appearance="standard">
+    <input type="text" class="p-2" autocomplete="off" matInput placeholder="Buscar por Nombre"
+    #multiUserSearch (input)="onInputChange()">
+  </mat-form-field>
+<table>
+
+  <thead>
+    <tr>
+      <th>EDITAR</th>
+      <th>ELIMINAR</th>
+      <th>No.</th>
+      <th>NOMBRE</th>
+      <th>NOMBRE DE USUARIO</th>
+      <th>ROL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let duser of employees; let indexof = index; let u of usuario;" class="text-lg"
+      [class.alt]="(indexof + 1)%2==1">
+      <td style="width: 10px;">
+        <div class="rounded-full cursor-pointer" (click)="UpdateUser(u.uuid)">
+          <div class="justify-center text-center ">
+            <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+          </div>
+        </div>
+      </td>
+
+      <td style="width: 10px;">
+        <div class="rounded-full cursor-pointer" (click)="deletePerson(u.uuid)">
+          <div class="justify-center text-center ">
+            <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
+          </div>
+        </div>
+      </td>
+      <td>{{indexof + 1}}</td>
+      <td>{{duser.uuidPerson}}</td>
+      <td>{{duser.username}}</td>
+      <td>{{duser.rol}}</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
 
 </div>

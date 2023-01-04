@@ -21,6 +21,7 @@ import { RequestHistoryComponent } from './components/newviews/request-history/r
 import { PermissionComponent } from './components/partials/permission/permission.component';
 import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
 import { StatuspermissionComponent } from './components/newviews/statuspermission/statuspermission.component';
+import { RequestReportComponent } from './components/newviews/request-report/request-report.component';
 
 
 const routerOptions: ExtraOptions = {
@@ -59,6 +60,14 @@ const routes: Routes = [
     path: 'historial',
     component: HistoryComponent
 
+  },
+
+
+
+  {
+    path: 'SolicitudesDePermisos',
+    component: RequestReportComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'historial_solicitudes',

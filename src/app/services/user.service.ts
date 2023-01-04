@@ -57,6 +57,17 @@ export class UserService {
     return this.http.get(`${environment.URL}/users`)
   }
 
+  users1() {
+    return this.http.get(`${environment.URL}/users/admins`)
+  }
+
+  users2() {
+    return this.http.get(`${environment.URL}/users/employees`)
+  }
+  users3() {
+    return this.http.get(`${environment.URL}/users/bosses`)
+  }
+
   changePassword(actual_password: string, new_password: string) {
     let newCredentials = {
       actual_password: actual_password,

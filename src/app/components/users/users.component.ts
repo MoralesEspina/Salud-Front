@@ -1,10 +1,11 @@
+import { Employees, Admins } from './../../models/user.model';
 import { filteruser } from './../../models/namepreson.model';
 import { IUser } from './../../models/edituser.model';
 import { nameperson } from 'src/app/models/namepreson.model';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Rol } from 'src/app/models/rols.model';
-import { User } from 'src/app/models/user.model';
+import { Bosses, User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { PersonService } from 'src/app/services/person.service';
@@ -29,6 +30,9 @@ export class UsersComponent implements OnInit {
   curriculum= new CurriculumDataI()
   usuario: IUser[] = []
   users: User[] = []
+  admins: Admins[] = []
+  bosses: Bosses[] = []
+  employees: Employees[] = []
   submitted: boolean = false;
   error: string = '';
   rols: Rol[] = []
@@ -58,6 +62,9 @@ export class UsersComponent implements OnInit {
   ngOnInit() {
     this.getrols()
     this.getUsers()
+    this.getUsers1()
+    this.getUsers2()
+    this.getUsers3()
     this.GetNamePerson()
     this.form = this.fb.group({
       uuidPerson: ['', Validators.required],
@@ -170,6 +177,31 @@ export class UsersComponent implements OnInit {
     this.userService.users()
       .subscribe(data => {
         this.users = data['data']
+      }, err => console.log(err))
+
+  }
+
+  getUsers1() {
+
+    this.userService.users2()
+      .subscribe(data => {
+        this.admins = data['data']
+      }, err => console.log(err))
+
+  }
+  getUsers2() {
+
+    this.userService.users2()
+      .subscribe(data => {
+        this.employees = data['data']
+      }, err => console.log(err))
+
+  }
+  getUsers3() {
+
+    this.userService.users3()
+      .subscribe(data => {
+        this.bosses = data['data']
       }, err => console.log(err))
 
   }

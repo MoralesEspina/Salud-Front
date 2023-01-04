@@ -18,6 +18,9 @@ export class RequestpermissionService {
   getOneRequestPermission(uuid: string) {
     return this.http.get(`${environment.URL}/permission/${uuid}`)
   }
+  getAllRequestPermission(): Observable<any>  {
+    return this.http.get(`${environment.URL}/permission`)
+  }
 
   getPermissionsBossOne(uuid: any): Observable<any> {
     return this.http.get(`${environment.URL}/permission/table/bossone/${uuid}`);

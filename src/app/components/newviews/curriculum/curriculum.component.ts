@@ -78,29 +78,29 @@ export class CurriculumComponent {
 
     //----------Form Person----------//
     fullname: [null, Validators.required],
-    phone: [null, Validators.required],
-    email: [null, Validators.required],
-    nit: [null, Validators.required],
-    dpi: [null, Validators.required],
-    borndate: [null, Validators.required],
+    phone: [null],
+    email: [null],
+    nit: [null],
+    dpi: [null],
+    borndate: [null],
 
 
     //----------Form Curriculum----------//
-    direction: [null, Validators.required],
-    country: [null, Validators.required],
-    homephone: [null, Validators.required],
-    bornPlace: [null, Validators.required],
-    nacionality: [null, Validators.required],
-    municipality: [null, Validators.required],
-    village: [null, Validators.required],
-    workPhone: [null, Validators.required],
-    age: [null, Validators.required],
-    civilStatus: [null, Validators.required],
-    etnia: [null, Validators.required],
-    passport: [null, Validators.required],
-    license: [null, Validators.required],
-    department: [null, Validators.required],
-    igss: [null, Validators.required],
+    direction: [null],
+    country: [null],
+    homephone: [null],
+    bornPlace: [null],
+    nacionality: [null],
+    municipality: [null],
+    village: [null],
+    workPhone: [null],
+    age: [null],
+    civilStatus: [null],
+    etnia: [null],
+    passport: [null],
+    license: [null],
+    department: [null],
+    igss: [null],
   });
 
 
@@ -356,13 +356,14 @@ export class CurriculumComponent {
       license: this.addressFormCurriculum.value.license,
       department: this.addressFormCurriculum.value.department,
       igss: this.addressFormCurriculum.value.igss,
-      phone: '',
-      email:'',
-      dpi:'',
-      nit:'',
-      bornDate: null,
+      phone: this.addressFormCurriculum.value.phone,
+      email: this.addressFormCurriculum.value.email,
+      dpi: this.addressFormCurriculum.value.dpi,
+      nit: this.addressFormCurriculum.value.nit,
+      bornDate: this.addressFormCurriculum.value.borndate,
       fullname:''
     }
+
     this.curriculumService.editCurriculum(curriculum,id_entrada).subscribe(data => {
       Swal.fire({
         position: 'top-end',

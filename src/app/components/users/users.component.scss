@@ -51,14 +51,22 @@
     padding-bottom: 4%;
 }
 .user{
-  margin: 0 auto;
-
+  margin: auto;
+  margin-top: 40px;
   border-color: rgb(25, 15, 200);
   width: 500px;
 }
 
 .datagrid{
-  margin: 0 auto;
   margin-top: 10px;
-  width: 700px;
+  margin-bottom: 50px;
+}
+.tabla1{
+  max-width: 800px;
+  display:inline-table;
+
+}
+.tabla2{
+  max-width: 640px;
+  display:inline-table;
 }

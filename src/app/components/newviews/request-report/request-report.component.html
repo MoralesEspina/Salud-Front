@@ -16,10 +16,8 @@
             <th>No.</th>
             <th>EMITIDO</th>
             <th>FECHA DE PERMISO</th>
-            <th>JEFE INMEDIATO</th>
-            <th>ESTADO</th>
-            <th>VO.BO.</th>
-            <th>ESTADO</th>
+            <th>SOLICITANTE</th>
+
             <th>ESTADO DE SOLICITUD</th>
             <th>DETALLES</th>
             <th>IMPRIMIR</th>
@@ -29,10 +27,7 @@
           <td>{{indexof + 1}}</td>
           <td>{{item.submittedAt  | date: 'd MMM y H:mm' | uppercase }}</td>
           <td>{{item.permissionDate  | date: 'd MMM y ' | uppercase }}</td>
-          <td>{{item.bossOne}}</td>
-          <td>{{item.statusBossOne}} </td>
-          <td>{{item.bossTwo}}</td>
-          <td>{{item.statusBossTwo}}</td>
+          <td>{{item.person.fullname}}</td>
           <td>{{item.status}}</td>
           <td style="width: 50px;">
             <div class="rounded-full cursor-pointer">

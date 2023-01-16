@@ -8,6 +8,9 @@ import Swal from 'sweetalert2';
 import { CurriculumDataI } from 'src/app/models/curriculum.model';
 import { ReferenceI } from 'src/app/models/references.model';
 import { SweetAlertService } from 'src/app/services/sweetAlert.service';
+import { MatDialog } from '@angular/material';
+import { UploadavatarComponent } from '../../partials/uploadavatar/uploadavatar.component';
+import { LocalService } from 'src/app/services/local.service';
 
 export interface Family {
   name: string;
@@ -24,7 +27,7 @@ export interface Family {
 })
 
 export class CurriculumComponent {
-
+  urlImage: string;
   civilStatus: any[] = [
     'Soltero', 'Casado', 'Divorciado', 'Viudo'
   ];
@@ -111,6 +114,9 @@ export class CurriculumComponent {
     private userService: UserService,
     private curriculumService: CurriculumService,
     private _sweetAlertService: SweetAlertService) { }
+    private dialog: MatDialog,
+    private localService: LocalService,
+    private curriculumService: CurriculumService) { }
 
 
   modelExperience: ExperienceI | undefined;
@@ -430,5 +436,25 @@ export class CurriculumComponent {
   }
 
     //TODO TERMINAR METODOS PARA ELIMINAR LOS DATOS
+
+
+  async UploadAvatar() {
+    const modalDialog = this.dialog.open(UploadavatarComponent, {
+      disableClose: true,
+      autoFocus: true,
+      width: '400px',
+
+    })
+
+    modalDialog.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.urlImage = data['data'].imageURL
+          this.localService.setJsonValue('avatar', this.urlImage);
+        }
+      },
+      err => console.log(err))
+  }
+
 }
 

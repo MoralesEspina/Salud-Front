@@ -7,6 +7,9 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import Swal from 'sweetalert2';
 import { CurriculumDataI } from 'src/app/models/curriculum.model';
 import { ReferenceI } from 'src/app/models/references.model';
+import { MatDialog } from '@angular/material';
+import { UploadavatarComponent } from '../../partials/uploadavatar/uploadavatar.component';
+import { LocalService } from 'src/app/services/local.service';
 
 export interface Family {
   name: string;
@@ -23,7 +26,7 @@ export interface Family {
 })
 
 export class CurriculumComponent {
-
+  urlImage: string;
   civilStatus: any[] = [
     'SOLTERO', 'CASADO', 'DIVORCIADO', 'VIUDO'
   ];
@@ -108,7 +111,11 @@ export class CurriculumComponent {
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
+    private dialog: MatDialog,
+
+    private localService: LocalService,
     private curriculumService: CurriculumService) { }
+
 
 
   modelExperience: ExperienceI | undefined;
@@ -380,5 +387,25 @@ export class CurriculumComponent {
       })
     });
   }
+
+
+  async UploadAvatar() {
+    const modalDialog = this.dialog.open(UploadavatarComponent, {
+      disableClose: true,
+      autoFocus: true,
+      width: '400px',
+
+    })
+
+    modalDialog.afterClosed().subscribe(
+      data => {
+        if (data) {
+          this.urlImage = data['data'].imageURL
+          this.localService.setJsonValue('avatar', this.urlImage);
+        }
+      },
+      err => console.log(err))
+  }
+
 }
 

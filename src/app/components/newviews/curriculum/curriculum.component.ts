@@ -7,6 +7,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import Swal from 'sweetalert2';
 import { CurriculumDataI } from 'src/app/models/curriculum.model';
 import { ReferenceI } from 'src/app/models/references.model';
+import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 
 export interface Family {
   name: string;
@@ -25,13 +26,13 @@ export interface Family {
 export class CurriculumComponent {
 
   civilStatus: any[] = [
-    'SOLTERO', 'CASADO', 'DIVORCIADO', 'VIUDO'
+    'Soltero', 'Casado', 'Divorciado', 'Viudo'
   ];
   ethnicity: any[] = [
-    'MAYA', 'LADINO', 'GARIFUNA', 'XINKA'
+    'Maya', 'Ladino', 'Garifuna', 'Xinka'
   ];
   relationship: any[] = [
-    'ABUELO', 'ABUELA', 'PADRE', 'MADRE', 'HERMANO', 'HERMANA', 'HIJO', 'HIJA', 'TIO', 'TIA', 'PRIMO', 'PRIMA', 'TIO', 'SOBRINO', 'SOBRINA'
+    'Abuelo', 'Abuela', 'Padre', 'Madre', 'Hermano', 'Hermana', 'Hijo', 'Hija', 'Tio', 'Tia', 'Primo', 'Prima', 'Sobrino', 'Sobrina'
   ];
 
   addressFormRefPer = this.fb.group({
@@ -108,7 +109,8 @@ export class CurriculumComponent {
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
-    private curriculumService: CurriculumService) { }
+    private curriculumService: CurriculumService,
+    private _sweetAlertService: SweetAlertService) { }
 
 
   modelExperience: ExperienceI | undefined;
@@ -128,6 +130,7 @@ export class CurriculumComponent {
     this.loadRefPer();
   }
 
+  //TODO EMPIEZAN METODOS PARA CARGAR DE DATOS
   loadCurriculum() {
     let id_entrada = this.userService.userValue.uuidPerson;
     if (id_entrada) {
@@ -173,17 +176,6 @@ export class CurriculumComponent {
     }
   }
 
-  loadExperience() {
-    let id_entrada = this.userService.userValue.uuidPerson;
-    if (id_entrada) {
-      this.curriculumService.GetExperience(id_entrada).subscribe(
-        data => {
-          this.tableExperience = data['data'];
-        }
-      )
-    }
-  }
-
   loadRefFam() {
     let id_entrada = this.userService.userValue.uuidPerson;
     if (id_entrada) {
@@ -206,6 +198,21 @@ export class CurriculumComponent {
     }
   }
 
+  loadExperience() {
+    let id_entrada = this.userService.userValue.uuidPerson;
+    if (id_entrada) {
+      this.curriculumService.GetExperience(id_entrada).subscribe(
+        data => {
+          this.tableExperience = data['data'];
+        }
+      )
+    }
+  }
+
+  //TODO TERMINAN METODOS PARA CARGAR DE DATOS
+
+  //TODO EMPIEZAN METODOS PARA AGREGAR DE DATOS
+
   aggEducation() {
     let id_entrada = this.userService.userValue.uuidPerson;
     const education: EducationI = {
@@ -221,20 +228,10 @@ export class CurriculumComponent {
     }
 
     this.curriculumService.createPersonEducation(education).subscribe(data => {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Cliente Creado con Exito',
-        showConfirmButton: false,
-        timer: 700
-      })
-      setTimeout(location.reload.bind(location), 700);
+      this._sweetAlertService.createAndUpdate('Registro creado con éxito');
+      this.loadEducation();
     }, error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'No se ha podido ingresar el cliente',
-        text: error.message,
-      })
+      this._sweetAlertService.error('No se pudo crear el registro');
     });
   }
 
@@ -251,23 +248,11 @@ export class CurriculumComponent {
       company: null,
       isfamiliar: true,
     }
-    console.log(refFam)
     this.curriculumService.createRef(refFam).subscribe(data => {
-      console.log(data)
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Cliente Creado con Exito',
-        showConfirmButton: false,
-        timer: 700
-      })
-      setTimeout(location.reload.bind(location), 700);
+      this._sweetAlertService.createAndUpdate('Registro creado con éxito');
+      this.loadRefFam();
     }, error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'No se ha podido ingresar el cliente',
-        text: error.message,
-      })
+      this._sweetAlertService.error('No se pudo crear el registro');
     });
   }
 
@@ -284,22 +269,11 @@ export class CurriculumComponent {
       company: this.addressFormRefPer.value.company,
       isfamiliar: false,
     }
-    console.log(refPer)
     this.curriculumService.createRef(refPer).subscribe(data => {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Cliente Creado con Exito',
-        showConfirmButton: false,
-        timer: 700
-      })
-      setTimeout(location.reload.bind(location), 700);
+      this._sweetAlertService.createAndUpdate('Registro creado con éxito');
+      this.loadRefPer();
     }, error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'No se ha podido ingresar el cliente',
-        text: error.message,
-      })
+      this._sweetAlertService.error('No se pudo crear el registro');
     });
   }
 
@@ -319,23 +293,16 @@ export class CurriculumComponent {
       salary: this.addressFormWorkExperience.value.salary,
     }
     this.curriculumService.createWorkExp(workExpr).subscribe(data => {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Cliente Creado con Exito',
-        showConfirmButton: false,
-        timer: 700
-      })
-      setTimeout(location.reload.bind(location), 700);
+      this._sweetAlertService.createAndUpdate('Registro creado con éxito');
+      this.loadExperience();
     }, error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'No se ha podido ingresar el cliente',
-        text: error.message,
-      })
+      this._sweetAlertService.error('No se pudo crear el registro');
     });
   }
 
+  //TODO TERMINAN METODOS PARA AGREGAR DE DATOS
+
+  //TODO METODO PARA EDITAR DE DATOS
   editCurriculum() {
     let id_entrada = this.userService.userValue.uuidPerson;
     const curriculum: CurriculumDataI = {
@@ -365,21 +332,103 @@ export class CurriculumComponent {
     }
 
     this.curriculumService.editCurriculum(curriculum,id_entrada).subscribe(data => {
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Registro Actualizado con Exito',
-        showConfirmButton: false,
-        timer: 700
-      })
-      setTimeout(location.reload.bind(location), 700);
+      this._sweetAlertService.createAndUpdate('Registro actualizado con éxito');
+      this.loadCurriculum();
     }, error => {
-      Swal.fire({
-        icon: 'error',
-        title: 'No se ha podido ingresar el cliente',
-        text: error.message,
-      })
+      this._sweetAlertService.error('No se pudo editar el registro');
     });
   }
+
+  //TODO EMPIEZAN METODOS PARA ELIMINAR LOS DATOS
+
+  deleteEducation(id){
+      Swal.fire({
+        title: 'Estas seguro?',
+        text: "No podras revertir esta acción!",
+        icon: 'warning',
+        showCancelButton: true,
+        cancelButtonText: 'No, Cancelar!',
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Borralo!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.curriculumService.deleteEducation(id).subscribe(data => {
+            this._sweetAlertService.deleteOneConfirmation('Registro eliminado con éxito');
+            this.loadEducation();
+          }, error => {
+            this._sweetAlertService.deleteOneError('No se ha podido eliminar el registro', error);
+          });
+        }
+      })
+  }
+
+  deleteRefFam(id){
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "No podras revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'No, Cancelar!',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Borralo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.curriculumService.deleteRefFam(id).subscribe(data => {
+          this._sweetAlertService.deleteOneConfirmation('Registro eliminado con éxito');
+          this.loadRefFam();
+        }, error => {
+          this._sweetAlertService.deleteOneError('No se ha podido eliminar el registro', error);
+        });
+      }
+    })
+  }
+
+  deleteRefPer(id){
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "No podras revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'No, Cancelar!',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Borralo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.curriculumService.deleteRefPer(id).subscribe(data => {
+          this._sweetAlertService.deleteOneConfirmation('Registro eliminado con éxito');
+          this.loadRefPer();
+        }, error => {
+          this._sweetAlertService.deleteOneError('No se ha podido eliminar el registro', error);
+        });
+      }
+    })
+  }
+
+  deleteWorkExp(id){
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: "No podras revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonText: 'No, Cancelar!',
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Borralo!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.curriculumService.deleteExperience(id).subscribe(data => {
+          this._sweetAlertService.deleteOneConfirmation('Registro eliminado con éxito');
+          this.loadExperience();
+        }, error => {
+          this._sweetAlertService.deleteOneError('No se ha podido eliminar el registro', error);
+        });
+      }
+    })
+  }
+
+    //TODO TERMINAR METODOS PARA ELIMINAR LOS DATOS
 }
 

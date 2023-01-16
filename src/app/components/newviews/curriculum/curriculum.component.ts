@@ -11,6 +11,7 @@ import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 import { MatDialog } from '@angular/material';
 import { UploadavatarComponent } from '../../partials/uploadavatar/uploadavatar.component';
 import { LocalService } from 'src/app/services/local.service';
+import { AvatarsService } from 'src/app/services/avatars.service';
 
 export interface Family {
   name: string;
@@ -115,7 +116,10 @@ export class CurriculumComponent {
     private _sweetAlertService: SweetAlertService,
     private dialog: MatDialog,
     private localService: LocalService,
-    private curriculumService: CurriculumService) { }
+    private avatar: AvatarsService,
+    private curriculumService: CurriculumService
+
+    ) { }
 
 
   modelExperience: ExperienceI | undefined;
@@ -133,6 +137,15 @@ export class CurriculumComponent {
     this.loadEducation();
     this.loadRefFam();
     this.loadRefPer();
+    this.urlImage = this.localService.getJsonValue('avatar');
+
+      if (!this.urlImage) {
+        this.avatar.GetAvatar().subscribe(data => {
+          this.urlImage = data['data'];
+          this.localService.setJsonValue('avatar', this.urlImage);
+        }, err => console.log(err));
+      }
+
   }
 
   //TODO EMPIEZAN METODOS PARA CARGAR DE DATOS

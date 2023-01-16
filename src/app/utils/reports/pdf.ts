@@ -75,6 +75,7 @@ export async function Curriculum(curriculum: CurriculumDataI, fam: ReferenceI, a
 
     pdf.add(new Txt('Información familiar________________________________________').alignment('left').relativePosition(0, 370).fontSize(16).color('#2778B4').bold().end)
 
+
     pdf.add(new Table(
           [
           [

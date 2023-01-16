@@ -47,14 +47,17 @@ export class SweetAlertService {
       icon: 'success',
       title: titulo,
       showConfirmButton: false,
-      timer: 1000
+      timer: 700
     })
   }
 
   deleteOneConfirmation(titulo) {
     Swal.fire({
+      position: 'top-end',
       icon: 'success',
       title: titulo,
+      showConfirmButton: false,
+      timer: 700
     })
   }
 
@@ -72,7 +75,7 @@ export class SweetAlertService {
       icon: 'error',
       title: titulo,
       showConfirmButton: false,
-      timer: 1000
+      timer: 700
     })
   }
 

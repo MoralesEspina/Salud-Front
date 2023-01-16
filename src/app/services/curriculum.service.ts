@@ -41,19 +41,33 @@ export class CurriculumService {
     return this.http.get<EducationI[]>(`${environment.URL}/personEducation/${uuid}`)
   }
 
+  deleteEducation(uuid: any){
+    return this.http.delete(`${environment.URL}/personEducation/${uuid}`)
+  }
+
   GetExperience(uuid: any):Observable<ExperienceI[]> {
     return this.http.get<ExperienceI[]>(`${environment.URL}/workExp/${uuid}`)
+  }
+
+  deleteExperience(uuid: any){
+    return this.http.delete(`${environment.URL}/workExp/${uuid}`)
   }
 
   GetRefFam(uuid: any):Observable<ReferenceI[]> {
     return this.http.get<ReferenceI[]>(`${environment.URL}/references/refFam/${uuid}`)
   }
 
+  deleteRefFam(uuid: any){
+    return this.http.delete(`${environment.URL}/references/refFam/${uuid}`)
+  }
+
   GetRefPer(uuid: any):Observable<ReferenceI[]> {
     return this.http.get<ReferenceI[]>(`${environment.URL}/references/refPer/${uuid}`)
   }
 
-
+  deleteRefPer(uuid: any){
+    return this.http.delete(`${environment.URL}/references/refPer/${uuid}`)
+  }
 
 }
 

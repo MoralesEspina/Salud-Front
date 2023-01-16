@@ -34,11 +34,11 @@ export async function Constancy(person: IPerson, configuration: AuthorizationCon
     days = 'días'
   }
 
-  /*if (!configuration.imageURL) {
+  if (!configuration.imageURL) {
     configuration.imageURL = 'https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/certify%2Fb7394630-1b37-4fb7-a67b-104109938666.jpg?alt=media&token=13a2b33b-a7ba-4c83-a0be-0e15a3a4988b'
   }
 
-  pdf.background(await new Img(configuration.imageURL).alignment('center').relativePosition(0, 30).build())*/
+  pdf.background(await new Img(configuration.imageURL).alignment('center').relativePosition(0, 30).build())
   pdf.add({
     lineHeight: 2,
     text: '\n\n\n\n\n'

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { analytics } from 'firebase';
 import { Claims } from 'src/app/models/claims.model';
 import { RequestpermissionService } from 'src/app/services/request-permission.service';
 import { UserService } from 'src/app/services/user.service';

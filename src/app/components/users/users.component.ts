@@ -183,7 +183,7 @@ export class UsersComponent implements OnInit {
 
   getUsers1() {
 
-    this.userService.users2()
+    this.userService.users1()
       .subscribe(data => {
         this.admins = data['data']
       }, err => console.log(err))

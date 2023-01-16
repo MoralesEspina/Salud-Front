@@ -112,8 +112,7 @@ export class CurriculumComponent {
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
-    private curriculumService: CurriculumService,
-    private _sweetAlertService: SweetAlertService) { }
+    private _sweetAlertService: SweetAlertService,
     private dialog: MatDialog,
     private localService: LocalService,
     private curriculumService: CurriculumService) { }

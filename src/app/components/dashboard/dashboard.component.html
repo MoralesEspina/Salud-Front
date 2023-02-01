@@ -127,50 +127,53 @@
       </div>
     </div>
   </div>
-  <div class="container" *ngIf="user.rol == 'employed'||user.rol == 'boss'||user.rol == 'boss2' ">
-    <mat-card class="card">
-      <div class="contenedor">
-        <div class="row">
-          <div class="caja" align="center">
+  <div class="container"*ngIf="user.rol == 'employed'||user.rol == 'boss'||user.rol == 'boss2' ">
+    <mat-card class="card" >
+        <div class="row" >
+          <div class="div1" align="center">
             <a routerLink="/curriculum">
               <span >
                 Curriculum
               </span>
               <br>
-              <mat-icon class="fa-5x" style="margin-left: -50px;">assignment_ind</mat-icon>
+              <mat-icon class="fa-10x" style="width: auto; height: auto;" >assignment_ind</mat-icon>
             </a>
           </div>
           <!--(click)="createRequestAuthorizationModal(uuidactual)"-->
-          <div class="caja" align="center">
+          <div class="div2"align="center" >
             <a routerLink="/solicitudpermiso">
               <span >
                 Solicitar Permiso
               </span>
               <br>
-              <mat-icon class="fa-5x" style="margin-left: -50px;">add_box</mat-icon>
+              <mat-icon class="fa-10x"  style="width: auto; height: auto;">add_box</mat-icon>
             </a>
 
           </div>
+        </div>
+          <div class="row">
 
-          <div class="caja" align="center">
-            <a routerLink="/permisos">
+          <div class="div1"align="center">
+            <a routerLink="/permisos" >
               <span >
                 Historial de Permisos
               </span>
               <br>
-              <mat-icon class="fa-5x" style="margin-left: -50px;">history</mat-icon>
+              <mat-icon class="fa-10x" style="margin-top: -10px; width: auto; height: auto;">history</mat-icon>
             </a>
           </div>
 
-
-          <div class="caja" align="center">
-            <a>
+          <div class="div2" align="center" >
+            <a (click)="PrintConstancy(IDPerson)">
+              <span >
               Imprimir constancia
-              <app-constancy class="fa-2x" [IDPerson]="uuidactual"></app-constancy>
+            </span>
+            <br>
+              <mat-icon  class="far fa-id-card fas fa-edit fa-8x fa-fw fa-inverse text-gray-900" style="width: auto; height: auto;"></mat-icon >
             </a>
           </div>
         </div>
-      </div>
+
     </mat-card>
 
 

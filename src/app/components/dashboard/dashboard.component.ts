@@ -24,6 +24,7 @@ import { PersonmodalComponent } from '../partials/personmodal/personmodal.compon
 import { WorkComponent } from '../partials/work/work.component';
 import { PermissionrequestComponent } from '../pdfs/permissionrequest/permissionrequest.component.js';
 import { VacationrequestComponent } from '../pdfs/vacationrequest/vacationrequest.component';
+import { Constancy } from 'src/app/utils/reports/Constancy';
 
 
 PdfMakeWrapper.setFonts(pdfFonts, {
@@ -68,6 +69,7 @@ export class DashboardComponent implements OnInit {
     private localService: LocalService,
     private RequestpermissionService: RequestpermissionService,
     private userService: UserService,
+    private constancyService: AuthorizationService
   ) {
     this.localService.getJsonValue('limit');
     this.ManyPersons();
@@ -351,7 +353,28 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-
+  PrintConstancy(uuidPerson) {
+    this.personService.OnePerson(uuidPerson)
+    .subscribe(async data => {
+      let person = new IPerson();
+      person = data['data']
+      this.constancyService.GetConfigurationFile('constancy')
+        .subscribe(async configuration => {
+          await Constancy(person, configuration['data']).then(
+            pdf => {
+              pdf.create().print()
+            }
+          )
+        }, async err => {
+          console.log(err)
+          await Constancy(person, null).then(
+            pdf => {
+              pdf.create().print()
+            }
+          )
+        })
+    })
+}
 
 
 }

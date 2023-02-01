@@ -1,4 +1,4 @@
-import { PrincipalComponent } from './components/newviews/principal/principal.component';
+
 import { A11yModule } from '@angular/cdk/a11y';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -116,8 +116,6 @@ import { RequestReportComponent } from './components/newviews/request-report/req
     PermissionauthComponent,
 
     PermissionComponent,
-
-    PrincipalComponent,
 
 
     PermissionrequestComponent,

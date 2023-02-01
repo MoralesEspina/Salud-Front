@@ -5,10 +5,12 @@
       <mat-card-title class="text-center">INFORMACIÓN CURRICULUM</mat-card-title>
 <div style="margin: auto;text-align: center;">
       <button mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="UploadAvatar()">Subir Foto</button>
+
       <mat-card-actions style="text-align: center;">
         <app-curriculum-pdf [UUIDPerson]="uuid"></app-curriculum-pdf>
       </mat-card-actions>
       <img class="rounded-full ring-2 ring-white" style="margin:auto; width: 300px; margin-bottom: 15px;" src="{{urlImage}}" alt="">
+
     </div>
       <mat-card-header>
         <mat-card-title>DATOS GENERALES</mat-card-title>

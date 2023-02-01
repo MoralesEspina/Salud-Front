@@ -11,6 +11,7 @@ import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 import { MatDialog } from '@angular/material';
 import { UploadavatarComponent } from '../../partials/uploadavatar/uploadavatar.component';
 import { LocalService } from 'src/app/services/local.service';
+import { AvatarsService } from 'src/app/services/avatars.service';
 
 export interface Family {
   name: string;
@@ -115,7 +116,10 @@ export class CurriculumComponent {
     private _sweetAlertService: SweetAlertService,
     private dialog: MatDialog,
     private localService: LocalService,
-    private curriculumService: CurriculumService) { }
+    private avatar: AvatarsService,
+    private curriculumService: CurriculumService
+
+    ) { }
 
 
   modelExperience: ExperienceI | undefined;
@@ -126,6 +130,10 @@ export class CurriculumComponent {
   tableRefFam: ReferenceI[] | undefined;
   tableRefPer: ReferenceI[] | undefined;
   uuid: string = this.userService.userValue.uuidPerson;
+  lengthExperience;
+  lengthEducation;
+  lengthRefFam;
+  lengthRefPer;
 
   ngOnInit(): void {
     this.loadExperience();
@@ -133,6 +141,15 @@ export class CurriculumComponent {
     this.loadEducation();
     this.loadRefFam();
     this.loadRefPer();
+    this.urlImage = this.localService.getJsonValue('avatar');
+
+      if (!this.urlImage) {
+        this.avatar.GetAvatar().subscribe(data => {
+          this.urlImage = data['data'];
+          this.localService.setJsonValue('avatar', this.urlImage);
+        }, err => console.log(err));
+      }
+
   }
 
   //TODO EMPIEZAN METODOS PARA CARGAR DE DATOS
@@ -176,6 +193,7 @@ export class CurriculumComponent {
       this.curriculumService.GetEducation(id_entrada).subscribe(
         data => {
           this.tableEducation = data['data'];
+          this.lengthEducation = this.tableEducation.length
         }
       )
     }
@@ -187,6 +205,7 @@ export class CurriculumComponent {
       this.curriculumService.GetRefFam(id_entrada).subscribe(
         data => {
           this.tableRefFam = data['data'];
+          this.lengthRefFam = this.tableRefFam.length
         }
       )
     }
@@ -198,6 +217,7 @@ export class CurriculumComponent {
       this.curriculumService.GetRefPer(id_entrada).subscribe(
         data => {
           this.tableRefPer = data['data'];
+          this.lengthRefPer = this.tableRefPer.length
         }
       )
     }
@@ -209,6 +229,7 @@ export class CurriculumComponent {
       this.curriculumService.GetExperience(id_entrada).subscribe(
         data => {
           this.tableExperience = data['data'];
+          this.lengthExperience = this.tableExperience.length
         }
       )
     }
@@ -442,7 +463,6 @@ export class CurriculumComponent {
       disableClose: true,
       autoFocus: true,
       width: '400px',
-
     })
 
     modalDialog.afterClosed().subscribe(

@@ -5,6 +5,9 @@
       <mat-card-title class="text-center">INFORMACIÓN CURRICULUM</mat-card-title>
 <div style="margin: auto;text-align: center;">
       <button mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="UploadAvatar()">Subir Foto</button>
+      <mat-card-actions style="text-align: center;">
+        <app-curriculum-pdf [UUIDPerson]="uuid"></app-curriculum-pdf>
+      </mat-card-actions>
       <img class="rounded-full ring-2 ring-white" style="margin:auto; width: 300px; margin-bottom: 15px;" src="{{urlImage}}" alt="">
     </div>
       <mat-card-header>
@@ -296,7 +299,7 @@
       </mat-card-content>
 
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" [disabled]="addressFormPersonEducation.invalid" (click)="aggEducation()">Agregar</button>
+        <button mat-raised-button color="primary"  *ngIf="this.lengthEducation != 3" [disabled]="addressFormPersonEducation.invalid" (click)="aggEducation()">Agregar</button>
       </mat-card-actions>
       <div class="container">
         <table class="table table-hover">
@@ -382,7 +385,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" [disabled]="addressFormRefFam.invalid" (click)="aggRefFam()">Agregar</button>
+        <button mat-raised-button color="primary" *ngIf="this.lengthRefFam != 3" [disabled]="addressFormRefFam.invalid" (click)="aggRefFam()">Agregar</button>
       </mat-card-actions>
       <div class="container">
         <table class="table table-hover">
@@ -475,7 +478,7 @@
       </mat-card-content>
 
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" [disabled]="addressFormRefPer.invalid" (click)="aggRefPer()">Agregar</button>
+        <button mat-raised-button color="primary" *ngIf="this.lengthRefPer != 3" [disabled]="addressFormRefPer.invalid" (click)="aggRefPer()">Agregar</button>
       </mat-card-actions>
 
       <div class="container">
@@ -601,7 +604,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" type="submit" [disabled]="addressFormWorkExperience.invalid" (click)="aggWorkExp()">Agregar</button>
+        <button mat-raised-button color="primary" type="submit" *ngIf="this.lengthExperience != 3" [disabled]="addressFormWorkExperience.invalid" (click)="aggWorkExp()">Agregar</button>
       </mat-card-actions>
       <div class="container">
       <table class="table table-hover">
@@ -620,7 +623,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let experience of tableExperience">
-            <th scope="row">{{experience.direction}}</th>
+            <td scope="row">{{experience.direction}}</td>
             <td>{{experience.phone}}</td>
             <td>{{experience.reason}}</td>
             <td>{{experience.dateof}}</td>
@@ -641,9 +644,6 @@
       </table>
     </div>
     </mat-card>
-    <mat-card-actions style="text-align: center;">
-      <app-curriculum-pdf [UUIDPerson]="uuid"></app-curriculum-pdf>
-    </mat-card-actions>
   </form>
 </div>
 

@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AvatarsService } from 'src/app/services/avatars.service';
+import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -18,7 +19,7 @@ export class UploadavatarComponent implements OnInit {
     private avatar: AvatarsService,
     private dialogRef: MatDialogRef<UploadavatarComponent>,
     @Inject(MAT_DIALOG_DATA) inputData) {
-    console.log(inputData);
+
   }
 
   ngOnInit() {
@@ -42,6 +43,7 @@ export class UploadavatarComponent implements OnInit {
       const formData = new FormData();
       formData.append('avatar', this.fileToSend);
 
+
       Swal.fire({
         allowOutsideClick: false,
         icon: 'info',
@@ -52,12 +54,13 @@ export class UploadavatarComponent implements OnInit {
       });
 
       Swal.showLoading();
-
+      console.log(formData)
       this.avatar.UploadAvatar(formData)
         .subscribe(
           data => {
             Swal.close();
             this.dialogRef.close(data);
+            console.log(data)
           },
           err => console.log(err)
         )

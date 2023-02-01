@@ -130,6 +130,10 @@ export class CurriculumComponent {
   tableRefFam: ReferenceI[] | undefined;
   tableRefPer: ReferenceI[] | undefined;
   uuid: string = this.userService.userValue.uuidPerson;
+  lengthExperience;
+  lengthEducation;
+  lengthRefFam;
+  lengthRefPer;
 
   ngOnInit(): void {
     this.loadExperience();
@@ -189,6 +193,7 @@ export class CurriculumComponent {
       this.curriculumService.GetEducation(id_entrada).subscribe(
         data => {
           this.tableEducation = data['data'];
+          this.lengthEducation = this.tableEducation.length
         }
       )
     }
@@ -200,6 +205,7 @@ export class CurriculumComponent {
       this.curriculumService.GetRefFam(id_entrada).subscribe(
         data => {
           this.tableRefFam = data['data'];
+          this.lengthRefFam = this.tableRefFam.length
         }
       )
     }
@@ -211,6 +217,7 @@ export class CurriculumComponent {
       this.curriculumService.GetRefPer(id_entrada).subscribe(
         data => {
           this.tableRefPer = data['data'];
+          this.lengthRefPer = this.tableRefPer.length
         }
       )
     }
@@ -222,6 +229,7 @@ export class CurriculumComponent {
       this.curriculumService.GetExperience(id_entrada).subscribe(
         data => {
           this.tableExperience = data['data'];
+          this.lengthExperience = this.tableExperience.length
         }
       )
     }
@@ -455,7 +463,6 @@ export class CurriculumComponent {
       disableClose: true,
       autoFocus: true,
       width: '400px',
-
     })
 
     modalDialog.afterClosed().subscribe(

@@ -353,8 +353,9 @@ export class DashboardComponent implements OnInit {
     })
   }
 
-  PrintConstancy(uuidPerson) {
-    this.personService.OnePerson(uuidPerson)
+  PrintConstancy() {
+    let id_person = this.userService.userValue.uuidPerson;
+    this.personService.OnePerson(id_person)
     .subscribe(async data => {
       let person = new IPerson();
       person = data['data']

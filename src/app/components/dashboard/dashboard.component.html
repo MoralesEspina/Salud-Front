@@ -127,7 +127,7 @@
       </div>
     </div>
   </div>
-  <div class="container"*ngIf="user.rol == 'employed'||user.rol == 'boss'||user.rol == 'boss2' ">
+  <div class="container" style="margin: auto;" *ngIf="user.rol == 'employed'||user.rol == 'boss'||user.rol == 'boss2' ">
     <mat-card class="card" >
         <div class="row" >
           <div class="div1" align="center">
@@ -164,7 +164,7 @@
           </div>
 
           <div class="div2" align="center" >
-            <a (click)="PrintConstancy(IDPerson)">
+            <a (click)="PrintConstancy()">
               <span >
               Imprimir constancia
             </span>

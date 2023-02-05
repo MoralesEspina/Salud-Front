@@ -62,16 +62,17 @@ export class StatuspermissionComponent implements OnInit {
           .subscribe(async data => {
             let permission = new IPermission('','','','','','','','','','');
             permission = data['data']
+            console.log(permission)
             this.constancyService.GetConfigurationFile('constancy')
               .subscribe(async configuration => {
-                await Permission(person, permission, configuration['data']).then(
+                await Permission(person, permission).then(
                   pdf => {
                     pdf.create().print()
                   }
                 )
               }, async err => {
                 console.log(err)
-                await Permission(person,permission, null).then(
+                await Permission(person,permission).then(
                   pdf => {
                     pdf.create().print()
                   }

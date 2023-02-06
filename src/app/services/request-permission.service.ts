@@ -18,8 +18,8 @@ export class RequestpermissionService {
   getOneRequestPermission(uuid: string) {
     return this.http.get(`${environment.URL}/permission/${uuid}`)
   }
-  getAllRequestPermission(): Observable<any>  {
-    return this.http.get(`${environment.URL}/permission`)
+  getAllRequestPermission(startDate: string, endDate: string): Observable<any>  {
+    return this.http.get(`${environment.URL}/permission?startdate=${startDate}&enddate=${endDate}`)
   }
 
   getPermissionsBossOne(uuid: any): Observable<any> {

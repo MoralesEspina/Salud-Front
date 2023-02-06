@@ -62,6 +62,7 @@ import { PermissionReqComponent } from './components/newviews/permission/permiss
 import { StatuspermissionComponent } from './components/newviews/statuspermission/statuspermission.component';
 import { environment } from 'src/environments/environment.prod';
 import { RequestReportComponent } from './components/newviews/request-report/request-report.component';
+import { FilterDatePipe } from './components/newviews/pipes/filter.pipe';
 
 
 
@@ -117,7 +118,6 @@ import { RequestReportComponent } from './components/newviews/request-report/req
 
     PermissionComponent,
 
-
     PermissionrequestComponent,
 
     CurriculumPDFComponent,
@@ -126,6 +126,8 @@ import { RequestReportComponent } from './components/newviews/request-report/req
     PermissionReqComponent,
     StatuspermissionComponent,
     RequestReportComponent,
+
+    FilterDatePipe,
 
   ],
 

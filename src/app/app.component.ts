@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'DAS Jalapa';
+  statusfilter: string="";
 
   public secciones: Array<string> = ['primera', 'segunda', 'tercera', 'cuarta', 'quinta'];
 }

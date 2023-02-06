@@ -63,7 +63,7 @@ import { StatuspermissionComponent } from './components/newviews/statuspermissio
 import { environment } from 'src/environments/environment.prod';
 import { RequestReportComponent } from './components/newviews/request-report/request-report.component';
 import { FilterDatePipe } from './components/newviews/pipes/filter.pipe';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -89,46 +89,27 @@ import { FilterDatePipe } from './components/newviews/pipes/filter.pipe';
     PersonComponent,
     GridrequestvacationComponent,
     PersonGridComponent,
-
     FilterPipe,
-
     UploadavatarComponent,
-
     ConfigurationauthorizationfileComponent,
-
     AuthorizationConfigurationComponent,
-
     EspecialitiesComponent,
-
     CertificationComponent,
-
     NotfoundComponent,
-
     ConstancyComponent,
-
     RequestsComponent,
-
     HistoryComponent,
-
     CurriculumComponent,
-
     UsermodalComponent,
-
     PermissionauthComponent,
-
     PermissionComponent,
-
     PermissionrequestComponent,
-
     CurriculumPDFComponent,
-
     RequestHistoryComponent,
     PermissionReqComponent,
     StatuspermissionComponent,
     RequestReportComponent,
-
     FilterDatePipe,
-
   ],
 
   imports: [
@@ -160,11 +141,8 @@ import { FilterDatePipe } from './components/newviews/pipes/filter.pipe';
     MatCheckboxModule,
     AppRoutingModule,
     MatSortModule,
-
-    MatSortModule,
-
     MatRadioModule,
-
+    NgxPaginationModule
 
   ],
   entryComponents: [

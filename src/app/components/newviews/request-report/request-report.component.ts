@@ -1,10 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Claims } from 'src/app/models/claims.model';
 import { RequestpermissionService } from 'src/app/services/request-permission.service';
 import { UserService } from 'src/app/services/user.service';
-import { MatPaginator } from '@angular/material/paginator';
-
-
 
 interface estado {
   value: string;

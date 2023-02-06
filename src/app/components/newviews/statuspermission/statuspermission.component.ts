@@ -46,23 +46,21 @@ export class StatuspermissionComponent implements OnInit {
     this._permission.getPermissionsUserHistory(id_entrada).subscribe(
       response =>{
         this.permissionreq2 = response.data;
-        console.log(this.permissionreq2)
       }, error =>{
 
       }
     )
   }
 
-  PrintConstancy(uuidPerson, uuidPermission) {
+  PrintPermission(uuidPerson, uuidPermission) {
     this.personService.OnePerson(uuidPerson)
       .subscribe(async data => {
         let person = new IPerson();
         person = data['data']
         this._permission.getOneRequestPermission(uuidPermission)
           .subscribe(async data => {
-            let permission = new IPermission('','','','','','','','','','');
+            let permission = new IPermission('','','','','','','','','','','');
             permission = data['data']
-            console.log(permission)
             this.constancyService.GetConfigurationFile('constancy')
               .subscribe(async configuration => {
                 await Permission(person, permission).then(

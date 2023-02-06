@@ -9,7 +9,7 @@ export class IPermission{
       public motive: string,
 
       public uuidPerson: string,
-
+      public document: string,
       public bossOne: string,
       public bossTwo: string,
       public reason: string,

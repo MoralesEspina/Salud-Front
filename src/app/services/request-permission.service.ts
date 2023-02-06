@@ -38,9 +38,6 @@ export class RequestpermissionService {
   updateOneRequestPermission(form:IPermission, uuid: string) {
     return this.http.put(`${environment.URL}/permission/${uuid}`, form)
   }
-
-
-
   getBossOne(){
     return this.http.get(`${environment.URL}/permission/information/bossone`)
   }

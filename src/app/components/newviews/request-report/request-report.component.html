@@ -58,7 +58,7 @@
         </tr>
       </thead>
       <tbody style="text-align: center;"
-        *ngFor="let item of permissionreq | filterStatus:statusfilter let indexof = index;" style="text-align: center;"  style="text-align: center;">
+        *ngFor="let item of permissionreq let indexof = index; | filterStatus:statusfilter | paginate: { itemsPerPage: 15, currentPage: p } "style="text-align: center;">
         <td>{{indexof + 1}}</td>
         <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
         <td>{{item.permissionDate | date: 'd MMM y ' | uppercase }}</td>
@@ -84,5 +84,7 @@
     </table>
 
   </div>
+  <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
+  </pagination-controls>
 
 </div>

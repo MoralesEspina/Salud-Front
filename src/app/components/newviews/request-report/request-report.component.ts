@@ -17,7 +17,7 @@ interface estado {
 })
 
 export class RequestReportComponent implements OnInit {
-
+public p: number = 1;
   public permissionreq: any;
   startDateInput: string
   endDateInput: string;

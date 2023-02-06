@@ -23,6 +23,7 @@ export class PermissionReqComponent implements OnInit {
   public id_entrada;
   public _uuidPerson;
   public _uuidUser;
+  public rol;
   statusPermission: boolean;
   statusPermission2: boolean;
   protected persons: nameperson[] = []
@@ -46,14 +47,10 @@ export class PermissionReqComponent implements OnInit {
   addressFormPermission = this.fb.group({
     permissionDate: [null, Validators.required],
     motive: [null, Validators.required],
-    uuidPerson: [null, Validators.required],
+    document: [null, Validators.maxLength(150)],
     bossOne: [null, Validators.required],
     bossTwo: [null, Validators.required],
-    statusBossOne: [null],
-    statusBossTwo: [null],
-    status: [null],
-    reason: [null, Validators.maxLength(99)],
-
+    reason: [null],
   })
 
 
@@ -66,6 +63,7 @@ export class PermissionReqComponent implements OnInit {
     private _sweetAlertService: SweetAlertService,
     private _errorService: ErrorsService,
     private _router: Router,
+    private authServie: UserService,
   ) {
     this.images = [];
 
@@ -77,8 +75,8 @@ export class PermissionReqComponent implements OnInit {
 
   ngOnInit(): void {
     this.id_entrada = this.router.snapshot.params['id'];
+    this.rol = this.authServie.userValue.rol;
     this._uuidUser = this.userService.userValue.uuid;
-    console.log(this.userService.userValue.uuid)
     if (!this.id_entrada) {
       this._uuidPerson = this.userService.userValue.uuidPerson;
       this.loadPerson(this._uuidPerson);
@@ -87,7 +85,6 @@ export class PermissionReqComponent implements OnInit {
     this.getBossOne();
     this.loadPermission();
   }
-
 
   loadPerson(person) {
     this.personService.OnePerson(person).subscribe(
@@ -102,30 +99,43 @@ export class PermissionReqComponent implements OnInit {
     )
   }
 
-
-
-  createNewPermission() {
+  createNewPermission(addressFormPermission) {
     let id_entrada = this.userService.userValue.uuidPerson;
-    const permission: IPermission = {
-      submittedAt: "",
-      permissionDate: this.addressFormPermission.value.permissionDate,
-      motive: this.addressFormPermission.value.motive,
-      uuidPerson: id_entrada,
-      bossOne: this.addressFormPermission.value.bossOne,
-      bossTwo: this.addressFormPermission.value.bossTwo,
-      reason: "-",
-      statusBossOne: "",
-      statusBossTwo: "",
-      status: "",
-    }
-    this._permission.createRequestPermissionService(permission).subscribe(
-      data => {
-        this._sweetAlertService.createAndUpdate('Se Creo correctamente la solicitud');
-        this._router.navigate(['permisos']);
-      }, error => {
-        console.log(error)
+      const permission: IPermission = {
+        submittedAt: "",
+        permissionDate: addressFormPermission.value.permissionDate,
+        motive: addressFormPermission.value.motive,
+        uuidPerson: id_entrada,
+        bossOne: addressFormPermission.value.bossOne,
+        bossTwo: addressFormPermission.value.bossTwo,
+        document: addressFormPermission.value.document,
+        reason: "",
+        statusBossOne: "",
+        statusBossTwo: "",
+        status: "",
       }
-    );
+      if (!addressFormPermission.valid) {
+        this._sweetAlertService.warning('Complete correctamente el formulario');
+        return
+      }
+      this._permission.createRequestPermissionService(permission).subscribe(
+        data => {
+          this._sweetAlertService.createAndUpdate('Se Creo correctamente la solicitud');
+          switch (this.rol) {
+            case 'boss':
+              this._router.navigate(['estadopermisos']);
+              break;
+              case 'boss2':
+                this._router.navigate(['estadopermisos']);
+                break;
+            default:
+              break;
+          }
+
+        }, error => {
+          this._sweetAlertService.error('Se produjo un error al crear la solictud');
+        }
+      );
   }
 
   getBossOne() {
@@ -160,6 +170,7 @@ export class PermissionReqComponent implements OnInit {
             'motive': this.permission.motive,
             'bossOne': this.permission.bossOne,
             'bossTwo': this.permission.bossTwo,
+            'document': this.permission.document,
             'statusBossOne': '',
             'statusBossTwo': '',
             'status': '',
@@ -181,6 +192,17 @@ export class PermissionReqComponent implements OnInit {
 
 
   async denyRequest() {
+
+    if (this.rol == 'boss') {
+      var statusBossOne = 'Denegada'
+      var statusBossTwo = 'En Espera'
+      var status = 'Denegada'
+    } else if (this.rol == 'boss2') {
+      var statusBossOne = this.permission.statusBossOne
+      var statusBossTwo = 'Denegada'
+      var status = 'Denegada'
+    }
+
     const { value: text } = await Swal.fire({
       input: 'textarea',
       inputLabel: 'Indique el motivo del rechazo:',
@@ -202,9 +224,10 @@ export class PermissionReqComponent implements OnInit {
       'motive': '',
       'bossOne': '',
       'bossTwo': '',
-      'statusBossOne': 'Denegada',
-      'statusBossTwo': 'En Espera',
-      'status': 'Denegada',
+      'document': '',
+      'statusBossOne': statusBossOne,
+      'statusBossTwo': statusBossTwo,
+      'status': status,
       'reason': text,
     }
     this._permission.updateOneRequestPermission(deny, this.id_entrada).subscribe(
@@ -223,85 +246,19 @@ export class PermissionReqComponent implements OnInit {
       }
     );
   }
-
 
   acceptRequest(addressFormPermission){
-    const accepted:IPermission = {
-      'submittedAt': '',
 
-      'uuidPerson': '',
-      'permissionDate': '',
-      'motive': '',
-      'bossOne': '',
-      'bossTwo': '',
-      'statusBossOne': 'Aceptada',
-      'statusBossTwo': 'En Espera',
-      'status': 'En Espera',
-      'reason': '',
-    }
-    if (addressFormPermission.valid) {
-      this._permission.updateOneRequestPermission(accepted, this.id_entrada).subscribe(
-        response => {
-          this._sweetAlertService.createAndUpdate('Se acepto correctamente la solicitud');
-          this._router.navigate(['/permisos'])
-        }, error => {
-          console.log(error)
-          this.data_response = error;
-          this._errorService.error(this.data_response);
-        }
-      );
-    } else {
-      this._sweetAlertService.warning('Complete correctamente el formulario');
-    }
-  }
-
-  // ----------------------------- Aceptar/denegar Boss2 --------------------------------------------------
-
-  async denyRequest2() {
-    const { value: text } = await Swal.fire({
-      input: 'textarea',
-      inputLabel: 'Indique el motivo del rechazo:',
-      inputPlaceholder: 'Escribe acá el motivo...',
-      inputAttributes: {
-        'aria-label': 'Type your message here'
-      },
-      showCancelButton: true
-    })
-
-    if (!text) {
-      this._sweetAlertService.warning('Debe ingresar un motivo');
-      return
-    }
-    const deny: IPermission = {
-      'submittedAt': '',
-      'uuidPerson': '',
-      'permissionDate': '',
-      'motive': '',
-      'bossOne': '',
-      'bossTwo': '',
-      'statusBossOne': this.permission.statusBossOne,
-      'statusBossTwo': 'Denegada',
-      'status': 'Denegada',
-      'reason': text,
-    }
-    this._permission.updateOneRequestPermission(deny, this.id_entrada).subscribe(
-      response => {
-        this._sweetAlertService.createAndUpdate('Se denego correctamente la solicitud');
-        this._router.navigate(['/permisos'])
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-
-      }, error => {
-        console.log(error)
-        this._sweetAlertService.warning('No se pudo denegar la solicitud');
-        this.data_response = error;
-        this._errorService.error(this.data_response);
+      if (this.rol == 'boss') {
+        var statusBossOne = 'Aceptada'
+        var statusBossTwo = 'En Espera'
+        var status = this.permission.status
+      } else if (this.rol == 'boss2') {
+        var statusBossOne = this.permission.statusBossOne
+        var statusBossTwo = 'Aceptada'
+        var status = 'Aceptada'
       }
-    );
-  }
 
-  acceptRequest2(addressFormPermission){
     const accepted:IPermission = {
       'submittedAt': '',
       'uuidPerson': '',
@@ -309,9 +266,10 @@ export class PermissionReqComponent implements OnInit {
       'motive': '',
       'bossOne': '',
       'bossTwo': '',
-      'statusBossOne': 'Aceptada',
-      'statusBossTwo': 'Aceptada',
-      'status': 'Aceptada',
+      'document': '',
+      'statusBossOne': statusBossOne,
+      'statusBossTwo': statusBossTwo,
+      'status': status,
       'reason': '',
     }
     if (addressFormPermission.valid) {
@@ -329,7 +287,4 @@ export class PermissionReqComponent implements OnInit {
       this._sweetAlertService.warning('Complete correctamente el formulario');
     }
   }
-
-
-
 }

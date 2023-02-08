@@ -57,7 +57,7 @@ export class StatuspermissionComponent implements OnInit {
       .subscribe(async data => {
         let person = new IPerson();
         person = data['data']
-        this._permission.getOneRequestPermission(uuidPermission)
+        this._permission.getOneRequestPermissionWithName(uuidPermission)
           .subscribe(async data => {
             let permission = new IPermission('','','','','','','','','','','');
             permission = data['data']

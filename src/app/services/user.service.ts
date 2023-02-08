@@ -92,6 +92,12 @@ export class UserService {
     return this.http.post(`${environment.URL}/curriculums`, JSON.stringify(curriculum))
   }
 
+  deleteUser(uuid: string) {
+    return this.http.delete(`${environment.URL}/users/${uuid}`)
+  }
 
+  deleteCurriculum(uuid: string) {
+    return this.http.delete(`${environment.URL}/curriculums/${uuid}`)
+  }
 
 }

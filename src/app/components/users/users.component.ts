@@ -3,7 +3,7 @@ import { filteruser } from './../../models/namepreson.model';
 import { IUser } from './../../models/edituser.model';
 import { nameperson } from 'src/app/models/namepreson.model';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Rol } from 'src/app/models/rols.model';
 import { Bosses, User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -13,6 +13,7 @@ import { UsermodalComponent } from '../partials/usermodal/usermodal.component';
 import { MatDialog, MatTableDataSource } from '@angular/material';
 import { LocalService } from 'src/app/services/local.service';
 import { CurriculumDataI } from 'src/app/models/curriculum.model';
+import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class UsersComponent implements OnInit {
   form: FormGroup;
   title: string
   user = new User()
-  curriculum= new CurriculumDataI()
+  curriculum = new CurriculumDataI()
   usuario: IUser[] = []
   users: User[] = []
   admins: Admins[] = []
@@ -52,20 +53,17 @@ export class UsersComponent implements OnInit {
     private personService: PersonService,
     private fb: FormBuilder,
     private localService: LocalService,
+    private _sweetAlertService: SweetAlertService,
   ) {
     this.localService.getJsonValue('limit');
     this.ManyPersons();
   }
 
-  @ViewChild('multiUserSearch',{static: false}) multiUserSearchInput: ElementRef;
+  @ViewChild('multiUserSearch', { static: false }) multiUserSearchInput: ElementRef;
 
   ngOnInit() {
     this.getrols()
-    this.getUsers()
-    this.getUsers1()
-    this.getUsers2()
-    this.getUsers3()
-    this.GetNamePerson()
+    this.afterChanges()
     this.form = this.fb.group({
       uuidPerson: ['', Validators.required],
       username: [this.user.username, Validators.required],
@@ -118,124 +116,88 @@ export class UsersComponent implements OnInit {
     if (this.form.invalid) { return }
     this.user = this.form.value
     this.user.id_rol = parseInt(`${this.user.id_rol}`)
-
-    this.curriculum.uuidPerson= this.user.uuidPerson
-
+    this.curriculum.uuidPerson = this.user.uuidPerson
     this.userService.crearUsuario(this.user)
       .subscribe(data => {
-        this.getUsers()
-        this.GetNamePerson()
-
-        this.form.reset()
-        Swal.fire({
-          icon: 'success',
-          title: '<span style="color: white; "> Usuario creado correctamente </span>',
-          toast: true,
-          showConfirmButton: false,
-          position: 'top-end',
-          timer: 1500,
-          timerProgressBar: true,
-          background: '#68d391',
-        })
-
+        this._sweetAlertService.createAndUpdate('Usuario creado correctamente');
+        this.userService.crearCurriculum(this.curriculum)
+          .subscribe(
+            res => {
+              this.curriculum = res[0];
+            },
+            err => console.log(err)
+          )
+          setTimeout(function(){
+            window.location.reload()
+          }, 700);
       }, (err) => {
         if (err == 'User already exists') {
-          Swal.fire({
-            icon: 'error',
-            title: 'Este usuario ya existe!',
-            timer: 2000,
-          })
+          this._sweetAlertService.error('Este usuario ya existe');
         } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Fallo al crear el usuario',
-            timer: 2000,
-          })
+          this._sweetAlertService.error('No se pudo crear el usuario');
         }
       });
+  }
 
-    this.userService.crearCurriculum(this.curriculum)
-    .subscribe(
-      res => {
-        this.curriculum = res[0];
-        console.log(res[0]);
-      },
-      err => console.log(err)
-    )
-
+  afterChanges() {
+    this.ManyPersons()
+    this.getUsers1()
+    this.getUsers2()
+    this.getUsers3()
+    this.GetNamePerson()
   }
 
   getrols() {
     this.userService.rols()
       .subscribe(data => {
         this.rols = data['data']
-      }, err => console.log(err))
-  }
-
-  getUsers() {
-
-    this.userService.users()
-      .subscribe(data => {
-        this.users = data['data']
-      }, err => console.log(err))
-
-  }
+      }, err => console.log(err))}
 
   getUsers1() {
-
     this.userService.users1()
       .subscribe(data => {
         this.admins = data['data']
-      }, err => console.log(err))
+      }, err => console.log(err))}
 
-  }
   getUsers2() {
-
     this.userService.users2()
       .subscribe(data => {
         this.employees = data['data']
-      }, err => console.log(err))
+        console.log(this.employees)
+      }, err => console.log(err)) }
 
-  }
   getUsers3() {
-
     this.userService.users3()
       .subscribe(data => {
         this.bosses = data['data']
-      }, err => console.log(err))
-
-  }
-
+      }, err => console.log(err))}
 
   GetNamePerson() {
-    this.personService.GetNamePerson()
-    .subscribe(data => {
-      this.persons = data['data']
-      this._persons = data['data']
+    this.personService.GetNamePersonForUser()
+      .subscribe(data => {
+        this.persons = data['data']
+        this._persons = data['data']
+      }, err => console.log(err))}
 
-    }, err => console.log(err))
-  }
-
-  onInputChange(){
-    console.log(this.multiUserSearchInput.nativeElement.value);
+  onInputChange() {
     const searchInput = this.multiUserSearchInput.nativeElement.value ?
-    this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
-    this.persons = this._persons.filter(u => {
+      this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
+      this.persons = this._persons.filter(u => {
       const name: string = u.fullname.toLowerCase();
       return name.indexOf(searchInput) > -1;
     });
   }
-  onInputChange2(){
-    console.log(this.multiUserSearchInput.nativeElement.value);
+
+  onInputChange2() {
     const searchInput = this.multiUserSearchInput.nativeElement.value ?
-    this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
+      this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
     this.fiteruser = this._fiteruser.filter(u => {
       const name: string = u.name.toLowerCase();
       return name.indexOf(searchInput) > -1;
     });
   }
+
   UpdateUser(uuid) {
-    console.log(uuid);
     this.userService.OneUser(uuid)
       .subscribe(data => {
         const modalDialog = this.dialog.open(UsermodalComponent, {
@@ -244,32 +206,22 @@ export class UsersComponent implements OnInit {
           width: '600px',
           data: {
             user: data['data'],
-            action: 'Actualizar'
-
-          }
-        }
-        )
-
+            action: 'Actualizar' }
+        })
         modalDialog.afterClosed()
           .subscribe(result => {
-
             if (result) {
               this.userService.UpdateUser(result, uuid)
                 .subscribe(ok => {
-                  this.ManyPersons()
-                }, err => console.log(err))
-                setTimeout(location.reload.bind(location),200);
-            }
-          }
-
-          )
-
-      }
-
-      )
-
+                  this.afterChanges()
+                  this._sweetAlertService.createAndUpdate('Registro actualizado con éxito');
+                }, err => console.log(err)
+                )}
+          })
+      })
   }
-  deletePerson(id: string) {
+
+  deletePerson(id: string, idPerson: string) {
     Swal.fire({
       title: '¿Estás seguro?',
       text: 'Borrar el Usuario!',
@@ -281,18 +233,37 @@ export class UsersComponent implements OnInit {
       confirmButtonText: 'Si, borrar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire({
-          icon: 'success',
-          title: `<span class="text-gray-900"> Usuario borrado exitosamente </span>`,
-          toast: true,
-          showConfirmButton: false,
-          position: 'top-end',
-          timer: 2000,
-          background: '#ffffff',
-        })
+        this.userService.deleteUser(id).subscribe(data => {
+          this._sweetAlertService.deleteOneConfirmation('Registro eliminado con éxito');
+          this.afterChanges()
+          this.userService.deleteCurriculum(idPerson).subscribe(data => {
+          })
+        }, error => {
+          this._sweetAlertService.deleteOneError('No se ha podido eliminar el registro', error);
+        });
       }
     })
   }
 
-
+  deleteAdmin(id: string) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'Borrar el Usuario!',
+      icon: 'warning',
+      showCancelButton: true,
+      cancelButtonColor: '#4299e1',
+      confirmButtonColor: '#f56565',
+      cancelButtonText: "Cancelar",
+      confirmButtonText: 'Si, borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.deleteUser(id).subscribe(data => {
+          this._sweetAlertService.deleteOneConfirmation('Registro eliminado con éxito');
+          this.afterChanges();
+        }, error => {
+          this._sweetAlertService.deleteOneError('No se ha podido eliminar el registro', error);
+        });
+      }
+    })
+  }
 }

@@ -1,8 +1,9 @@
 <app-navbar></app-navbar>
-<div class="mt-8 lg:mt-4 px-6 ml-12 mr-auto">
-  <div class="row" style="width: 1250px; margin: auto;">
-    <div class="user border rounded-md " style="display:inline-table;">
-      <form class="ed-item ed-container inputsize">
+<div class="mt-8 px-6 ml-12">
+<div class="contenedor" >
+
+    <div class="user border rounded-md " style="width: 500px; height: 350px;">
+      <form class="inputsize">
         <mat-dialog-content [formGroup]="form">
           <div class="ed-item ed-container">
             <div class="ed-item s-100 m-100 l-100">
@@ -70,15 +71,12 @@
 
         </div>
       </form>
-
-
     </div>
 
     <!--Data object from database-->
 
-
-    <div class="datagrid border rounded-md " style="display:inline-table; float: right;">
-      <table class="tabla1" style="width: 700px; ">
+    <div class="tabla1 datagrid border rounded-md " style="width: 700px; margin-bottom: 15px;">
+      <table>
         <thead style="text-align: center;">
           <tr>
             <th>EDITAR</th>
@@ -88,9 +86,10 @@
             <th>ROL</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let duser of admins | paginate: { itemsPerPage: 10, currentPage: p } let indexof = index let u of usuario;" class="text-lg"
-            [class.alt]="(indexof + 1)%2==1">
+        <tbody >
+          <tr
+            *ngFor="let duser of admins | paginate: { itemsPerPage: 10, currentPage: p } let indexof = index let u of usuario;"
+            class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="UpdateUser(u.uuid)">
                 <div class="justify-center text-center ">
@@ -107,8 +106,8 @@
               </div>
             </td>
             <td>{{indexof + 1}}</td>
-            <td>{{duser.username}}</td>
-            <td>{{duser.rol}}</td>
+            <td >{{duser.username}}</td>
+            <td style="text-align: center;">{{duser.rol}}</td>
           </tr>
 
         </tbody>
@@ -116,11 +115,9 @@
       <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
       </pagination-controls>
     </div>
-  </div>
-  <div> </div>
-  <div class="row" style="width: 1350px; margin: auto;">
-    <div class="datagrid border rounded-md " style="display:inline-table; float: left;">
-      <table class="tabla1" style=" width: 650px;" >
+
+    <div class="tabla2 datagrid border rounded-md " style="width: 700px; margin-top: 15px;">
+      <table>
 
         <thead style="text-align: center;">
           <tr>
@@ -133,8 +130,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let duser of bosses | paginate: { itemsPerPage: 10, currentPage: p2 } let indexof = index let u of usuario;" class="text-lg"
-            [class.alt]="(indexof + 1)%2==1">
+          <tr
+            *ngFor="let duser of bosses | paginate: { itemsPerPage: 10, currentPage: p2 } let indexof = index let u of usuario;"
+            class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="UpdateUser(u.uuid)">
                 <div class="justify-center text-center ">
@@ -152,7 +150,7 @@
             </td>
             <td>{{indexof + 1}}</td>
             <td>{{duser.uuidPerson}}</td>
-            <td>{{duser.username}}</td>
+            <td style="text-align: center;">{{duser.username}}</td>
             <td>{{duser.rol}}</td>
           </tr>
 
@@ -162,8 +160,8 @@
       </pagination-controls>
     </div>
 
-    <div class="datagrid border rounded-md " style="display:inline-table; float: right;">
-      <table class="tabla2">
+    <div class="tabla3 datagrid border rounded-md " style="width: 700px;">
+      <table >
 
         <thead style="text-align: center;">
           <tr>
@@ -176,8 +174,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let duser of employees | paginate: { itemsPerPage: 10, currentPage: p3} let indexof = index let u of usuario;" class="text-lg"
-            [class.alt]="(indexof + 1)%2==1">
+          <tr
+            *ngFor="let duser of employees | paginate: { itemsPerPage: 10, currentPage: p3} let indexof = index let u of usuario;"
+            class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="UpdateUser(u.uuid)">
                 <div class="justify-center text-center ">
@@ -195,7 +194,7 @@
             </td>
             <td>{{indexof + 1}}</td>
             <td>{{duser.uuidPerson}}</td>
-            <td>{{duser.username}}</td>
+            <td style="text-align: center;">{{duser.username}}</td>
             <td>{{duser.rol}}</td>
           </tr>
 

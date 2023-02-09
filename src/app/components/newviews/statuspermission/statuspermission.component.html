@@ -1,17 +1,12 @@
 <app-navbar></app-navbar>
-
 <!--Data object from database-->
 <div class="box">
-
-
     <div class="datagrid overflow-x-auto block">
       <div align="center" class=" font-bold capitalize" style="margin-bottom: 5PX; font-size: 20px;">
         MIS SOLICITUDES ACTIVAS <br>
       </div>
       <table>
-
         <thead>
-
           <tr style="text-align: center;">
             <th>No.</th>
             <th>EMITIDO</th>
@@ -22,10 +17,11 @@
             <th>ESTADO</th>
             <th>ESTADO DE SOLICITUD</th>
             <th>DETALLES</th>
-            <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody style="text-align: center;" *ngFor="let item of permissionreq; let indexof = index;" style="text-align: center;">
+        <tbody>
+        <tr style="text-align: center;" *ngFor="let item of permissionreq  let indexof = index;" style="text-align: center;"
+          class="text-lg" [class.alt]="(indexof + 1)%2==1">
           <td>{{indexof + 1}}</td>
           <td>{{item.submittedAt  | date: 'd MMM y H:mm' | uppercase }}</td>
           <td>{{item.permissionDate  | date: 'd MMM y ' | uppercase }}</td>
@@ -41,24 +37,16 @@
               </div>
             </div>
           </td>
-          <td style="width: 10px;">
-            <div class="rounded-full cursor-pointer">
-              <div class="justify-center text-center ">
-                <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900" (click)="PrintPermission(item.uuidPerson, item.uuid)"></i>
-              </div>
-            </div>
-          </td>
+        </tr>
         </tbody>
       </table>
     </div>
-    <div class="datagrid overflow-x-auto block" style="margin-top: 100PX;">
+    <div class="datagrid overflow-x-auto block" style="margin-top: 50PX;">
       <div align="center" class=" font-bold capitalize" style="margin-bottom: 5PX; font-size: 20px;">
         HISTORIAL DE SOLICITUDES<br>
       </div>
       <table>
-
         <thead>
-
           <tr style="text-align: center;">
             <th>No.</th>
             <th>EMITIDO</th>
@@ -68,8 +56,10 @@
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody style="text-align: center;" *ngFor="let item of permissionreq2; let indexof = index;">
-          <td>{{indexof + 1}}</td>
+        <tbody>
+          <tr style="text-align: center;" *ngFor="let item of permissionreq2 | paginate: { id: 'Page', itemsPerPage: tableSize, currentPage: p} let indexof = index;"
+          class="text-lg" [class.alt]="(indexof + 1)%2==1">
+          <td>{{tableSize * (p -1 ) + indexof + 1}}</td>
           <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
           <td>{{item.permissionDate | date: 'd MMM y' | uppercase }}</td>
           <td>{{item.status}}</td>
@@ -87,8 +77,10 @@
               </div>
             </div>
           </td>
+        </tr>
         </tbody>
       </table>
-
+      <pagination-controls id="Page" (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
+      </pagination-controls>
   </div>
 </div>

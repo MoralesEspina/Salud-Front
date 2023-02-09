@@ -3,6 +3,12 @@
  * inputs sizes and forms
  *
 */
+p{
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 1px;
+  text-align: center;
+}
 
 .target {
     position: absolute;
@@ -51,7 +57,27 @@
     padding-bottom: 4%;
 }
 
+.tabla1{
+  min-width: 700px;
+  max-width: 700px;
+  min-height: 460px;
+  max-height: 460px;
 
+}
+
+.tabla2{
+  min-width: 700px;
+  max-width: 700px;
+  min-height: 460px;
+  max-height: 460px;
+}
+
+.tabla3{
+  min-width: 700px;
+  max-width: 700px;
+  min-height: 460px;
+  max-height: 460px;
+}
 
 .contenedor{
   margin: 0 auto;

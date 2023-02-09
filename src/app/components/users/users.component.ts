@@ -26,6 +26,8 @@ export class UsersComponent implements OnInit {
   public p: number = 1;
   public p2: number = 1;
   public p3: number = 1;
+  public tableSize: number = 10;
+
   search = this.localService.getJsonValue('filter');
   limit: any = this.localService.getJsonValue('limit');
   form: FormGroup;
@@ -166,7 +168,7 @@ export class UsersComponent implements OnInit {
     this.userService.users2()
       .subscribe(data => {
         this.employees = data['data']
-        console.log(this.employees)
+
       }, err => console.log(err)) }
 
   getUsers3() {

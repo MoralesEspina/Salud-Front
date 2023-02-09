@@ -23,7 +23,8 @@ export class AuthorizationComponent implements OnInit {
   endDateInput: string
   order: string // asc o desc
   orderField: string
-
+  public p:number = 1;
+  public tableSize:number = 25;
   authorizations: IAuthorization[] = []
 
   constructor(private reportService: ReportsService) { }

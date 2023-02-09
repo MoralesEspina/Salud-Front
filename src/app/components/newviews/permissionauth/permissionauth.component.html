@@ -21,8 +21,8 @@
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody *ngFor="let item of permissionreq; let indexof = index;" style="text-align: center;">
-          <td>{{indexof + 1}}</td>
+        <tbody *ngFor="let item of permissionreq | paginate: { id: 'Page', currentPage: p, itemsPerPage: tableSize }; let indexof = index;" style="text-align: center;">
+          <td>{{tableSize * (p -1 ) + indexof + 1}}</td>
           <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
           <td>{{item.person.fullname}}</td>
           <td>{{item.permissionDate | date: 'd MMM y' | uppercase }}</td>
@@ -42,6 +42,8 @@
           </td>
         </tbody>
       </table>
+      <pagination-controls id="Page" (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
+      </pagination-controls>
     </div>
 
     <div class="datagrid" style="margin-top: 50PX; width: 1200px;">
@@ -60,8 +62,8 @@
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody *ngFor="let item of permissionreq2; let indexof = index;" style="text-align: center;">
-          <td>{{indexof + 1}}</td>
+        <tbody *ngFor="let item of permissionreq2 | paginate: { id: 'Page2', itemsPerPage: tableSize, currentPage: p2} let indexof = index;" style="text-align: center;">
+          <td>{{tableSize * (p2 -1 ) + indexof + 1}}</td>
           <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
           <td>{{item.bossOne}}</td>
           <td>{{item.person.fullname}}</td>
@@ -82,6 +84,8 @@
           </td>
         </tbody>
       </table>
+      <pagination-controls id="Page2" (pageChange)="p2 = $event" nextLabel="Siguiente" previousLabel="Anterior">
+      </pagination-controls>
     </div>
 
 </div>

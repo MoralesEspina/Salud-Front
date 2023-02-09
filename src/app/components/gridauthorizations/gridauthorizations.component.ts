@@ -30,7 +30,8 @@ export class GridauthorizationsComponent implements OnInit {
   authorizations: IAuthorization[] = []
   authorizationPDF = new IAuthorization();
   user = new Claims();
-
+  public p:number = 1;
+  public tableSize:number = 25;
   search: string;
 
   dataSource: { filter: string; };

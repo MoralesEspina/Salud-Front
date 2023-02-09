@@ -46,8 +46,8 @@ export class PermissionReqComponent implements OnInit {
 
   addressFormPermission = this.fb.group({
     permissionDate: [null, Validators.required],
-    motive: [null, Validators.required],
-    document: [null, Validators.maxLength(150)],
+    motive: [null, [Validators.required]],
+    document: [null, [Validators.required]],
     bossOne: [null, Validators.required],
     bossTwo: [null, Validators.required],
     reason: [null],

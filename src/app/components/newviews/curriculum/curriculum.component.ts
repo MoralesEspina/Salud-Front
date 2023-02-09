@@ -256,6 +256,9 @@ export class CurriculumComponent {
     this.curriculumService.createPersonEducation(education).subscribe(data => {
       this._sweetAlertService.createAndUpdate('Registro creado con éxito');
       this.loadEducation();
+      this.addressFormPersonEducation.reset();
+      for(let i in this.addressFormPersonEducation.controls)
+      this.addressFormPersonEducation.controls[i].setErrors(null);
     }, error => {
       this._sweetAlertService.error('No se pudo crear el registro');
     });
@@ -277,6 +280,9 @@ export class CurriculumComponent {
     this.curriculumService.createRef(refFam).subscribe(data => {
       this._sweetAlertService.createAndUpdate('Registro creado con éxito');
       this.loadRefFam();
+      this.addressFormRefFam.reset();
+      for(let i in this.addressFormRefFam.controls)
+      this.addressFormRefFam.controls[i].setErrors(null);
     }, error => {
       this._sweetAlertService.error('No se pudo crear el registro');
     });
@@ -297,6 +303,9 @@ export class CurriculumComponent {
     }
     this.curriculumService.createRef(refPer).subscribe(data => {
       this._sweetAlertService.createAndUpdate('Registro creado con éxito');
+      this.addressFormRefPer.reset({});
+      for(let i in this.addressFormRefPer.controls)
+      this.addressFormRefPer.controls[i].setErrors(null);
       this.loadRefPer();
     }, error => {
       this._sweetAlertService.error('No se pudo crear el registro');
@@ -321,6 +330,8 @@ export class CurriculumComponent {
     this.curriculumService.createWorkExp(workExpr).subscribe(data => {
       this._sweetAlertService.createAndUpdate('Registro creado con éxito');
       this.loadExperience();
+      this.addressFormWorkExperience.reset();
+      this.addressFormWorkExperience.markAsUntouched();
     }, error => {
       this._sweetAlertService.error('No se pudo crear el registro');
     });

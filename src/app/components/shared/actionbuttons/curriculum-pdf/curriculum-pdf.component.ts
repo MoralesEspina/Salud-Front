@@ -2,9 +2,7 @@ import { ReferenceI } from './../../../../models/references.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { ITable } from 'pdfmake-wrapper/lib/interfaces';
 import { CurriculumDataI } from 'src/app/models/curriculum.model';
-import { AuthorizationService } from 'src/app/services/authorization.service';
 import { CurriculumService } from 'src/app/services/curriculum.service';
-import { PersonService } from 'src/app/services/person.service';
 import { Cell, Img, PdfMakeWrapper, Table, Txt } from 'pdfmake-wrapper';
 import { UserService } from 'src/app/services/user.service';
 import * as dayjs from 'dayjs';
@@ -15,7 +13,6 @@ import { LocalService } from 'src/app/services/local.service';
 type TableRowFam = [string, string, string, string];
 type TableRowPer = [string, string, string, string, string];
 type TableRowEducation = [string, string, string, string, string, string, string];
-type TableRowExperience = [string, string, string, string, string, string, string, string];
 
 @Component({
   selector: 'app-curriculum-pdf',
@@ -25,18 +22,17 @@ type TableRowExperience = [string, string, string, string, string, string, strin
 
 export class CurriculumPDFComponent implements OnInit {
 
-
   @Input()
   UUIDPerson: string;
   curriculum: CurriculumDataI | undefined;
-  tableRefFam: ReferenceI[] = [];
-  tableRefPer: ReferenceI[] = [];
-  tableEducation: EducationI[] = [];
+  refFam: ReferenceI[];
+  refPer: ReferenceI[];
+  education: EducationI[];
   tableExperience: ExperienceI[] = [];
   position:any = -100;
   fecha = new Date();
   imageURL: string = 'https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/certify%2FFormato_Curriculum_Logo.png?alt=media&token=77b83778-621f-490a-bf0b-601ccc01339d'
-  urlImage = this.localService.getJsonValue('avatar');
+  urlImage: string;
 
   constructor(
     private curriculumService: CurriculumService,
@@ -44,11 +40,7 @@ export class CurriculumPDFComponent implements OnInit {
     private localService: LocalService) { }
 
   ngOnInit() {
-    this.loadExperience();
-    this.loadCurriculum();
-    this.loadEducation();
-    this.loadRefFam();
-    this.loadRefPer();
+
   }
 
   //TODO EMPIEZAN METODOS PARA CARGAR DE DATOS
@@ -68,7 +60,7 @@ export class CurriculumPDFComponent implements OnInit {
     if (id_entrada) {
       this.curriculumService.GetEducation(id_entrada).subscribe(
         data => {
-          this.tableEducation = data['data'];
+          this.education = data['data'];
         }
       )
     }
@@ -79,7 +71,7 @@ export class CurriculumPDFComponent implements OnInit {
     if (id_entrada) {
       this.curriculumService.GetRefFam(id_entrada).subscribe(
         data => {
-          this.tableRefFam = data['data'];
+          this.refFam = data['data'];
         }
       )
     }
@@ -90,7 +82,7 @@ export class CurriculumPDFComponent implements OnInit {
     if (id_entrada) {
       this.curriculumService.GetRefPer(id_entrada).subscribe(
         data => {
-          this.tableRefPer = data['data'];
+          this.refPer = data['data'];
         }
       )
     }
@@ -102,6 +94,7 @@ export class CurriculumPDFComponent implements OnInit {
       this.curriculumService.GetExperience(id_entrada).subscribe(
         data => {
           this.tableExperience = data['data'];
+          console.log(this.tableExperience)
         }
       )
     }
@@ -109,8 +102,14 @@ export class CurriculumPDFComponent implements OnInit {
 
    //TODO TERMINAN METODOS PARA CARGAR DE DATOS
 
-  async GenerateReportTable(refFam: ReferenceI[], refPer: ReferenceI[], education: EducationI[], experience: ExperienceI[]) {
+  async GenerateReportTable() {
 
+    this.loadExperience();
+    this.loadCurriculum();
+    this.loadEducation();
+    this.loadRefFam();
+    this.loadRefPer();
+    this. urlImage = this.localService.getJsonValue('avatar');
     const pdf = new PdfMakeWrapper()
 
     pdf.pageSize('A4')
@@ -135,61 +134,61 @@ export class CurriculumPDFComponent implements OnInit {
     pdf.add(new Txt('País').alignment('left').relativePosition(0, 100).bold().end)
     pdf.add(new Txt(this.curriculum.country).alignment('left').relativePosition(125, 100).end)
     pdf.add(new Txt('Municipio').alignment('left').relativePosition(238, 100).bold().end)
-    pdf.add(new Txt(this.curriculum.municipality).alignment('left').relativePosition(360, 100).end)
+    pdf.add(new Txt(this.curriculum.municipality).alignment('left').relativePosition(340, 100).end)
 
     pdf.add(new Txt('Departamento').alignment('left').relativePosition(0, 120).bold().end)
     pdf.add(new Txt(this.curriculum.department).alignment('left').relativePosition(125, 120).end)
     pdf.add(new Txt('Aldea o caserío').alignment('left').relativePosition(238, 120).bold().end)
-    pdf.add(new Txt(this.curriculum.village).alignment('left').relativePosition(360, 120).end)
+    pdf.add(new Txt(this.curriculum.village).alignment('left').relativePosition(340, 120).end)
 
     pdf.add(new Txt('Teléfono residencia').alignment('left').relativePosition(0, 140).bold().end)
     pdf.add(new Txt(this.curriculum.homephone).alignment('left').relativePosition(125, 140).end)
     pdf.add(new Txt('Teléfono oficina').alignment('left').relativePosition(238, 140).bold().end)
-    pdf.add(new Txt(this.curriculum.workPhone).alignment('left').relativePosition(360, 140).end)
+    pdf.add(new Txt(this.curriculum.workPhone).alignment('left').relativePosition(340, 140).end)
 
     pdf.add(new Txt('Teléfono celular').alignment('left').relativePosition(0, 160).bold().end)
     pdf.add(new Txt(this.curriculum.phone).alignment('left').relativePosition(125, 160).end)
     pdf.add(new Txt('Correo electrónico').alignment('left').relativePosition(238, 160).bold().end)
-    pdf.add(new Txt(this.curriculum.email).alignment('left').relativePosition(360, 160).end)
+    pdf.add(new Txt(this.curriculum.email).alignment('left').relativePosition(340, 160).end)
 
     pdf.add(new Txt('Fecha de nacimiento').alignment('left').relativePosition(0, 180).bold().end)
     pdf.add(new Txt(this.curriculum.bornDate).alignment('left').relativePosition(125, 180).end)
     pdf.add(new Txt('Edad').alignment('left').relativePosition(238, 180).bold().end)
-    pdf.add(new Txt(this.curriculum.age).alignment('left').relativePosition(360, 180).end)
+    pdf.add(new Txt(this.curriculum.age).alignment('left').relativePosition(340, 180).end)
 
     pdf.add(new Txt('Lugar nacimiento').alignment('left').relativePosition(0, 200).bold().end)
     pdf.add(new Txt(this.curriculum.bornPlace).alignment('left').relativePosition(125, 200).end)
     pdf.add(new Txt('Estado civil').alignment('left').relativePosition(238, 200).bold().end)
-    pdf.add(new Txt(this.curriculum.civilStatus).alignment('left').relativePosition(360, 200).end)
+    pdf.add(new Txt(this.curriculum.civilStatus).alignment('left').relativePosition(340, 200).end)
 
     pdf.add(new Txt('Nacionalidad').alignment('left').relativePosition(0, 220).bold().end)
     pdf.add(new Txt(this.curriculum.nacionality).alignment('left').relativePosition(125, 220).end)
     pdf.add(new Txt('Etnia').alignment('left').relativePosition(238, 220).bold().end)
-    pdf.add(new Txt(this.curriculum.etnia).alignment('left').relativePosition(360, 220).end)
+    pdf.add(new Txt(this.curriculum.etnia).alignment('left').relativePosition(340, 220).end)
 
     pdf.add(new Txt('Datos de identificación_______________________________________').alignment('left').relativePosition(0, 240).fontSize(16).color('#2778B4').bold().end)
 
     pdf.add(new Txt('CUI').alignment('left').relativePosition(0, 260).bold().end)
     pdf.add(new Txt(this.curriculum.dpi).alignment('left').relativePosition(125, 260).end)
     pdf.add(new Txt('No. pasaporte').alignment('left').relativePosition(238, 260).bold().end)
-    pdf.add(new Txt(this.curriculum.passport).alignment('left').relativePosition(360, 260).end)
+    pdf.add(new Txt(this.curriculum.passport).alignment('left').relativePosition(340, 260).end)
 
     pdf.add(new Txt('No. Afiliación IGSS').alignment('left').relativePosition(0, 280).bold().end)
     pdf.add(new Txt(this.curriculum.igss).alignment('left').relativePosition(125, 280).end)
     pdf.add(new Txt('Licencia').alignment('left').relativePosition(238, 280).bold().end)
-    pdf.add(new Txt(this.curriculum.license).alignment('left').relativePosition(360, 280).end)
+    pdf.add(new Txt(this.curriculum.license).alignment('left').relativePosition(340, 280).end)
 
     pdf.add(new Txt('NIT').alignment('left').relativePosition(0, 300).bold().end)
     pdf.add(new Txt(this.curriculum.nit).alignment('left').relativePosition(125, 300).end)
 
     pdf.add(new Txt('Información familiar________________________________________').alignment('center').relativePosition(0, 340).fontSize(16).color('#2778B4').bold().end)
-    pdf.add(this.createTableRefFam(refFam))
+    pdf.add(this.createTableRefFam(this.refFam))
 
     pdf.add(new Txt('Educación__________________________________________________').alignment('center').relativePosition(0, 470).fontSize(16).color('#2778B4').bold().end)
-    pdf.add(this.createTableEducation(education))
+    pdf.add(this.createTableEducation(this.education))
 
     pdf.add(new Txt('Referencias Personales_______________________________________').alignment('center').relativePosition(0, 600).fontSize(16).color('#2778B4').bold().end)
-    pdf.add(this.createTableRefPer(refPer))
+    pdf.add(this.createTableRefPer(this.refPer))
 
     pdf.add(new Txt('Experiencia Laboral_______________________________________').alignment('center').relativePosition(0, -10).fontSize(16).color('#2778B4').bold().pageBreak('before').end)
 
@@ -220,7 +219,7 @@ export class CurriculumPDFComponent implements OnInit {
     pdf.add(new Txt('_________________________________________').alignment('center').relativePosition(0, this.position+160).fontSize(12).bold().end)
     pdf.add(new Txt('F. '+this.curriculum.fullname).alignment('center').relativePosition(0, this.position+180).fontSize(12).bold().end)
     pdf.add(new Txt('Fecha de generación: '+ this.fecha.toLocaleDateString()).alignment('center').relativePosition(0, this.position+200).fontSize(8).bold().end)
-
+    this.position = -100;
     pdf.create().open();
   }
 
@@ -244,8 +243,8 @@ export class CurriculumPDFComponent implements OnInit {
       .end;
   }
 
-  extractDataToRowFam(refPer: ReferenceI[]): TableRowFam[] {
-    return refPer.map((row, index) => [row.name, row.phone, row.relationship, dayjs(row.bornDate).format('DD/MM/YYYY')])
+  extractDataToRowFam(refFam: ReferenceI[]): TableRowFam[] {
+    return refFam.map((row, index) => [row.name, row.phone, row.relationship, dayjs(row.bornDate).format('DD/MM/YYYY')])
   }
 
   createTableEducation(education: EducationI[]): ITable {

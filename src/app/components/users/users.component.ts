@@ -23,6 +23,9 @@ import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 })
 
 export class UsersComponent implements OnInit {
+  public p: number = 1;
+  public p2: number = 1;
+  public p3: number = 1;
   search = this.localService.getJsonValue('filter');
   limit: any = this.localService.getJsonValue('limit');
   form: FormGroup;

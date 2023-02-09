@@ -1,6 +1,4 @@
-
 import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
-
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { CertificationComponent } from './components/certification/certification.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -12,7 +10,6 @@ import { NotfoundComponent } from './components/partials/notfound/notfound.compo
 import { AuthorizationComponent } from './components/reports/authorization/authorization.component';
 import { PersonGridComponent } from './components/reports/person-grid/person-grid.component';
 import { UsersComponent } from './components/users/users.component';
-import { RequestsComponent } from './components/newviews/requests/requests.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
 import { HistoryComponent } from './components/newviews/history/history.component';
@@ -30,16 +27,28 @@ const routerOptions: ExtraOptions = {
 }
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-
-  {path: 'reportes', component: AuthorizationComponent , canActivate: [AuthGuard], data: {roles: [Role.admin]} },
-
-  {path: 'requests', component: RequestsComponent , },
-
-  {path: 'dashboard',component: DashboardComponent,canActivate: [AuthGuard] },
-
-  {path: "registros", component: GridauthorizationsComponent, canActivate: [AuthGuard], data: {roles: [Role.admin]} },
-
+  {
+    path: '',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'reportes',
+    component: AuthorizationComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.admin] }
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: "registros",
+    component: GridauthorizationsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.admin] }
+  },
   {
     path: 'login',
     component: LoginComponent
@@ -48,22 +57,17 @@ const routes: Routes = [
     path: 'usuarios',
     component: UsersComponent,
     canActivate: [AuthGuard],
-    data: {roles: [Role.admin]}
+    data: { roles: [Role.admin] }
   },
   {
     path: 'dependency',
     component: JobdependencyComponent,
     canActivate: [AuthGuard]
   },
-
   {
     path: 'historial',
     component: HistoryComponent
-
   },
-
-
-
   {
     path: 'SolicitudesDePermisos',
     component: RequestReportComponent,
@@ -72,9 +76,7 @@ const routes: Routes = [
   {
     path: 'historial_solicitudes',
     component: RequestHistoryComponent
-
   },
-
   {
     path: 'solicitudes',
     component: GridrequestvacationComponent,
@@ -100,7 +102,6 @@ const routes: Routes = [
     path: 'estadopermisos',
     component: StatuspermissionComponent
   },
-
   {
     path: 'solicitudpermiso',
     component: PermissionReqComponent
@@ -109,10 +110,6 @@ const routes: Routes = [
     path: 'solicitudpermiso/edit/:id',
     component: PermissionReqComponent
   },
-
-
-
-
   {
     path: 'not-found',
     component: NotfoundComponent
@@ -121,8 +118,6 @@ const routes: Routes = [
     path: '**',
     redirectTo: 'not-found'
   },
-
-
 ];
 
 export const AppRoutingModule = RouterModule.forRoot(routes, routerOptions);

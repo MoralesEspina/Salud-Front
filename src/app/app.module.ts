@@ -1,4 +1,3 @@
-
 import { A11yModule } from '@angular/cdk/a11y';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -45,7 +44,6 @@ import { JobsComponent } from './components/shared/render/jobs/jobs.component';
 import { UsersComponent } from './components/users/users.component';
 import { Jwtheader } from './guards/jwtheader.interceptor';
 import { Statuserror } from './guards/statuserror.interceptor';
-import { RequestsComponent } from './components/newviews/requests/requests.component';
 import { MatSortModule } from '@angular/material/sort';
 import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -53,9 +51,7 @@ import { HistoryComponent } from './components/newviews/history/history.componen
 import { UsermodalComponent } from './components/partials/usermodal/usermodal.component';
 import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
 import { PermissionComponent } from './components/partials/permission/permission.component';
-
 import { PermissionrequestComponent } from './components/pdfs/permissionrequest/permissionrequest.component';
-
 import { CurriculumPDFComponent } from './components/shared/actionbuttons/curriculum-pdf/curriculum-pdf.component';
 import { RequestHistoryComponent } from './components/newviews/request-history/request-history.component';
 import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
@@ -97,7 +93,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     CertificationComponent,
     NotfoundComponent,
     ConstancyComponent,
-    RequestsComponent,
     HistoryComponent,
     CurriculumComponent,
     UsermodalComponent,
@@ -119,7 +114,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     BrowserAnimationsModule,
     HttpClientModule,
     MatNativeDateModule,
-
     MatDatepickerModule,
     MatSlideToggleModule,
     MatSidenavModule,
@@ -133,7 +127,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     MatInputModule,
     MatListModule,
     MatMenuModule,
-    MatNativeDateModule,
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,

@@ -50,23 +50,18 @@
     padding-top: 4%;
     padding-bottom: 4%;
 }
-.user{
-  margin: auto;
-  margin-top: 40px;
-  border-color: rgb(25, 15, 200);
-  width: 500px;
+
+
+
+.contenedor{
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  place-items: center;
+  width: 1400px;
 }
 
-.datagrid{
-  margin-top: 10px;
-  margin-bottom: 50px;
-}
-.tabla1{
-  max-width: 800px;
-  display:inline-table;
-
-}
-.tabla2{
-  max-width: 640px;
-  display:inline-table;
-}

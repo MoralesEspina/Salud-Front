@@ -47,9 +47,6 @@ export class UsersComponent implements OnInit {
   private _fiteruser: filteruser[] = []
   page: number = 1
 
-
-
-
   constructor(
     private dialog: MatDialog,
     private userService: UserService,
@@ -187,15 +184,6 @@ export class UsersComponent implements OnInit {
       this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
       this.persons = this._persons.filter(u => {
       const name: string = u.fullname.toLowerCase();
-      return name.indexOf(searchInput) > -1;
-    });
-  }
-
-  onInputChange2() {
-    const searchInput = this.multiUserSearchInput.nativeElement.value ?
-      this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
-    this.fiteruser = this._fiteruser.filter(u => {
-      const name: string = u.name.toLowerCase();
       return name.indexOf(searchInput) > -1;
     });
   }

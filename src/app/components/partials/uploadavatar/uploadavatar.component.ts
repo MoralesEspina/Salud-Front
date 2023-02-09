@@ -54,13 +54,11 @@ export class UploadavatarComponent implements OnInit {
       });
 
       Swal.showLoading();
-      console.log(formData)
       this.avatar.UploadAvatar(formData)
         .subscribe(
           data => {
             Swal.close();
             this.dialogRef.close(data);
-            console.log(data)
           },
           err => console.log(err)
         )

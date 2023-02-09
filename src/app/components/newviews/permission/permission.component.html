@@ -56,9 +56,9 @@
             <mat-checkbox [formControl]="disableSelect" *ngIf="editing==false">OTRO</mat-checkbox>
           </p>
           <div>
-            <mat-form-field appearance="fill" style="width: 660px; margin-top: -20px;">
+            <mat-form-field *ngIf="disableSelect.value == true" appearance="fill" style="width: 660px; margin-top: -20px;">
               <mat-label>RAZÓN DE AUSENCIA</mat-label>
-              <textarea matInput [readonly]="disableSelect.value == false" [readonly]="editing == true"
+              <textarea matInput [readonly]="editing == true"
                 formControlName="motive"></textarea>
             </mat-form-field>
           </div>
@@ -99,7 +99,6 @@
           <mat-form-field appearance="fill" style="width: 260px; margin-right: 10px;">
             <mat-label>JEFE INMEDIATO</mat-label>
             <mat-select formControlName="bossOne" [disabled]="editing == true" required>
-
               <mat-option value="" disabled>Seleccionar</mat-option>
               <mat-option value="{{item.uuid}}" *ngFor="let item of bossOneList">{{item.fullname}}</mat-option>
             </mat-select>

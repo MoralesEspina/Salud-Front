@@ -13,23 +13,22 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
     pdf.defaultStyle({
         fontSize: 12
     })
-
+    console.log(permission)
    // pdf.background(await new Img(authorizationConfiguration.imageURL).alignment(authorizationConfiguration.align).width(authorizationConfiguration.width).height(authorizationConfiguration.height).build())
-
    pdf.add(await new Img('https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/avatars%2Flogo-mspas%20(1).png?alt=media&token=5a4e689a-b3d9-402d-b7da-df99d43c642d').alignment('left').width(225).height(50).relativePosition(0, -60).opacity(0.5).build())
    pdf.add(new Txt('MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA SOCIAL').alignment('right').bold().relativePosition(0, -50).fontSize(8).color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('DIRECCIÓN DE ÁREA DE SALUD DE JALAPA').alignment('right').bold().relativePosition(0, -40).fontSize(8).color('#3A66A0').opacity(0.5).end)
-   pdf.add(new Txt('DEPARTAMENTO DE RECURSOS HUMANOS').alignment('right').bold().relativePosition(0, -30).fontSize(8).color('#c').opacity(0.5).end)
+   pdf.add(new Txt('DEPARTAMENTO DE RECURSOS HUMANOS').alignment('right').bold().relativePosition(0, -30).fontSize(8).color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('FORMULARIO DE AUSENCIA AL SERVICIO').alignment('center').bold().fontSize(12).end)
    pdf.add(new Txt('JEFATURA DE PERSONAL').alignment('center').bold().fontSize(12).end)
    pdf.add(new Txt('DIRECCIÓN DE ÁREA DE SALUD DE JALAPA').alignment('center').fontSize(12).bold().end)
    pdf.add(new Txt('Fecha de solicitud: ').relativePosition(0, 25).fontSize(12).bold().end)
    pdf.add(new Txt('Día: ').relativePosition(110, 25).fontSize(12).bold().end)
-   pdf.add(new Table([[dayjs(permission.permissionDate).format('DD')]]).relativePosition(135, 22).alignment('center').fontSize(12).bold().widths([50]).end)
+   pdf.add(new Table([[dayjs(permission.submittedAt).format('DD')]]).relativePosition(135, 22).alignment('center').fontSize(12).bold().widths([50]).end)
    pdf.add(new Txt('Mes: ').relativePosition(200, 25).fontSize(12).bold().end)
-   pdf.add(new Table([[dayjs(permission.permissionDate).locale("es").format('MMMM')]]).relativePosition(230, 22).alignment('center').fontSize(12).bold().widths([130]).end)
+   pdf.add(new Table([[dayjs(permission.submittedAt).locale("es").format('MMMM')]]).relativePosition(230, 22).alignment('center').fontSize(12).bold().widths([130]).end)
    pdf.add(new Txt('Año: ').relativePosition(375, 25).fontSize(12).bold().end)
-   pdf.add(new Table([[dayjs(permission.permissionDate).format('YYYY')]]).relativePosition(410, 22).alignment('center').fontSize(12).bold().widths([50]).end)
+   pdf.add(new Table([[dayjs(permission.submittedAt).format('YYYY')]]).relativePosition(410, 22).alignment('center').fontSize(12).bold().widths([50]).end)
 
    pdf.add(new Txt('Nombre del servidor o contratista: ').relativePosition(0, 50).fontSize(12).bold().end)
    pdf.add(new Txt(person.fullname).bold().relativePosition(190, 50).end)
@@ -91,14 +90,25 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
    pdf.add(new Table([[permission.document]]).relativePosition(0, 365).fontSize(12).bold().widths(['*']).heights((rowIndex) => (rowIndex === 0 ? 35 : 0)).end)
 
    pdf.add(new Txt('SI LA SOLICITUD DE AUSENCIA DEL SERVICIO NO AMERITA SER APROBADA, ESPECIFICAR LOS MOTIVOS: ').relativePosition(0, 435).fontSize(10).bold().end)
-   pdf.add(new Table([[permission.reason]]).relativePosition(0, 465).fontSize(10).bold().widths(['*']).heights((rowIndex) => (rowIndex === 0 ? 65 : 0)).end)
+   if (permission.status == 'Denegada') {
+    pdf.add(new Txt(permission.reason).relativePosition(4, 465).fontSize(12).bold().end)
+   }
 
+   pdf.add(new Table([[' ']]).relativePosition(0, 465).fontSize(10).bold().widths(['*']).heights((rowIndex) => (rowIndex === 0 ? 65 : 0)).end)
+   pdf.add(new Txt(person.fullname).relativePosition(0, 560).fontSize(12).bold().end)
    pdf.add(new Txt('_______________________').relativePosition(0, 560).fontSize(12).bold().end)
    pdf.add(new Txt('INTERESADO').relativePosition(30,575 ).fontSize(12).bold().end)
+
+   if (permission.statusBossOne == 'Aceptada') {
+    pdf.add(new Txt(permission.bossOne).relativePosition(350, 560).fontSize(12).bold().end)
+   }
 
    pdf.add(new Txt('_______________________').relativePosition(350, 560).fontSize(12).bold().end)
    pdf.add(new Txt('JEFE INMEDIATO').relativePosition(370,575 ).fontSize(12).bold().end)
 
+   if (permission.statusBossTwo == 'Aceptada') {
+    pdf.add(new Txt(permission.bossTwo).relativePosition(160, 600).fontSize(12).bold().end)
+   }
    pdf.add(new Txt('______________________________').relativePosition(160,600).fontSize(12).bold().end)
    pdf.add(new Txt('VO.BO. JEFE DE PERSONAL').relativePosition(170,615 ).fontSize(12).bold().end)
 

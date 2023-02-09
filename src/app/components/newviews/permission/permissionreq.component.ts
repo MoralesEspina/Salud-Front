@@ -46,8 +46,8 @@ export class PermissionReqComponent implements OnInit {
 
   addressFormPermission = this.fb.group({
     permissionDate: [null, Validators.required],
-    motive: [null, Validators.required],
-    document: [null, Validators.maxLength(150)],
+    motive: [null, [Validators.required]],
+    document: [null, [Validators.required]],
     bossOne: [null, Validators.required],
     bossTwo: [null, Validators.required],
     reason: [null],
@@ -163,6 +163,7 @@ export class PermissionReqComponent implements OnInit {
       this._permission.getOneRequestPermission(this.id_entrada).subscribe(
         data => {
           this.permission = data['data'];
+          console.log(this.permission)
           this.loadPerson(this.permission.uuidPerson);
           this.addressFormPermission.patchValue({
             'uuidPerson': this.permission.uuidPerson,
@@ -198,7 +199,7 @@ export class PermissionReqComponent implements OnInit {
       var statusBossTwo = 'En Espera'
       var status = 'Denegada'
     } else if (this.rol == 'boss2') {
-      var statusBossOne = this.permission.statusBossOne
+      var statusBossOne = 'Aceptada'
       var statusBossTwo = 'Denegada'
       var status = 'Denegada'
     }
@@ -254,7 +255,7 @@ export class PermissionReqComponent implements OnInit {
         var statusBossTwo = 'En Espera'
         var status = this.permission.status
       } else if (this.rol == 'boss2') {
-        var statusBossOne = this.permission.statusBossOne
+        var statusBossOne = 'Aceptada'
         var statusBossTwo = 'Aceptada'
         var status = 'Aceptada'
       }

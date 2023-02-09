@@ -1,7 +1,6 @@
 <app-navbar></app-navbar>
 <div class="mt-8 px-6 ml-12">
 <div class="contenedor" >
-
     <div class="user border rounded-md " style="width: 500px; height: 350px;">
       <form class="inputsize">
         <mat-dialog-content [formGroup]="form">
@@ -25,9 +24,7 @@
                 <mat-label>Nombre de usuario</mat-label>
                 <input matInput formControlName="username" [ngClass]="{'is-invalid':submitted && f.username.errors}">
               </mat-form-field>
-
             </div>
-
             <div class="ed-item s-100 m-100 l-100">
               <span *ngIf="submitted && f.password.errors" class="text-red-700 text-xs animated fadeIn">Ingrese la
                 contraseña</span>
@@ -38,7 +35,6 @@
               </mat-form-field>
               <span *ngIf="submitted && f.password.errors" class="text-blue-700"> </span>
             </div>
-
             <div class="ed-item s-100 m-100 l-100">
               <span *ngIf="submitted && f.id_rol.errors" class="text-red-700 text-xs animated fadeIn">Seleccione el
                 rol</span>
@@ -51,12 +47,9 @@
                 </mat-select>
               </mat-form-field>
             </div>
-
           </div>
         </mat-dialog-content>
-
         <div class="ed-item ed-container ">
-
           <div class="ed-item s-50">
             <div class="py-1 ">
               <button class="mycustom-buttom-primary hover:bg-green-700 rounded-lg tamano"
@@ -68,7 +61,6 @@
               <button class="mycustom-button-warning hover:bg-red-700 rounded-lg tamano">CANCELAR</button>
             </div>
           </div>
-
         </div>
       </form>
     </div>
@@ -91,7 +83,7 @@
             *ngFor="let duser of admins | paginate: { itemsPerPage: 10, currentPage: p } let indexof = index let u of usuario;"
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="width: 10px;">
-              <div class="rounded-full cursor-pointer" (click)="UpdateUser(u.uuid)">
+              <div class="rounded-full cursor-pointer" (click)="UpdateUser(duser.uuid)">
                 <div class="justify-center text-center ">
                   <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
                 </div>
@@ -99,7 +91,7 @@
             </td>
 
             <td style="width: 10px;">
-              <div class="rounded-full cursor-pointer" (click)="deletePerson(u.uuid)">
+              <div class="rounded-full cursor-pointer" (click)="deleteAdmin(duser.uuid)">
                 <div class="justify-center text-center ">
                   <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
                 </div>
@@ -109,16 +101,13 @@
             <td >{{duser.username}}</td>
             <td style="text-align: center;">{{duser.rol}}</td>
           </tr>
-
         </tbody>
       </table>
       <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
       </pagination-controls>
     </div>
-
     <div class="tabla2 datagrid border rounded-md " style="width: 700px; margin-top: 15px;">
       <table>
-
         <thead style="text-align: center;">
           <tr>
             <th>EDITAR</th>
@@ -134,7 +123,7 @@
             *ngFor="let duser of bosses | paginate: { itemsPerPage: 10, currentPage: p2 } let indexof = index let u of usuario;"
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="width: 10px;">
-              <div class="rounded-full cursor-pointer" (click)="UpdateUser(u.uuid)">
+              <div class="rounded-full cursor-pointer" (click)="UpdateUser(duser.uuid)">
                 <div class="justify-center text-center ">
                   <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
                 </div>
@@ -142,27 +131,24 @@
             </td>
 
             <td style="width: 10px;">
-              <div class="rounded-full cursor-pointer" (click)="deletePerson(u.uuid)">
+              <div class="rounded-full cursor-pointer" (click)="deletePerson(duser.uuid, duser.uuidPerson)">
                 <div class="justify-center text-center ">
                   <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
                 </div>
               </div>
             </td>
             <td>{{indexof + 1}}</td>
-            <td>{{duser.uuidPerson}}</td>
+            <td>{{duser.fullname}}</td>
             <td style="text-align: center;">{{duser.username}}</td>
             <td>{{duser.rol}}</td>
           </tr>
-
         </tbody>
       </table>
       <pagination-controls (pageChange)="p2 = $event" nextLabel="Siguiente" previousLabel="Anterior">
       </pagination-controls>
     </div>
-
     <div class="tabla3 datagrid border rounded-md " style="width: 700px;">
       <table >
-
         <thead style="text-align: center;">
           <tr>
             <th>EDITAR</th>
@@ -178,26 +164,24 @@
             *ngFor="let duser of employees | paginate: { itemsPerPage: 10, currentPage: p3} let indexof = index let u of usuario;"
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="width: 10px;">
-              <div class="rounded-full cursor-pointer" (click)="UpdateUser(u.uuid)">
+              <div class="rounded-full cursor-pointer" (click)="UpdateUser(duser.uuid)">
                 <div class="justify-center text-center ">
                   <i class="fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
                 </div>
               </div>
             </td>
-
             <td style="width: 10px;">
-              <div class="rounded-full cursor-pointer" (click)="deletePerson(u.uuid)">
+              <div class="rounded-full cursor-pointer" (click)="deletePerson(duser.uuid, duser.uuidPerson)">
                 <div class="justify-center text-center ">
                   <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
                 </div>
               </div>
             </td>
             <td>{{indexof + 1}}</td>
-            <td>{{duser.uuidPerson}}</td>
+            <td>{{duser.fullname}}</td>
             <td style="text-align: center;">{{duser.username}}</td>
             <td>{{duser.rol}}</td>
           </tr>
-
         </tbody>
       </table>
       <pagination-controls (pageChange)="p3 = $event" nextLabel="Siguiente" previousLabel="Anterior">

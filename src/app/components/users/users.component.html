@@ -67,7 +67,7 @@
 
     <!--Data object from database-->
 
-    <div class="tabla1 datagrid border rounded-md " style="width: 700px; margin-bottom: 15px;">
+    <div class="tabla1 datagrid border rounded-md " style="width: 700px; margin-bottom: 10px;">
       <table>
         <thead style="text-align: center;">
           <tr>
@@ -106,7 +106,7 @@
       <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
       </pagination-controls>
     </div>
-    <div class="tabla2 datagrid border rounded-md " style="width: 700px; margin-top: 15px;">
+    <div class="tabla2 datagrid border rounded-md " style="width: 700px; margin-top: -5px;">
       <table>
         <thead style="text-align: center;">
           <tr>
@@ -138,7 +138,7 @@
               </div>
             </td>
             <td>{{indexof + 1}}</td>
-            <td>{{duser.uuidPerson}}</td>
+            <td>{{duser.fullname}}</td>
             <td style="text-align: center;">{{duser.username}}</td>
             <td>{{duser.rol}}</td>
           </tr>
@@ -147,7 +147,7 @@
       <pagination-controls (pageChange)="p2 = $event" nextLabel="Siguiente" previousLabel="Anterior">
       </pagination-controls>
     </div>
-    <div class="tabla3 datagrid border rounded-md " style="width: 700px;">
+    <div class="tabla3 datagrid border rounded-md " style="width: 700px; margin-top: 6  px;">
       <table >
         <thead style="text-align: center;">
           <tr>
@@ -178,7 +178,7 @@
               </div>
             </td>
             <td>{{indexof + 1}}</td>
-            <td>{{duser.uuidPerson}}</td>
+            <td>{{duser.fullname}}</td>
             <td style="text-align: center;">{{duser.username}}</td>
             <td>{{duser.rol}}</td>
           </tr>

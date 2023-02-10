@@ -49,9 +49,6 @@ export class UsersComponent implements OnInit {
   private _fiteruser: filteruser[] = []
   page: number = 1
 
-
-
-
   constructor(
     private dialog: MatDialog,
     private userService: UserService,
@@ -70,7 +67,7 @@ export class UsersComponent implements OnInit {
     this.getrols()
     this.afterChanges()
     this.form = this.fb.group({
-      uuidPerson: ['', Validators.required],
+      uuidPerson: [''],
       username: [this.user.username, Validators.required],
       password: [this.user.password, Validators.required],
       id_rol: [this.user.id_rol, Validators.required]
@@ -188,17 +185,8 @@ export class UsersComponent implements OnInit {
     const searchInput = this.multiUserSearchInput.nativeElement.value ?
       this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
       this.persons = this._persons.filter(u => {
-      const name: string = u.fullname.toLowerCase();
-      return name.indexOf(searchInput) > -1;
-    });
-  }
-
-  onInputChange2() {
-    const searchInput = this.multiUserSearchInput.nativeElement.value ?
-      this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
-    this.fiteruser = this._fiteruser.filter(u => {
-      const name: string = u.name.toLowerCase();
-      return name.indexOf(searchInput) > -1;
+        const name: string = u.fullname.replace(/\s/g, '').toLowerCase();
+        return name.indexOf(searchInput.replace(/\s/g, '').toLowerCase()) > -1;
     });
   }
 

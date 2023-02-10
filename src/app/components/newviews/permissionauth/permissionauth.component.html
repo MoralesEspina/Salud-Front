@@ -21,7 +21,10 @@
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody *ngFor="let item of permissionreq | paginate: { id: 'Page', currentPage: p, itemsPerPage: tableSize }; let indexof = index;" style="text-align: center;">
+        <tbody>
+          <tr
+          *ngFor="let item of permissionreq | paginate: { id: 'Page', currentPage: p, itemsPerPage: tableSize }; let indexof = index;" style="text-align: center;"
+           class="text-lg" [class.alt]="(indexof + 1)%2==1">
           <td>{{tableSize * (p -1 ) + indexof + 1}}</td>
           <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
           <td>{{item.person.fullname}}</td>
@@ -40,6 +43,7 @@
               </div>
             </div>
           </td>
+        </tr>
         </tbody>
       </table>
       <pagination-controls id="Page" (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
@@ -62,7 +66,10 @@
             <th>IMPRIMIR</th>
           </tr>
         </thead>
-        <tbody *ngFor="let item of permissionreq2 | paginate: { id: 'Page2', itemsPerPage: tableSize, currentPage: p2} let indexof = index;" style="text-align: center;">
+        <tbody>
+          <tr
+          *ngFor="let item of permissionreq2 | paginate: { id: 'Page2', itemsPerPage: tableSize, currentPage: p2} let indexof = index;" style="text-align: center;"
+          class="text-lg" [class.alt]="(indexof + 1)%2==1">
           <td>{{tableSize * (p2 -1 ) + indexof + 1}}</td>
           <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
           <td>{{item.bossOne}}</td>
@@ -82,6 +89,7 @@
               </div>
             </div>
           </td>
+        </tr>
         </tbody>
       </table>
       <pagination-controls id="Page2" (pageChange)="p2 = $event" nextLabel="Siguiente" previousLabel="Anterior">

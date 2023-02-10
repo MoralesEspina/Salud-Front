@@ -59,7 +59,6 @@ export class PermissionauthComponent implements OnInit {
     let id_entrada = this.userService.userValue.uuidPerson;
     this._permission.getPermissionsBossTwo(id_entrada).subscribe(
       response =>{
-        console.log(response.data)
         this.permissionreq2 = response.data;
       }, error =>{
 

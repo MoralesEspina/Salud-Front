@@ -26,6 +26,9 @@ export class PermissionauthComponent implements OnInit {
   search: string;
   public permissionreq;
   public permissionreq2;
+  public p: number = 1;
+  public p2: number = 1;
+  public tableSize: number = 10;
   uuid: string = this.userService.userValue.uuidPerson;
 
   constructor(
@@ -56,7 +59,6 @@ export class PermissionauthComponent implements OnInit {
     let id_entrada = this.userService.userValue.uuidPerson;
     this._permission.getPermissionsBossTwo(id_entrada).subscribe(
       response =>{
-        console.log(response.data)
         this.permissionreq2 = response.data;
       }, error =>{
 

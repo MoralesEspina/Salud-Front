@@ -133,11 +133,11 @@
         </div>
         <div align="center" class="row" *ngIf="editing==true && statusbossTwo==true">
           <button mat-raised-button color="primary" style="margin-right: 10px;"
-            (click)="acceptRequest(addressFormPermission)">Aceptar VO.BO.</button>
-          <button mat-raised-button color="primary" (click)="denyRequest()">Denegar VO.BO.</button>
+            (click)="acceptRequestVoBo(addressFormPermission)">Aceptar VO.BO.</button>
+          <button mat-raised-button color="primary" (click)="denyRequestVoBo()">Denegar VO.BO.</button>
         </div>
-        <div align="center" class="row">
-          <button mat-raised-button color="primary" style="margin-top: 10px;" *ngIf="editing==true">Imprimir</button>
+        <div align="center" class="row" *ngIf="editing==true && statusRequest == false ">
+          <button mat-raised-button color="primary" style="margin-top: 10px;" >Imprimir</button>
         </div>
 
       </mat-card-content>

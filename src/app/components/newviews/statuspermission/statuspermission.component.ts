@@ -16,6 +16,8 @@ export class StatuspermissionComponent implements OnInit {
   user = new Claims();
   public permissionreq;
   public permissionreq2;
+  public p: number = 1;
+  public tableSize: number = 10;
   constructor(
 
     private userService: UserService,

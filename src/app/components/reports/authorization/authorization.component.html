@@ -89,9 +89,9 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let aut of authorizations; let indexof = index;">
+                    <tbody *ngFor="let aut of authorizations | paginate: { itemsPerPage: tableSize, currentPage: p } let indexof = index;">
                         <tr>
-                            <td>{{indexof + 1}}</td>
+                            <td>{{tableSize * (p -1 ) + indexof + 1}}</td>
                             <td>{{aut.person.fullname}}</td>
                             <td>{{aut.person.work_dependency.name}}</td>
                             <td align="center">{{aut.startdate}}</td>
@@ -100,6 +100,8 @@
                         </tr>
                     </tbody>
                 </table>
+                <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
+                </pagination-controls>
             </div>
         </div>
 

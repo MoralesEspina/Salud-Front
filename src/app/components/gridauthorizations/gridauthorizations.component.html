@@ -31,13 +31,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let ai of authorizations | filter:search:'person'; let indexof = index" class="text-lg"
+          <tr *ngFor="let ai of authorizations | filter:search:'person'| paginate: { itemsPerPage: tableSize, currentPage: p } let indexof = index" class="text-lg"
             [class.alt]="(indexof + 1)%2==1">
-            <td>{{indexof + 1}}</td>
+            <td>{{tableSize * (p -1 ) + indexof + 1}}</td>
             <td>{{ai.person.fullname}}</td>
             <td>{{ai.person.cui}}</td>
             <td>{{ai.submitted_at}}</td>
-
             <td style="width: 10px;" *ngIf="user.rol == 'admin'">
               <div class="rounded-full cursor-pointer" (click)="updateOne(ai.uuid_authorization)">
                 <div class="justify-center text-center ">
@@ -56,6 +55,8 @@
           </tr>
         </tbody>
       </table>
+      <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
+      </pagination-controls>
     </div>
   </div>
 </div>

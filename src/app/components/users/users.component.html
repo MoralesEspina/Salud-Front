@@ -1,11 +1,12 @@
 <app-navbar></app-navbar>
 <div class="mt-8 px-6 ml-12">
 <div class="contenedor" >
-    <div class="user border rounded-md " style="width: 500px; height: 350px;">
+    <div class="user border rounded-md " style="width: 500px; height: 410px;">
       <form class="inputsize">
         <mat-dialog-content [formGroup]="form">
           <div class="ed-item ed-container">
             <div class="ed-item s-100 m-100 l-100">
+              <p>Crear usuario</p>
               <mat-form-field appearance="outline" class="w-full" style="margin-top: 10px;">
                 <mat-label>Persona</mat-label>
                 <mat-select formControlName='uuidPerson'>
@@ -64,24 +65,25 @@
         </div>
       </form>
     </div>
-
     <!--Data object from database-->
-
-    <div class="tabla1 datagrid border rounded-md " style="width: 700px; margin-bottom: 10px;">
+    <div class="tabla1 datagrid border rounded-md " style=" margin-bottom: 20px;">
       <table>
         <thead style="text-align: center;">
           <tr>
-            <th>EDITAR</th>
-            <th>ELIMINAR</th>
-            <th>No.</th>
+            <th>NO</th>
             <th>NOMBRE DE USUARIO</th>
             <th>ROL</th>
+            <th>EDITAR</th>
+            <th>ELIMINAR</th>
           </tr>
         </thead>
         <tbody >
           <tr
-            *ngFor="let duser of admins | paginate: { itemsPerPage: 10, currentPage: p } let indexof = index let u of usuario;"
+            *ngFor="let duser of admins | paginate: { id: 'Page', itemsPerPage: tableSize, currentPage: p } let indexof = index let u of usuario;"
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
+            <td style="text-align: center;">{{tableSize * (p -1 ) + indexof + 1}}</td>
+            <td >{{duser.username}}</td>
+            <td style="text-align: center;">{{duser.rol}}</td>
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="UpdateUser(duser.uuid)">
                 <div class="justify-center text-center ">
@@ -89,7 +91,6 @@
                 </div>
               </div>
             </td>
-
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="deleteAdmin(duser.uuid)">
                 <div class="justify-center text-center ">
@@ -97,31 +98,32 @@
                 </div>
               </div>
             </td>
-            <td>{{indexof + 1}}</td>
-            <td >{{duser.username}}</td>
-            <td style="text-align: center;">{{duser.rol}}</td>
           </tr>
         </tbody>
       </table>
-      <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
+      <pagination-controls id="Page" (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
       </pagination-controls>
     </div>
-    <div class="tabla2 datagrid border rounded-md " style="width: 700px; margin-top: -5px;">
+    <div class="tabla2 datagrid border rounded-md ">
       <table>
         <thead style="text-align: center;">
           <tr>
+            <th>NO</th>
+            <th>NOMBRE</th>
+            <th>USUARIO</th>
+            <th>ROL</th>
             <th>EDITAR</th>
             <th>ELIMINAR</th>
-            <th>No.</th>
-            <th>NOMBRE</th>
-            <th>NOMBRE DE USUARIO</th>
-            <th>ROL</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            *ngFor="let duser of bosses | paginate: { itemsPerPage: 10, currentPage: p2 } let indexof = index let u of usuario;"
+            *ngFor="let duser of bosses | paginate: { id: 'Page2', itemsPerPage: tableSize, currentPage: p2 } let indexof = index let u of usuario;"
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
+            <td style="text-align: center;">{{tableSize * (p2 -1 ) + indexof + 1}}</td>
+            <td>{{duser.fullname | titlecase}}</td>
+            <td style="text-align: center;">{{duser.username}}</td>
+            <td>{{duser.rol}}</td>
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="UpdateUser(duser.uuid)">
                 <div class="justify-center text-center ">
@@ -129,7 +131,6 @@
                 </div>
               </div>
             </td>
-
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="deletePerson(duser.uuid, duser.uuidPerson)">
                 <div class="justify-center text-center ">
@@ -137,32 +138,32 @@
                 </div>
               </div>
             </td>
-            <td>{{indexof + 1}}</td>
-            <td>{{duser.fullname}}</td>
-            <td style="text-align: center;">{{duser.username}}</td>
-            <td>{{duser.rol}}</td>
           </tr>
         </tbody>
       </table>
-      <pagination-controls (pageChange)="p2 = $event" nextLabel="Siguiente" previousLabel="Anterior">
+      <pagination-controls id="Page2" (pageChange)="p2 = $event" nextLabel="Siguiente" previousLabel="Anterior">
       </pagination-controls>
     </div>
-    <div class="tabla3 datagrid border rounded-md " style="width: 700px; margin-top: 6  px;">
+    <div class="tabla3 datagrid border rounded-md ">
       <table >
         <thead style="text-align: center;">
           <tr>
+            <th>NO</th>
+            <th>NOMBRE</th>
+            <th>USUARIO</th>
+            <th>ROL</th>
             <th>EDITAR</th>
             <th>ELIMINAR</th>
-            <th>No.</th>
-            <th>NOMBRE</th>
-            <th>NOMBRE DE USUARIO</th>
-            <th>ROL</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            *ngFor="let duser of employees | paginate: { itemsPerPage: 10, currentPage: p3} let indexof = index let u of usuario;"
+            *ngFor="let duser of employees | paginate: { id: 'Page3', itemsPerPage: tableSize, currentPage: p3} let indexof = index let u of employees;"
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
+            <td style="text-align: center;">{{tableSize * (p3 -1 ) + indexof + 1}}</td>
+            <td>{{duser.fullname | titlecase}}</td>
+            <td style="text-align: center;">{{duser.username}}</td>
+            <td>{{duser.rol}}</td>
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="UpdateUser(duser.uuid)">
                 <div class="justify-center text-center ">
@@ -177,14 +178,10 @@
                 </div>
               </div>
             </td>
-            <td>{{indexof + 1}}</td>
-            <td>{{duser.fullname}}</td>
-            <td style="text-align: center;">{{duser.username}}</td>
-            <td>{{duser.rol}}</td>
           </tr>
         </tbody>
       </table>
-      <pagination-controls (pageChange)="p3 = $event" nextLabel="Siguiente" previousLabel="Anterior">
+      <pagination-controls id="Page3" (pageChange)="p3 = $event" nextLabel="Siguiente" previousLabel="Anterior">
       </pagination-controls>
     </div>
   </div>

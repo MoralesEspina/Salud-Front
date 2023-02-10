@@ -22,6 +22,8 @@ export class GridrequestvacationComponent implements OnInit {
   requestVacation: RequestVacation;
   user = new Claims();
   search: string;
+  public p:number = 1;
+  public tableSize:number = 25;
 
   constructor(
     private requestVacationService: RequestVacationService,

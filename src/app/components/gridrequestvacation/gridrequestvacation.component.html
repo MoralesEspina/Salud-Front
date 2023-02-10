@@ -34,9 +34,9 @@
         </thead>
         <tbody>
 
-          <tr *ngFor="let rv of requestsVacation | filter:search:'person'; let indexof = index" class="text-lg"
+          <tr *ngFor="let rv of requestsVacation | filter:search:'person' | paginate: { itemsPerPage: tableSize, currentPage: p } let indexof = index" class="text-lg"
             [class.alt]="(indexof + 1)%2==1">
-            <td>{{indexof + 1}}</td>
+            <td>{{tableSize * (p -1 ) + indexof + 1}}</td>
             <td>{{rv.person.fullname}}</td>
             <td>{{rv.person.cui}}</td>
             <td>{{rv.submitted_at}}</td>
@@ -67,6 +67,8 @@
           </tr>
         </tbody>
       </table>
+      <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
+      </pagination-controls>
     </div>
   </div>
 </div>

@@ -31,7 +31,7 @@ export class PermissionReqComponent implements OnInit {
   public permission: IPermission;
   public bossOneList;
   public bossTwoList;
-  public statusRequest;
+  public statusRequest: boolean;
 
   public data_response;
   statusbossOne: boolean = false;
@@ -158,13 +158,12 @@ export class PermissionReqComponent implements OnInit {
   }
 
   loadPermission() {
-
     if (this.id_entrada) {
       this.editing = true
       this._permission.getOneRequestPermission(this.id_entrada).subscribe(
         data => {
           this.permission = data['data'];
-          this.statusRequest = this.permission.status
+          this.permission.status == 'En Espera' ? this.statusRequest = true : this.statusRequest = false
           this.loadPerson(this.permission.uuidPerson);
           this.addressFormPermission.patchValue({
             'uuidPerson': this.permission.uuidPerson,
@@ -217,7 +216,7 @@ export class PermissionReqComponent implements OnInit {
       'bossTwo': '',
       'document': '',
       'statusBossOne': 'Denegada',
-      'statusBossTwo': '',
+      'statusBossTwo': this.permission.statusBossTwo,
       'status': '',
       'reason': text,
     }
@@ -294,7 +293,7 @@ export class PermissionReqComponent implements OnInit {
       'bossTwo': '',
       'document': '',
       'statusBossOne': 'Aceptada',
-      'statusBossTwo': '',
+      'statusBossTwo': this.permission.statusBossTwo,
       'status': '',
       'reason': '',
     }

@@ -56,10 +56,10 @@
             <mat-checkbox [formControl]="disableSelect" *ngIf="editing==false">OTRO</mat-checkbox>
           </p>
           <div>
-            <mat-form-field *ngIf="disableSelect.value == true" appearance="fill" style="width: 660px; margin-top: -20px;">
+            <mat-form-field *ngIf="disableSelect.value == true" appearance="fill"
+              style="width: 660px; margin-top: -20px;">
               <mat-label>RAZÓN DE AUSENCIA</mat-label>
-              <textarea matInput [readonly]="editing == true"
-                formControlName="motive"></textarea>
+              <textarea matInput [readonly]="editing == true" formControlName="motive"></textarea>
             </mat-form-field>
           </div>
         </div>
@@ -67,8 +67,7 @@
         <div class="row">
           <mat-form-field appearance="fill" style="width: 660px; margin-top: 10px;">
             <mat-label>DOCUMENTOS A ADJUNTAR</mat-label>
-            <textarea matInput  [readonly]="editing == true"
-              formControlName="document"></textarea>
+            <textarea matInput [readonly]="editing == true" formControlName="document"></textarea>
           </mat-form-field>
         </div>
         <!-- <div class="row">
@@ -99,19 +98,29 @@
           <mat-form-field appearance="fill" style="width: 260px; margin-right: 10px;">
             <mat-label>JEFE INMEDIATO</mat-label>
             <mat-select formControlName="bossOne" [disabled]="editing == true" required>
-              <mat-option value="" disabled>Seleccionar</mat-option>
-              <mat-option value="{{item.uuid}}" *ngFor="let item of bossOneList">{{item.fullname}}</mat-option>
+
+              <input type="text" class="p-2" autocomplete="off" matInput placeholder="Buscar por Nombre"
+                #multiUserSearch (input)="onInputChange1()">
+
+              <mat-option value="{{bossOne.uuid}}"
+                *ngFor="let bossOne of bossOnefilter">{{bossOne.fullname}}</mat-option>
             </mat-select>
+
           </mat-form-field>
 
           <mat-form-field appearance="fill" style="width: 260px;">
             <mat-label>JEFE VO.BO.</mat-label>
+
             <mat-select formControlName="bossTwo" [disabled]="editing == true" required>
-              <!-- <input type="text" class="p-2" autocomplete="off" matInput placeholder="Buscar por Nombre"
-                  #multiUserSearch (input)="onInputChange()"> -->
-              <mat-option value="" disabled>Seleccionar</mat-option>
-              <mat-option value="{{item.uuid}}" *ngFor="let item of bossTwoList">{{item.fullname}}</mat-option>
+
+              <input type="text" class="p-2" autocomplete="off" matInput placeholder="Buscar por Nombre"
+                #multiUserSearch2 (input)="onInputChange2()">
+
+              <mat-option value="{{bossTwo.uuid}}"
+                *ngFor="let bossTwo of bossTwofilter">{{bossTwo.fullname}}</mat-option>
+
             </mat-select>
+
           </mat-form-field>
           <div class="row" *ngIf="deny==true ">
             <div align="center" class=" font-bold capitalize">

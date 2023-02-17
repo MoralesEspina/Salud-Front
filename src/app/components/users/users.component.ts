@@ -23,6 +23,7 @@ import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 })
 
 export class UsersComponent implements OnInit {
+  filterTerm: string;
   public p: number = 1;
   public p2: number = 1;
   public p3: number = 1;
@@ -45,9 +46,6 @@ export class UsersComponent implements OnInit {
   person = new nameperson()
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
-  protected fiteruser: filteruser[] = []
-  private _fiteruser: filteruser[] = []
-  page: number = 1
 
   constructor(
     private dialog: MatDialog,
@@ -58,7 +56,6 @@ export class UsersComponent implements OnInit {
     private _sweetAlertService: SweetAlertService,
   ) {
     this.localService.getJsonValue('limit');
-    this.ManyPersons();
   }
 
   @ViewChild('multiUserSearch', { static: false }) multiUserSearchInput: ElementRef;
@@ -78,37 +75,6 @@ export class UsersComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  ManyPersons(page?: number, limit?: string, filter?: string) {
-
-    if (limit && typeof limit == 'string') {
-      this.localService.setJsonValue('limit', limit)
-    }
-
-    if (filter && typeof filter == 'string' && typeof filter != 'object' || filter == '') {
-      this.localService.setJsonValue('filter', filter)
-    }
-
-    var stlimit = this.localService.getJsonValue('limit')
-    var stFilter = this.localService.getJsonValue('filter')
-
-    this.userService.ManyPersons(page, stlimit, stFilter)
-      .subscribe(res => {
-        this.users = res['data']
-      })
-  }
-  increment() {
-    this.page++
-    this.ManyPersons(this.page)
-  }
-
-  decrement() {
-    if (this.page <= 0) {
-      this.page = 1
-    } else {
-      this.page--
-    }
-    this.ManyPersons(this.page)
   }
 
   get f() { return this.form.controls }
@@ -142,7 +108,6 @@ export class UsersComponent implements OnInit {
   }
 
   afterChanges() {
-    this.ManyPersons()
     this.getUsers1()
     this.getUsers2()
     this.getUsers3()

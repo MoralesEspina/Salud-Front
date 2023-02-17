@@ -14,7 +14,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
 import { HistoryComponent } from './components/newviews/history/history.component';
 import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
-import { RequestHistoryComponent } from './components/newviews/request-history/request-history.component';
 import { PermissionComponent } from './components/partials/permission/permission.component';
 import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
 import { StatuspermissionComponent } from './components/newviews/statuspermission/statuspermission.component';
@@ -62,7 +61,8 @@ const routes: Routes = [
   {
     path: 'dependency',
     component: JobdependencyComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { roles: [Role.admin, Role.member] }
   },
   {
     path: 'historial',
@@ -71,44 +71,54 @@ const routes: Routes = [
   {
     path: 'SolicitudesDePermisos',
     component: RequestReportComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'historial_solicitudes',
-    component: RequestHistoryComponent
+    canActivate: [AuthGuard],
+    data: { roles: [Role.admin, Role.member] }
   },
   {
     path: 'solicitudes',
     component: GridrequestvacationComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: { roles: [Role.admin, Role.member] }
   },
   {
     path: 'constancia/:idPerson',
     component: CertificationComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'personas',
-    component: PersonGridComponent
+    component: PersonGridComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.admin, Role.member] }
   },
   {
     path: 'curriculum',
-    component: CurriculumComponent
+    component: CurriculumComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.boss, Role.boss2, Role.employed] }
   },
   {
     path: 'permisos',
-    component: PermissionauthComponent
+    component: PermissionauthComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.boss, Role.boss2, Role.employed] }
   },
   {
     path: 'estadopermisos',
-    component: StatuspermissionComponent
+    component: StatuspermissionComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.boss, Role.boss2, Role.employed] }
   },
   {
     path: 'solicitudpermiso',
-    component: PermissionReqComponent
+    component: PermissionReqComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [Role.boss, Role.boss2, Role.employed] }
   },
   {
     path: 'solicitudpermiso/edit/:id',
-    component: PermissionReqComponent
+    component: PermissionReqComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'not-found',

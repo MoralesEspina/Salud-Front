@@ -52,8 +52,7 @@ import { UsermodalComponent } from './components/partials/usermodal/usermodal.co
 import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
 import { PermissionComponent } from './components/partials/permission/permission.component';
 import { PermissionrequestComponent } from './components/pdfs/permissionrequest/permissionrequest.component';
-import { CurriculumPDFComponent } from './components/shared/actionbuttons/curriculum-pdf/curriculum-pdf.component';
-import { RequestHistoryComponent } from './components/newviews/request-history/request-history.component';
+import { CurriculumPDFComponent } from './components/pdfs/curriculum-pdf/curriculum-pdf.component';
 import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
 import { StatuspermissionComponent } from './components/newviews/statuspermission/statuspermission.component';
 import { environment } from 'src/environments/environment.prod';
@@ -101,7 +100,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     PermissionComponent,
     PermissionrequestComponent,
     CurriculumPDFComponent,
-    RequestHistoryComponent,
     PermissionReqComponent,
     StatuspermissionComponent,
     RequestReportComponent,

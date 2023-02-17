@@ -42,9 +42,7 @@
       </div>
     </div>
     <table>
-
       <thead>
-
         <tr style="text-align: center;">
           <th>No.</th>
           <th>EMITIDO</th>
@@ -61,7 +59,7 @@
         <td>{{tableSize * (p -1 ) + indexof + 1}}</td>
         <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
         <td>{{item.permissionDate | date: 'd MMM y ' | uppercase }}</td>
-        <td>{{item.person.fullname}}</td>
+        <td>{{item.fullname}}</td>
         <td>{{item.status}}</td>
         <td style="width: 50px;">
           <div class="rounded-full cursor-pointer">

@@ -98,10 +98,10 @@
         <div align="center" class="row">
           <mat-form-field appearance="fill" style="width: 260px; margin-right: 10px;">
             <mat-label>JEFE INMEDIATO</mat-label>
-            <mat-select formControlName="bossOne" [disabled]="editing == true" required>
-              <mat-option value="" disabled>Seleccionar</mat-option>
-              <mat-option value="{{item.uuid}}" *ngFor="let item of bossOneList">{{item.fullname}}</mat-option>
-            </mat-select>
+              <input formControlName="bossOne" matInput type="text" [matAutocomplete]="auto" [disabled]="editing == true" required />
+              <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let item of bossOneList" value="{{item.uuid}}" >{{item.fullname}}</mat-option>
+            </mat-autocomplete>
           </mat-form-field>
 
           <mat-form-field appearance="fill" style="width: 260px;">

@@ -1,4 +1,4 @@
-import { ReferenceI } from './../../../../models/references.model';
+import { ReferenceI } from '../../../models/references.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { ITable } from 'pdfmake-wrapper/lib/interfaces';
 import { CurriculumDataI } from 'src/app/models/curriculum.model';

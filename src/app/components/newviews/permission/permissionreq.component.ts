@@ -114,6 +114,7 @@ export class PermissionReqComponent implements OnInit {
       statusBossOne: "",
       statusBossTwo: "",
       status: "",
+      fullname: ""
     }
     if (!addressFormPermission.valid) {
       this._sweetAlertService.warning('Complete correctamente el formulario');
@@ -219,6 +220,7 @@ export class PermissionReqComponent implements OnInit {
       'statusBossTwo': this.permission.statusBossTwo,
       'status': '',
       'reason': text,
+      'fullname': ''
     }
     this._permission.updateOneRequestPermission(deny, this.id_entrada).subscribe(
       response => {
@@ -265,6 +267,7 @@ export class PermissionReqComponent implements OnInit {
       'statusBossTwo': 'Denegada',
       'status': '',
       'reason': text,
+      'fullname': ''
     }
     this._permission.updateOneRequestPermission(deny, this.id_entrada).subscribe(
       response => {
@@ -296,6 +299,7 @@ export class PermissionReqComponent implements OnInit {
       'statusBossTwo': this.permission.statusBossTwo,
       'status': '',
       'reason': '',
+      'fullname': ''
     }
     if (addressFormPermission.valid) {
       this._permission.updateOneRequestPermission(accepted, this.id_entrada).subscribe(
@@ -326,6 +330,7 @@ export class PermissionReqComponent implements OnInit {
       'statusBossTwo': 'Aceptada',
       'status': '',
       'reason': '',
+      'fullname': ''
     }
     if (addressFormPermission.valid) {
       this._permission.updateOneRequestPermission(accepted, this.id_entrada).subscribe(

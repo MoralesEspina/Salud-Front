@@ -23,7 +23,7 @@ export class RequestReportComponent implements OnInit {
   public p: number = 1;
   public tableSize: number = 20;
 
-  public permissionreq: IPermission[];
+  public permissionreq: IPermission[] = [];
   startDateInput: string
   endDateInput: string;
   estados: estado[] = [
@@ -57,7 +57,6 @@ export class RequestReportComponent implements OnInit {
     this._permission.getAllRequestPermission(startDate, endDate).subscribe(
       response =>{
         this.permissionreq = response.data;
-
       } , err => console.log(err)
     )
   }
@@ -78,13 +77,13 @@ export class RequestReportComponent implements OnInit {
       return;
     }
 
-    const membrete = `Dirección de Área de Salud de Jalapa\n Departamento de Recursos Humanos\n Reporte de solicitudes de permiso\n`;
+    const membrete = `Dirección de Área de Salud de Jalapa\n Departamento de Recursos Humanos\n Reporte de Solicitudes de Ausencias\n`;
     var startDate = FormatsDate.DateToWordObject(this.startDateInput)
     var endDate = FormatsDate.DateToWordObject(this.endDateInput)
 
     const datesOfEmitted = `Del ${startDate['day']} de ${startDate['month']} al ${endDate['day']} de ${endDate['month']} de ${startDate['year']}\n\n`
     const pdf = new PdfMakeWrapper()
-    pdf.pageSize('A4')
+    pdf.pageSize('Letter')
     pdf.pageOrientation('landscape')
     pdf.pageMargins([40, 40, 40, 91])
 
@@ -99,28 +98,22 @@ export class RequestReportComponent implements OnInit {
     pdf.create().open();
   }
 
-  createTablePermission(RefPermission: IPermission[]): ITable {
+  createTablePermission(permissions: IPermission[]): ITable {
     return new Table([
-      [ new Txt('Emitido').bold().color('white').alignment('center').end, new Txt('Fecha de Permiso').bold().color('white').alignment('center').end, new Txt('Solicitante').bold().color('white').alignment('center').end, new Txt('Estado de Solicitud').bold().color('white').alignment('center').end],
-
+      [new Txt('No').bold().color('white').alignment('center').end, new Txt('Emitido').bold().color('white').alignment('center').end, new Txt('Fecha de Permiso').bold().color('white').alignment('center').end, new Txt('Solicitante').bold().color('white').alignment('center').end, new Txt('Estado de Solicitud').bold().color('white').alignment('center').end],
+      ...this.extractDataToPermission(permissions)
     ])
-    .relativePosition(0, 370)
-    .widths(['*', 90, 90, 110])
+    .widths([20, 100, 100, 350, 100])
       .layout({
-        vLineColor: () => '#3A66A0',
-        hLineColor: () => '#3A66A0',
-        fillColor: (rowIndex) => {
-          if (rowIndex === 0) {
-            return '#3A66A0';
-          }
+        fillColor: (rowIndex: number, node: any, columnIndex: number) => {
+          return rowIndex === 0 ? '#ABE6FA' : '';
         }
       })
       .alignment('center')
       .end;
   }
 
-  extractDataToPermission(RefPermission: IPermission[]): TablePermission[] {
-    return RefPermission.map((row, index) => [`${index + 1}`, row.submittedAt, dayjs(row.permissionDate).format('DD/MM/YYYY'), row.status, row.status])
+  extractDataToPermission(permissions: IPermission[]): TablePermission[] {
+    return permissions.map((row, index) => [`${index + 1}`, dayjs(row.submittedAt).locale("es").format('DD/MMMM/YYYY'), dayjs(row.permissionDate).locale("es").format('DD/MMMM/YYYY'), row.fullname, row.status])
   }
-
 }

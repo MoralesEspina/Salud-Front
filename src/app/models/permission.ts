@@ -16,8 +16,7 @@ export class IPermission{
       public statusBossOne: string,
       public statusBossTwo: string,
       public status: string,
-
-
+      public fullname: string
     ) {
 
     }

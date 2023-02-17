@@ -61,7 +61,7 @@ export class StatuspermissionComponent implements OnInit {
         person = data['data']
         this._permission.getOneRequestPermissionWithName(uuidPermission)
           .subscribe(async data => {
-            let permission = new IPermission('','','','','','','','','','','');
+            let permission = new IPermission('','','','','','','','','','','','');
             permission = data['data']
             this.constancyService.GetConfigurationFile('constancy')
               .subscribe(async configuration => {

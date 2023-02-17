@@ -59,7 +59,6 @@ import { environment } from 'src/environments/environment.prod';
 import { RequestReportComponent } from './components/newviews/request-report/request-report.component';
 import { FilterDatePipe } from './components/newviews/pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -135,7 +134,6 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     MatSortModule,
     MatRadioModule,
     NgxPaginationModule,
-    NgMultiSelectDropDownModule.forRoot(),
 
   ],
   entryComponents: [

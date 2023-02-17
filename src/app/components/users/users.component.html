@@ -9,16 +9,13 @@
               <p>Crear usuario</p>
               <mat-form-field appearance="outline" class="w-full" style="margin-top: 10px;">
                 <mat-label>Persona</mat-label>
-                <input type="text"
-                placeholder="Search for a street"
-                [formControl]="control"
-                [matAutocomplete]="auto"
-                class="example-input">
-              <mat-autocomplete #auto="matAutocomplete">
-           <mat-option *ngFor="let street of filteredStreets | async" [value]="street">
-             {{street}}
-           </mat-option>
-         </mat-autocomplete>
+                <mat-select formControlName='uuidPerson'>
+                  <input type="text" class="p-2" autocomplete="off" matInput placeholder="Buscar por Nombre"
+                    #multiUserSearch (input)="onInputChange()">
+                  <mat-option *ngFor="let persona of persons" [value]="persona.uuid">
+                    {{persona.fullname}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
             <div class="ed-item s-100 m-100 l-100">

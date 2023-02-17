@@ -13,6 +13,7 @@ import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 import { ErrorsService } from 'src/app/services/errors.service';
 
 
+
 @Component({
   templateUrl: './permission.component.html',
   styleUrls: ['./permission.component.scss']
@@ -26,8 +27,10 @@ export class PermissionReqComponent implements OnInit {
   public rol;
   statusPermission: boolean;
   statusPermission2: boolean;
-  protected persons: nameperson[] = []
-  private _persons: nameperson[] = []
+  protected bossOnefilter: nameperson[] = []
+  private _bossOnefilter: nameperson[] = []
+  protected bossTwofilter: nameperson[] = []
+  private _bossTwofilter: nameperson[] = []
   public permission: IPermission;
   public bossOneList;
   public bossTwoList;
@@ -73,6 +76,7 @@ export class PermissionReqComponent implements OnInit {
   modelPerson: IPerson | undefined;
 
   @ViewChild('multiUserSearch', { static: false }) multiUserSearchInput: ElementRef;
+  @ViewChild('multiUserSearch2', { static: false }) multiUserSearch2Input: ElementRef;
 
   ngOnInit(): void {
     this.id_entrada = this.router.snapshot.params['id'];
@@ -144,6 +148,8 @@ export class PermissionReqComponent implements OnInit {
     this._permission.getBossOne().subscribe(
       response => {
         this.bossOneList = response['data'];
+        this.bossOnefilter = response['data'];
+        this._bossOnefilter = response['data'];
       }, error => {
       }
     )
@@ -153,6 +159,8 @@ export class PermissionReqComponent implements OnInit {
     this._permission.getBossTwo().subscribe(
       response => {
         this.bossTwoList = response['data'];
+        this.bossTwofilter = response['data'];
+        this._bossTwofilter = response['data'];
       }, error => {
       }
     )
@@ -347,4 +355,25 @@ export class PermissionReqComponent implements OnInit {
       this._sweetAlertService.warning('Complete correctamente el formulario');
     }
   }
+
+  onInputChange1() {
+    const searchInputs = this.multiUserSearchInput.nativeElement.value ?
+      this.multiUserSearchInput.nativeElement.value.toLowerCase() : '';
+      this.bossOnefilter = this._bossOnefilter.filter(us => {
+        const name2: string = us.fullname.replace(/\s/g, '').toLowerCase();
+        return name2.indexOf(searchInputs.replace(/\s/g, '').toLowerCase()) > -1;
+    });
+  }
+
+  onInputChange2() {
+    const searchInput = this.multiUserSearch2Input.nativeElement.value ?
+      this.multiUserSearch2Input.nativeElement.value.toLowerCase() : '';
+      this.bossTwofilter = this._bossTwofilter.filter(u => {
+        const name: string = u.fullname.replace(/\s/g, '').toLowerCase();
+        return name.indexOf(searchInput.replace(/\s/g, '').toLowerCase()) > -1;
+    });
+  }
+
+
+
 }

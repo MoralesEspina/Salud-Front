@@ -7,8 +7,8 @@ export const environment = {
   //URL2: 'https://das-jalapa-system.herokuapp.com',
   URL2: 'http://localhost:4000',
   URL: 'http://localhost:4000/das/v1',
-  //URLCustomForms: 'https://das-custom-forms.herokuapp.com',
-  URLCustomForms: 'http://localhost:3000',
+  URLCustomForms: 'https://das-custom-forms.herokuapp.com',
+  //URLCustomForms: 'http://localhost:3000',
   viewSalary: false,
   production: false
 };

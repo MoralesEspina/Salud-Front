@@ -169,6 +169,7 @@ export class PermissionReqComponent implements OnInit {
   loadPermission() {
     if (this.id_entrada) {
       this.editing = true
+      this.disableSelect=new FormControl(true);
       this._permission.getOneRequestPermission(this.id_entrada).subscribe(
         data => {
           this.permission = data['data'];

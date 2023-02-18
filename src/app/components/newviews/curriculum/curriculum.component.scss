@@ -38,3 +38,13 @@ table {
   display: grid;
   place-items: center;
 }
+
+.contenedor{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 95%;
+height: 50px;
+}
+
+

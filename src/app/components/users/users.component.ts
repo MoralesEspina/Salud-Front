@@ -47,6 +47,18 @@ export class UsersComponent implements OnInit {
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
 
+  rolTranslations = {
+    'admin': 'Administrador',
+    'member': 'Secretari@',
+    'boss': 'Jefe Inmediato',
+    'boss2': 'Jefe Vo.Bo',
+    'employed': 'Empleado',
+  };
+
+  getRolTranslation(rol: string): string {
+    return this.rolTranslations[rol] || rol;
+  }
+
   constructor(
     private dialog: MatDialog,
     private userService: UserService,

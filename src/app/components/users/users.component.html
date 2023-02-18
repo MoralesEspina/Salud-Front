@@ -43,7 +43,7 @@
                 <mat-label>Rol</mat-label>
                 <mat-select formControlName="id_rol" [ngClass]="{'is-invalid':submitted && f.id_rol.errors}">
                   <mat-option *ngFor="let option of rols" [value]="option.id_rol">
-                    {{option.type_rol}}
+                    {{getRolTranslation(option.type_rol)}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -83,7 +83,7 @@
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="text-align: center;">{{tableSize * (p -1 ) + indexof + 1}}</td>
             <td >{{duser.username}}</td>
-            <td style="text-align: center;">{{duser.rol}}</td>
+            <td style="text-align: center;">{{getRolTranslation(duser.rol)}}</td>
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="UpdateUser(duser.uuid)">
                 <div class="justify-center text-center ">
@@ -123,7 +123,7 @@
             <td style="text-align: center;">{{tableSize * (p2 -1 ) + indexof + 1}}</td>
             <td>{{duser.fullname | titlecase}}</td>
             <td style="text-align: center;">{{duser.username}}</td>
-            <td>{{duser.rol}}</td>
+            <td>{{getRolTranslation(duser.rol)}}</td>
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="UpdateUser(duser.uuid)">
                 <div class="justify-center text-center ">
@@ -163,7 +163,7 @@
             <td style="text-align: center;">{{tableSize * (p3 -1 ) + indexof + 1}}</td>
             <td>{{duser.fullname | titlecase}}</td>
             <td style="text-align: center;">{{duser.username}}</td>
-            <td>{{duser.rol}}</td>
+            <td>{{getRolTranslation(duser.rol)}}</td>
             <td style="width: 10px;">
               <div class="rounded-full cursor-pointer" (click)="UpdateUser(duser.uuid)">
                 <div class="justify-center text-center ">

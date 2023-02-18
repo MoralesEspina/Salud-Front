@@ -34,7 +34,7 @@
     </li>
 
 
-    <li *ngIf="user.rol == 'admin'||user.rol == 'member'">
+    <li *ngIf="user.rol == 'admin'">
       <a (click)="DisplayNone()">
         <i class="fa fa-clock-o fa-2x"></i>
         <span class="nav-text">
@@ -85,7 +85,7 @@
       </a>
     </li>
 
-    <li *ngIf="user.rol == 'admin'||user.rol == 'member'">
+    <li *ngIf="user.rol == 'admin'">
       <a (click)="isClickedReportes = !isClickedReportes">
         <i class="fa fa-clipboard-list"></i>
         <span class="nav-text">
@@ -119,9 +119,9 @@
       <li>
         <a routerLink="/SolicitudesDePermisos" routerLinkActive="text-yellow-500">
           <div class="ml-4">
-            <i class="fa fa-user-tie"></i>
+            <i class="fa fa-clipboard-check"></i>
             <span class="nav-text font-bold ml-3">
-              Reporte de solicitudes de permisos
+              Reporte de solicitudes de ausencias
             </span>
           </div>
         </a>
@@ -130,27 +130,27 @@
     </div>
     <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'boss2'||user.rol == 'employed'">
       <a routerLink="/solicitudpermiso">
-        <i class="fa fa-users fa-2x"></i>
+        <i class="fa fa-pen fa-2x"></i>
         <span class="nav-text">
-          Solicitar Permiso
+          Solicitar permiso de ausencia
         </span>
       </a>
     </li>
 
     <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'boss2' ">
       <a routerLink="/permisos">
-        <i class="fa fa-users fa-2x"></i>
+        <i class="fa fa-check "></i>
         <span class="nav-text">
-          Aceptar/Denegar Permisos
+          Aceptar/Denegar permisos de ausencias
         </span>
       </a>
     </li>
 
     <li class="has-subnav" *ngIf="user.rol == 'boss'||user.rol == 'boss2'||user.rol == 'employed'">
       <a routerLink="/estadopermisos">
-        <i class="fa fa-users fa-2x"></i>
+        <i class="fa fa-layer-group fa-2x"></i>
         <span class="nav-text">
-          Estado de mis Permisos
+          Estado de mis solicitudes de ausencias
         </span>
       </a>
     </li>

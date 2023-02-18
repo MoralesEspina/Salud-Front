@@ -2,16 +2,21 @@
 <div class="box">
   <form [formGroup]="addressFormCurriculum">
     <mat-card class="shipping-card">
-      <mat-card-title class="text-center">INFORMACIÓN CURRICULUM</mat-card-title>
-<div style="margin: auto;text-align: center;">
-      <button mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="UploadAvatar()">Subir Foto</button>
-
-      <mat-card-actions style="text-align: center;">
-        <app-curriculum-pdf [UUIDPerson]="uuid"></app-curriculum-pdf>
+      <div class="contenedor">
+      <mat-card-title class="text-center" style="width: 100%;margin-left: 10%;">INFORMACIÓN CURRICULUM</mat-card-title>
+      <mat-card-actions align-content="right" style="align-content: right;">
+        <app-curriculum-pdf [UUIDPerson]="uuid" style="width: 50px;"></app-curriculum-pdf>
       </mat-card-actions>
-      <img class="rounded-full ring-2 ring-white" style="margin:auto; width: 300px; margin-bottom: 15px;" src="{{urlImage}}" alt="">
-
     </div>
+      <div style="margin: auto;text-align: center;">
+        <button mat-raised-button color="primary" style="margin-bottom: 10px;" (click)="UploadAvatar()">Subir
+          Foto</button>
+
+
+        <img class="rounded-full ring-2 ring-white" style="margin:auto; width: 300px; margin-bottom: 15px;"
+          src="{{urlImage}}" alt="">
+
+      </div>
       <mat-card-header>
         <mat-card-title>DATOS GENERALES</mat-card-title>
       </mat-card-header>
@@ -25,7 +30,7 @@
               </mat-error>
             </mat-form-field>
           </div>
-          </div>
+        </div>
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
@@ -41,7 +46,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="País" formControlName="country">
               <mat-error *ngIf="addressFormCurriculum.controls['country']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -49,17 +54,17 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Municipio" formControlName="municipality">
               <mat-error *ngIf="addressFormCurriculum.controls['municipality']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
         </div>
-         <div class="row">
+        <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
               <input matInput placeholder="Departamento" formControlName="department">
               <mat-error *ngIf="addressFormCurriculum.controls['department']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -67,7 +72,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Aldea/Caserio" formControlName="village">
               <mat-error *ngIf="addressFormCurriculum.controls['village']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -77,15 +82,15 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Teléfono Residencia" formControlName="homephone">
               <mat-error *ngIf="addressFormCurriculum.controls['homephone']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput  placeholder="Teléfono Oficina" formControlName="workPhone">
+              <input matInput placeholder="Teléfono Oficina" formControlName="workPhone">
               <mat-error *ngIf="addressFormCurriculum.controls['workPhone']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -95,7 +100,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Telefono Celular" formControlName="phone">
               <mat-error *ngIf="addressFormCurriculum.controls['phone']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -103,7 +108,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Correo Electronico" type="email" formControlName="email">
               <mat-error *ngIf="addressFormCurriculum.controls['email']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -113,7 +118,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Fecha de Nacimiento" type="date" formControlName="borndate">
               <mat-error *ngIf="addressFormCurriculum.controls['borndate']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -121,7 +126,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Edad" formControlName="age">
               <mat-error *ngIf="addressFormCurriculum.controls['age']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -129,9 +134,9 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Lugar de Nacimiento"formControlName="bornPlace">
+              <input matInput placeholder="Lugar de Nacimiento" formControlName="bornPlace">
               <mat-error *ngIf="addressFormCurriculum.controls['bornPlace']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -139,7 +144,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Estado Civil" formControlName="civilStatus">
               <mat-error *ngIf="addressFormCurriculum.controls['civilStatus']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -149,7 +154,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Nacionalidad" formControlName="nacionality">
               <mat-error *ngIf="addressFormCurriculum.controls['nacionality']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -157,7 +162,7 @@
             <mat-form-field class="full-width">
               <input matInput placeholder="Etnia" formControlName="etnia">
               <mat-error *ngIf="addressFormCurriculum.controls['etnia']">
-               <strong>*Obligatorio</strong>
+                <strong>*Obligatorio</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -175,7 +180,7 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="CUI"formControlName="dpi">
+              <input matInput placeholder="CUI" formControlName="dpi">
               <mat-error *ngIf="addressFormCurriculum.controls['dpi'].hasError('required')">
                 <strong>*Obligatorio</strong>
               </mat-error>
@@ -220,8 +225,9 @@
         </div>
       </mat-card-content>
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" type="submit" [disabled]="addressFormCurriculum.invalid" (click)="editCurriculum()">Actualizar</button>
-        <button mat-raised-button color="primary" routerLink="/dashboard" >Regresar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="addressFormCurriculum.invalid"
+          (click)="editCurriculum()">Actualizar</button>
+        <button mat-raised-button color="primary" routerLink="/dashboard">Regresar</button>
       </mat-card-actions>
     </mat-card>
   </form>
@@ -345,7 +351,7 @@
         <mat-card-title>REFERENCIAS FAMILIARES</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-         <div class="row">
+        <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
               <input matInput placeholder="Nombre" formControlName="name">
@@ -366,7 +372,7 @@
         <div class="row">
           <div class="col">
             <mat-form-field class="full-width">
-              <mat-select  matInput placeholder="Parentesco" formControlName="relationship">
+              <mat-select matInput placeholder="Parentesco" formControlName="relationship">
                 <mat-option *ngFor="let status of relationship" [value]="status">
                   {{status}}
                 </mat-option>
@@ -387,7 +393,8 @@
         </div>
       </mat-card-content>
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" *ngIf="this.lengthRefFam != 3" [disabled]="addressFormRefFam.invalid" (click)="aggRefFam()">Agregar</button>
+        <button mat-raised-button color="primary" *ngIf="this.lengthRefFam != 3" [disabled]="addressFormRefFam.invalid"
+          (click)="aggRefFam()">Agregar</button>
       </mat-card-actions>
       <div class="container">
         <table class="table table-hover">
@@ -476,11 +483,12 @@
       </mat-card-content>
 
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" *ngIf="this.lengthRefPer != 3" [disabled]="addressFormRefPer.invalid" (click)="aggRefPer()">Agregar</button>
+        <button mat-raised-button color="primary" *ngIf="this.lengthRefPer != 3" [disabled]="addressFormRefPer.invalid"
+          (click)="aggRefPer()">Agregar</button>
       </mat-card-actions>
 
       <div class="container">
-        <table class="table table-bordered" >
+        <table class="table table-bordered">
           <thead>
             <tr>
               <th scope="col">Nombre</th>
@@ -645,14 +653,11 @@
                 <div class="justify-center text-center ">
                   <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
                 </div>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </mat-card>
   </form>
 </div>
-
-

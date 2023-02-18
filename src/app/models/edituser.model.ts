@@ -8,6 +8,7 @@ export class IUser {
     public role: Rol
     public uuidPerson: string
     public isSelected: boolean;
+    public id_rol: number
 
     constructor() {
         this.uuid = null;

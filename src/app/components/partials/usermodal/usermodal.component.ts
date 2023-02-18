@@ -43,7 +43,6 @@ export class UsermodalComponent implements OnInit {
   }
 
   ngOnInit() {
-
     if (this.formActionSubmmit == 'Actualizar') {
       this.form = this.fb.group({
         username: [this.user.username, Validators.required],
@@ -69,13 +68,17 @@ export class UsermodalComponent implements OnInit {
       confirmButtonColor: '#4299e1',
       cancelButtonColor: '#f56565',
       cancelButtonText: "Cancelar",
-      confirmButtonText: `si, ${this.formActionSubmmit.toLowerCase()}!`
+      confirmButtonText: `Si, ${this.formActionSubmmit.toLowerCase()}!`
 
     }).then((result) => {
       if (result.isConfirmed) {
         this.user2 = this.form.value
-        this.user2.id_rol = parseInt(`${this.user2.id_rol}`)
-        this.dialogRef.close(this.user2);
+        if (this.user2.id_rol == null) {
+          this.user2.id_rol = parseInt(`${this.user.id_rol}`)
+          this.dialogRef.close(this.user2);
+        }
+          this.user2.id_rol = parseInt(`${this.user2.id_rol}`)
+          this.dialogRef.close(this.user2);
       }
     })
   }

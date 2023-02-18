@@ -30,7 +30,7 @@ export class CurriculumPDFComponent implements OnInit {
   education: EducationI[];
   tableExperience: ExperienceI[] = [];
   fecha = new Date();
-  imageURL: string = 'https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/certify%2FFormato_Curriculum_Logo.png?alt=media&token=77b83778-621f-490a-bf0b-601ccc01339d'
+  imageURL: string = 'https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/avatars%2F022405c2-9fdb-4caa-ba22-b2d3a93cbc0c.jpg?alt=media&token=931728a3-f91b-4d7d-9df9-1f0dd67b1712'
   urlImage: string;
 
   constructor(
@@ -93,7 +93,6 @@ export class CurriculumPDFComponent implements OnInit {
       this.curriculumService.GetExperience(id_entrada).subscribe(
         data => {
           this.tableExperience = data['data'];
-          console.log(this.tableExperience)
         }
       )
     }
@@ -118,10 +117,12 @@ export class CurriculumPDFComponent implements OnInit {
       fontSize: 10
     })
 
-    pdf.add(await new Img(this.imageURL).alignment('center').width(200).height(100).relativePosition(0, -60).build())
+    pdf.add(await new Img(this.imageURL).alignment('center').width(100).height(75).relativePosition(0, -60).build())
 
     pdf.add(await new Img(this.urlImage).alignment('right').width(100).height(100).relativePosition(0, -50).build())
 
+    pdf.add(new Txt('Dirección de Área de Salud de Jalapa').alignment('center').relativePosition(0, 20).color('#2A3C91').fontSize(12).bold().end)
+    pdf.add(new Txt('Departamento de Recursos Humanos').alignment('center').relativePosition(0, 35).color('#2A3C91').fontSize(12).bold().end)
     pdf.add(new Txt('Datos generales___________________________________________________________________').alignment('left').relativePosition(0, 60).color('#2778B4').fontSize(12).bold().end)
 
     pdf.add(new Txt('Nombre Completo').alignment('left').relativePosition(0, 90).bold().end)

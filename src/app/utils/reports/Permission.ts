@@ -15,7 +15,7 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
     })
     console.log(permission)
    // pdf.background(await new Img(authorizationConfiguration.imageURL).alignment(authorizationConfiguration.align).width(authorizationConfiguration.width).height(authorizationConfiguration.height).build())
-   pdf.add(await new Img('https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/avatars%2Flogo-mspas%20(1).png?alt=media&token=5a4e689a-b3d9-402d-b7da-df99d43c642d').alignment('left').width(225).height(50).relativePosition(0, -60).opacity(0.5).build())
+   pdf.add(await new Img('https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/avatars%2Fc37d9fab-1cc0-4605-9836-4d3681b0635d.jpg?alt=media&token=9b2e9959-0ea1-4a8e-bfe7-1a6755f69f2b').alignment('left').width(75).height(75).relativePosition(0, -60).opacity(0.5).build())
    pdf.add(new Txt('MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA SOCIAL').alignment('right').bold().relativePosition(0, -50).fontSize(8).color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('DIRECCIÓN DE ÁREA DE SALUD DE JALAPA').alignment('right').bold().relativePosition(0, -40).fontSize(8).color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('DEPARTAMENTO DE RECURSOS HUMANOS').alignment('right').bold().relativePosition(0, -30).fontSize(8).color('#3A66A0').opacity(0.5).end)
@@ -66,7 +66,7 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
    pdf.add(new Txt('No marcaje de huella por cumplimiento de actividades o comisiones ').relativePosition(15, 275).fontSize(12).bold().end)
    pdf.add(new Table([[' ']]).relativePosition(455, 272).fontSize(12).bold().widths([20]).end)
    pdf.add(await new Img('https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/avatars%2FCheck.png?alt=media&token=b87a88f7-a937-46af-a7e2-78c9091c55a4').width(10).height(10).relativePosition(0, 302).build())
-   pdf.add(new Txt('Otro: __________________________________________________________________________').bold().relativePosition(15, 300).end)
+   pdf.add(new Txt('Otro: ').bold().relativePosition(15, 300).end)
 
    switch (permission.motive) {
     case 'Permiso (conforme lo establecido en la Ley de Servicio Civil y Pacto Colectivo)':
@@ -82,7 +82,7 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
       pdf.add(new Txt('X').relativePosition(465, 274).fontSize(14).bold().end)
       break;
     default:
-      pdf.add(new Txt(permission.motive).relativePosition(47, 300).fontSize(12).bold().end)
+      pdf.add(new Txt(permission.motive).relativePosition(47, 300).decoration('underline').fontSize(12).bold().end)
       break;
    }
 
@@ -90,35 +90,44 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
    pdf.add(new Table([[permission.document]]).relativePosition(0, 365).fontSize(12).bold().widths(['*']).heights((rowIndex) => (rowIndex === 0 ? 35 : 0)).end)
 
    pdf.add(new Txt('SI LA SOLICITUD DE AUSENCIA DEL SERVICIO NO AMERITA SER APROBADA, ESPECIFICAR LOS MOTIVOS: ').relativePosition(0, 435).fontSize(10).bold().end)
+
    if (permission.status == 'Denegada') {
-    pdf.add(new Txt(permission.reason).relativePosition(4, 465).fontSize(12).bold().end)
-   }
+    if (permission.statusBossOne == 'Denegada') {
+      pdf.add(new Txt(' Denegada por: ' + permission.bossOne).relativePosition(4, 465).fontSize(12).bold().end)
+      pdf.add(new Txt(' Razón: ' + permission.reason).relativePosition(4, 480).fontSize(12).bold().end)
+    }else if (permission.statusBossTwo == 'Denegada') {
+      pdf.add(new Txt(' Denegada por: ' + permission.bossTwo).relativePosition(4, 465).fontSize(12).bold().end)
+      pdf.add(new Txt(' Razón: ' + permission.reason).relativePosition(4, 480).fontSize(12).bold().end)
+    } else {
+      pdf.add(new Txt(permission.reason).relativePosition(4, 465).fontSize(12).bold().end)
+    }
+    }
 
    pdf.add(new Table([[' ']]).relativePosition(0, 465).fontSize(10).bold().widths(['*']).heights((rowIndex) => (rowIndex === 0 ? 65 : 0)).end)
-   pdf.add(new Txt(person.fullname).relativePosition(0, 560).fontSize(12).bold().end)
-   pdf.add(new Txt('_______________________').relativePosition(0, 560).fontSize(12).bold().end)
-   pdf.add(new Txt('INTERESADO').relativePosition(30,575 ).fontSize(12).bold().end)
+   pdf.add(new Txt(person.fullname).relativePosition(-157, 560).fontSize(12).bold().alignment('center').end)
+   pdf.add(new Txt('_____________________________').relativePosition(-157, 560).fontSize(12).bold().alignment('center').end)
+   pdf.add(new Txt('INTERESADO').relativePosition(-157,575 ).fontSize(12).bold().alignment('center').end)
 
    if (permission.statusBossOne == 'Aceptada') {
-    pdf.add(new Txt(permission.bossOne).relativePosition(350, 560).fontSize(12).bold().end)
+    pdf.add(new Txt(permission.bossOne).relativePosition(157, 560).alignment('center').fontSize(12).bold().end)
    }
-
-   pdf.add(new Txt('_______________________').relativePosition(350, 560).fontSize(12).bold().end)
-   pdf.add(new Txt('JEFE INMEDIATO').relativePosition(370,575 ).fontSize(12).bold().end)
+   pdf.add(new Txt('_____________________________').relativePosition(157, 560).alignment('center').fontSize(12).bold().end)
+   pdf.add(new Txt('JEFE INMEDIATO').relativePosition(157,575 ).fontSize(12).alignment('center').bold().end)
 
    if (permission.statusBossTwo == 'Aceptada') {
-    pdf.add(new Txt(permission.bossTwo).relativePosition(160, 600).fontSize(12).bold().end)
+    pdf.add(new Txt(permission.bossTwo).relativePosition(0, 600).alignment('center').fontSize(12).bold().end)
    }
-   pdf.add(new Txt('______________________________').relativePosition(160,600).fontSize(12).bold().end)
-   pdf.add(new Txt('VO.BO. JEFE DE PERSONAL').relativePosition(170,615 ).fontSize(12).bold().end)
+   pdf.add(new Txt('_______________________________').relativePosition(0,600).fontSize(12).alignment('center').bold().end)
+   pdf.add(new Txt('VO.BO. JEFE DE PERSONAL').relativePosition(0,615 ).alignment('center').fontSize(12).bold().end)
+   pdf.add(new Txt('O').relativePosition(0,628 ).alignment('center').fontSize(10).bold().end)
+   pdf.add(new Txt('COORDINADOR DE DISTRITO').relativePosition(0,638 ).alignment('center').fontSize(12).bold().end)
 
-   pdf.add(new Txt('NOTA:').relativePosition(0,640).fontSize(8).bold().end)
+   pdf.add(new Txt('NOTA:').relativePosition(0,650).fontSize(8).bold().end)
    pdf.add(new Txt('EL PRESENTE FORMULARIO ES PARA USO EXCLUSIVO DEL PERSONAL DE LA DIRECCIÓN DE ÁREA DE SALUD DE JALAPA EN TODOS SUS DEPARTAMENTOS, UNIDADES Y/O PROGRAMAS Y PARA COORDINADORES DISTRITALES DE SALUD.')
-   .relativePosition(0,650).fontSize(8).end)
+   .relativePosition(0,660).fontSize(8).end)
 
-   pdf.add(new Txt('DEPARTAMENTO DE RECURSOS HUMANOS, DIRECCIÓN DE ÁREA DE SALUD JALAPA').relativePosition(66,690).fontSize(9).bold().color('#3A66A0').opacity(0.5).end)
-   pdf.add(new Txt('6ª.Calle Tránsito Rojas 6-41 Bo. La Democracia Pte. Las Guzmán, Jalapa, Jalapa').relativePosition(80,700).fontSize(10).bold().color('#3A66A0').opacity(0.5).end)
-   pdf.add(new Txt('7922-3889').relativePosition(230,710).fontSize(10).bold().color('#3A66A0').opacity(0.5).end)
-   pdf.add(new Txt('rrhh225jalapa2@gmail.com').relativePosition(190,720).fontSize(10).bold().color('#3A66A0').opacity(0.5).end)
+   pdf.add(new Txt('DEPARTAMENTO DE RECURSOS HUMANOS, DIRECCIÓN DE ÁREA DE SALUD DE JALAPA').relativePosition(0,700).fontSize(9).alignment('center').bold().color('#3A66A0').opacity(0.5).end)
+   pdf.add(new Txt('6ª.Calle Tránsito Rojas 6-41 Bo. La Democracia Pte. Las Guzmán, Jalapa, Jalapa').relativePosition(0,710).fontSize(10).alignment('center').bold().color('#3A66A0').opacity(0.5).end)
+   pdf.add(new Txt('7922-3889').relativePosition(0,720).fontSize(10).bold().color('#3A66A0').opacity(0.5).alignment('center').end)
     return pdf;
 }

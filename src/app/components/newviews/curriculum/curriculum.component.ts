@@ -70,6 +70,7 @@ export class CurriculumComponent {
     bossname: [null, Validators.required],
     sector: [null, Validators.required],
     salary: [null, Validators.required],
+    company: [null, Validators.required]
   });
 
   addressFormRefFam = this.fb.group({
@@ -326,12 +327,14 @@ export class CurriculumComponent {
       bossname: this.addressFormWorkExperience.value.bossname,
       sector: this.addressFormWorkExperience.value.sector,
       salary: this.addressFormWorkExperience.value.salary,
+      company: this.addressFormWorkExperience.value.company
     }
     this.curriculumService.createWorkExp(workExpr).subscribe(data => {
       this._sweetAlertService.createAndUpdate('Registro creado con éxito');
+      this.addressFormWorkExperience.reset({});
+      for(let i in this.addressFormWorkExperience.controls)
+      this.addressFormWorkExperience.controls[i].setErrors(null);
       this.loadExperience();
-      this.addressFormWorkExperience.reset();
-      this.addressFormWorkExperience.markAsUntouched();
     }, error => {
       this._sweetAlertService.error('No se pudo crear el registro');
     });

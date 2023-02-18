@@ -301,7 +301,7 @@
       </mat-card-content>
 
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary"  *ngIf="this.lengthEducation != 3" [disabled]="addressFormPersonEducation.invalid" (click)="aggEducation()">Agregar</button>
+        <button mat-raised-button color="primary"  *ngIf="this.lengthEducation != 5" [disabled]="addressFormPersonEducation.invalid" (click)="aggEducation()">Agregar</button>
       </mat-card-actions>
       <div class="container">
         <table class="table table-hover">
@@ -466,14 +466,10 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <mat-select  matInput placeholder="Parentesco" formControlName="relationship">
-                <mat-option *ngFor="let status of relationship" [value]="status">
-                  {{status}}
-                </mat-option>
+              <input  matInput placeholder="Parentesco" formControlName="relationship">
                 <mat-error *ngIf="addressFormRefPer.controls['relationship'].hasError('required')">
                   <strong>*Obligatorio</strong>
                 </mat-error>
-              </mat-select>
             </mat-form-field>
           </div>
         </div>
@@ -522,7 +518,15 @@
       </mat-card-header>
       <mat-card-content>
         <div  class="row">
-          <div style="margin-left: 15px;margin-right: -100px; width: 130px;">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombre de la Institución o Empresa" formControlName="company">
+              <mat-error *ngIf="addressFormWorkExperience.controls['company'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
             <mat-form-field class="full-width">
               <input matInput placeholder="Fecha De Inicio" type="date" formControlName="dateof">
               <mat-error *ngIf="addressFormWorkExperience.controls['dateof'].hasError('required')">
@@ -530,8 +534,8 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div style="margin: auto; margin-left: 150px; width: 130px;">
-            <mat-form-field class="full-width">
+          <div class="col">
+            <mat-form-field class="full-width" >
               <input matInput placeholder="Fecha Del Final" type="date" formControlName="dateto">
               <mat-error *ngIf="addressFormWorkExperience.controls['dateto'].hasError('required')">
                 <strong>*Obligatorio</strong>
@@ -606,12 +610,13 @@
         </div>
       </mat-card-content>
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" type="submit" *ngIf="this.lengthExperience != 3" [disabled]="addressFormWorkExperience.invalid" (click)="aggWorkExp()">Agregar</button>
+        <button mat-raised-button color="primary" type="submit" *ngIf="this.lengthExperience != 5" [disabled]="addressFormWorkExperience.invalid" (click)="aggWorkExp()">Agregar</button>
       </mat-card-actions>
       <div class="container">
       <table class="table table-hover">
         <thead>
           <tr>
+            <th scope="col">Empresa</th>
             <th scope="col">Direccion</th>
             <th scope="col">Telefono</th>
             <th scope="col">Motivo del Retiro</th>
@@ -625,7 +630,8 @@
         </thead>
         <tbody>
           <tr *ngFor="let experience of tableExperience">
-            <td scope="row">{{experience.direction}}</td>
+            <td scope="row">{{experience.company}}</td>
+            <td>{{experience.direction}}</td>
             <td>{{experience.phone}}</td>
             <td>{{experience.reason}}</td>
             <td>{{experience.dateof}}</td>

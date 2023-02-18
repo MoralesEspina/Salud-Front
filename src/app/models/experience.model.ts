@@ -10,4 +10,5 @@ export class ExperienceI{
   bossname: string;
   sector: string;
   salary: string;
+  company: string;
 }

@@ -23,12 +23,10 @@ export class UsermodalComponent implements OnInit {
   submitted: boolean = false
   color: ThemePalette = 'primary';
   checked = false;
-
   user: IUser
   actualUser: IUser
   roles: Rol[] = []
   user2 = new User()
-
 
   formActionSubmmit: string; //create or Actualizar
 
@@ -50,16 +48,12 @@ export class UsermodalComponent implements OnInit {
       this.form = this.fb.group({
         username: [this.user.username, Validators.required],
         rol: [this.user.role, Validators.required],
-        id_rol: [this.user2.id_rol, Validators.required],
-        pasword: '',
-
-
+        id_rol: [this.user2.id_rol],
+        password: '',
       }
       );
     }
     this.manyRols();
-
-
   }
 
   get f() { return this.form.controls }
@@ -81,18 +75,14 @@ export class UsermodalComponent implements OnInit {
       if (result.isConfirmed) {
         this.user2 = this.form.value
         this.user2.id_rol = parseInt(`${this.user2.id_rol}`)
-
-
         this.dialogRef.close(this.user2);
       }
     })
-
   }
 
   close(): void {
     this.dialogRef.close();
   }
-
 
   manyRols() {
     this.userService.rols()
@@ -100,8 +90,6 @@ export class UsermodalComponent implements OnInit {
         this.roles = data['data']
       })
   }
-
-
 }
 
 

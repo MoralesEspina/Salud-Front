@@ -307,8 +307,7 @@
       </mat-card-content>
 
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" *ngIf="this.lengthEducation != 3"
-          [disabled]="addressFormPersonEducation.invalid" (click)="aggEducation()">Agregar</button>
+        <button mat-raised-button color="primary"  *ngIf="this.lengthEducation != 5" [disabled]="addressFormPersonEducation.invalid" (click)="aggEducation()">Agregar</button>
       </mat-card-actions>
       <div class="container">
         <table class="table table-hover">
@@ -474,14 +473,10 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <mat-select matInput placeholder="Parentesco" formControlName="relationship">
-                <mat-option *ngFor="let status of relationship" [value]="status">
-                  {{status}}
-                </mat-option>
+              <input  matInput placeholder="Parentesco" formControlName="relationship">
                 <mat-error *ngIf="addressFormRefPer.controls['relationship'].hasError('required')">
                   <strong>*Obligatorio</strong>
                 </mat-error>
-              </mat-select>
             </mat-form-field>
           </div>
         </div>
@@ -530,8 +525,16 @@
         <mat-card-title class="text-center">EXPERIENCIA LABORAL</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <div class="row">
-          <div style="margin-left: 15px;margin-right: -100px; width: 130px;">
+        <div  class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Nombre de la Institución o Empresa" formControlName="company">
+              <mat-error *ngIf="addressFormWorkExperience.controls['company'].hasError('required')">
+                <strong>*Obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
             <mat-form-field class="full-width">
               <input matInput placeholder="Fecha De Inicio" type="date" formControlName="dateof">
               <mat-error *ngIf="addressFormWorkExperience.controls['dateof'].hasError('required')">
@@ -539,8 +542,8 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div style="margin: auto; margin-left: 150px; width: 130px;">
-            <mat-form-field class="full-width">
+          <div class="col">
+            <mat-form-field class="full-width" >
               <input matInput placeholder="Fecha Del Final" type="date" formControlName="dateto">
               <mat-error *ngIf="addressFormWorkExperience.controls['dateto'].hasError('required')">
                 <strong>*Obligatorio</strong>
@@ -615,40 +618,40 @@
         </div>
       </mat-card-content>
       <mat-card-actions style="text-align: center;">
-        <button mat-raised-button color="primary" type="submit" *ngIf="this.lengthExperience != 3"
-          [disabled]="addressFormWorkExperience.invalid" (click)="aggWorkExp()">Agregar</button>
+        <button mat-raised-button color="primary" type="submit" *ngIf="this.lengthExperience != 5" [disabled]="addressFormWorkExperience.invalid" (click)="aggWorkExp()">Agregar</button>
       </mat-card-actions>
       <div class="container">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Direccion</th>
-              <th scope="col">Telefono</th>
-              <th scope="col">Motivo del Retiro</th>
-              <th scope="col">Fecha de Inicio</th>
-              <th scope="col">Fecha del Final</th>
-              <th scope="col">Puesto Desempeñado</th>
-              <th scope="col">Nombre de Jefe Inmediato</th>
-              <th scope="col">Sector</th>
-              <th scope="col">Salario</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let experience of tableExperience">
-              <td scope="row">{{experience.direction}}</td>
-              <td>{{experience.phone}}</td>
-              <td>{{experience.reason}}</td>
-              <td>{{experience.dateof}}</td>
-              <td>{{experience.dateto}}</td>
-              <td>{{experience.job}}</td>
-              <td>{{experience.bossname}}</td>
-              <td>{{experience.sector}}</td>
-              <td>{{experience.salary}}</td>
-              <td style="width: 5px;">
-                <div class="rounded-full cursor-pointer" (click)="deleteWorkExp(experience.uuid)">
-                  <div class="justify-center text-center ">
-                    <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
-                  </div>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Empresa</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Motivo del Retiro</th>
+            <th scope="col">Fecha de Inicio</th>
+            <th scope="col">Fecha del Final</th>
+            <th scope="col">Puesto Desempeñado</th>
+            <th scope="col">Nombre de Jefe Inmediato</th>
+            <th scope="col">Sector</th>
+            <th scope="col">Salario</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let experience of tableExperience">
+            <td scope="row">{{experience.company}}</td>
+            <td>{{experience.direction}}</td>
+            <td>{{experience.phone}}</td>
+            <td>{{experience.reason}}</td>
+            <td>{{experience.dateof}}</td>
+            <td>{{experience.dateto}}</td>
+            <td>{{experience.job}}</td>
+            <td>{{experience.bossname}}</td>
+            <td>{{experience.sector}}</td>
+            <td>{{experience.salary}}</td>
+            <td style="width: 5px;">
+              <div class="rounded-full cursor-pointer" (click)="deleteWorkExp(experience.uuid)">
+                <div class="justify-center text-center ">
+                  <i class="fas fa-trash-alt fa-2x fa-fw fa-inverse text-red-500"></i>
                 </div>
               </td>
             </tr>

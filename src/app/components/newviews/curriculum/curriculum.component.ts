@@ -43,33 +43,33 @@ export class CurriculumComponent {
     //----------Form References----------//
     name: [null, Validators.required],
     phone: [null, Validators.required],
-    relationship: [null, Validators.required],
-    profession: [null, Validators.required],
-    company: [null, Validators.required],
+    relationship: [null],
+    profession: [null],
+    company: [null],
   });
 
   addressFormPersonEducation = this.fb.group({
     //----------Form PersonEducation----------//
-    country: [null, Validators.required],
+    country: [null],
     establishment: [null, Validators.required],
     periodof: [null, Validators.required],
     periodto: [null, Validators.required],
-    certificate: [null, Validators.required],
-    status: [null, Validators.required],
-    grade: [null, Validators.required],
+    certificate: [null],
+    status: [null],
+    grade: [null],
   });
 
   addressFormWorkExperience = this.fb.group({
     //----------Form WorkExperience----------//
-    direction: [null, Validators.required],
+    direction: [null],
     phone: [null, Validators.required],
-    reason: [null, Validators.required],
+    reason: [null],
     dateof: [null, Validators.required],
     dateto: [null, Validators.required],
     job: [null, Validators.required],
     bossname: [null, Validators.required],
-    sector: [null, Validators.required],
-    salary: [null, Validators.required],
+    sector: [null],
+    salary: [null],
     company: [null, Validators.required]
   });
 
@@ -77,7 +77,7 @@ export class CurriculumComponent {
     name: [null, Validators.required],
     phone: [null, Validators.required],
     relationship: [null, Validators.required],
-    bornDate: [null, Validators.required],
+    bornDate: [null],
   });
 
   addressFormCurriculum = this.fb.group({

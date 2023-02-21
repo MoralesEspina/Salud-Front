@@ -13,9 +13,9 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
     pdf.defaultStyle({
         fontSize: 12
     })
-    console.log(permission)
+
    // pdf.background(await new Img(authorizationConfiguration.imageURL).alignment(authorizationConfiguration.align).width(authorizationConfiguration.width).height(authorizationConfiguration.height).build())
-   pdf.add(await new Img('https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/avatars%2Fc37d9fab-1cc0-4605-9836-4d3681b0635d.jpg?alt=media&token=9b2e9959-0ea1-4a8e-bfe7-1a6755f69f2b').alignment('left').width(75).height(75).relativePosition(0, -60).opacity(0.5).build())
+   pdf.add(await new Img('https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/avatars%2Flogo-mspas%20(1).png?alt=media&token=5a4e689a-b3d9-402d-b7da-df99d43c642d').alignment('left').width(220).height(55).relativePosition(0, -60).opacity(0.5).build())
    pdf.add(new Txt('MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA SOCIAL').alignment('right').bold().relativePosition(0, -50).fontSize(8).color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('DIRECCIÓN DE ÁREA DE SALUD DE JALAPA').alignment('right').bold().relativePosition(0, -40).fontSize(8).color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('DEPARTAMENTO DE RECURSOS HUMANOS').alignment('right').bold().relativePosition(0, -30).fontSize(8).color('#3A66A0').opacity(0.5).end)

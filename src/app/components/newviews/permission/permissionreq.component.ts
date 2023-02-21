@@ -11,6 +11,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 import { ErrorsService } from 'src/app/services/errors.service';
+import { Permission } from 'src/app/utils/reports/Permission';
+import { AuthorizationService } from 'src/app/services/authorization.service';
 
 
 
@@ -35,6 +37,7 @@ export class PermissionReqComponent implements OnInit {
   public bossOneList;
   public bossTwoList;
   public statusRequest: boolean;
+  public uuidPermission;
 
   public data_response;
   statusbossOne: boolean = false;
@@ -68,6 +71,7 @@ export class PermissionReqComponent implements OnInit {
     private _errorService: ErrorsService,
     private _router: Router,
     private authServie: UserService,
+    private constancyService: AuthorizationService,
   ) {
     this.images = [];
 
@@ -173,6 +177,7 @@ export class PermissionReqComponent implements OnInit {
       this._permission.getOneRequestPermission(this.id_entrada).subscribe(
         data => {
           this.permission = data['data'];
+          this.uuidPermission = data['data'].uuid;
           this.permission.status == 'En Espera' ? this.statusRequest = true : this.statusRequest = false
           this.loadPerson(this.permission.uuidPerson);
           this.addressFormPermission.patchValue({
@@ -186,8 +191,7 @@ export class PermissionReqComponent implements OnInit {
             'statusBossTwo': '',
             'status': '',
             'reason': this.permission.reason,
-          }
-          );
+          });
           if (this.permission.bossOne == this._uuidUser && this.permission.statusBossOne == 'En Espera' && this.permission.statusBossTwo == 'En Espera') {
             this.statusbossOne = true;
           } else if (this.permission.bossTwo == this._uuidUser && this.permission.statusBossOne == 'Aceptada' && this.permission.statusBossTwo == 'En Espera') {
@@ -375,6 +379,31 @@ export class PermissionReqComponent implements OnInit {
     });
   }
 
-
-
+  PrintPermission() {
+    this.personService.OnePerson(this.permission.uuidPerson)
+      .subscribe(async data => {
+        let person = new IPerson();
+        person = data['data']
+        this._permission.getOneRequestPermissionWithName(this.uuidPermission)
+          .subscribe(async data => {
+            let permission = new IPermission('','','','','','','','','','','','');
+            permission = data['data']
+            this.constancyService.GetConfigurationFile('constancy')
+              .subscribe(async configuration => {
+                await Permission(person, permission).then(
+                  pdf => {
+                    pdf.create().print()
+                  }
+                )
+              }, async err => {
+                console.log(err)
+                await Permission(person,permission).then(
+                  pdf => {
+                    pdf.create().print()
+                  }
+                )
+              })
+          })
+      })
+  }
 }

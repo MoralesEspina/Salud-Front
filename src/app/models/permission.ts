@@ -7,7 +7,6 @@ export class IPermission{
       public submittedAt: string,
       public permissionDate: string,
       public motive: string,
-
       public uuidPerson: string,
       public document: string,
       public bossOne: string,

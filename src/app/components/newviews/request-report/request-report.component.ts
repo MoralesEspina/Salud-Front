@@ -7,6 +7,10 @@ import { FormatsDate } from '../../../../common/date-formats';
 import { ITable } from 'pdfmake-wrapper/lib/interfaces';
 import { IPermission } from 'src/app/models/permission';
 import * as dayjs from 'dayjs';
+import { PersonService } from 'src/app/services/person.service';
+import { AuthorizationService } from 'src/app/services/authorization.service';
+import { IPerson } from 'src/app/models/person.model';
+import { Permission } from 'src/app/utils/reports/Permission';
 
 interface estado {
   value: string;
@@ -32,16 +36,16 @@ export class RequestReportComponent implements OnInit {
     {value: 'Denegada', viewValue: 'Denegada'},
     {value: '', viewValue: 'Todas'},
   ];
-  constructor(
 
-    private userService: UserService,
+  constructor(
     private _permission: RequestpermissionService,
+    private personService: PersonService,
+    private constancyService: AuthorizationService,
   ) { }
 
   ngOnInit() {
 
   }
-
 
   getPermissions(startDate: string, endDate: string){
     this.startDateInput = startDate || this.startDateInput
@@ -91,7 +95,6 @@ export class RequestReportComponent implements OnInit {
       fontSize: 12
     })
 
-
     pdf.add(new Txt(membrete).alignment('center').fontSize(14).bold().end)
     pdf.add(new Txt(datesOfEmitted).alignment('center').fontSize(14).bold().end)
     pdf.add(this.createTablePermission(permissionRegistersForReport))
@@ -116,4 +119,33 @@ export class RequestReportComponent implements OnInit {
   extractDataToPermission(permissions: IPermission[]): TablePermission[] {
     return permissions.map((row, index) => [`${index + 1}`, dayjs(row.submittedAt).locale("es").format('DD/MMMM/YYYY'), dayjs(row.permissionDate).locale("es").format('DD/MMMM/YYYY'), row.fullname, row.status])
   }
+
+  PrintPermission(uuidPerson, uuidPermission) {
+    this.personService.OnePerson(uuidPerson)
+      .subscribe(async data => {
+        let person = new IPerson();
+        person = data['data']
+        this._permission.getOneRequestPermissionWithName(uuidPermission)
+          .subscribe(async data => {
+            let permission = new IPermission('','','','','','','','','','','','');
+            permission = data['data']
+            this.constancyService.GetConfigurationFile('constancy')
+              .subscribe(async configuration => {
+                await Permission(person, permission).then(
+                  pdf => {
+                    pdf.create().print()
+                  }
+                )
+              }, async err => {
+                console.log(err)
+                await Permission(person,permission).then(
+                  pdf => {
+                    pdf.create().print()
+                  }
+                )
+              })
+          })
+      })
+  }
 }
+

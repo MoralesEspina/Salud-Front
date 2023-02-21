@@ -147,7 +147,7 @@
           <button mat-raised-button color="primary" (click)="denyRequestVoBo()">Denegar VO.BO.</button>
         </div>
         <div align="center" class="row" *ngIf="editing==true && statusRequest == false ">
-          <button mat-raised-button color="primary" style="margin-top: 10px;" >Imprimir</button>
+          <button mat-raised-button color="primary" style="margin-top: 10px;" (click)="PrintPermission()" >Imprimir</button>
         </div>
 
       </mat-card-content>

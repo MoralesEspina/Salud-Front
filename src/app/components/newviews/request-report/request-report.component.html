@@ -71,7 +71,7 @@
         <td style="width: 10px;">
           <div class="rounded-full cursor-pointer">
             <div class="justify-center text-center ">
-              <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900"></i>
+              <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900" *ngIf="item.status !== 'En Espera'" (click)="PrintPermission(item.uuidPerson, item.uuid)"></i>
             </div>
           </div>
         </td>

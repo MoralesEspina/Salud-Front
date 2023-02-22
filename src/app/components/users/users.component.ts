@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
 
   rolTranslations = {
     'admin': 'Administrador',
-    'member': 'Secretari@',
+    'member': 'Miembro',
     'boss': 'Jefe Inmediato',
     'boss2': 'Jefe Vo.Bo',
     'employed': 'Empleado',

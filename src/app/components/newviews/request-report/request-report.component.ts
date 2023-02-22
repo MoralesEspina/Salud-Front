@@ -11,6 +11,7 @@ import { PersonService } from 'src/app/services/person.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { IPerson } from 'src/app/models/person.model';
 import { Permission } from 'src/app/utils/reports/Permission';
+import { Claims } from 'src/app/models/claims.model';
 
 interface estado {
   value: string;
@@ -30,26 +31,32 @@ export class RequestReportComponent implements OnInit {
   public permissionreq: IPermission[] = [];
   startDateInput: string
   endDateInput: string;
+  statusInput: string;
   estados: estado[] = [
     {value: 'En Espera', viewValue: 'En Espera'},
     {value: 'Aceptada', viewValue: 'Aceptada'},
     {value: 'Denegada', viewValue: 'Denegada'},
-    {value: '', viewValue: 'Todas'},
+    {value: 'Todas', viewValue: 'Todas'},
   ];
+
+  user: Claims = new Claims()
 
   constructor(
     private _permission: RequestpermissionService,
     private personService: PersonService,
     private constancyService: AuthorizationService,
+    private authService: UserService,
   ) { }
 
   ngOnInit() {
-
+    this.user.rol = this.authService.userValue.rol;
   }
 
-  getPermissions(startDate: string, endDate: string){
+  getPermissions(startDate: string, endDate: string, status: string){
+    let id_entrada = this.authService.userValue.uuidPerson;
     this.startDateInput = startDate || this.startDateInput
     this.endDateInput = endDate || this.endDateInput
+    this.statusInput = status || this.statusInput
     if (!startDate || !endDate) {
       return
     }
@@ -58,7 +65,7 @@ export class RequestReportComponent implements OnInit {
       endDate = this.formatDate(endDate)
     }
 
-    this._permission.getAllRequestPermission(startDate, endDate).subscribe(
+    this._permission.getAllRequestPermission(startDate, endDate, status, id_entrada).subscribe(
       response =>{
         this.permissionreq = response.data;
       } , err => console.log(err)

@@ -72,4 +72,16 @@ export class LoginComponent implements OnInit {
         console.log(err)
       })
   }
+  showMessage() {
+    Swal.fire({
+      title: '¡Mensaje de prueba!',
+      text: 'Este es un mensaje de prueba con Sweet Alert',
+      confirmButtonText: 'Ok',
+      html: '<div><img src="https://i.pinimg.com/originals/5d/62/28/5d622817ab36350424b3779fcedd2750.jpg" style="width:50px;margin-bottom: -18px;"> Texto de la primera línea</div>' +
+              '<div><img src="https://i.pinimg.com/originals/5d/62/28/5d622817ab36350424b3779fcedd2750.jpg" style="width:50px;margin-bottom: -18px">Texto de la segunda línea</div>' +
+              '<div><img src="https://i.pinimg.com/originals/5d/62/28/5d622817ab36350424b3779fcedd2750.jpg" style="width:50px;margin-bottom: -18px">Texto de la tercera línea</div>',
+
+
+            });
+  }
 }

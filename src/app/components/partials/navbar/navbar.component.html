@@ -34,7 +34,7 @@
     </li>
 
 
-    <li *ngIf="user.rol == 'admin'">
+    <li *ngIf="user.rol == 'admin' || user.rol == 'member' ">
       <a (click)="DisplayNone()">
         <i class="fa fa-clock-o fa-2x"></i>
         <span class="nav-text">
@@ -85,7 +85,7 @@
       </a>
     </li>
 
-    <li *ngIf="user.rol == 'admin'">
+    <li *ngIf="user.rol == 'admin' || user.rol == 'boss'||user.rol == 'boss2'">
       <a (click)="isClickedReportes = !isClickedReportes">
         <i class="fa fa-clipboard-list"></i>
         <span class="nav-text">
@@ -106,7 +106,7 @@
         </a>
       </li>
 
-      <li>
+      <li *ngIf="user.rol == 'admin'">
         <a routerLink="/personas" routerLinkActive="text-yellow-500">
           <div class="ml-4">
             <i class="fa fa-user-tie"></i>
@@ -116,7 +116,7 @@
           </div>
         </a>
       </li>
-      <li>
+      <li *ngIf="user.rol == 'boss'||user.rol == 'boss2'||user.rol == 'admin'">
         <a routerLink="/SolicitudesDePermisos" routerLinkActive="text-yellow-500">
           <div class="ml-4">
             <i class="fa fa-clipboard-check"></i>

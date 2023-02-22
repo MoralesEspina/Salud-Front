@@ -28,6 +28,19 @@ export class UsermodalComponent implements OnInit {
   roles: Rol[] = []
   user2 = new User()
 
+
+  rolTranslations = {
+    'admin': 'Administrador',
+    'member': 'Miembro',
+    'boss': 'Jefe Inmediato',
+    'boss2': 'Jefe Vo.Bo',
+    'employed': 'Empleado',
+  };
+
+
+  getRolTranslation(rol: string): string {
+    return this.rolTranslations[rol] || rol;
+  }
   formActionSubmmit: string; //create or Actualizar
 
   constructor(

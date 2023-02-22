@@ -4,7 +4,7 @@
 <div class="box">
 
 
-  <div class="datagrid overflow-x-auto block">
+  <div class="datagrid overflow-x-auto block" *ngIf="user.rol == 'admin'"  >
     <div align="center" class=" font-bold capitalize" style="margin-bottom: 5PX; font-size: 20px;">
       HISTORIAL DE SOLICITUDES <br>
     </div>
@@ -15,20 +15,21 @@
           <mat-form-field appearance="fill" class="input-width" style="margin-right: 10px;margin-left: 10px">
             <mat-label>Fecha Del</mat-label>
             <input matInput [matDatepicker]="picker1" [ngModel]="startDateInput"
-              (ngModelChange)="getPermissions($event, endDateInput)" readonly>
+              (ngModelChange)="getPermissions($event, endDateInput, statusInput)" readonly>
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="fill" class="input-width">
             <mat-label>Fecha Al</mat-label>
             <input matInput [matDatepicker]="picker2" [ngModel]="endDateInput"
-              (ngModelChange)="getPermissions(startDateInput, $event)" readonly>
+              (ngModelChange)="getPermissions(startDateInput, $event, statusInput)" readonly>
             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>
           <mat-form-field appearance="fill" style="margin-left: 10px;">
             <mat-label>Filtrar por estado</mat-label>
-            <mat-select [(ngModel)]="statusfilter">
+            <mat-select [ngModel]="statusInput"
+            (ngModelChange)="getPermissions(startDateInput,endDateInput, $event)">
               <mat-option *ngFor="let estado of estados" [value]="estado.value">
                 {{estado.viewValue}}
               </mat-option>
@@ -82,6 +83,85 @@
     <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
     </pagination-controls>
   </div>
+
+
+  <div class="datagrid overflow-x-auto block" *ngIf="user.rol == 'boss' || user.rol == 'boss2' "  >
+    <div align="center" class=" font-bold capitalize" style="margin-bottom: 5PX; font-size: 20px;">
+      HISTORIAL DE SOLICITUDES <br>
+    </div>
+
+    <div class="filters">
+      <div class="row">
+        <div style="float: left;">
+          <mat-form-field appearance="fill" class="input-width" style="margin-right: 10px;margin-left: 10px">
+            <mat-label>Fecha Del</mat-label>
+            <input matInput [matDatepicker]="picker1" [ngModel]="startDateInput"
+              (ngModelChange)="getPermissions($event, endDateInput, statusInput)" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+            <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="input-width">
+            <mat-label>Fecha Al</mat-label>
+            <input matInput [matDatepicker]="picker2" [ngModel]="endDateInput"
+              (ngModelChange)="getPermissions(startDateInput, $event, statusInput)" readonly>
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field appearance="fill" style="margin-left: 10px;">
+            <mat-label>Filtrar por estado</mat-label>
+            <mat-select [ngModel]="statusInput"
+            (ngModelChange)="getPermissions(startDateInput,endDateInput, $event)">
+              <mat-option *ngFor="let estado of estados" [value]="estado.value">
+                {{estado.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr style="text-align: center;">
+          <th>No.</th>
+          <th>EMITIDO</th>
+          <th>FECHA DE PERMISO</th>
+          <th>SOLICITANTE</th>
+          <th>ESTADO DE SOLICITUD</th>
+          <th>DETALLES</th>
+          <th>IMPRIMIR</th>
+        </tr>
+      </thead>
+      <tbody style="text-align: center;">
+      <tr *ngFor="let item of permissionreq  | filterStatus:statusfilter  | paginate: { itemsPerPage: tableSize, currentPage: p } let indexof = index;"
+        class="text-lg" [class.alt]="(indexof + 1)%2==1">
+        <td>{{tableSize * (p -1 ) + indexof + 1}}</td>
+        <td>{{item.submittedAt | date: 'd MMM y H:mm' | uppercase }}</td>
+        <td>{{item.permissionDate | date: 'd MMM y ' | uppercase }}</td>
+        <td>{{item.fullname}}</td>
+        <td>{{item.status}}</td>
+        <td style="width: 50px;">
+          <div class="rounded-full cursor-pointer">
+            <div class="justify-center text-center" [routerLink]="['/solicitudpermiso/edit/',item.uuid]">
+              <i class="fas fa-check fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+            </div>
+          </div>
+        </td>
+        <td style="width: 10px;">
+          <div class="rounded-full cursor-pointer">
+            <div class="justify-center text-center ">
+              <i class="fas fa-print fa-2x fa-fw fa-inverse text-gray-900" *ngIf="item.status !== 'En Espera'" (click)="PrintPermission(item.uuidPerson, item.uuid)"></i>
+            </div>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+    <pagination-controls (pageChange)="p = $event" nextLabel="Siguiente" previousLabel="Anterior">
+    </pagination-controls>
+  </div>
+
+
 
 
 </div>

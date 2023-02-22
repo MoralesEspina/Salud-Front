@@ -38,7 +38,7 @@
               <mat-label>Nuevo Rol</mat-label>
               <mat-select formControlName="id_rol" [ngClass]="{'is-invalid':submitted && f.id_rol.errors}">
                 <mat-option *ngFor="let option of roles" [value]="option.id_rol">
-                  {{option.type_rol}}
+                  {{getRolTranslation(option.type_rol)}}
                 </mat-option>
               </mat-select>
             </mat-form-field>

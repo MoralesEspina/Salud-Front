@@ -72,7 +72,7 @@ const routes: Routes = [
     path: 'SolicitudesDePermisos',
     component: RequestReportComponent,
     canActivate: [AuthGuard],
-    data: { roles: [Role.admin, Role.member] }
+    data: { roles: [Role.admin, Role.member, Role.boss, Role.boss2] }
   },
   {
     path: 'solicitudes',

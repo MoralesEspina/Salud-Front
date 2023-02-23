@@ -1,60 +1,44 @@
 <app-navbar></app-navbar>
-
+<div class="" (click)="showMessage()" style="position: absolute; right: 12%; top: 100px;">
+  <i class="fas fa-plus-circle fas fa-question fa-2x "></i>
+</div>
 <div class="target animated ">
-  <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-  type="button"
-  (click)="showMessage()">
-Mostrar mensaje
-</button>
-
-          <form class="bg-white shadow-xs rounded px-8 pt-6 pb-8 mb-4 border-2 border-blue-400"
-                [formGroup]= "loginForm" (ngSubmit)="login()"
-                autocomplete="on">
-
-            <div class="block text-gray-700 text-base font-bold mb-2 text-center pb-5">LOGIN</div>
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
-                Username
-              </label>
-              <input
-                class="input-gray focus:outline-none focus:border-blue-400"
-                autocomplete="off"
-                type="text"
-                formControlName = "username"
-                name="username"
-                required
-                [ngClass]="{'is-invalid':submitted && f.username.errors}"
-                placeholder="Username">
-                <span class="text-blue-700"></span>
-                <span *ngIf="submitted && f.username.errors"
-                  class="text-red-700 text-xs animated fadeIn">Ingrese el usuario</span>
-            </div>
-
-            <div class="mb-6">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                Password
-              </label>
-              <input
-                class="input-gray focus:outline-none focus:border-blue-600"
-                type="password"
-                formControlName = "password"
-                name="password"
-                required
-                [ngClass]="{'is-invalid':submitted && f.password.errors}"
-                placeholder="***************">
-                <span class="text-blue-700"></span>
-                <span *ngIf="submitted && f.password.errors"
-                  class="text-red-700 text-xs animated fadeIn">Ingrese la contraseña</span>
-            </div>
 
 
-            <div class="flex items-center justify-center">
-              <button
-                class="bg-green-500 hover:bg-green-700  push push-focus"
-                type="submit">
-                Ingresar
-              </button>
-            </div>
-          </form>
+  <form class="bg-white shadow-xs rounded px-8 pt-6 pb-8 mb-4 border-2 border-blue-400" [formGroup]="loginForm"
+    (ngSubmit)="login()" autocomplete="on">
+
+    <div class="block text-gray-700 text-base font-bold mb-2 text-center pb-5">LOGIN</div>
+    <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-1" for="username">
+        Username
+      </label>
+      <input class="input-gray focus:outline-none focus:border-blue-400" autocomplete="off" type="text"
+        formControlName="username" name="username" required [ngClass]="{'is-invalid':submitted && f.username.errors}"
+        placeholder="Username">
+      <span class="text-blue-700"></span>
+      <span *ngIf="submitted && f.username.errors" class="text-red-700 text-xs animated fadeIn">Ingrese el
+        usuario</span>
+    </div>
+
+    <div class="mb-6">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+        Password
+      </label>
+      <input class="input-gray focus:outline-none focus:border-blue-600" type="password" formControlName="password"
+        name="password" required [ngClass]="{'is-invalid':submitted && f.password.errors}"
+        placeholder="***************">
+      <span class="text-blue-700"></span>
+      <span *ngIf="submitted && f.password.errors" class="text-red-700 text-xs animated fadeIn">Ingrese la
+        contraseña</span>
+    </div>
+
+
+    <div class="flex items-center justify-center">
+      <button class="bg-green-500 hover:bg-green-700  push push-focus" type="submit">
+        Ingresar
+      </button>
+    </div>
+  </form>
 
 </div>

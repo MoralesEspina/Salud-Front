@@ -122,7 +122,7 @@ export class CurriculumPDFComponent implements OnInit {
     pdf.add(await new Img(this.urlImage).alignment('right').width(100).height(100).relativePosition(0, -50).build())
 
     pdf.add(new Txt('Dirección de Área de Salud de Jalapa').alignment('center').relativePosition(0, 20).color('#2A3C91').fontSize(12).bold().end)
-    pdf.add(new Txt('Departamento de Recursos Humanos').alignment('center').relativePosition(0, 35).color('#2A3C91').fontSize(12).bold().end)
+    pdf.add(new Txt('Sección de Recursos Humanos').alignment('center').relativePosition(0, 35).color('#2A3C91').fontSize(12).bold().end)
     pdf.add(new Txt('Datos generales___________________________________________________________________').alignment('left').relativePosition(0, 60).color('#2778B4').fontSize(12).bold().end)
 
     pdf.add(new Txt('Nombre Completo').alignment('left').relativePosition(0, 90).bold().end)

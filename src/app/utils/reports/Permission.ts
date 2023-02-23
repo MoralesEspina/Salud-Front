@@ -15,10 +15,10 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
     })
 
    // pdf.background(await new Img(authorizationConfiguration.imageURL).alignment(authorizationConfiguration.align).width(authorizationConfiguration.width).height(authorizationConfiguration.height).build())
-   pdf.add(await new Img('https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/avatars%2Flogo-mspas%20(1).png?alt=media&token=5a4e689a-b3d9-402d-b7da-df99d43c642d').alignment('left').width(220).height(55).relativePosition(0, -60).opacity(0.5).build())
+   pdf.add(await new Img('https://firebasestorage.googleapis.com/v0/b/das-jalapa.appspot.com/o/avatars%2FLogo%20Salud.jpg?alt=media&token=6b2b9bb3-3fe8-41d3-a5b5-980376b8497b').alignment('left').width(75).height(70).relativePosition(20, -70).opacity(0.5).build())
    pdf.add(new Txt('MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA SOCIAL').alignment('right').bold().relativePosition(0, -50).fontSize(8).color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('DIRECCIÓN DE ÁREA DE SALUD DE JALAPA').alignment('right').bold().relativePosition(0, -40).fontSize(8).color('#3A66A0').opacity(0.5).end)
-   pdf.add(new Txt('DEPARTAMENTO DE RECURSOS HUMANOS').alignment('right').bold().relativePosition(0, -30).fontSize(8).color('#3A66A0').opacity(0.5).end)
+   pdf.add(new Txt('SECCIÓN DE RECURSOS HUMANOS').alignment('right').bold().relativePosition(0, -30).fontSize(8).color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('FORMULARIO DE AUSENCIA AL SERVICIO').alignment('center').bold().fontSize(12).end)
    pdf.add(new Txt('JEFATURA DE PERSONAL').alignment('center').bold().fontSize(12).end)
    pdf.add(new Txt('DIRECCIÓN DE ÁREA DE SALUD DE JALAPA').alignment('center').fontSize(12).bold().end)
@@ -104,18 +104,18 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
     }
 
    pdf.add(new Table([[' ']]).relativePosition(0, 465).fontSize(10).bold().widths(['*']).heights((rowIndex) => (rowIndex === 0 ? 65 : 0)).end)
-   pdf.add(new Txt(person.fullname).relativePosition(-157, 560).fontSize(12).bold().alignment('center').end)
-   pdf.add(new Txt('_____________________________').relativePosition(-157, 560).fontSize(12).bold().alignment('center').end)
-   pdf.add(new Txt('INTERESADO').relativePosition(-157,575 ).fontSize(12).bold().alignment('center').end)
+   pdf.add(new Txt(person.fullname).relativePosition(-140, 562).fontSize(10).bold().alignment('center').end)
+   pdf.add(new Txt('_____________________________').relativePosition(-140, 560).fontSize(12).bold().alignment('center').end)
+   pdf.add(new Txt('INTERESADO').relativePosition(-140,575 ).fontSize(12).bold().alignment('center').end)
 
    if (permission.statusBossOne == 'Aceptada') {
-    pdf.add(new Txt(permission.bossOne).relativePosition(157, 560).alignment('center').fontSize(12).bold().end)
+    pdf.add(new Txt(permission.bossOne).relativePosition(140, 562).alignment('center').fontSize(10).bold().end)
    }
-   pdf.add(new Txt('_____________________________').relativePosition(157, 560).alignment('center').fontSize(12).bold().end)
-   pdf.add(new Txt('JEFE INMEDIATO').relativePosition(157,575 ).fontSize(12).alignment('center').bold().end)
+   pdf.add(new Txt('_____________________________').relativePosition(140, 560).alignment('center').fontSize(12).bold().end)
+   pdf.add(new Txt('JEFE INMEDIATO').relativePosition(140,575 ).fontSize(12).alignment('center').bold().end)
 
    if (permission.statusBossTwo == 'Aceptada') {
-    pdf.add(new Txt(permission.bossTwo).relativePosition(0, 600).alignment('center').fontSize(12).bold().end)
+    pdf.add(new Txt(permission.bossTwo).relativePosition(0, 602).alignment('center').fontSize(10).bold().end)
    }
    pdf.add(new Txt('_______________________________').relativePosition(0,600).fontSize(12).alignment('center').bold().end)
    pdf.add(new Txt('VO.BO. JEFE DE PERSONAL').relativePosition(0,615 ).alignment('center').fontSize(12).bold().end)
@@ -126,7 +126,7 @@ export async function Permission(person: IPerson, permission: IPermission): Prom
    pdf.add(new Txt('EL PRESENTE FORMULARIO ES PARA USO EXCLUSIVO DEL PERSONAL DE LA DIRECCIÓN DE ÁREA DE SALUD DE JALAPA EN TODOS SUS DEPARTAMENTOS, UNIDADES Y/O PROGRAMAS Y PARA COORDINADORES DISTRITALES DE SALUD.')
    .relativePosition(0,660).fontSize(8).end)
 
-   pdf.add(new Txt('DEPARTAMENTO DE RECURSOS HUMANOS, DIRECCIÓN DE ÁREA DE SALUD DE JALAPA').relativePosition(0,700).fontSize(9).alignment('center').bold().color('#3A66A0').opacity(0.5).end)
+   pdf.add(new Txt('SECCIÓN DE RECURSOS HUMANOS, DIRECCIÓN DE ÁREA DE SALUD DE JALAPA').relativePosition(0,700).fontSize(9).alignment('center').bold().color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('6ª.Calle Tránsito Rojas 6-41 Bo. La Democracia Pte. Las Guzmán, Jalapa, Jalapa').relativePosition(0,710).fontSize(10).alignment('center').bold().color('#3A66A0').opacity(0.5).end)
    pdf.add(new Txt('7922-3889').relativePosition(0,720).fontSize(10).bold().color('#3A66A0').opacity(0.5).alignment('center').end)
     return pdf;

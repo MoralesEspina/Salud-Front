@@ -74,14 +74,12 @@ export class LoginComponent implements OnInit {
   }
   showMessage() {
     Swal.fire({
-      title: '¡Mensaje de prueba!',
-      text: 'Este es un mensaje de prueba con Sweet Alert',
-      confirmButtonText: 'Ok',
-      html: '<div><img src="https://i.pinimg.com/originals/5d/62/28/5d622817ab36350424b3779fcedd2750.jpg" style="width:50px;margin-bottom: -18px;"> Texto de la primera línea</div>' +
-              '<div><img src="https://i.pinimg.com/originals/5d/62/28/5d622817ab36350424b3779fcedd2750.jpg" style="width:50px;margin-bottom: -18px">Texto de la segunda línea</div>' +
-              '<div><img src="https://i.pinimg.com/originals/5d/62/28/5d622817ab36350424b3779fcedd2750.jpg" style="width:50px;margin-bottom: -18px">Texto de la tercera línea</div>',
-
-
-            });
-  }
+    title: 'Proyecto DAS Jalapa',
+    confirmButtonText: 'Cerrar',
+    html: '<div style="display:flex;place-items:center;margin-bottom: 10px;"><img src="https://images.vexels.com/media/users/3/144010/isolated/preview/ef462bc0caf75dc40f16f1528df3b8a6-icono-de-trazo-de-dinero-dolar.png" style="width:50px"> <span style="text-align: left; margin-left:20px">Idea y coordinación:<br>Cristian Jiaan Caarlo Lopez Marroquin<br>@gmail.com</span></div>' +
+    '<div style="display:flex;align-items:center;margin-bottom: 10px;"><img src="https://icon-library.com/images/programing-icon/programing-icon-10.jpg" style="width:50px"> <span style="text-align: left; margin-left:20px">Version 1.0:<br>Mynor<br>@gmail.com</span></div>' +
+    '<div style="display:flex;align-items:center;margin-bottom: 5px;"><img src="https://64.media.tumblr.com/30488689ab7ea04f2dad17ff3b25bb8b/tumblr_n76suhUhqN1trlsqfo1_500.png" style="width:55px; margin-top:30px"> <span style="text-align: left; margin-left:15px">Version 2.0:<br>Esdras Mefiboseth Morales Espina<br>moralesespina92@gmail.com</span></div>'+
+    '<div style="display:flex;align-items:center;margin-bottom: 10px;"><img src="https://i.imgflip.com/57yw2j.png" style="width:70px; margin-left:-10px"> <span style="text-align: left; margin-left:10px">Dylan Alexis Tobar Orellana<br>dylantobar2001@gmail.com</span></div>',
+    });
+    }
 }

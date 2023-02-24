@@ -25,6 +25,8 @@ import { WorkComponent } from '../partials/work/work.component';
 import { PermissionrequestComponent } from '../pdfs/permissionrequest/permissionrequest.component.js';
 import { VacationrequestComponent } from '../pdfs/vacationrequest/vacationrequest.component';
 import { Constancy } from 'src/app/utils/reports/Constancy';
+import { BossesmodalComponent } from '../partials/bossesmodal/bossesmodal.component';
+import { SweetAlertService } from 'src/app/services/sweetAlert.service';
 
 
 PdfMakeWrapper.setFonts(pdfFonts, {
@@ -69,7 +71,8 @@ export class DashboardComponent implements OnInit {
     private localService: LocalService,
     private RequestpermissionService: RequestpermissionService,
     private userService: UserService,
-    private constancyService: AuthorizationService
+    private constancyService: AuthorizationService,
+    private _sweetAlertService: SweetAlertService,
   ) {
     this.localService.getJsonValue('limit');
     this.ManyPersons();
@@ -377,5 +380,27 @@ export class DashboardComponent implements OnInit {
     })
 }
 
+UpdateUser() {
+  this.personService.GetAuthBosses()
+    .subscribe(data => {
+      const modalDialog = this.dialog.open(BossesmodalComponent, {
+        disableClose: true,
+        autoFocus: true,
+        width: '600px',
+        data: {
+          user: data['data'],
+          action: 'Actualizar' }
+      })
+      modalDialog.afterClosed()
+        .subscribe(result => {
+          if (result) {
+            this.personService.UpdateAuthBosses(result)
+              .subscribe(ok => {
 
+                this._sweetAlertService.createAndUpdate('Registro actualizado con éxito');
+              }, err => console.log(err)
+              )}
+        })
+    })
+}
 }

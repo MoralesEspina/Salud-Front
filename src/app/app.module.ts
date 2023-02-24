@@ -59,6 +59,7 @@ import { environment } from 'src/environments/environment.prod';
 import { RequestReportComponent } from './components/newviews/request-report/request-report.component';
 import { FilterDatePipe } from './components/newviews/pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BossesmodalComponent } from './components/partials/bossesmodal/bossesmodal.component';
 
 
 @NgModule({
@@ -95,6 +96,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     HistoryComponent,
     CurriculumComponent,
     UsermodalComponent,
+    BossesmodalComponent,
     PermissionauthComponent,
     PermissionComponent,
     PermissionrequestComponent,
@@ -146,6 +148,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ConstancyComponent,
     CurriculumPDFComponent,
     UsermodalComponent,
+    BossesmodalComponent,
     PermissionReqComponent,
     PermissionrequestComponent,
     ConfigurationauthorizationfileComponent,

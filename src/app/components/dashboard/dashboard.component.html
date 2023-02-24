@@ -37,6 +37,12 @@
         </div>
 
         <div class="block sm:flex mx-0 py-1 ml-0 sm:ml-auto">
+          <div class="flex items-center px-0 sm:px-1 ">
+            <button
+              class="flex-1 text-xs shadow appearance-none border bg-red-500 text-blue-100 h-10  hover:bg-red-700 rounded-lg actions-width px-2"
+              (click)="UpdateUser()" *ngIf="user.rol == 'admin'">Cambiar Jefes</button>
+          </div>
+
           <app-especialities></app-especialities>
           <app-jobs></app-jobs>
           <app-dependencies></app-dependencies>

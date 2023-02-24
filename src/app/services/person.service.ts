@@ -1,3 +1,4 @@
+import { IBosses } from './../models/person.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
@@ -55,7 +56,13 @@ export class PersonService {
     return this.http.get(`${environment.URL}/validation/certify/${uuid}`)
   }
 
+  GetAuthBosses() {
+    return this.http.get(`${environment.URL}/authorizations/authbosses`)
+  }
 
+  UpdateAuthBosses(bosses:IBosses) {
+    return this.http.put(`${environment.URL}/authorizations/authbosses`, JSON.stringify(bosses))
+  }
 
 }
 

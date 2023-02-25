@@ -105,7 +105,7 @@ export class AuthorizationComponent implements OnInit {
       return;
     }
 
-    const membrete = `Dirección de Área de Salud de Jalapa\n Departamento de Recursos Humanos\n Reporte de personal que estuvo de vacaciones\n`;
+    const membrete = `Dirección de Área de Salud de Jalapa\n Sección de Recursos Humanos\n Reporte de personal que estuvo de vacaciones\n`;
     var startDate = FormatsDate.DateToWordObject(this.startDateInput)
     var endDate = FormatsDate.DateToWordObject(this.endDateInput)
 

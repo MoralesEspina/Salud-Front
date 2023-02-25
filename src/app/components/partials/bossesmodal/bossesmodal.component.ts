@@ -59,7 +59,7 @@ export class BossesmodalComponent implements OnInit {
       confirmButtonColor: '#4299e1',
       cancelButtonColor: '#f56565',
       cancelButtonText: "Cancelar",
-      confirmButtonText: `Si, ${this.formActionSubmmit.toLowerCase()}!`
+      confirmButtonText: `Si, ${this.formActionSubmmit}!`
 
     }).then((result) => {
       if (result.isConfirmed) {

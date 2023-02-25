@@ -22,7 +22,7 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
 
     var register = authorization.register
 
-    let text1 = 'DEPARTAMENTO DE RECURSOS HUMANOS'
+    let text1 = 'SECCIÓN DE RECURSOS HUMANOS'
     let text2 = 'DIRECCIÓN DE ÁREA DE SALUD DE JALAPA'
     let text3 = 'MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA SOCIAL'
 

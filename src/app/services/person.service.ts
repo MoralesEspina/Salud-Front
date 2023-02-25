@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { IUser } from '../models/edituser.model';
 import { IPerson } from '../models/person.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +57,7 @@ export class PersonService {
     return this.http.get(`${environment.URL}/validation/certify/${uuid}`)
   }
 
-  GetAuthBosses() {
+  GetAuthBosses(): Observable<any>  {
     return this.http.get(`${environment.URL}/authorizations/authbosses`)
   }
 

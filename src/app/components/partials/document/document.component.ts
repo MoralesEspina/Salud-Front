@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { IAuthorization } from 'src/app/models/authorization';
 import { IPerson } from 'src/app/models/person.model';
 import { IWork } from 'src/app/models/work.model';
+import { PersonService } from 'src/app/services/person.service';
 import { WorkService } from 'src/app/services/work.service';
 import FormatDateToLetter from '../../../utils/formats/formatDateToLetter';
 
@@ -20,6 +21,8 @@ export class DocumentComponent implements OnInit {
   form: FormGroup;
   submitted: boolean = false
   person: IPerson
+  bossname;
+  bossdirector;
   authorizationFormEmmited = new IAuthorization();
   authorizationOfVacations = new IAuthorization();
 
@@ -31,12 +34,14 @@ export class DocumentComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private workService: WorkService,
+    private personService: PersonService,
     private dialogRef: MatDialogRef<DocumentComponent>,
     @Inject(MAT_DIALOG_DATA) data) {
     this.person = data['person']
   }
 
   ngOnInit() {
+    this.getBosses()
 
     this.form = this.fb.group({
       submitted_at: [this.authorizationOfVacations.submitted_at, []],
@@ -49,10 +54,10 @@ export class DocumentComponent implements OnInit {
       observation: [this.authorizationOfVacations.observation],
       authorizationyear: [this.authorizationOfVacations.authorizationyear, Validators.required],
       body: [this.bodytext, []],
-      personnelOfficer: [this.authorizationOfVacations.personnelOfficer = "Licda. Andrea Raquel Pinto López ", Validators.required],
+      personnelOfficer: [this.authorizationOfVacations.personnelOfficer, Validators.required],
       personnelOfficerPosition: [this.authorizationOfVacations.personnelOfficerPosition = 'Jefe de Personal', Validators.required],
       personnelOfficerArea: [this.authorizationOfVacations.personnelOfficerArea = 'Área de Salud de Jalapa', Validators.required],
-      executiveDirector: [this.authorizationOfVacations.executiveDirector = 'Vo. Bo. Dr. José Rafael Campos Polanco', Validators.required],
+      executiveDirector: [this.authorizationOfVacations.executiveDirector, Validators.required],
       executiveDirectorPosition: [this.authorizationOfVacations.executiveDirectorPosition = 'Director Ejecutivo', Validators.required],
       executiveDirectorArea: [this.authorizationOfVacations.executiveDirectorArea = 'Área de Salud de Jalapa', Validators.required],
     })
@@ -86,6 +91,18 @@ export class DocumentComponent implements OnInit {
       })
   }
 
+  getBosses(){
+      this.personService.GetAuthBosses().subscribe(
+        data => {
+          this.bossname = data.data[0].nameboss;
+          this.bossdirector = data.data[0].namedirector;
+          this.form.patchValue({
+            personnelOfficer: this.bossname,
+            executiveDirector: this.bossdirector
+          })
+        }
+      )
+  }
   emmittedDay(e) {
     this.actuality = FormatDateToLetter(e)
   }

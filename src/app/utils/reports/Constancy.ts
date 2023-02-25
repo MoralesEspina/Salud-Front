@@ -47,7 +47,7 @@ export async function Constancy(person: IPerson, configuration: AuthorizationCon
     {
       text: [
         {
-          text: 'EL DEPARTAMENTO DE RECURSOS HUMANOS DE LA DIRECCIÓN DE ÁREA DE SALUD DE JALAPA, DEPENDENCIA DEL MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA SOCIAL, por medio de la presente ',
+          text: 'LA SECCIÓN DE RECURSOS HUMANOS DE LA DIRECCIÓN DE ÁREA DE SALUD DE JALAPA, DEPENDENCIA DEL MINISTERIO DE SALUD PÚBLICA Y ASISTENCIA SOCIAL, por medio de la presente ',
           alignment: 'justify'
         },
         {

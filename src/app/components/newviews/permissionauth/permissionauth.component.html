@@ -31,7 +31,7 @@
           <td style="width: 180px;">
             <div class="rounded-full cursor-pointer">
               <div class="justify-center text-center" [routerLink]="['/solicitudpermiso/edit/',item.uuid]">
-                <i class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+                <i class="fas fa-edit-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
               </div>
             </div>
           </td>
@@ -42,7 +42,7 @@
       </pagination-controls>
     </div>
 
-    <div class="datagrid" style="margin-top: 50PX; width: 1200px;">
+    <div class="datagrid" style="margin-top: 50PX; width: 1200px;"  *ngIf="user.rol == 'boss2'">
       <div align="center" class=" font-bold capitalize" style="margin-bottom: 5PX; font-size: 20px;">
         SOLICITUDES POR AUTORIZAR VO.BO.<br>
       </div>
@@ -69,7 +69,7 @@
           <td style="width: 180px;">
             <div class="rounded-full cursor-pointer">
               <div class="justify-center text-center" [routerLink]="['/solicitudpermiso/edit/',item.uuid]">
-                <i class="fas fa-plus-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
+                <i class="fas fa-edit-circle fas fa-edit fa-2x fa-fw fa-inverse text-green-500"></i>
               </div>
             </div>
           </td>

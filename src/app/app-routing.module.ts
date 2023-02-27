@@ -12,7 +12,6 @@ import { PersonGridComponent } from './components/reports/person-grid/person-gri
 import { UsersComponent } from './components/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './models/rols.model';
-import { HistoryComponent } from './components/newviews/history/history.component';
 import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
 import { PermissionComponent } from './components/partials/permission/permission.component';
 import { PermissionReqComponent } from './components/newviews/permission/permissionreq.component';
@@ -64,10 +63,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.admin, Role.member] }
   },
-  {
-    path: 'historial',
-    component: HistoryComponent
-  },
+
   {
     path: 'SolicitudesDePermisos',
     component: RequestReportComponent,

@@ -78,7 +78,6 @@ export class RequestReportComponent implements OnInit {
   }
 
   GenerateReportTable(permissionRegistersForReport: IPermission[]) {
-    console.log(permissionRegistersForReport)
     if (permissionRegistersForReport.length == 0) {
       Sweet.fire({
         icon: 'info',
@@ -88,7 +87,7 @@ export class RequestReportComponent implements OnInit {
       return;
     }
 
-    const membrete = `Dirección de Área de Salud de Jalapa\n Departamento de Recursos Humanos\n Reporte de Solicitudes de Ausencias\n`;
+    const membrete = `Dirección de Área de Salud de Jalapa\n Sección de Recursos Humanos\n Reporte de Solicitudes de Ausencias\n`;
     var startDate = FormatsDate.DateToWordObject(this.startDateInput)
     var endDate = FormatsDate.DateToWordObject(this.endDateInput)
 

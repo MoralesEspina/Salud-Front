@@ -10,21 +10,6 @@
   font-size: 12px !important;
 }
 
-.inputheight {
-  width: 100% !important;
-}
-
-.inputheight1 {
-  width: 60% !important;
-}
-
-.my-form {
-  width: 100%;
-}
-
-.full-width {
-  width: 100% !important;
-}
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
   color: white;
@@ -38,10 +23,8 @@
   margin-top: -14%;
 }
 
-.justi-center {
-  padding-left: 12%;
-  padding-right: 12%;
-
-  padding-top: 4%;
-  padding-bottom: 4%;
+.ed-container{
+  place-items: center;
+  place-content: center;
+  width: 100%;
 }

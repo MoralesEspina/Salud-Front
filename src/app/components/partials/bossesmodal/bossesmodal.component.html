@@ -2,31 +2,29 @@
   Jefe de personal y Director Ejecutivo
 </div>
 
-<div class="ed-container">
+<div class="ed-container" >
   <div class="row">
     <form class="ed-item ed-container inputsize">
-      <mat-dialog-content [formGroup]="form">
-        <div class="ed-item ed-container">
-          <div class="ed-item s-100 m-50 l-50">
-            <span *ngIf="submitted && f.nameboss.errors" class="text-red-700 text-xs animated fadeIn">Ingrese
+      <mat-dialog-content [formGroup]="form"style="width: 100%;">
+        <div  class="ed-item ed-container" style="width: 100%;">
+          <div class="input"style="width: 50%;" >
+            <span *ngIf="submitted && f.nameboss.errors" class="text-red-700 text-xs animated fadeIn" style="width: 100%;">Ingrese
               este campo</span>
-            <mat-form-field appearance="outline" class="inputheight">
+            <mat-form-field appearance="outline" class="inputheight" style="width: 100%;">
               <mat-label>Jefe de personal</mat-label>
               <input matInput formControlName="nameboss">
             </mat-form-field>
           </div>
-          <span *ngIf="submitted && f.namedirector.errors" class="text-red-700 text-xs animated fadeIn">Ingrese
+          <div class="input"style="width: 50%;">
+          <span *ngIf="submitted && f.namedirector.errors" class="text-red-700 text-xs animated fadeIn" style="width: 100%;">Ingrese
             este campo</span>
-          <div class="ed-item s-100 m-50 l-50">
-            <mat-form-field appearance="outline" class="inputheight">
+
+            <mat-form-field appearance="outline" class="inputheight"style="width: 100%;">
               <mat-label>Director Ejecutivo</mat-label>
               <input matInput formControlName="namedirector">
             </mat-form-field>
           </div>
-          </div>
-
-
-
+        </div>
       </mat-dialog-content>
 
       <div class="ed-item ed-container">

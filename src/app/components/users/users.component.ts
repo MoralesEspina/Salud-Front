@@ -29,6 +29,7 @@ export class UsersComponent implements OnInit {
   public p3: number = 1;
   public tableSize: number = 10;
 
+
   search = this.localService.getJsonValue('filter');
   limit: any = this.localService.getJsonValue('limit');
   form: FormGroup;
@@ -47,6 +48,7 @@ export class UsersComponent implements OnInit {
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
 
+
   rolTranslations = {
     'admin': 'Administrador',
     'member': 'Miembro',
@@ -54,6 +56,7 @@ export class UsersComponent implements OnInit {
     'boss2': 'Jefe Vo.Bo',
     'employed': 'Empleado',
   };
+
 
   getRolTranslation(rol: string): string {
     return this.rolTranslations[rol] || rol;
@@ -83,12 +86,6 @@ export class UsersComponent implements OnInit {
     })
 
   }
-  dataSource = new MatTableDataSource(this.users);
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   get f() { return this.form.controls }
 
   save() {
@@ -132,7 +129,13 @@ export class UsersComponent implements OnInit {
         this.rols = data['data']
       }, err => console.log(err))}
 
-  getUsers1() {
+  getUsers1(filter?: string) {
+
+    if (filter && typeof filter == 'string' && typeof filter != 'object' || filter == '') {
+      this.localService.setJsonValue('filter', filter)
+    }
+
+    var stFilter = this.localService.getJsonValue('filter')
     this.userService.users1()
       .subscribe(data => {
         this.admins = data['data']
@@ -236,4 +239,6 @@ export class UsersComponent implements OnInit {
       }
     })
   }
+
+
 }

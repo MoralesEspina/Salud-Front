@@ -131,17 +131,7 @@ export class PermissionReqComponent implements OnInit {
     this._permission.createRequestPermissionService(permission).subscribe(
       data => {
         this._sweetAlertService.createAndUpdate('Se Creo correctamente la solicitud');
-        switch (this.rol) {
-          case 'boss':
-            this._router.navigate(['estadopermisos']);
-            break;
-          case 'boss2':
-            this._router.navigate(['estadopermisos']);
-            break;
-          default:
-            break;
-        }
-
+        this._router.navigate(['estadopermisos']);
       }, error => {
         this._sweetAlertService.error('Se produjo un error al crear la solictud');
       }

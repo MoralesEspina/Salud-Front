@@ -59,6 +59,8 @@ import { RequestReportComponent } from './components/newviews/request-report/req
 import { FilterDatePipe } from './components/newviews/pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BossesmodalComponent } from './components/partials/bossesmodal/bossesmodal.component';
+import { FilterUPipe } from './components/newviews/pipes/filter-u.pipe';
+import { FilterBPipe } from './components/newviews/pipes/filter-b.pipe';
 
 
 @NgModule({
@@ -103,6 +105,8 @@ import { BossesmodalComponent } from './components/partials/bossesmodal/bossesmo
     StatuspermissionComponent,
     RequestReportComponent,
     FilterDatePipe,
+    FilterUPipe,
+    FilterBPipe,
   ],
 
   imports: [

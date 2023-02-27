@@ -67,10 +67,7 @@
     </div>
     <!--Data object from database-->
     <div class="tabla1 datagrid border rounded-md " style=" margin-bottom: 20px;">
-      <!-- <input placeholder="Search"
-      class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"
-      [ngModel]="search" (ngModelChange)="ManyPersons( null, limit, $event)" /> -->
-
+      <input type="text" class="form-control" matInput name = "filterAdmin" placeholder="Buscar..." [(ngModel)] ="filterAdmin">
       <table>
         <thead style="text-align: center;">
           <tr>
@@ -83,7 +80,7 @@
         </thead>
         <tbody >
           <tr
-            *ngFor="let duser of admins | paginate: { id: 'Page', itemsPerPage: tableSize, currentPage: p } let indexof = index let u of usuario;"
+            *ngFor="let duser of admins | filterU:filterAdmin | paginate: { id: 'Page', itemsPerPage: tableSize, currentPage: p } let indexof = index let u of usuario "
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="text-align: center;">{{tableSize * (p -1 ) + indexof + 1}}</td>
             <td >{{duser.username}}</td>
@@ -109,6 +106,7 @@
       </pagination-controls>
     </div>
     <div class="tabla2 datagrid border rounded-md ">
+      <input type="text" class="form-control" matInput name = "filterBoss" placeholder="Buscar..." [(ngModel)] ="filterBoss">
       <table>
         <thead style="text-align: center;">
           <tr>
@@ -122,7 +120,7 @@
         </thead>
         <tbody>
           <tr
-            *ngFor="let duser of bosses | paginate: { id: 'Page2', itemsPerPage: tableSize, currentPage: p2 } let indexof = index let u of usuario;"
+            *ngFor="let duser of bosses | filterB:filterBoss | paginate: { id: 'Page2', itemsPerPage: tableSize, currentPage: p2 } let indexof = index let u of usuario;"
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="text-align: center;">{{tableSize * (p2 -1 ) + indexof + 1}}</td>
             <td>{{duser.fullname | titlecase}}</td>
@@ -148,7 +146,9 @@
       <pagination-controls id="Page2" (pageChange)="p2 = $event" nextLabel="Siguiente" previousLabel="Anterior">
       </pagination-controls>
     </div>
+
     <div class="tabla3 datagrid border rounded-md ">
+      <input type="text" class="form-control" matInput name = "filterEmployed" placeholder="Buscar..." [(ngModel)] ="filterEmployed">
       <table >
         <thead style="text-align: center;">
           <tr>
@@ -162,7 +162,7 @@
         </thead>
         <tbody>
           <tr
-            *ngFor="let duser of employees | paginate: { id: 'Page3', itemsPerPage: tableSize, currentPage: p3} let indexof = index let u of employees;"
+            *ngFor="let duser of employees | filterB:filterEmployed | paginate: { id: 'Page3', itemsPerPage: tableSize, currentPage: p3} let indexof = index let u of employees;"
             class="text-lg" [class.alt]="(indexof + 1)%2==1">
             <td style="text-align: center;">{{tableSize * (p3 -1 ) + indexof + 1}}</td>
             <td>{{duser.fullname | titlecase}}</td>

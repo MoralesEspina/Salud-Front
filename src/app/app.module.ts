@@ -47,7 +47,6 @@ import { Statuserror } from './guards/statuserror.interceptor';
 import { MatSortModule } from '@angular/material/sort';
 import { CurriculumComponent } from './components/newviews/curriculum/curriculum.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { HistoryComponent } from './components/newviews/history/history.component';
 import { UsermodalComponent } from './components/partials/usermodal/usermodal.component';
 import { PermissionauthComponent } from './components/newviews/permissionauth/permissionauth.component';
 import { PermissionComponent } from './components/partials/permission/permission.component';
@@ -60,6 +59,8 @@ import { RequestReportComponent } from './components/newviews/request-report/req
 import { FilterDatePipe } from './components/newviews/pipes/filter.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BossesmodalComponent } from './components/partials/bossesmodal/bossesmodal.component';
+import { FilterUPipe } from './components/newviews/pipes/filter-u.pipe';
+import { FilterBPipe } from './components/newviews/pipes/filter-b.pipe';
 
 
 @NgModule({
@@ -93,7 +94,6 @@ import { BossesmodalComponent } from './components/partials/bossesmodal/bossesmo
     CertificationComponent,
     NotfoundComponent,
     ConstancyComponent,
-    HistoryComponent,
     CurriculumComponent,
     UsermodalComponent,
     BossesmodalComponent,
@@ -105,6 +105,8 @@ import { BossesmodalComponent } from './components/partials/bossesmodal/bossesmo
     StatuspermissionComponent,
     RequestReportComponent,
     FilterDatePipe,
+    FilterUPipe,
+    FilterBPipe,
   ],
 
   imports: [

@@ -47,6 +47,9 @@ export class UsersComponent implements OnInit {
   person = new nameperson()
   protected persons: nameperson[] = []
   private _persons: nameperson[] = []
+    filterAdmin = '';
+    filterBoss = '';
+    filterEmployed = '';
 
 
   rolTranslations = {
@@ -72,6 +75,8 @@ export class UsersComponent implements OnInit {
   ) {
     this.localService.getJsonValue('limit');
   }
+
+
 
   @ViewChild('multiUserSearch', { static: false }) multiUserSearchInput: ElementRef;
 
@@ -139,6 +144,7 @@ export class UsersComponent implements OnInit {
     this.userService.users1()
       .subscribe(data => {
         this.admins = data['data']
+        console.log(this.admins)
       }, err => console.log(err))}
 
   getUsers2() {

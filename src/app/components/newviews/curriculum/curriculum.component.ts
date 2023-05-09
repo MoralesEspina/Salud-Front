@@ -330,7 +330,6 @@ export class CurriculumComponent {
       salary: this.addressFormWorkExperience.value.salary,
       company: this.addressFormWorkExperience.value.company
     }
-    console.log(workExpr)
     this.curriculumService.createWorkExp(workExpr).subscribe(data => {
       this._sweetAlertService.createAndUpdate('Registro creado con éxito');
       this.addressFormWorkExperience.reset({});

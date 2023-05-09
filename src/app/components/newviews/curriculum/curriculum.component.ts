@@ -304,9 +304,10 @@ export class CurriculumComponent {
     }
     this.curriculumService.createRef(refPer).subscribe(data => {
       this._sweetAlertService.createAndUpdate('Registro creado con éxito');
-      this.addressFormRefPer.reset({});
-      for(let i in this.addressFormRefPer.controls)
-      this.addressFormRefPer.controls[i].setErrors(null);
+      this.addressFormRefPer.reset({})
+      for(let i in this.addressFormRefPer.controls){
+        this.addressFormWorkExperience.controls[i].setErrors(null);
+      }
       this.loadRefPer();
     }, error => {
       this._sweetAlertService.error('No se pudo crear el registro');
@@ -329,6 +330,7 @@ export class CurriculumComponent {
       salary: this.addressFormWorkExperience.value.salary,
       company: this.addressFormWorkExperience.value.company
     }
+    console.log(workExpr)
     this.curriculumService.createWorkExp(workExpr).subscribe(data => {
       this._sweetAlertService.createAndUpdate('Registro creado con éxito');
       this.addressFormWorkExperience.reset({});

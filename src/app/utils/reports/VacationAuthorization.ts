@@ -67,7 +67,7 @@ export async function CreatePDFVacationAuthorization(authorization: IAuthorizati
         fontSize: 13
     })
 
-    //pdf.background(await new Img(authorizationConfiguration.imageURL).alignment(authorizationConfiguration.align).width(authorizationConfiguration.width).height(authorizationConfiguration.height).build())
+    pdf.background(await new Img(authorizationConfiguration.imageURL).alignment(authorizationConfiguration.align).width(authorizationConfiguration.width).height(authorizationConfiguration.height).build())
     pdf.add(new Txt('Reg: ').alignment('left').relativePosition(0, 5).end)
     pdf.add(new Txt(` ${FormatNumberToRender(register, 4, '0')}-${new Date().getFullYear()}`).bold().decoration('underline').alignment('left').relativePosition(30, 5).end)
     pdf.add(new Txt('AUTORIZACIÓN DE VACACIONES').alignment('center').bold().decoration('underline').relativePosition(0, 30).end)
